@@ -1,0 +1,63 @@
+# ============================================================
+# 智能体动态记忆管理 - 提交前自动检查
+# 维护人：陈易
+#
+# 启用方式（每位成员在自己的机器上执行一次）：
+#     pip install pre-commit
+#     pre-commit install
+#     pre-commit run --all-files     # 可选：立即对全仓检查一遍
+#
+# 注意：
+#   - 首次运行需要联网下载钩子依赖，之后本地缓存可用
+#   - 钩子版本可用 pre-commit autoupdate 更新
+#   - 本项目不配置 CI，本地钩子是唯一的自动检查，
+#     提交 PR 前请额外手动执行 ruff check . 与 pytest -q
+# ============================================================
+
+repos:
+  # ---------- Ruff：检查 + 格式化 ----------
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        name: ruff check（自动修复可修复项）
+        args: [--fix]
+      - id: ruff-format
+        name: ruff format
+
+  # ---------- 通用文件检查 ----------
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+        name: 去除行尾空白
+        args: [--markdown-linebreak-ext=md]   # Markdown 行尾两个空格表示换行，需保留
+      - id: end-of-file-fixer
+        name: 文件末尾补空行
+      - id: check-yaml
+        name: 校验 YAML 语法
+      - id: check-toml
+        name: 校验 TOML 语法
+      - id: check-json
+        name: 校验 JSON 语法
+      - id: check-merge-conflict
+        name: 检查未解决的合并冲突标记
+      - id: check-added-large-files
+        name: 拦截大文件（>2MB）
+        args: ["--maxkb=2048"]
+      - id: detect-private-key
+        name: 拦截私钥
+      - id: mixed-line-ending
+        name: 统一换行符为 LF
+        args: ["--fix=lf"]
+      - id: no-commit-to-branch
+        name: 禁止直接向 main 提交
+        args: ["--branch", "main"]
+
+# 说明：
+#   detect-private-key 只能识别私钥格式，无法识别 API key；
+#   .env 的防线是 .gitignore，不要依赖这个钩子。
+#
+#   no-commit-to-branch 会阻止本地在 main 上直接提交，与 Ruleset 的
+#   要求一致（所有改动走分支 + PR）。如果某次确实需要在本地 main 上
+#   提交，可临时注释掉该钩子，不要用 --no-verify 绕过全部检查。
