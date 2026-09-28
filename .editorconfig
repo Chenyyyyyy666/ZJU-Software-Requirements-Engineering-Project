@@ -1,0 +1,39 @@
+# ============================================================
+# 智能体动态记忆管理 - 编辑器统一配置
+# 维护人：陈易
+# 作用：统一缩进、换行、编码，编辑器会自动遵循
+# VS Code 原生支持；版本较早时安装 "EditorConfig for VS Code" 扩展
+# ============================================================
+
+root = true
+
+# ---------- 全局默认 ----------
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+
+# ---------- Python ----------
+[*.{py,pyi}]
+indent_size = 4
+max_line_length = 100
+
+# ---------- 前端与配置文件 ----------
+[*.{js,jsx,ts,tsx,css,scss,html,json,jsonl,yaml,yml,toml}]
+indent_size = 2
+
+# ---------- Markdown ----------
+# 行尾的两个空格表示换行，因此不自动去除行尾空白
+[*.md]
+trim_trailing_whitespace = false
+
+# ---------- Makefile 必须使用制表符 ----------
+[Makefile]
+indent_style = tab
+
+# ---------- Windows 脚本沿用 CRLF ----------
+[*.{bat,cmd,ps1}]
+end_of_line = crlf

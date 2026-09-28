@@ -1,0 +1,77 @@
+# ============================================================
+# 智能体动态记忆管理 - 文件属性约定
+# 维护人：陈易
+# 作用：统一换行符，避免 macOS 与 Windows 混用时整个文件显示为"被修改"
+# ============================================================
+
+# 默认：自动识别文本文件，统一使用 LF
+* text=auto eol=lf
+
+# ---------- 文本文件（显式声明，确保跨平台一致） ----------
+*.py        text eol=lf
+*.pyi       text eol=lf
+*.md        text eol=lf
+*.txt       text eol=lf
+*.toml      text eol=lf
+*.cfg       text eol=lf
+*.ini       text eol=lf
+*.yaml      text eol=lf
+*.yml       text eol=lf
+*.json      text eol=lf
+*.jsonl     text eol=lf
+*.csv       text eol=lf
+*.html      text eol=lf
+*.css       text eol=lf
+*.scss      text eol=lf
+*.js        text eol=lf
+*.ts        text eol=lf
+*.tsx       text eol=lf
+*.sh        text eol=lf
+*.env       text eol=lf
+.gitignore  text eol=lf
+.gitattributes text eol=lf
+.editorconfig  text eol=lf
+
+# ---------- Windows 专用脚本保留 CRLF ----------
+*.bat       text eol=crlf
+*.cmd       text eol=crlf
+*.ps1       text eol=crlf
+
+# ---------- 二进制文件（禁止换行符转换与文本 diff） ----------
+*.png       binary
+*.jpg       binary
+*.jpeg      binary
+*.gif       binary
+*.ico       binary
+*.pdf       binary
+*.pptx      binary
+*.docx      binary
+*.xlsx      binary
+*.zip       binary
+*.woff      binary
+*.woff2     binary
+*.ttf       binary
+*.otf       binary
+
+# ---------- 模型与索引产物 ----------
+*.faiss     binary
+*.index     binary
+*.npy       binary
+*.npz       binary
+*.pkl       binary
+*.pickle    binary
+*.pt        binary
+*.bin       binary
+*.onnx      binary
+*.safetensors binary
+
+# ---------- 语言统计 ----------
+# 文档与过程材料不计入代码统计，避免仓库语言比例失真
+docs/**         linguist-documentation
+slides/**       linguist-documentation
+process/**      linguist-documentation
+experiments/**  linguist-documentation
+
+# ---------- 合并策略 ----------
+# JSON 与 CSV 不做自动合并策略：union 合并会破坏 JSON 结构，
+# 出现冲突时由对应负责人手工解决，避免产生语法错误的文件

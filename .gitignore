@@ -1,0 +1,123 @@
+# ============================================================
+# 智能体动态记忆管理 - Git 忽略规则
+# 维护人：陈易
+# 说明：排除"本机产生、可重新生成、体积大或含敏感信息"的内容。
+#       若某个被忽略的文件确实需要提交（例如团队约定共享的小型缓存），
+#       用 git add -f <文件> 显式加入，并在 PR 说明中写清原因。
+# ============================================================
+
+# ---------- 密钥与配置 ----------
+# .env 每人本地各一份，绝不入库；.env.example 必须入库作为模板
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets/
+credentials.json
+
+# ---------- 数据集（课程数据不入库） ----------
+locomo.json
+locomo10.json
+data/
+datasets/
+*.jsonl
+*.csv
+
+# ---------- 模型与向量索引产物（可重新生成） ----------
+indexes/
+*.faiss
+*.index
+*.npy
+*.npz
+*.pkl
+*.pickle
+*.h5
+*.pt
+*.bin
+*.onnx
+*.safetensors
+models/
+.cache/
+cache/
+
+# ---------- 运行输出与临时文件 ----------
+outputs/
+predictions/
+logs/
+*.log
+tmp/
+temp/
+*.tmp
+*.zip
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+ENV/
+.tox/
+.nox/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.dmypy.json
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.ipynb_checkpoints/
+
+# ---------- Node / 前端 ----------
+node_modules/
+.next/
+.nuxt/
+.vite/
+.parcel-cache/
+.turbo/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+
+# ---------- 编辑器与 IDE ----------
+# .vscode 只保留团队统一配置，个人设置不入库
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+.history/
+
+# ---------- 操作系统 ----------
+.DS_Store
+._*
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ---------- 打包与备份 ----------
+*.bak
+*.orig
+*.rej
+*.backup
