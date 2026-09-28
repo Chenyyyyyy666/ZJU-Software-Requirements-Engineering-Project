@@ -1,0 +1,53 @@
+# ============================================================
+# 智能体动态记忆管理 - 工具配置
+# 维护人：鲁瑞特
+#
+# 说明：本文件只存放工具配置（ruff、pytest、commitizen）。
+#       依赖清单在 requirements.txt 中维护，本文件不声明依赖。
+# ============================================================
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+exclude = [
+    ".venv",
+    "venv",
+    "build",
+    "dist",
+    "node_modules",
+    "data",
+    "cache",
+    ".git",
+]
+
+[tool.ruff.lint]
+# E/W: pycodestyle 错误与警告
+# F:   pyflakes（未使用变量、未定义名称等）
+# I:   import 排序（替代 isort）
+# UP:  pyupgrade（使用新语法）
+# B:   flake8-bugbear（常见陷阱）
+# SIM: flake8-simplify
+# C4:  flake8-comprehensions
+# PTH: 优先使用 pathlib，保证跨平台路径正确
+select = ["E", "F", "I", "UP", "B", "SIM", "C4", "PTH"]
+
+[tool.ruff.lint.per-file-ignores]
+# 包的 __init__.py 通常用于导出接口，允许未使用的导入
+"__init__.py" = ["F401"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+# 测试统一放在 tests/ 目录；该目录建立后 pytest 会自动只收集其中的用例
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.commitizen]
+# 可选工具：安装 commitizen 后可用 cz commit 交互式生成约定式提交信息
+#     pip install commitizen
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version = "0.1.0"
+update_changelog_on_bump = false

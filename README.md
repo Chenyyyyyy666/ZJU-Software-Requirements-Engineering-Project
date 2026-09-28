@@ -25,16 +25,18 @@
 
 ```text
 .
-├── README.md         # 项目说明（本文件）
-├── .gitignore        # 忽略规则：密钥、数据集、缓存与临时文件
-├── .gitattributes    # 换行符与二进制文件约定（macOS 与 Windows 协作）
-├── .editorconfig     # 编辑器缩进、编码与换行统一配置
-├── .env.example      # 环境变量模板（真实密钥填在本地 .env，不入库）
-├── docs/             # 各里程碑交付文档（Markdown 源 + 导出 PDF）
-├── slides/           # 课堂展示的幻灯片源文件与 PDF
-├── src/              # 源代码
-├── process/          # 过程材料：会议纪要、会议截图、周计划
-└── experiments/      # 实验配置与结果记录
+├── README.md                # 项目说明（本文件）
+├── .gitignore               # 忽略规则：密钥、数据集、缓存与临时文件
+├── .gitattributes           # 换行符与二进制文件约定（macOS 与 Windows 协作）
+├── .editorconfig            # 编辑器缩进、编码与换行统一配置
+├── .env.example             # 环境变量模板（真实密钥填在本地 .env，不入库）
+├── .pre-commit-config.yaml  # 提交前自动检查：ruff、大文件、私钥
+├── pyproject.toml           # ruff 与 pytest 工具配置
+├── docs/                    # 各里程碑交付文档（Markdown 源 + 导出 PDF）
+├── slides/                  # 课堂展示的幻灯片源文件与 PDF
+├── src/                     # 源代码
+├── process/                 # 过程材料：会议纪要、会议截图、周计划
+└── experiments/             # 实验配置与结果记录
 ```
 
 各目录的用途、命名规则与负责人见目录内的 README：[`docs`](docs/README.md)、[`slides`](slides/README.md)、[`src`](src/README.md)、[`process`](process/README.md)、[`experiments`](experiments/README.md)。
@@ -50,6 +52,15 @@ source .venv/bin/activate        # Windows PowerShell: .venv\Scripts\Activate.ps
 ```
 
 依赖清单待技术栈确定后补充（维护人：鲁瑞特）。届时在虚拟环境激活的状态下执行 `pip install -r requirements.txt` 即可。
+
+启用提交前自动检查（每位成员在自己的机器上执行一次）：
+
+```bash
+pip install pre-commit
+pre-commit install
+```
+
+启用后每次 `git commit` 会自动运行 ruff 格式化与检查，并拦截大文件、私钥与未解决的冲突标记。本项目不配置 CI，因此在提交 Pull Request 前请在本地再手动执行一次 `ruff check .` 与 `pytest -q`，并把结果写进 PR 描述。
 
 团队同时使用 macOS 与 Windows，因此约定：代码中一律使用 `pathlib` 处理路径、所有文件读写显式指定 `encoding="utf-8"`、文件名统一小写加下划线、不把项目放在带中文或空格的路径下。
 
@@ -143,10 +154,11 @@ python [评测入口] --conversation [conv_id] --output answers.json
 - **仓库**：私有仓库，由 Ruleset `protect-main` 保护默认分支 `main`：所有改动必须通过 Pull Request 合并、至少一位成员审核通过、禁止删除主干与强推覆盖历史、合并方式仅允许 Squash。
 - **分支**：`feat/`、`fix/`、`docs/`、`chore/`、`exp/` 前缀，一人一分支，分支寿命控制在数天内。
 - **提交**：遵循约定式提交，如 `feat(memory): 抽取人物与时间字段`。
+- **本地检查**：提交前由 `pre-commit` 自动运行 ruff 与大文件、私钥检查；不配置 CI，因此 PR 描述中需附上本地 `ruff check .` 与 `pytest -q` 的执行结果。
 - **会议**：每周一次例会，组织者固定为陈易，会议纪要由轮值成员于当天上传至 `process/`。
 - **记录**：每个里程碑打 tag（如 `v0.1-milestone1`），过程材料当天入库。
 
-详细规范见 `docs/git-conventions.md`（陈易，第一阶段）与 `docs/coding-standards.md`（鲁瑞特，第一阶段）。
+详细规范见 [Git 协作规范](docs/git-conventions.md)（陈易）与 `docs/coding-standards.md`（鲁瑞特，第一阶段）。
 
 ## 路线图 Roadmap
 
