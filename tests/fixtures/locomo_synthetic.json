@@ -1,0 +1,40 @@
+[
+  {
+    "sample_id": "demo-01",
+    "qa": [{"question": "GOLD_QUESTION", "answer": "GOLD_ANSWER", "evidence": ["GOLD_EVIDENCE"]}],
+    "event_summary": {"events": "GOLD_EVENT_SUMMARY"},
+    "observation": {"session_1": "GENERATED_OBSERVATION"},
+    "session_summary": {"session_1": "GENERATED_SUMMARY"},
+    "conversation": {
+      "speaker_a": "Alex",
+      "speaker_b": "Sam",
+      "session_1_date_time": "1:56 pm on 8 May, 2023",
+      "session_1": [
+        {"speaker": "Alex", "dia_id": "D1:1", "text": "I am researching adoption agencies."},
+        {"speaker": "Sam", "dia_id": "D1:2", "text": "Good luck with the adoption process!"},
+        {
+          "speaker": "Alex",
+          "dia_id": "D1:3",
+          "text": "My photo https://example.org/photo.jpg",
+          "img_url": ["https://example.org/photo.jpg"],
+          "blip_caption": "IMAGE_CAPTION_SECRET",
+          "query": "IMAGE_SEARCH_SECRET"
+        }
+      ],
+      "session_2_date_time": "9:55 am on 22 May, 2023",
+      "session_2": [
+        {"speaker": "Alex", "dia_id": "D2:1", "text": "I passed the adoption agency interviews last Friday!"},
+        {"speaker": "Sam", "dia_id": "D2:2", "text": "Congratulations!"}
+      ]
+    }
+  },
+  {
+    "sample_id": "demo-02",
+    "conversation": {
+      "session_1_date_time": "2023-05-09T10:00:00",
+      "session_1": [
+        {"speaker": "Taylor", "dia_id": "D1:1", "text": "Adoption interviews are on my calendar."}
+      ]
+    }
+  }
+]

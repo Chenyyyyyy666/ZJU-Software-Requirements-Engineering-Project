@@ -13,6 +13,8 @@
 | `design-and-test.md` | 系统设计、编码实现与测试说明 | 张崇洋 | 各模块负责人供稿，许子萌出架构与流程图 | 里程碑 4 |
 | `final-report.md` | 最终报告 | 张崇洋 | 全员按章节供稿 | 里程碑 5 |
 | `interfaces.md` | 模块接口契约：Memory 结构、检索接口、推理接口、答案输出格式 | 谁定义谁写 | 消费方确认 | 全程 |
+| `memory-design.md` | B 的数据与记忆设计草案：抽取、存储、检索及 OpenViking 借鉴范围 | 鲁瑞特 | 陈易及接口消费方确认 | Proposal 与后续实现 |
+| `memory-example.json` | 课件第 12 页的 Memory JSON 示例，人工整理，非真实构建结果 | 鲁瑞特 | 消费方核对字段 | Proposal 与接口评审 |
 | `coding-standards.md` | 代码规范：命名、类型标注、日志、异常、测试要求 | 鲁瑞特 | 于国庆、许子萌、张崇洋确认 | 第一阶段 |
 | `git-conventions.md` | Git 规范：分支命名、约定式提交、PR 流程、合并策略、tag 约定 | 陈易 | 张崇洋校对 | 第一阶段 |
 | `tech-selection.md` | DimMem 与 MRAgent 的技术选型调研与对比结论 | 于国庆 | 无 | 第一阶段 |
