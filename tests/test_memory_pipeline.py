@@ -142,7 +142,7 @@ def test_retrieval_ranking_filters_and_isolation(bundle):
     ).hits
     with pytest.raises(ValueError, match="conversation"):
         search_memories(index, RetrievalRequest(conversation_id="demo-02", query="interviews"))
-    with pytest.raises(ValueError, match="Only BM25"):
+    with pytest.raises(ValueError, match="Vector index not built"):
         search_memories(
             index, RetrievalRequest(conversation_id="demo-01", query="adoption", mode="hybrid")
         )

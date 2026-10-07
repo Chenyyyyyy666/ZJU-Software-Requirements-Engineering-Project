@@ -2,7 +2,7 @@
 
 本文是职责 B 的 Proposal 配套设计，说明如何将 LoCoMo 对话转换为可追溯的结构化记忆，并向推理、Web 和评测模块提供检索结果。第一版采用按对话隔离的 JSON 存储和可替换的检索通道，优先跑通一段对话。
 
-状态：2026-10-04 已按负责人授权推进 `0.1` 实现：完成数据契约、读取清洗、JSON 读写、逐轮基线、DeepSeek 抽取入口和内存 BM25。后文涉及向量检索、摘要视图及增量构建的部分仍是设计提案。字段定义以 [interfaces.md](interfaces.md) 为准；[memory-example.json](memory-example.json) 是课件例子的人工整理结果。真实 DeepSeek 抽取质量尚未验证，不能将离线基线或模拟接口测试视为模型效果。
+状态：已完成 `0.1` 数据契约、读取清洗、JSON 读写、逐轮基线、DeepSeek 抽取入口、BM25、MiniLM 向量检索与 RRF 混合检索。摘要视图及增量构建仍是设计提案。字段定义以 [interfaces.md](interfaces.md) 为准；[memory-example.json](memory-example.json) 是课件例子的人工整理结果。真实 DeepSeek 抽取质量及开发集上的检索召回率尚未验证。
 
 ## 课程要求与当前边界
 
@@ -41,7 +41,7 @@
 ```text
 locomo.json                              # 课程原始数据，本地存放
 outputs/memory/<conversation_id>.json    # MemoryBundle 与来源证据
-indexes/<conversation_id>/               # 预留给后续持久化索引；当前 BM25 在内存构建
+indexes/<hash>.json                      # 向量及模型/记忆版本元数据；BM25 在内存构建
 cache/                                  # 抽取响应缓存
 ```
 
@@ -53,9 +53,9 @@ MemoryBundle 包含 `schema_version`、`conversation_id`、`build_info`、`sourc
 
 ## 检索与证据回溯
 
-第一步实现 BM25 单通道，完成“对话 → Memory → 索引 → 有序结果 → 原始证据”链路。第二步加入向量检索，embedding 模型及其运行方式在开发集上验证后记录版本，当前不预设提供商。
+已实现 BM25 和向量检索。embedding 使用本地 `sentence-transformers/all-MiniLM-L6-v2`，默认 CPU，输出 384 维归一化向量；固定模型 revision 为 `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`。只编码 Memory.content 和问题，计算余弦相似度，原始来源仍单独保留。模型与问题长度超过 256 token 时明确报错，避免截断证据。效果需在开发集验证。[官方模型说明](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
 
-混合检索拟采用等权 Reciprocal Rank Fusion：每路先取 `candidate_k` 条，单路内部按 Memory ID 去重，以 `sum(1 / (60 + rank))` 合并排名，rank 从 1 开始，最后截取 `top_k`。该融合规则是本组设计提案。BM25 分数和向量相似度不直接相加；分数仅用于当前查询排序，不解释为概率。
+混合检索采用等权 Reciprocal Rank Fusion：每路先取 `candidate_k` 条，按 Memory ID 合并去重，以 `sum(1 / (60 + rank))` 合并排名，rank 从 1 开始，最后截取 `top_k`。BM25 分数和向量相似度不直接相加；分数仅用于当前查询排序，不解释为概率。两路原始分数和排名同时返回，便于评测与错误分析。
 
 所有通道先限定 `conversation_id`。C 可以显式提供实体/属性过滤条件；查询分析失败或名称不确定时先不加硬过滤。初次检索结果交给 C 后，C 可请求同实体同属性的关联历史；扩展结果单列，保留初始 Top-K，便于 E 分别分析检索召回与扩展效果。B 不据“当前”一词自行删除旧状态。
 
@@ -89,4 +89,4 @@ OpenViking 的记忆抽取允许编辑、合并或删除已有文件；若以后
 
 基础自动化测试已覆盖来源校验、空对话与空查询、跨对话隔离、JSON 读写、检索排序和过滤、旧状态保留、输入标签隔离、索引版本不匹配，以及 DeepSeek 模拟响应与缓存。相对时间的模型推导正确性和语义抽取质量仍需真实模型实验；E 后续补充正式评测。
 
-后续待明确的信息：课程对话编号与正式输入输出格式、实体别名规则、embedding 方案、C 的关联历史调用方式、E 的 Recall@K 口径。当前实现可独立运行，以上信息不作为开发前置条件；未确定的参数不写成最终决定。
+后续待明确的信息：课程对话编号与正式输入输出格式、实体别名规则、C 的关联历史调用方式、E 的 Recall@K 口径。当前实现可独立运行；embedding 模型已选定 MiniLM，后续依据开发集结果判断是否需要替换。
