@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.1",
+  "conversation_id": "conv-26",
+  "build_info": {
+    "build_id": "course-slide12-example-v1",
+    "method": "manual_course_slide_example",
+    "input_sha256": null,
+    "extractor_config_id": "manual-example-v1",
+    "model": null,
+    "prompt_version": null,
+    "note": "人工整理自《0 - Project (2026).pdf》第12页；不是完整对话，不是模型抽取结果，也不表示该对话属于开发集。event_time 为根据课件会话日期进行的人工推导。"
+  },
+  "source_turns": [
+    {
+      "conversation_id": "conv-26",
+      "session_id": 19,
+      "turn_id": "D19:1",
+      "speaker": "Caroline",
+      "session_time": "2023-10-22T09:55:00",
+      "text": "I passed the adoption agency interviews last Friday! This is a big move towards my goal of having a family."
+    }
+  ],
+  "memories": [
+    {
+      "memory_id": "conv26_D19_1_001",
+      "conversation_id": "conv-26",
+      "content": "Caroline passed the adoption agency interviews.",
+      "entity": "Caroline",
+      "attribute": "adoption_status",
+      "value": "passed adoption agency interviews",
+      "session_time": "2023-10-22T09:55:00",
+      "time_expression": "last Friday",
+      "event_time": "2023-10-20",
+      "event_time_precision": "day",
+      "sources": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:1"
+        }
+      ]
+    }
+  ]
+}
