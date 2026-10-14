@@ -51,7 +51,9 @@ python -m venv .venv
 source .venv/bin/activate        # Windows PowerShell: .venv\Scripts\Activate.ps1
 ```
 
-依赖清单待技术栈确定后补充（维护人：鲁瑞特）。届时在虚拟环境激活的状态下执行 `pip install -r requirements.txt` 即可。
+依赖清单由鲁瑞特维护，已包含 Memory 与 BM25 最小链路所需依赖。在虚拟环境激活后执行 `python -m pip install -r requirements.txt`；无需密钥的完整演示见 [src/README.md](src/README.md)。
+
+向量与混合检索另安装 `python -m pip install -r requirements-vector.txt`，默认使用本地 MiniLM，无需 embedding API key。首次运行会下载固定版本的模型，随后复用本地模型与向量缓存。
 
 启用提交前自动检查（每位成员在自己的机器上执行一次）：
 
