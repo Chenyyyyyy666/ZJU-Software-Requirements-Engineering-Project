@@ -59,7 +59,7 @@
 
 （供稿：于国庆）
 
-【待补】一段话写清产品定位与它给使用者带来的价值，与 `proposal.md` 的愿景保持一致。
+智能体动态记忆管理系统面向长程多会话对话场景，解决普通向量 RAG 无法区分当前有效状态与过期历史状态的痛点。系统在答案生成前增加动态状态解析层，判定记忆间 RETAIN、UPDATE（SUPERSEDE）、CONFLICT 四类关系，筛选有效记忆，规避过期信息带来的错误回答；同时支持记忆、原始证据、状态演化可视化，并通过三项指标与基线方法对照，量化验证效果。
 
 ### 2.2 用户与使用场景
 
@@ -127,18 +127,14 @@
 
 ### 3.3 动态状态解析与答案生成
 
-（供稿：于国庆｜建议编号 FR-08–FR-11，可按实际调整）
+（供稿：于国庆）
 
-【待补】按"输入 → 处理 → 输出 → 异常"四要素逐条写，每条需求一行，并写明验收依据与实现位置。
-
-可参考的现有范围：查询分析、记忆间 RETAIN / UPDATE（SUPERSEDE）/ CONFLICT 关系判定、有效记忆选择、调用 DeepSeek 生成答案。本节的输入输出格式由本人在 [interfaces.md](interfaces.md) 中补全，并须携带 `build_id` 与被引用的 Memory ID。
-
-| 编号 | 需求 | 输入 / 处理 / 输出 / 异常 | 验收依据 | 实现位置 |
-| --- | --- | --- | --- | --- |
-| FR-08 | 【待补】 | 【待补】 | 【待补】 | 【待补】 |
-| FR-09 | 【待补】 | 【待补】 | 【待补】 | 【待补】 |
-| FR-10 | 【待补】 | 【待补】 | 【待补】 | 【待补】 |
-| FR-11 | 【待补】 | 【待补】 | 【待补】 | 【待补】 |
+| 编号  | 需求                                                         | 输入 / 处理 / 输出 / 异常                                    | 验收依据                                                     | 实现位置                                                   |
+| :---- | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- | :--------------------------------------------------------- |
+| FR-08 | 系统应能从用户问题中抽取影响状态判定的关键要素，输出结构化结果，作为候选记忆过滤与状态判定的约束 | **输入**：用户问题文本、当前 `conversation_id`。**处理**：调用 DeepSeek 官方接口（关闭 thinking），抽取 `entity`、`time_scope`、`time_expression`、`attribute` 与 `confidence`，字段名与 interfaces.md 契约保持一致。**输出**：JSON 对象，字段完整、可被下游解析。**异常**：返回非法 JSON 时重试 2 次，仍失败则记录日志并中断该题，不输出假成功结果 | 开发集问题上 `attribute` 非空率 100%，JSON 可解析率 100%；`time_scope` 抽样子集人工核对准确率 ≥ 80%（待开发集校准）；输出字段名与 docs/interfaces.md 一致 | `src/reasoning/query_analyzer.py`                          |
+| FR-09 | 系统应对候选记忆按实体与属性分组后进行两两比较，判定 RETAIN / UPDATE / SUPERSEDE / CONFLICT 四类时效关系 | **输入**：检索返回的候选 Memory 列表（含 `content`、`entity`、`attribute`、`session_time`、`event_time`、`sources`）。**处理**：仅在 `(entity, attribute)` 相同的组内比较；综合时间顺序、实体一致性、属性一致性与事件上下文判定，不得仅依赖语义相似度；`event_time` 与 `session_time` 均缺失时强制判定 CONFLICT；跨 `(entity, attribute)` 组记忆直接视为 RETAIN，跳过 LLM 调用节约 token。**输出**：MemoryRelation 列表，每条含 `memory_a`、`memory_b`、`relation_type`、`reason`、`sources`（SourceRef 结构）。**异常**：非法 JSON 重试 2 次，仍失败则降级为 CONFLICT 并记录错误日志，不中断流水线 | 输出 100% 符合 MemoryRelation schema；开发集总体判定准确率 ≥ 70%（V2 阶段优化），并按四类报告混淆矩阵；时间缺失样本 100% 判为 CONFLICT；跨组记忆 100% 不触发模型调用；同输入同 prompt 版本下判定结果一致 | `src/reasoning/relation_judge.py`                          |
+| FR-10 | 系统应根据状态关系判定结果选择当前有效记忆，组装 prompt 并调用 DeepSeek 生成答案 | **输入**：MemoryRelation 列表、Query 分析结果、候选 Memory 列表。**处理**：RETAIN 全部保留；UPDATE 合并为一条；SUPERSEDE 仅保留新值，旧值不送入 prompt；CONFLICT 双留并附加冲突标记。组装版本化答案 prompt，调用 DeepSeek 官方接口（关闭 thinking）生成一句话答案。**输出**：AnswerRecord，含 `question_id`、`answer`、`valid_memory_ids`、`conflict`、`build_id`。**异常**：生成失败重试 2 次，仍失败输出空答案并记录日志，不中断批量评测 | SUPERSEDE 场景下旧值 100% 不进入答案生成；冲突样本抽检 100% 包含冲突说明，不单方面选定结论；`valid_memory_ids` 均可通过 `get_memory` 与 `get_source_turns` 回溯原始轮次；答案格式 100% 符合课程评测接口；记录每题 token 消耗 | `src/reasoning/memory_selector.py` + `answer_generator.py` |
+| FR-11 | 系统应保证状态解析与答案输出可追溯到具体构建版本与证据轮次   | **输入**：AnswerRecord 与 MemoryRelation。**处理**：输出携带 `build_id` 与被引用的 Memory ID；证据键统一为 `(conversation_id, session_id, turn_id)`。**输出**：结构化结果，可供评测脚本、前端消费。**异常**：引用的 `build_id` 与当前 MemoryBundle 不一致时抛出 RuntimeError，需重建索引后再解析 | 每条答案与关系记录均含 `build_id`；`valid_memory_ids` 与 `sources` 在当前 bundle 内均可定位，定位失败率为 0；Recall@K 证据对齐以此口径为准 | `src/reasoning/`                                           |
 
 ### 3.4 记忆与状态可视化
 
@@ -243,11 +239,11 @@ python [评测入口] --conversation [conv_id] --questions [questions.json] --ou
 
 | 编号 | 类别 | 需求 | 验收依据 |
 | --- | --- | --- | --- |
-| NFR-01 | 可复现性 | 【待补】 | 【待补】 |
+| NFR-01 | 可复现性 | 状态解析与答案生成，在相同输入、相同 prompt 版本、相同配置下输出一致结果；prompt 模板版本化存放于 `src/reasoning/prompts/`，文件名携带版本号 | 在开发集选取固定问题集连续运行两次，MemoryRelation 的 `relation_type`、AnswerRecord 的 `valid_memory_ids` 完全一致；prompt 版本号可在输出日志追溯 |
 | NFR-02 | 跨平台 | 【待补】 | 【待补】 |
-| NFR-03 | 可追溯 | 【待补】 | 【待补】 |
+| NFR-03 | 可追溯 | 每条答案、记忆关系判定结果均可回溯至对应记忆与原始对话轮次，并且记录 `build_id` | 随机抽取 20 条 AnswerRecord，`valid_memory_ids` 调用 `get_memory`、`get_source_turns` 全部成功定位，定位失败率为 0 |
 | NFR-04 | 安全与合规 | 【待补】 | 【待补】 |
-| NFR-05 | 性能 | 【待补】 | 【待补】 |
+| NFR-05 | 性能 | 单题动态状态解析与答案生成端到端耗时可控，token 消耗完整统计，用于基线对照 | 开发集样本：单题状态判定平均耗时 ≤ 8 秒、答案生成平均耗时 ≤ 6 秒（实验室网络，排除 API 极端超时重试样本）；每题 token 消耗完整记录，可与 Full Text、Vector RAG 填入同一评测表 |
 
 ---
 
