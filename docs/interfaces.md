@@ -253,3 +253,33 @@ trace:
 - E：课程 evidence 如何映射到 SourceRef，Recall@K 的正式口径，初始检索与扩展检索分开记录。
 
 这些事项记录后续对接需要，不阻塞当前 `0.1` 实现。课程对话划分及正式评测输出仍以课程通知为准；实体别名和 C 的状态输出不在本次实现中。向量模型的实际召回效果需由开发集评测验证。
+
+## 2026-10-14：供 C / D / E 使用的证据交接入口
+
+Memory schema 和原有检索接口保持 `0.1`。新增便利函数（不替代 `search_memories`）：
+
+```python
+from src.index.context import retrieve_context
+
+def retrieve_context(
+    index: MemoryIndex, request: RetrievalRequest, *, history_limit: int | None = None
+) -> dict: ...
+```
+
+返回 JSON 可序列化对象：
+
+| 字段 | 含义 |
+| --- | --- |
+| `context_version` | 交接对象版本，目前 `0.1`，与 Memory schema 分开管理 |
+| `build_info` | 索引快照中的构建信息，显式区分真实抽取、逐轮基线和人工示例 |
+| `retrieval` | 未改写的 `RetrievalResult`，包含 conversation_id、build_id、初始 hits、trace |
+| `related_history` | 未请求时为 null；请求时为 `{memories, truncated}`，与 hits 分开，不含初始命中的重复 ID |
+| `source_turns` | hits 与 related_history 引用的原始轮次，按首次引用顺序去重；通过 `(session_id, turn_id)` 定位，conversation_id 与 retrieval 一致 |
+
+设置 `history_limit` 表示显式请求历史，必须同时传入 `request.entity` 和 `request.attribute`；limit 必须为正整数。这里同样使用**精确字符串匹配**，不自动解析别名或猜测实体。若实体或属性不确定，使用无过滤的初始检索，随后 C 可通过原有 `list_related_memories` 单独请求历史。结果截断时消费方必须保留提示，不能声称获得完整历史。
+
+来源从索引的同一快照读取；调用方不应在建索引后修改 `index.bundle`。加载新版 Memory 后重建索引，不能把旧 context 中的 ID 与新 bundle 混用。返回字典与原始存储不共享可变对象。空 hits 可正常返回；未请求历史时 `source_turns=[]`，不捏造候选或答案。
+
+C 使用 `retrieval.hits[*].memory` 和原始证据进行状态判断，并让自己的输出携带同一 build_id。D 可以直接展示 source_turns 原文。E 只用初始 hits 计算 Top-K 指标；若分析扩展历史效果，应另列结果。此入口不生成答案、不判断状态，也不表示 C/D/E 已确认接入。
+
+完整命令与接入示例见 [交接说明](b-handoff.md)。本次接口变更为新增函数，不修改已有调用签名。
