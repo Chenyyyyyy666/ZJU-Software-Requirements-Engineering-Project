@@ -1,6 +1,6 @@
 # Memory 与检索接口
 
-本文定义职责 B 向 C（推理）、D（Web）、E（评测）提供的数据契约，当前版本为 `0.1`。2026-10-04 已实现共享类型、LoCoMo 读取、JSON 读写、逐轮基线、DeepSeek 抽取入口和 BM25 检索。按负责人授权直接推进实现，接口调整通过后续版本记录，不以组员确认为实现前置条件。
+本文定义职责 B 向 C（推理）、D（Web）、E（评测）提供的数据契约，当前版本为 0.2。2026-10-04 已实现共享类型、LoCoMo 读取、JSON 读写、逐轮基线、DeepSeek 抽取入口和 BM25 检索。按负责人授权直接推进实现，接口调整通过后续版本记录，不以组员确认为实现前置条件。2026-10-15由C完成QueryAnalyzer 输出结构。
 
 类型定义见 `src/common/models.py`，构建入口见 `src/memory/build.py`，证据查询见 `src/memory/store.py`，检索见 `src/index/bm25.py`。现已增加 MiniLM 向量检索、向量缓存和 RRF 融合，Memory JSON schema 保持 `0.1`。加载器拒绝旧版 `0.1-draft`，旧草案文件须按当前结构重新导出。
 
@@ -68,6 +68,72 @@ SourceRef 只含 `session_id` 和 `turn_id` 两个字段，从所在 Memory 继�
 `event_time=null` 当且仅当 `event_time_precision=unknown`。对“去年”等超出当前日期精度的表达保留原文、日期留空，未来扩展时间区间时升级 schema。无时区输入保留无时区形式，不将本地时区当作数据时区。
 
 Memory 不含 gold evidence、答案、查询关系、全局有效性或向量。状态解析结果属于一次查询，须记录 `build_id` 及所引用的 Memory ID；C 负责具体格式。示例完整文件见 [memory-example.json](memory-example.json)。
+
+## QueryAnalyzer 输出结构
+
+本节定义 C 在动态状态解析中 Query 分析环节的输出契约，供检索过滤、状态关系判定与评测脚本消费。本结构由 C 定义，不属于 Memory 数据结构，不写入 MemoryBundle。
+
+### QueryAnalysisResult
+
+| 字段              | 类型           | 含义                                                         |
+| :---------------- | :------------- | :----------------------------------------------------------- |
+| `conversation_id` | string         | 必须与当前 bundle 一致                                       |
+| `build_id`        | string         | 本次分析所依据的构建版本，用于结果追溯                       |
+| `question_id`     | string 或 null | 题目编号；非评测场景为 null                                  |
+| `entity`          | string[]       | 问题涉及的核心实体；无法确定时为空列表，不猜测代词指向       |
+| `time_scope`      | string         | `current`、`past` 或 `specific`；表示问题指向的时间视角      |
+| `time_expression` | string 或 null | 问题中的时间原文，如 `last Friday`；无明确表达时为 null      |
+| `attribute`       | string 或 null | 问题询问的属性或事件类别，如 `adoption_status`；无法归类时为 null |
+| `confidence`      | number         | 0 到 1 之间的抽取置信度                                      |
+| `note`            | string 或 null | 抽取备注，不进入检索文本，不参与模型输入                     |
+
+所有字段均可序列化为 UTF-8 JSON；只有类型明确允许的字段可使用 `null`；空集合使用 `[]`。
+
+### 字段语义约束
+
+- `entity`：与 Memory.entity 的语义一致，可为人物、组织、地点等。无法确定时置空，不得填入问题原文未出现的推断值。多个实体按问题中的出现顺序排列，去重。
+- `time_scope`：`current` 表示问题指向当前状态，`past` 表示指向历史时点，`specific` 表示指向某一明确时间。该字段为本模块自定义，Memory 结构不含此字段。
+- `time_expression`：与 Memory.time_expression 字段名一致，保留问题中的时间原文，不做时区转换。
+- `attribute`：与 Memory.attribute 字段名一致。当问题涉及一次性事件时，同样填入该字段，不另设 event_type。
+- `confidence`：仅用于诊断与置信度校准，不参与检索排序，不作为过滤阈值。
+- `note`：仅用于记录抽取过程说明，不进入检索文本，不作为模型输入。
+
+### 与检索接口的衔接
+
+`entity` 与 `attribute` 可映射为 `RetrievalRequest` 的同名可选过滤字段。当 `entity` 为空列表或 `attribute` 为 null 时，调用方不得传入硬过滤条件，应保持该字段为 null 交由检索模块返回全量候选。
+
+`time_scope` 不进入 `RetrievalRequest`。检索模块不对时间做硬过滤，时间视角的解析由状态关系判定环节处理。
+
+### 与状态关系判定的衔接
+
+MemoryRelation 与答案输出应携带本结构的 `build_id` 与 `question_id`，确保一次查询的分析结果、判定结果与答案可被统一追溯。
+
+`time_scope` 为 `past` 时，被 SUPERSEDE 的旧记忆不得被无条件过滤，仍应作为答案生成的候选依据。该约束与 [memory-design.md](https://memory-design.md/) 中「询问过去状态时，旧事实仍可能是所需答案依据」一致。
+
+### 异常约定
+
+| 情况                                                         | 约定行为                                             |
+| :----------------------------------------------------------- | :--------------------------------------------------- |
+| 问题文本为空或仅含空白字符                                   | `ValueError`                                         |
+| 模型返回非法 JSON                                            | 有界重试后报错，记录失败样本，不输出假成功的分析结果 |
+| `confidence` 超出 0 到 1 范围                                | `ValueError`                                         |
+| `time_scope` 取值不在枚举内                                  | `ValueError`                                         |
+| `build_id` 与当前 bundle 不一致                              | `RuntimeError`，重建索引后再分析                     |
+| `entity` 或 `time_expression` 无法在问题原文或候选记忆中定位 | 该字段置空，不报错，由评测脚本另行统计定位通过率     |
+
+### 简化示例
+
+```
+{conversation_id: conv-26,
+build_id: course-slide12-example-v1,
+question_id: qa-014,
+entity: [Caroline],
+time_scope: current,
+time_expression: null,
+attribute: adoption_status,
+confidence: 0.92,
+note: null}
+```
 
 ## 函数接口
 
@@ -187,3 +253,33 @@ trace:
 - E：课程 evidence 如何映射到 SourceRef，Recall@K 的正式口径，初始检索与扩展检索分开记录。
 
 这些事项记录后续对接需要，不阻塞当前 `0.1` 实现。课程对话划分及正式评测输出仍以课程通知为准；实体别名和 C 的状态输出不在本次实现中。向量模型的实际召回效果需由开发集评测验证。
+
+## 2026-10-14：供 C / D / E 使用的证据交接入口
+
+Memory schema 和原有检索接口保持 `0.1`。新增便利函数（不替代 `search_memories`）：
+
+```python
+from src.index.context import retrieve_context
+
+def retrieve_context(
+    index: MemoryIndex, request: RetrievalRequest, *, history_limit: int | None = None
+) -> dict: ...
+```
+
+返回 JSON 可序列化对象：
+
+| 字段 | 含义 |
+| --- | --- |
+| `context_version` | 交接对象版本，目前 `0.1`，与 Memory schema 分开管理 |
+| `build_info` | 索引快照中的构建信息，显式区分真实抽取、逐轮基线和人工示例 |
+| `retrieval` | 未改写的 `RetrievalResult`，包含 conversation_id、build_id、初始 hits、trace |
+| `related_history` | 未请求时为 null；请求时为 `{memories, truncated}`，与 hits 分开，不含初始命中的重复 ID |
+| `source_turns` | hits 与 related_history 引用的原始轮次，按首次引用顺序去重；通过 `(session_id, turn_id)` 定位，conversation_id 与 retrieval 一致 |
+
+设置 `history_limit` 表示显式请求历史，必须同时传入 `request.entity` 和 `request.attribute`；limit 必须为正整数。这里同样使用**精确字符串匹配**，不自动解析别名或猜测实体。若实体或属性不确定，使用无过滤的初始检索，随后 C 可通过原有 `list_related_memories` 单独请求历史。结果截断时消费方必须保留提示，不能声称获得完整历史。
+
+来源从索引的同一快照读取；调用方不应在建索引后修改 `index.bundle`。加载新版 Memory 后重建索引，不能把旧 context 中的 ID 与新 bundle 混用。返回字典与原始存储不共享可变对象。空 hits 可正常返回；未请求历史时 `source_turns=[]`，不捏造候选或答案。
+
+C 使用 `retrieval.hits[*].memory` 和原始证据进行状态判断，并让自己的输出携带同一 build_id。D 可以直接展示 source_turns 原文。E 只用初始 hits 计算 Top-K 指标；若分析扩展历史效果，应另列结果。此入口不生成答案、不判断状态，也不表示 C/D/E 已确认接入。
+
+完整命令与接入示例见 [交接说明](b-handoff.md)。本次接口变更为新增函数，不修改已有调用签名。
