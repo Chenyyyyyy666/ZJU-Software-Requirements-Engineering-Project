@@ -179,3 +179,31 @@ class RetrievalResult(Contract):
 class RelatedMemoryResult(Contract):
     memories: list[Memory]
     truncated: bool
+
+
+class QueryAnalysisResult(Contract):
+    conversation_id: NonEmpty
+    build_id: NonEmpty
+    question_id: NonEmpty | None = None
+    entity: list[NonEmpty] = []
+    time_scope: Literal["current", "past", "specific"]
+    time_expression: NonEmpty | None = None
+    attribute: NonEmpty | None = None
+    confidence: Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]
+    note: str | None = None
+
+
+class MemoryRelation(Contract):
+    memory_a: NonEmpty
+    memory_b: NonEmpty
+    relation_type: Literal["RETAIN", "UPDATE", "SUPERSEDE", "CONFLICT"]
+    reason: NonEmpty
+    sources: Annotated[list[SourceRef], Field(min_length=1)]
+
+
+class AnswerRecord(Contract):
+    question_id: NonEmpty | None = None
+    answer: NonEmpty
+    valid_memory_ids: list[NonEmpty]
+    conflict: bool
+    build_id: NonEmpty

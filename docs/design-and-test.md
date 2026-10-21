@@ -1,71 +1,139 @@
-# 系统设计、编码与测试说明（B 供稿）
+# 系统设计、编码与测试报告
 
-里程碑 4｜供稿：鲁瑞特｜2026-10-14。
+> 6767 组｜里程碑 4｜主笔：张崇洋｜依据：[SRS](srs.md)、[接口](interfaces.md)
 
-本文是 B 的记忆与检索章节，供张崇洋合并进中期文档。组长最新安排为 10/21 前完成基础前后端、10/23 前补全本文；系统其他模块由对应负责人供稿。本文不表示整套系统已经端到端验收。
+## 1 总体设计
 
-## B.1 设计目标与模块边界
+（陈易）
 
-对应 SRS FR-01–FR-07：将单段 LoCoMo 原始对话转换为可追溯的事实集合，再为推理模块提供候选和原始证据。B 保留历史状态；状态关系判定、有效记忆选择和答案生成属于 C。
+### 1.1 设计目标与边界
 
-```mermaid
-flowchart LR
-    Raw[LoCoMo 原始对话] --> Clean[白名单读取与图片链接清洗]
-    Clean --> Build[按会话分块抽取]
-    Build --> JSON[带版本的 MemoryBundle]
-    JSON --> Index[BM25 与 MiniLM 索引]
-    Q[当前待答问题] --> Index
-    Index --> Rank[Top-K 与 RRF 融合]
-    Rank --> Context[候选与证据交接对象]
-    JSON --> Context
-    Context --> C[C 的状态解析模块]
+系统把 LoCoMo 长对话转换为带原始证据和版本信息的结构化 Memory，并在回答问题时先检索相关历史、再判定记忆之间的状态关系，只把仍然有效的记忆交给模型生成答案。总体目标是把“记忆构建、候选检索、状态解析、答案生成、证据展示与评测”拆成接口清晰的独立模块，使各模块可以分别实现、测试和替换。
+
+本期范围为单段对话内的文本记忆；不包含多模态、跨对话共享记忆、模型训练、面向公网的部署。Web 和评测入口属于同一问答流水线的消费端，不直接修改 Memory。
+
+### 1.2 总体架构
+
+```text
+【离线构建】
+locomo.json
+  └─ memory.locomo：读取、清洗文本并保留 source turn
+      └─ memory.build / extract：按会话分块，调用 DeepSeek 抽取事实
+          └─ MemoryBundle：Memory + 来源 + build_id，校验后保存为 JSON
+              └─ index：建立 BM25 与 MiniLM 向量索引
+
+【在线问答】
+question ─┬─ index.search：BM25 + 向量召回 → RRF 去重排序 → Top-K
+          └─ reasoning.query_analyzer：识别人物、属性、时间范围
+                  ↓
+          reasoning.relation_judge：判定 RETAIN / UPDATE / SUPERSEDE / CONFLICT
+                  ↓
+          reasoning.memory_selector：选择当前有效 Memory
+                  ↓
+          reasoning.answer_generator：调用 DeepSeek → AnswerRecord
+
+【消费端】
+web（规划中）：展示 Memory、原始证据、关系与答案
+eval（规划中）：批量调用同一问答流水线，计算指标并运行基线
 ```
 
-不将 QA 标注区、标准答案、gold evidence 或标注摘要送入构建/索引。在线问题由调用方单独传入。
+架构采用“离线构建 + 在线检索解析”的分层方式。离线阶段完成代价较高的事实抽取和索引建立；在线阶段只处理当前问题及其候选记忆。检索与状态解析分离，使 Recall@K 可以单独评价；状态解析与答案生成分离，使关系判断错误不会与生成错误混在一起。
 
-## B.2 数据结构和持久化
+### 1.3 模块划分与接口
 
-共享契约由 `src/common/models.py` 定义，禁止额外字段、非法数值和跨对话引用。完整字段见 [interfaces.md](interfaces.md)，本节只说明设计决策。
-
-| 决策 | 原因与影响 |
-| --- | --- |
-| Memory 保留 content、实体/属性/值、事件时间、来源 | 不确定的信息留空，事实原文与结构化值可互相核对 |
-| SourceTurn 与 Memory 分开 | 摘要不能替代原始证据；同一轮次可支持多个事实 |
-| session_time 与 event_time 分开 | 发言时间不等于事件发生时间，避免虚假时间顺序 |
-| build_id 绑定输入、配置与结果 | 换数据、模型或抽取结果后不能继续使用旧索引或旧引用 |
-| JSON 原子替换并重新校验 | 导出失败保留原文件，不让半写入结果被下游读取 |
-| embedding 只放索引缓存 | Memory JSON 保持轻量且独立于特定向量模型 |
-
-## B.3 抽取与失败处理
-
-读取器按会话编号、原始轮次顺序遍历，不读取标注派生内容。默认每块不跨会话，最多 20 轮、12000 文本字符；超限单轮报错，不截断证据。DeepSeek 返回事实列表后，先校验字段、时间精度、来源存在性及顺序，再写块缓存。
-
-默认最多 3 次尝试，瞬时网络失败、429、5xx、非法 JSON 或截断输出在上限内重试；鉴权等永久 HTTP 错误直接失败。失败时不输出完整成功 bundle，已完成块可复用。日志不打印密钥或 HTTP 响应正文。实际远端抽取效果必须另做质量核对，Mock 只验证请求和失败行为。
-
-## B.4 检索与交接
-
-BM25 在内存构建；向量编码使用固定 revision 的 MiniLM 和 384 维归一化向量。查询和事实使用同一编码器。超出模型 256 token 上限报错，避免静默截断。向量缓存身份绑定构建、完整 bundle、模型/依赖/设备和记忆顺序，并校验维数及有限数值。
-
-候选先按对话及显式实体/属性过滤，再各取 candidate_k；混合检索以 Memory ID 去重，按 `sum(1/(60+rank))` 合并。同分按 ID 稳定排序。模型失败不会自动降级为关键词检索。实体与属性为精确匹配，未知时不建议添加过滤。
-
-`src/index/context.py` 将初始检索结果、构建信息、来源和可选关联历史打包。历史只在调用方显式要求时加入独立字段；来源从同一索引快照读取。输出对象的修改不影响原始存储。这样 C 可推理、D 可展示、E 可对齐初始 Top-K 证据，同时保留各自职责。
-
-## B.5 需求、实现与测试追踪
-
-| 需求 | 实现 | 自动化测试文件与代表用例 | 仍需的外部验收 |
+| 模块 | 负责人 | 主要输入 | 主要输出 |
 | --- | --- | --- | --- |
-| FR-01 清洗与隔离 | `memory/locomo.py` | `test_memory_pipeline.py`：input_whitelist_and_chronology、label_changes_do_not_change_build | 课程实际文件适配 |
-| FR-02 抽取 | `memory/build.py`、`extract.py` | 同上：build_with_mocked_deepseek、bad_sources_retry_without_polluting_cache、transient_or_invalid_response_recovers | 真实 API、事实与时间质量核对 |
-| FR-03 导出与版本 | `common/models.py`、`memory/store.py` | 同上：bundle_roundtrip_and_stable_build、failed_save_preserves_previous_file、filter_before_top_k_and_snapshot | 消费方按 build_id 对齐 |
-| FR-04 关键词检索 | `index/bm25.py` | 同上：retrieval_ranking_filters_and_isolation、invalid_requests | 开发集召回评测 |
-| FR-05 向量检索 | `index/embeddings.py` | `test_vector_retrieval.py`：向量排名、缓存、维度/长度/数值等用例 | 真实模型运行与开发集效果 |
-| FR-06 混合检索 | `index/bm25.py` | `test_vector_retrieval.py`：RRF 去重、排名、通道信息等用例 | E 的正式对照实验 |
-| FR-07 原文与历史 | `memory/store.py`、`index/context.py` | `test_reasoning_context.py`：history_preserves_top_k_and_has_all_original_evidence、opt_in_history_empty_candidates_and_truncation、saved_bundle_to_consumer_cli | C 的真实推理调用、D 的页面展示 |
+| `common/` | 陈易协调 | 各模块共享字段 | Pydantic 数据契约、JSON 读写、统一错误语义 |
+| `memory/` | 鲁瑞特 | LoCoMo 对话、会话时间 | `MemoryBundle`、原始来源轮次 |
+| `index/` | 鲁瑞特 | `MemoryBundle`、问题与 K | BM25/向量候选、`RetrievalResult` |
+| `reasoning/` | 于国庆 | 问题、`RetrievalResult` | `QueryAnalysisResult`、`MemoryRelation`、`AnswerRecord` |
+| `web/` | 许子萌 | 问答结果、Memory ID | 记忆、证据和状态关系页面（规划中） |
+| `eval/` | 张崇洋 | 问题集、标准答案与证据 | 三指标结果、基线对照（规划中） |
 
-运行 `python -m pytest -q`、`python -m ruff check .`、`python -m ruff format --check .`。模型单元测试使用显式 Mock/测试编码器，不产生真实调用费用。真实模型运行、设备、规模、结果及未完成项统一见 [本次交付记录](../process/2026-10-14-b-delivery.md)，不把历史测试次数当本次证据。
+模块之间以数据对象和函数接口协作，不直接依赖彼此内部实现。`MemoryBundle`、`SourceRef`、`RetrievalResult`、`MemoryRelation` 和 `AnswerRecord` 定义在 `common/models.py`；字段级契约以 [interfaces.md](interfaces.md) 为准，变更接口时须通知所有消费方。
 
-## B.6 局限与后续工作
+### 1.4 端到端数据流与一致性
 
-抽取按块进行，跨块代词、实体别名归并和复杂时间区间尚未实现；未知字段保留 null。逐轮基线没有语义抽取能力。一个公开样例检索成功不能证明开发集指标达标。结构化交接入口经过消费契约测试，仍需要 C 的真实模块进行集成；目前不能声称已生成最终答案。
+1. **构建**：只向抽取模型提供清洗后的原始轮次；QA、标准答案和 gold evidence 不进入构建、索引或模型输入。
+2. **版本化**：每次构建记录 `build_id`、输入哈希、模型与 prompt 版本；索引、检索结果、状态判断和答案必须引用同一构建。
+3. **保留历史**：构建阶段保留新旧事实，不提前删除旧状态；是否有效由在线阶段的 Query 分析结果和关系判定决定。
+4. **证据回溯**：每条 Memory 保存 `(session_id, turn_id)` 来源；Web 和评测通过来源轮次定位原文或对齐 gold evidence。
+5. **错误处理**：空结果返回空集合；非法输入、版本不匹配、来源缺失等按 `interfaces.md` 明确报错，不静默降级或伪造成功结果。
 
-Python 3.11 和 macOS 的实际验收需要相应环境；本机其他 Python 版本的通过不替代双平台验收。正式课程接口、对话划分和评测口径由 A/E 对齐后记录。
+### 1.5 关键设计决策
+
+| 决策 | 原因 |
+| --- | --- |
+| 离线构建与在线问答分离 | 避免每次提问重复抽取和建索引，并保证构建结果可复现 |
+| 保留历史事实，查询时判定是否有效 | 过去的问题仍可能需要旧状态，不能在构建时永久覆盖历史 |
+| BM25 + 向量检索并用 RRF 融合 | 同时覆盖名称、属性等字面匹配和不同表达的语义匹配 |
+| 先判定候选记忆关系，再生成答案 | 避免把过期记忆直接交给生成模型，并在中间阶段定位错误 |
+| JSON 作为首版存储与模块边界 | 降低数据库和部署复杂度，便于课程交付、调试与证据检查 |
+| 本地 MiniLM、远端 DeepSeek | 向量计算可离线复用；语义抽取、关系判断和答案生成使用统一模型接口 |
+
+## 2 详细设计
+
+### 2.1 记忆与检索
+
+（鲁瑞特；可整理 `memory-design.md`、`b-handoff.md`）
+
+【待补：核心流程、数据结构、检索与失败处理。】
+
+### 2.2 状态解析与答案生成
+
+（于国庆）
+
+【待补：四类关系如何判定、有效记忆如何选择、答案和异常如何处理。】
+
+### 2.3 Web 展示
+
+（许子萌）
+
+【待补：页面与 API、记忆/证据/状态关系展示、错误状态。】
+
+### 2.4 评测接口
+
+（张崇洋）
+
+【待补：课程 CLI、三项指标计算方式和基线。】
+
+## 3 编码实现
+
+（各负责人提供，陈易汇编）
+
+- 环境与依赖：【待补】
+- 目录与需求映射：【待补】
+- 构建、配置和运行命令：【待补】
+- 当前完成度及已知限制：【待补，只写有证据的状态】
+
+## 4 现阶段测试结果
+
+（张崇洋汇总）
+
+本节只记录 M4 提交时实际完成并取得结果的测试，不作为最终验收结论。
+
+测试环境：【待补】
+
+测试命令：【待补】
+
+| 测试范围 | 已执行的测试 | 结果 | 证据位置 | 负责人 |
+| --- | --- | --- | --- | --- |
+| 数据结构与记忆构建 | 【待补】 | 【待补】 | 【待补】 | 鲁瑞特 |
+| 检索与证据回溯 | 【待补】 | 【待补】 | 【待补】 | 鲁瑞特 |
+| 状态解析与答案生成 | 【待补】 | 【待补】 | 【待补】 | 于国庆 |
+| Web 与课程接口 | 【待补】 | 【待补】 | 【待补】 | 许子萌、张崇洋 |
+| 集成链路 | 【待补】 | 【待补】 | 【待补】 | 陈易 |
+
+【待补：通过/失败数量及关键失败原因。未执行的项目应写“未测试”，不得填写推测结果。】
+
+## 5 阶段总结
+
+本节总结当前阶段已经形成的成果和仍未完成的工作，不对最终效果作结论。
+
+| 模块 | 当前成果 | 完成状态 | 负责人 |
+| --- | --- | --- | --- |
+| 记忆与检索 | 【待补】 | 【待补】 | 鲁瑞特 |
+| 状态解析与答案生成 | 【待补】 | 【待补】 | 于国庆 |
+| Web 展示 | 【待补】 | 【待补】 | 许子萌 |
+| 评测与基线 | 【待补】 | 【待补】 | 张崇洋 |
+| 集成与交付 | 【待补】 | 【待补】 | 陈易 |

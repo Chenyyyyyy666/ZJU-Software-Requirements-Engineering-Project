@@ -1,13 +1,28 @@
 # 智能体动态记忆管理 Agentic Dynamic Memory Management
 
 > ZJU Fall 2026 软件需求工程（Software Requirements Engineering）课程项目
-> 队名：`[team_name]` ｜ 队伍 ID：`[team_id]`
+> 队名：`6767组` ｜ 队伍 ID：`2`
 
 ## 项目简介 Overview
 
 在长程、多轮对话中，用户的状态、计划和偏好会持续变化。普通的向量检索虽然能召回与问题相关的历史信息，但可能同时召回当前状态与已被后续信息更新的历史状态，从而产生错误回答或错误决策。
 
 本项目基于 LoCoMo 长期多会话对话数据，开发一个支持**结构化记忆构建、查询驱动的动态状态解析、有效记忆检索与可视化**的 Web 应用。系统在回答问题前先判断历史记忆之间的保留、更新替代与冲突关系，确定当前仍然有效的记忆，再据此生成答案，并在网页端展示记忆、原始证据与状态演化过程。
+
+## 当前状态 Status
+
+> 更新于 2026-10-20。
+
+| 事项 | 状态 |
+| --- | --- |
+| 里程碑 1 团队工作流 | 已提交，tag `v0.1-milestone1` |
+| 里程碑 2 Proposal | 已于 10 月 9 日展示，tag `v0.2-proposal` |
+| 里程碑 3 需求规格说明书 | 骨架与约束、数据、评测章节完成，功能需求章节由各负责人供稿；截止 10 月 24 日 24:00 |
+| 里程碑 4 中期：设计、编码与测试 | 进行中；展示 10 月 22–23 日，材料截止 10 月 24 日 24:00 |
+| 已实现模块 | `src/common/`、`src/memory/`、`src/index/`，以及 `src/reasoning/`（Query 分析、状态关系判定、有效记忆选择与答案生成） |
+| 未实现模块 | `src/web/`、`src/eval/` |
+
+可运行范围与验证记录以 [src/README.md](src/README.md) 为准，本文档不重复实验细节。
 
 ## 团队 Team
 
@@ -35,11 +50,25 @@
 ├── docs/                    # 各里程碑交付文档（Markdown 源 + 导出 PDF）
 ├── slides/                  # 课堂展示的幻灯片源文件与 PDF
 ├── src/                     # 源代码
+├── tests/                   # 自动化测试与合成数据 fixture
 ├── process/                 # 过程材料：会议纪要、会议截图、周计划
 └── experiments/             # 实验配置与结果记录
 ```
 
 各目录的用途、命名规则与负责人见目录内的 README：[`docs`](docs/README.md)、[`slides`](slides/README.md)、[`src`](src/README.md)、[`process`](process/README.md)、[`experiments`](experiments/README.md)。
+
+### 文档索引 Documents
+
+| 文档 | 内容 | 收口人 |
+| --- | --- | --- |
+| [docs/proposal.md](docs/proposal.md) | 目标范围、功能路线图、里程碑计划（里程碑 2） | 陈易 |
+| [docs/srs.md](docs/srs.md) | 需求规格说明书（里程碑 3） | 张崇洋 |
+| [docs/design-and-test.md](docs/design-and-test.md) | 中期设计、实现与测试追踪（里程碑 4） | 张崇洋 |
+| [docs/interfaces.md](docs/interfaces.md) | 模块接口与数据结构 | 陈易、于国庆 |
+| [docs/memory-design.md](docs/memory-design.md) | 记忆结构与状态关系设计 | 鲁瑞特 |
+| [docs/team_workflow.md](docs/team_workflow.md) | 团队工作流与阶段计划（里程碑 1） | 陈易 |
+| [docs/git-conventions.md](docs/git-conventions.md) | 分支、提交、PR 与版本标签规范 | 陈易 |
+| [docs/team-roles.md](docs/team-roles.md) | 角色分工、文档责任与会议轮值 | 陈易 |
 
 ## 环境搭建 Setup
 
@@ -90,22 +119,25 @@ DEEPSEEK_MODEL=deepseek-flash
 
 1. 取得课程提供的数据文件，放在仓库**根目录**下并命名为 `locomo.json`（这是课程评测约定的路径）。
 2. 原始对话为 JSON 格式；数据中的图片链接字段在构建记忆时过滤掉，本项目不使用多模态部分。
-3. 数据划分、开发集与测试集对话编号：`[待课程助教公布后补充]`。
+3. 课程使用官方 10 段对话中的 6 段：4 段开发集用于设计与调试，2 段独立测试集用于最终评测，其余 4 段可作扩展评测。具体 `sample_id` 待助教公布后在此补充，不得用公开样例的 conv-26 推定开发集。
 
 ## 使用 Usage
 
-> 各命令随模块实现逐步补充，最终以 `src/README.md` 与代码入口为准。
-
 ```bash
-# 1. 构建结构化记忆
-python -m src.memory.build --conversation [conv_id]
+# 0. 安装依赖
+python -m pip install -r requirements.txt
 
-# 2. 回答问题
-python -m src.reasoning.answer --conversation [conv_id] --questions [questions.json]
+# 1. 构建结构化记忆（deepseek 模式需本地 .env；turns 模式无需密钥，用于验证管线）
+python -m src.memory.build --conversation <sample_id> --mode deepseek
 
-# 3. 启动 Web 应用
-[待实现]
+# 2. 检索：bm25 / vector / hybrid（vector 与 hybrid 需先装 requirements-vector.txt）
+python -m src.index.search --memory outputs/memory/<sample_id>.json --query "your question" --mode hybrid --top-k 5
+
+# 3. 输出交给推理模块的候选与证据
+python -m src.index.context --memory outputs/memory/<sample_id>.json --query "your question" --top-k 5
 ```
+
+状态解析与答案生成已提供 Python 入口 `src.reasoning.pipeline.answer(question, retrieval)`；Web 应用（`src.web`）与评测脚本（`src.eval`）尚未实现。当前可运行范围、参数说明与已知限制见 [src/README.md](src/README.md)。
 
 ### 课程评测接口 Course Evaluation Interface
 
@@ -131,6 +163,8 @@ python [评测入口] --conversation [conv_id] --output answers.json
 
 ## 结果 Results
 
+> 评测脚本尚在实现中，下表为结构占位，不代表当前系统效果。数字产生后须同时记录所用数据划分、检索参数与模型版本。
+
 | 方法 | 问题回答 F1 | Recall@K | 状态更新准确率 | 平均 token |
 | --- | --- | --- | --- | --- |
 | Full Text | 待填 | 待填 | 待填 | 待填 |
@@ -139,21 +173,23 @@ python [评测入口] --conversation [conv_id] --output answers.json
 
 ## 里程碑 Deliverables and Milestones
 
-| # | 里程碑 | 权重 | 交付物 | 截止 |
-| --- | --- | --- | --- | --- |
-| 1 | 团队工作流 Team Workflow | 15% | 文档 PDF（不超过 5 页）+ process ZIP | 10 月 10 日 24:00 |
-| 2 | Proposal：目标范围与功能路线图 | 5% | slides PDF（不超过 10 页）+ process ZIP | 上台展示 10 月 9 日；材料 10 月 10 日 24:00 |
-| 3 | 需求规格说明书 Software Requirements Specification | 15% | 文档 PDF + process ZIP | 10 月 24 日 24:00 |
-| 4 | 中期：设计、编码与测试 | 35% | 设计/测试文档 + 代码 + process ZIP | 10 月 24 日 24:00 |
-| 5 | 最终报告与展示 | 30% | 最终报告 + 代码 + process ZIP | 11 月 9 日 24:00 |
+| # | 里程碑 | 权重 | 交付物 | 截止 | 状态 |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 团队工作流 Team Workflow | 15% | 文档 PDF（不超过 5 页）+ process ZIP | 10 月 10 日 24:00 | 已提交 |
+| 2 | Proposal：目标范围与功能路线图 | 5% | slides PDF（不超过 10 页）+ process ZIP | 展示 10 月 9 日；材料 10 月 10 日 24:00 | 已完成 |
+| 3 | 需求规格说明书 Software Requirements Specification | 15% | 文档 PDF（不超过 5 页）+ process ZIP | 10 月 24 日 24:00 | 进行中 |
+| 4 | 中期：设计、编码与测试 | 35% | 设计/测试文档（不超过 5 页）+ 代码 + slides PDF（不超过 10 页）+ process ZIP | 展示 10 月 22–23 日；材料 10 月 24 日 24:00 | 进行中 |
+| 5 | 最终报告与展示 | 30% | 最终报告 + 代码 + process ZIP | 11 月 9 日 24:00 | 未开始 |
 
-**本组展示任务**：仅提案（Proposal）一次，10 月 9 日，约 10 分钟展示 + 5 分钟提问。其余里程碑按要求提交材料，展示安排以课程通知为准。
+**本组展示任务**：提案（Proposal）已于 10 月 9 日完成；中期展示安排在 10 月 22–23 日，约 10 分钟展示 + 5 分钟提问。即使某个里程碑没有上台展示，对应材料仍需按期提交。中期是否需要单独提交 slides，助教答复为准，本仓库按需要准备。
 
-提交方式：邮件发送给助教，命名 `PROJECT-MILESTONE[n]-[team_id]-[team_name]`。
+提交方式：邮件发送给助教，命名 `PROJECT-MILESTONE[n]-[team_id]-[team_name]`，如 `PROJECT-MILESTONE3-2-6767组`。
+
+版本标签：`v0.1-milestone1`（团队工作流提交版）、`v0.2-proposal`（提案材料）。
 
 ## 团队工作流 Team Workflow
 
-- **仓库**：私有仓库，由 Ruleset `protect-main` 保护默认分支 `main`：所有改动必须通过 Pull Request 合并、至少一位成员审核通过、禁止删除主干与强推覆盖历史、合并方式仅允许 Squash。
+- **仓库**：成员按角色授予写入权限；由 Ruleset `protect-main` 保护默认分支 `main`：所有改动必须通过 Pull Request 合并、至少一位成员审核通过、禁止删除主干与强推覆盖历史、合并方式仅允许 Squash。
 - **分支**：`feat/`、`fix/`、`docs/`、`chore/`、`exp/` 前缀，一人一分支，分支寿命控制在数天内。
 - **提交**：遵循约定式提交，如 `feat(memory): 抽取人物与时间字段`。
 - **本地检查**：提交前由 `pre-commit` 自动运行 ruff 与大文件、私钥检查；不配置 CI，因此 PR 描述中需附上本地 `ruff check .` 与 `pytest -q` 的执行结果。
@@ -165,11 +201,12 @@ python [评测入口] --conversation [conv_id] --output answers.json
 ## 路线图 Roadmap
 
 - [x] 仓库初始化、目录结构与协作约定
-- [ ] 结构化记忆构建（LoCoMo 对话 → 统一 JSON）
-- [ ] 检索与动态状态解析（RETAIN / UPDATE / SUPERSEDE / CONFLICT）
+- [x] 结构化记忆构建（LoCoMo 对话 → 统一 JSON）
+- [x] 基础检索（BM25 / MiniLM 向量 / RRF 混合）
+- [x] 动态状态解析（RETAIN / UPDATE / SUPERSEDE / CONFLICT）与答案生成
 - [ ] Web 应用与记忆、证据、状态演化可视化
 - [ ] 三指标评测与 baseline 对照分析
-- [ ] 最终报告与展示材料
+- [ ] 中期与最终报告、展示材料
 - [ ] 扩展方向（选做）：图记忆与多跳关系、记忆合并压缩、自适应检索与复杂时间推理
 
 ## 参考资料 References
