@@ -20,7 +20,8 @@
 | 里程碑 3 需求规格说明书 | 骨架与约束、数据、评测章节完成，功能需求章节由各负责人供稿；截止 10 月 24 日 24:00 |
 | 里程碑 4 中期：设计、编码与测试 | 进行中；展示 10 月 22–23 日，材料截止 10 月 24 日 24:00 |
 | 已实现模块 | `src/common/`、`src/memory/`、`src/index/`，以及 `src/reasoning/`（Query 分析、状态关系判定、有效记忆选择与答案生成） |
-| 未实现模块 | `src/web/`、`src/eval/` |
+| 已开始实现模块 | `src/web/`（本地记忆、证据、问答和关系视图） |
+| 尚未实现模块 | `src/eval/` |
 
 可运行范围与验证记录以 [src/README.md](src/README.md) 为准，本文档不重复实验细节。
 
@@ -49,8 +50,9 @@
 ├── pyproject.toml           # ruff 与 pytest 工具配置
 ├── docs/                    # 各里程碑交付文档（Markdown 源 + 导出 PDF）
 ├── slides/                  # 课堂展示的幻灯片源文件与 PDF
-├── src/                     # 源代码
+├── src/                     # 源代码（common、memory、index、reasoning、web）
 ├── tests/                   # 自动化测试与合成数据 fixture
+├── examples/                # 明确标记的手工合成演示数据
 ├── process/                 # 过程材料：会议纪要、会议截图、周计划
 └── experiments/             # 实验配置与结果记录
 ```
@@ -137,7 +139,7 @@ python -m src.index.search --memory outputs/memory/<sample_id>.json --query "you
 python -m src.index.context --memory outputs/memory/<sample_id>.json --query "your question" --top-k 5
 ```
 
-状态解析与答案生成已提供 Python 入口 `src.reasoning.pipeline.answer(question, retrieval)`；Web 应用（`src.web`）与评测脚本（`src.eval`）尚未实现。当前可运行范围、参数说明与已知限制见 [src/README.md](src/README.md)。
+状态解析与答案生成已提供 Python 接口；本地 Web 页面可通过 `python -m src.web.server` 启动，默认读取 `outputs/memory/` 下的记忆 bundle。问答功能需配置 DeepSeek key；评测脚本（`src.eval`）尚未实现。当前可运行范围、参数说明与已知限制见 [src/README.md](src/README.md)。
 
 ### 课程评测接口 Course Evaluation Interface
 
