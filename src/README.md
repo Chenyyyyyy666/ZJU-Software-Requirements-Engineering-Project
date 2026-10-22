@@ -52,7 +52,15 @@ Memory 的 content 与问题由同一模型编码为 384 维向量，归一化�
 
 固定模型 revision 为 `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`。为避免静默丢失证据，单条记忆或问题超过模型 256 token 上限时明确报错；需将长记忆拆成更短的事实。此限制按模型 tokenizer 计数，包含特殊 token。[官方模型说明](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
 
-本地验证：47 项自动化测试通过（模型相关单元测试使用测试编码器）；另外使用真实 MiniLM 在 CPU 离线模式下检索公开 conv-26 的 419 条逐轮基线记忆，生成 419 × 384 向量。查询 `adoption interviews` 时 D19:1 在 vector 中排名 3，在 hybrid 中排名 1。该单例验证说明链路可运行，不等于开发集评测结果或普遍优于 BM25，也不代表已完成真实 DeepSeek 抽取验证。
+2026-10-14 本地验证：54 项自动化测试通过（模型相关单元测试使用测试编码器）；另外使用真实 MiniLM 在 Windows / Python 3.13.5 / CPU 离线模式下检索公开 conv-26 的 419 条逐轮基线记忆。查询 `adoption interviews` 时 D19:1 在 BM25 中排名 1、vector 中排名 3、hybrid 中排名 1；各模式重复 30 次结果一致，全部命中可回溯原始轮次。该单例验证不等于开发集评测结果、真实 DeepSeek 抽取质量或双平台验收。详细证据见 [交付记录](../process/2026-10-14-b-delivery.md)。
+
+### 交给推理模块的候选与证据
+
+```bash
+python -m src.index.context --memory outputs/memory/demo-01.json --query "adoption interviews" --top-k 3 --output outputs/demo-context.json
+```
+
+输出包括 `build_info`、完整 `retrieval`、`source_turns` 和可选的 `related_history`。Python 调用为 `src.index.context.retrieve_context(index, request)`；显式传入实体、属性与 `history_limit` 时扩展关联历史，初始 Top-K 保持不变。此入口不执行状态判断或答案生成。可运行示例、真实抽取验收步骤和接收方清单见 [B 交接说明](../docs/b-handoff.md)。
 
 数据格式依据 [LoCoMo 官方仓库](https://github.com/snap-research/locomo)。API 参数依据 DeepSeek 的 [JSON 输出](https://api-docs.deepseek.com/guides/json_mode/) 与 [思考模式](https://api-docs.deepseek.com/guides/thinking_mode/) 文档；实际实现与 mock 测试使用 `response_format=json_object` 和 `thinking.type=disabled`。
 
