@@ -33,7 +33,7 @@ question ─┬─ index.search：BM25 + 向量召回 → RRF 去重排序 → T
           reasoning.answer_generator：调用 DeepSeek → AnswerRecord
 
 【消费端】
-web（规划中）：展示 Memory、原始证据、关系与答案
+web：本地 HTTP 服务展示 Memory、原始证据、关系与答案
 eval（规划中）：批量调用同一问答流水线，计算指标并运行基线
 ```
 
@@ -47,7 +47,7 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 | `memory/` | 鲁瑞特 | LoCoMo 对话、会话时间 | `MemoryBundle`、原始来源轮次 |
 | `index/` | 鲁瑞特 | `MemoryBundle`、问题与 K | BM25/向量候选、`RetrievalResult` |
 | `reasoning/` | 于国庆 | 问题、`RetrievalResult` | `QueryAnalysisResult`、`MemoryRelation`、`AnswerRecord` |
-| `web/` | 许子萌 | 问答结果、Memory ID | 记忆、证据和状态关系页面（规划中） |
+| `web/` | 许子萌 | MemoryBundle、用户问题 | 本地 HTTP 接口与记忆、证据、问答和状态关系页面 |
 | `eval/` | 张崇洋 | 问题集、标准答案与证据 | 三指标结果、基线对照（规划中） |
 
 模块之间以数据对象和函数接口协作，不直接依赖彼此内部实现。`MemoryBundle`、`SourceRef`、`RetrievalResult`、`MemoryRelation` 和 `AnswerRecord` 定义在 `common/models.py`；字段级契约以 [interfaces.md](interfaces.md) 为准，变更接口时须通知所有消费方。
@@ -89,7 +89,38 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 
 （许子萌）
 
-【待补：页面与 API、记忆/证据/状态关系展示、错误状态。】
+Web 采用 Python 标准库 `ThreadingHTTPServer` 提供本地 HTTP 服务，前端使用静态 HTML、CSS 与 JavaScript，不增加前端构建工具或运行时依赖。默认只绑定 `127.0.0.1:8000`。记忆文件从 `WEB_MEMORY_DIR` 指定目录读取，默认 `outputs/memory/`；每次请求按 `conversation_id` 加载并校验对应的 `MemoryBundle`，记忆 ID 只在该 bundle 内解析，避免将用户输入拼接为文件路径。
+
+```mermaid
+flowchart LR
+    User[用户浏览器] -->|HTTP| Web[本地 WebHandler]
+    Web -->|GET /api/conversations| Files[outputs/memory/*.json]
+    Web -->|GET /api/memories| Bundle[MemoryBundle]
+    Web -->|GET /api/memories/id| Evidence[get_memory + get_source_turns]
+    Web -->|POST /api/ask| Search[BM25 检索]
+    Search --> Reason[query_analyzer → relation_judge]
+    Reason --> Select[memory_selector]
+    Select --> Answer[answer_generator]
+    Bundle --> UI[记忆列表与来源证据]
+    Answer --> UI
+    Reason --> UI
+```
+
+| 路由 | 输入 | 输出与行为 |
+| --- | --- | --- |
+| `GET /` | 无 | 返回单页应用；`/app.css`、`/app.js` 提供静态资源 |
+| `GET /api/conversations` | 无 | 返回已校验的对话 ID、build_id 和 Memory 数量 |
+| `GET /api/memories?conversation_id=...` | 对话 ID | 返回该 bundle 的 Memory 列表及 build_id |
+| `GET /api/memories/{memory_id}?conversation_id=...` | 对话 ID、Memory ID | 使用 `get_memory` 和 `get_source_turns` 返回记忆与原始轮次 |
+| `POST /api/ask` | 对话 ID、问题、可选 top_k | 使用 BM25 检索并调用现有 Query 分析、关系判定、有效记忆选择和答案生成，返回检索、关系与答案记录 |
+
+页面由三部分组成：左栏按对话浏览并搜索记忆；选择记忆后显示来源轮次、说话人、会话时间和原文；问答区显示答案、引用的有效 Memory、记忆关系及关系判定理由。点选关系节点可跳转到其证据。空数据、无匹配项和错误请求均显示页面提示；后端不静默替换 bundle，也不在前端重新推断状态。
+
+当前问答端使用 BM25，模型相关的查询分析、关系判断和答案生成需要本地 `.env` 中配置 DeepSeek API key；API 配置失败时向页面返回通用错误提示，不回传密钥或模型响应正文。当前实现为本地开发/课堂演示用途，不提供认证、跨域或公网部署能力。浏览记忆与证据不需要模型 API。
+
+`examples/demo_dynamic_memory.json` 提供两条人工合成的状态变化记忆，可用于界面操作演示；其 `build_info.method` 标为 `manual_course_slide_example`，不得作为课程数据、自动抽取结果或评测证据。设 `WEB_MEMORY_DIR=examples` 后启动服务即可浏览。在线提问仍会调用 DeepSeek API。
+
+**演示顺序**：启动 Web 服务并打开 `demo-state-change` → 选择“准备参加面试”记忆并展开 S1:1 原文 → 提问 `What is Alex's current adoption progress?` → 展示回答引用及两条记忆的状态关系 → 点击关系节点回看 S2:1 证据。该样例只演示交互与可解释性，关系标签和答案由运行时模型生成，不是预设评测结果。
 
 ### 2.4 评测接口
 
@@ -101,10 +132,10 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 
 （各负责人提供，陈易汇编）
 
-- 环境与依赖：【待补】
-- 目录与需求映射：【待补】
-- 构建、配置和运行命令：【待补】
-- 当前完成度及已知限制：【待补，只写有证据的状态】
+- 环境与依赖：Python 3.11；依赖见 `requirements.txt`。Web 页面与 API 使用 Python 标准库，问答功能复用现有 `pydantic`、索引和推理依赖。
+- 目录与需求映射：`src/web/server.py` 实现 FR-12 至 FR-15 的 HTTP 路由；`src/web/static/` 实现记忆浏览、证据回看、问题提交和关系展示。Memory 和证据读取复用 `src/memory/store.py`；检索复用 `src/index/bm25.py`；状态处理复用 `src/reasoning/`。
+- 构建、配置和运行命令：先按项目命令构建 MemoryBundle，再执行 `python -m src.web.server`；默认打开 `http://127.0.0.1:8000`。默认加载 `outputs/memory/`，可用 `WEB_MEMORY_DIR`、`WEB_HOST`、`WEB_PORT` 覆盖。问答需配置 `DEEPSEEK_API_KEY`。
+- 当前完成度及已知限制：Web 页面和本地 HTTP 路由已实现；本次交付记录中尚未执行 Web 手工验收或自动化测试。问答需本地 DeepSeek key；默认 BM25。逐轮 turns 基线缺少实体/属性，不能体现有意义的时态关系；课程真实数据上的端到端演示仍待实际运行确认。
 
 ## 4 现阶段测试结果
 
@@ -121,7 +152,7 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 | 数据结构与记忆构建 | 【待补】 | 【待补】 | 【待补】 | 鲁瑞特 |
 | 检索与证据回溯 | 【待补】 | 【待补】 | 【待补】 | 鲁瑞特 |
 | 状态解析与答案生成 | 【待补】 | 【待补】 | 【待补】 | 于国庆 |
-| Web 与课程接口 | 【待补】 | 【待补】 | 【待补】 | 许子萌、张崇洋 |
+| Web 与课程接口 | Web 代码已加入；本次文档编写时尚未执行 Web 手工验收或自动化测试 | 未测试，不代表验收通过 | `src/web/` | 许子萌、张崇洋 |
 | 集成链路 | 【待补】 | 【待补】 | 【待补】 | 陈易 |
 
 【待补：通过/失败数量及关键失败原因。未执行的项目应写“未测试”，不得填写推测结果。】
@@ -134,6 +165,6 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 | --- | --- | --- | --- |
 | 记忆与检索 | 【待补】 | 【待补】 | 鲁瑞特 |
 | 状态解析与答案生成 | 【待补】 | 【待补】 | 于国庆 |
-| Web 展示 | 【待补】 | 【待补】 | 许子萌 |
+| Web 展示 | 本地 HTTP 页面已实现记忆列表、来源轮次、BM25 问答接线和关系结果展示；尚无 Web 自动化测试，端到端效果待联调确认 | 已实现，未验收 | 许子萌 |
 | 评测与基线 | 【待补】 | 【待补】 | 张崇洋 |
 | 集成与交付 | 【待补】 | 【待补】 | 陈易 |

@@ -4,7 +4,7 @@
 
 ## 当前可运行范围
 
-B 的 `common/`、`memory/`、`index/` 已实现 `0.1` 数据接口、BM25、MiniLM 向量检索与 RRF 混合检索。`reasoning/`、`web/`、`eval/` 尚未实现。Memory 有两种构建模式：
+B 的 `common/`、`memory/`、`index/` 已实现 `0.1` 数据接口、BM25、MiniLM 向量检索与 RRF 混合检索；`reasoning/` 已提供 Query 分析、状态关系判定、有效记忆选择和答案生成。`web/` 提供本地演示界面；`eval/` 尚未实现。Memory 有两种构建模式：
 
 - `deepseek`：通过官方 API 抽取事实，关闭 thinking，使用 JSON 输出、来源校验及块级缓存。需要用户本地配置密钥，真实抽取效果尚未验证。
 - `turns`：每个文本轮次保存为一条 Memory，entity/attribute/value 和事件时间留空，标记为 `turn_baseline`。用于离线验证管线，不宣称完成语义抽取。
@@ -20,6 +20,24 @@ python -m src.index.search --memory outputs/memory/demo-01.json --query "adoptio
 ```
 
 生成的检索 JSON 包含排名、分数、Memory 与原始轮次引用。查看原文时用 `src.memory.store.get_source_turns`，数据保存在同一 MemoryBundle 的 source_turns 中。
+
+启动本地 Web 页面：
+
+```bash
+# Bash / macOS / Linux / WSL
+WEB_MEMORY_DIR=examples python -m src.web.server
+```
+
+Windows PowerShell:
+
+```powershell
+$env:WEB_MEMORY_DIR = "examples"
+python -m src.web.server
+```
+
+浏览器打开 `http://127.0.0.1:8000`。默认从 `outputs/memory/` 加载已构建的 MemoryBundle，可通过 `WEB_MEMORY_DIR` 指定其他目录。页面可离线浏览记忆和来源证据；问答会调用 DeepSeek，需要 `.env` 中配置 `DEEPSEEK_API_KEY`。当前页面使用 BM25 检索，逐轮 `turns` 基线没有人物/属性标注，因此不能用于展示有意义的状态关系。
+
+仓库中的 `examples/demo_dynamic_memory.json` 是人工编写的两阶段状态变化合成样例，只用于界面演示，**不是课程数据、真实抽取结果或效果评测样本**。用它时关系判断与答案生成仍会发起 DeepSeek API 调用并产生 API 费用；没有 API key 时可以浏览两条记忆和来源，但无法完成在线问答。
 
 ### 真实数据构建
 

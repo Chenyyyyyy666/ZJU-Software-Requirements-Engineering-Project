@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f6f8" />
+    <title>Recall · Dynamic Memory</title>
+    <link rel="stylesheet" href="/app.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="Recall 首页">
+          <span class="brand-mark">R</span>
+          <span><strong>recall</strong><small>动态记忆工作台</small></span>
+        </a>
+        <div class="sidebar-label">工作区</div>
+        <button class="nav-item active" type="button"><span class="nav-icon">◫</span>记忆浏览</button>
+        <div class="sidebar-note">
+          <span class="pulse"></span>
+          <div><strong>本地运行</strong><small>数据留在当前设备</small></div>
+        </div>
+        <div class="sidebar-footer">ZJU · Software Requirements Engineering</div>
+      </aside>
+
+      <main class="main-area">
+        <header class="topbar">
+          <div class="breadcrumb">工作区 <span>/</span> <strong>记忆浏览</strong></div>
+          <div class="topbar-right"><span class="service-dot"></span>本地服务运行中</div>
+        </header>
+
+        <section class="page-heading">
+          <div>
+            <div class="eyebrow">CONVERSATIONAL MEMORY</div>
+            <h1>让每段记忆都有来处</h1>
+            <p>浏览对话事实、核对原始证据，并追踪状态如何随时间变化。</p>
+          </div>
+          <label class="conversation-picker">
+            <span>当前对话</span>
+            <select id="conversation-select" aria-label="选择对话">
+              <option value="">正在读取…</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="summary-row" aria-label="当前对话概览">
+          <article class="summary-card"><span class="summary-icon icon-violet">▤</span><div><small>结构化记忆</small><strong id="memory-count">—</strong></div><span class="summary-caption">条事实</span></article>
+          <article class="summary-card"><span class="summary-icon icon-blue">◷</span><div><small>构建版本</small><strong class="build-value" id="build-id">—</strong></div><span class="summary-caption">BUILD ID</span></article>
+          <article class="summary-card"><span class="summary-icon icon-green">⌁</span><div><small>证据可回溯</small><strong>逐轮定位</strong></div><span class="summary-caption">原始对话</span></article>
+        </section>
+
+        <section class="workspace-grid">
+          <article class="panel memory-panel">
+            <div class="panel-heading">
+              <div><div class="panel-title">记忆库</div><div class="panel-subtitle">选择一条记忆查看原始来源</div></div>
+              <span class="count-pill" id="visible-count">0</span>
+            </div>
+            <label class="search-box"><span>⌕</span><input id="memory-filter" type="search" placeholder="搜索记忆、人物或属性" /></label>
+            <div class="memory-list" id="memory-list"><div class="loading-state">正在加载记忆…</div></div>
+          </article>
+
+          <div class="detail-column">
+            <article class="panel ask-panel">
+              <div class="panel-heading">
+                <div><div class="panel-title">向记忆提问</div><div class="panel-subtitle">答案将附带使用的记忆与状态关系</div></div>
+                <span class="ai-badge"><span>✦</span>动态解析</span>
+              </div>
+              <form id="question-form">
+                <label class="sr-only" for="question-input">输入问题</label>
+                <textarea id="question-input" rows="2" placeholder="例如：她目前的领养申请进展如何？"></textarea>
+                <div class="ask-actions"><span>仅使用当前对话的记忆与证据</span><button id="ask-button" type="submit"><span>✦</span>分析并回答</button></div>
+              </form>
+              <div id="answer-area" class="answer-area empty-answer"><span class="answer-orb">✦</span><div><strong>答案会显示在这里</strong><p>提交问题后，查看答案依据和记忆间的状态关系。</p></div></div>
+            </article>
+
+            <article class="panel evidence-panel">
+              <div class="panel-heading">
+                <div><div class="panel-title">原始证据</div><div class="panel-subtitle">从结构化记忆回到对话现场</div></div>
+                <span class="evidence-tag">SOURCE TURNS</span>
+              </div>
+              <div id="evidence-area" class="evidence-content"><div class="empty-state">从左侧选择一条记忆，查看它对应的原始对话轮次。</div></div>
+            </article>
+
+            <article class="panel relation-panel">
+              <div class="panel-heading">
+                <div><div class="panel-title">状态演化</div><div class="panel-subtitle">本次问题涉及的记忆关系</div></div>
+                <span class="evidence-tag">RELATION MAP</span>
+              </div>
+              <div id="relation-area" class="relation-content"><div class="empty-state">提出问题后，关系解析结果会出现在这里。</div></div>
+            </article>
+          </div>
+        </section>
+        <footer class="page-footer">Recall · Evidence first, state aware <span>开发演示版本</span></footer>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="/app.js" defer></script>
+  </body>
+</html>
