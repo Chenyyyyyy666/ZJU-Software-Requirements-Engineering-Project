@@ -95,6 +95,9 @@ Web 采用 Python 标准库 `ThreadingHTTPServer` 提供本地 HTTP 服务，前
 flowchart LR
     User[用户浏览器] -->|HTTP| Web[本地 WebHandler]
     Web -->|GET /api/conversations| Files[outputs/memory/*.json]
+    User -.->|POST /api/import（计划中）| Web
+    Web -.->|构建成功后写入| Files
+    Web -.->|调用（计划中）| M[记忆构建模块]
     Web -->|GET /api/memories| Bundle[MemoryBundle]
     Web -->|GET /api/memories/id| Evidence[get_memory + get_source_turns]
     Web -->|POST /api/ask| Search[BM25 检索]
@@ -113,12 +116,15 @@ flowchart LR
 | `GET /api/memories?conversation_id=...` | 对话 ID | 返回该 bundle 的 Memory 列表及 build_id |
 | `GET /api/memories/{memory_id}?conversation_id=...` | 对话 ID、Memory ID | 使用 `get_memory` 和 `get_source_turns` 返回记忆与原始轮次 |
 | `POST /api/ask` | 对话 ID、问题、可选 top_k | 使用 BM25 检索并调用现有 Query 分析、关系判定、有效记忆选择和答案生成，返回检索、关系与答案记录 |
+| `POST /api/import`（计划中） | LoCoMo JSON 文件、可选 `sample_id` | 校验输入并调用记忆构建流程；成功后将 MemoryBundle 写入记忆目录并返回构建状态 |
 
 页面由三部分组成：左栏按对话浏览并搜索记忆；选择记忆后显示来源轮次、说话人、会话时间和原文；问答区显示答案、引用的有效 Memory、记忆关系及关系判定理由。点选关系节点可跳转到其证据。空数据、无匹配项和错误请求均显示页面提示；后端不静默替换 bundle，也不在前端重新推断状态。
 
 当前问答端使用 BM25，模型相关的查询分析、关系判断和答案生成需要本地 `.env` 中配置 DeepSeek API key；API 配置失败时向页面返回通用错误提示，不回传密钥或模型响应正文。当前实现为本地开发/课堂演示用途，不提供认证、跨域或公网部署能力。浏览记忆与证据不需要模型 API。
 
 `examples/demo_dynamic_memory.json` 提供两条人工合成的状态变化记忆，可用于界面操作演示；其 `build_info.method` 标为 `manual_course_slide_example`，不得作为课程数据、自动抽取结果或评测证据。设 `WEB_MEMORY_DIR=examples` 后启动服务即可浏览。在线提问仍会调用 DeepSeek API。
+
+**用户导入对话（FR-16，尚未实现）**：目标是在页面提供 JSON 文件选择与导入操作；服务端校验 LoCoMo 格式及 `sample_id`，调用 `src/memory/` 构建 MemoryBundle，成功后写入 `WEB_MEMORY_DIR` 指向的记忆目录并刷新对话列表。多 sample 文件需由用户指定要构建的 sample。抽取时只读取对话轮次，不能把 QA、gold evidence、observation 或摘要标注传给抽取器。当前页面没有上传控件，服务端没有导入路由，也没有把上传内容接到记忆构建流程；用户目前仍需在终端运行 `python -m src.memory.build`。FR-16 尚未实现、尚未测试和验收，不能将其描述为已完成。
 
 **演示顺序**：启动 Web 服务并打开 `demo-state-change` → 选择“准备参加面试”记忆并展开 S1:1 原文 → 提问 `What is Alex's current adoption progress?` → 展示回答引用及两条记忆的状态关系 → 点击关系节点回看 S2:1 证据。该样例只演示交互与可解释性，关系标签和答案由运行时模型生成，不是预设评测结果。
 
@@ -133,7 +139,7 @@ flowchart LR
 （各负责人提供，陈易汇编）
 
 - 环境与依赖：Python 3.11；依赖见 `requirements.txt`。Web 页面与 API 使用 Python 标准库，问答功能复用现有 `pydantic`、索引和推理依赖。
-- 目录与需求映射：`src/web/server.py` 实现 FR-12 至 FR-15 的 HTTP 路由；`src/web/static/` 实现记忆浏览、证据回看、问题提交和关系展示。Memory 和证据读取复用 `src/memory/store.py`；检索复用 `src/index/bm25.py`；状态处理复用 `src/reasoning/`。
+- 目录与需求映射：`src/web/server.py` 与 `src/web/static/` 当前实现 FR-12 至 FR-15（记忆浏览、证据回看、问题提交和关系展示）。FR-16（浏览器上传 LoCoMo JSON 并构建记忆）尚未实现；当前没有上传控件或导入 API。Memory 和证据读取复用 `src/memory/store.py`；检索复用 `src/index/bm25.py`；状态处理复用 `src/reasoning/`。
 - 构建、配置和运行命令：先按项目命令构建 MemoryBundle，再执行 `python -m src.web.server`；默认打开 `http://127.0.0.1:8000`。默认加载 `outputs/memory/`，可用 `WEB_MEMORY_DIR`、`WEB_HOST`、`WEB_PORT` 覆盖。问答需配置 `DEEPSEEK_API_KEY`。
 - 当前完成度及已知限制：Web 页面和本地 HTTP 路由已实现；本次交付记录中尚未执行 Web 手工验收或自动化测试。问答需本地 DeepSeek key；默认 BM25。逐轮 turns 基线缺少实体/属性，不能体现有意义的时态关系；课程真实数据上的端到端演示仍待实际运行确认。
 
@@ -152,7 +158,7 @@ flowchart LR
 | 数据结构与记忆构建 | 【待补】 | 【待补】 | 【待补】 | 鲁瑞特 |
 | 检索与证据回溯 | 【待补】 | 【待补】 | 【待补】 | 鲁瑞特 |
 | 状态解析与答案生成 | 【待补】 | 【待补】 | 【待补】 | 于国庆 |
-| Web 与课程接口 | Web 代码已加入；本次文档编写时尚未执行 Web 手工验收或自动化测试 | 未测试，不代表验收通过 | `src/web/` | 许子萌、张崇洋 |
+| Web 与课程接口 | FR-12 至 FR-15 的 Web 代码已加入；FR-16 前端导入及记忆构建接线未实现；Web 手工验收和自动化测试尚未记录 | FR-16 未实现；其余 Web 功能未验收 | `src/web/` | 许子萌、张崇洋 |
 | 集成链路 | 【待补】 | 【待补】 | 【待补】 | 陈易 |
 
 【待补：通过/失败数量及关键失败原因。未执行的项目应写“未测试”，不得填写推测结果。】
@@ -165,6 +171,6 @@ flowchart LR
 | --- | --- | --- | --- |
 | 记忆与检索 | 【待补】 | 【待补】 | 鲁瑞特 |
 | 状态解析与答案生成 | 【待补】 | 【待补】 | 于国庆 |
-| Web 展示 | 本地 HTTP 页面已实现记忆列表、来源轮次、BM25 问答接线和关系结果展示；尚无 Web 自动化测试，端到端效果待联调确认 | 已实现，未验收 | 许子萌 |
+| Web 展示 | FR-12 至 FR-15 已有本地页面和 HTTP 接口，覆盖记忆列表、来源轮次、BM25 问答接线和关系结果展示；FR-16 用户上传 LoCoMo JSON 并触发记忆构建尚未实现（无上传控件、导入 API 和构建接线）。现有 Web 功能尚无自动化测试，端到端效果待联调确认 | FR-12 至 FR-15 已实现，未验收；FR-16 未实现、未测试 | 许子萌 |
 | 评测与基线 | 【待补】 | 【待补】 | 张崇洋 |
 | 集成与交付 | 【待补】 | 【待补】 | 陈易 |
