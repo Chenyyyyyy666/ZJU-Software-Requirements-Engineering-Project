@@ -81,9 +81,72 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 
 ### 2.2 状态解析与答案生成
 
-（于国庆）
+### 2.2.1 模块定位
 
-【待补：四类关系如何判定、有效记忆如何选择、答案和异常如何处理。】
+`reasoning/` 位于检索之后、答案生成之前，是本项目区别于 Vector RAG 的核心环节。它接收 `RetrievalResult`（候选 Memory 列表）和用户问题，输出 `AnswerRecord`（答案 + 有效记忆 ID + 冲突标记 + `build_id`）。
+
+对外入口为 `src/reasoning/pipeline.py::answer(question, retrieval, question_id=None)`，内部依次调用四个模块：
+
+| 文件                  | 职责                                                      |
+| :-------------------- | :-------------------------------------------------------- |
+| `query_analyzer.py`   | 调用 DeepSeek 抽取实体、时间视角、时间原文、属性与置信度  |
+| `relation_judge.py`   | 对候选记忆按 `(entity, attribute)` 分组，两两判定四类关系 |
+| `memory_selector.py`  | 按关系与 `time_scope` 选择当前有效记忆                    |
+| `answer_generator.py` | 组装 prompt，调用 DeepSeek 生成一句话答案                 |
+
+### 2.2.2 Query 分析
+
+输出 `QueryAnalysisResult`，字段与 `common/models.py` 一致：`entity`、`time_scope`（`current` / `past` / `specific`）、`time_expression`、`attribute`、`confidence`，并携带 `conversation_id` 与 `build_id`。
+
+设计要点：
+
+- 使用 DeepSeek 官方接口，`response_format={"type": "json_object"}`，关闭 thinking。
+- prompt 中给出 JSON 样例，避免返回空 content。
+- 返回空 content 或 JSON 非法时重试 2 次；仍失败则抛出 `ValueError`。
+- 401 / 402 错误直接抛出，不进入重试，避免浪费调用。
+
+### 2.2.3 四类关系的判定
+
+`relation_judge.judge_relations` 先按 `(entity, attribute)` 分组，**跳过 `entity` 或 `attribute` 为 null 的记忆**（turns 基线模式全部跳过，避免海量无意义调用）。仅在同组内两两比较，跨组记忆不产生关系记录，下游默认视为 RETAIN。
+
+判定依据：时间顺序（`session_time` 与 `event_time`）、实体一致性、属性一致性、事件上下文。**不依赖语义相似度**。
+
+四类关系的处理：
+
+| 关系      | 判定含义                     | 后续处理                    |
+| :-------- | :--------------------------- | :-------------------------- |
+| RETAIN    | 两条可同时成立               | 均保留                      |
+| UPDATE    | 后者补充或局部修改前者       | 交由 `memory_selector` 合并 |
+| SUPERSEDE | 新记忆明确取代旧记忆         | 仅保留新值                  |
+| CONFLICT  | 无法同时成立且无时间依据消解 | 双留并标记冲突              |
+
+两条记忆的 `event_time` 与 `session_time` **均缺失**时，强制判为 CONFLICT，不调用模型，不推测时间先后。
+
+输出 `MemoryRelation`，含 `memory_a`、`memory_b`、`relation_type`、`reason`、`sources`（按 `(session_id, turn_id)` 去重）。模型返回非法 JSON 时重试 2 次，仍失败则降级为 CONFLICT 并记录 `judge failed` 原因，不中断流水线。
+
+### 2.2.4 有效记忆选择
+
+`memory_selector.select_effective` 按关系过滤候选记忆：
+
+- RETAIN、UPDATE、CONFLICT：保留
+- SUPERSEDE：当 `time_scope != "past"` 时，丢弃 `memory_a`（旧值）
+- `time_scope == "past"` 时，**不丢弃**被 SUPERSEDE 的旧记忆，保留给回溯性提问使用
+
+这条规则对应 `memory-design.md` 中「询问过去状态时，旧事实仍可能是所需答案依据」。`has_conflict` 单独判断关系列表中是否存在 CONFLICT，供答案生成时决定是否附加冲突说明。
+
+### 2.2.5 答案生成与异常处理
+
+`answer_generator.generate_answer` 将有效记忆的内容逐条列出，冲突时附加 `[Note: conflicting information exists.]`，调用 DeepSeek 生成一句话答案。输出 `AnswerRecord`：
+
+| 字段               | 含义                                          |
+| :----------------- | :-------------------------------------------- |
+| `answer`           | 一句话答案；空 content 时降级为 `(no answer)` |
+| `valid_memory_ids` | 参与生成的有效记忆 ID                         |
+| `conflict`         | 有效记忆集合是否存在冲突                      |
+| `build_id`         | 与检索结果一致的构建版本                      |
+| `question_id`      | 评测场景的题号，非评测为 null                 |
+
+异常处理：模型返回空 content 时降级为 `(no answer)` 并记录，不中断批量评测。`build_id` 与当前 bundle 不一致时由上游检索模块抛 `RuntimeError`，本模块不重复校验。
 
 ### 2.3 Web 展示
 
@@ -120,7 +183,7 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 | --- | --- | --- | --- | --- |
 | 数据结构与记忆构建 | 【待补】 | 【待补】 | 【待补】 | 鲁瑞特 |
 | 检索与证据回溯 | 【待补】 | 【待补】 | 【待补】 | 鲁瑞特 |
-| 状态解析与答案生成 | 【待补】 | 【待补】 | 【待补】 | 于国庆 |
+| 状态解析与答案生成 | python -m pytest tests/test_reasoning.py -q;                        python -m pytest -q | 16 项通过；全量 63 项通过，无回归 | tests/test_reasoning.py`；`src/reasoning/ | 于国庆 |
 | Web 与课程接口 | 【待补】 | 【待补】 | 【待补】 | 许子萌、张崇洋 |
 | 集成链路 | 【待补】 | 【待补】 | 【待补】 | 陈易 |
 
@@ -133,7 +196,7 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 | 模块 | 当前成果 | 完成状态 | 负责人 |
 | --- | --- | --- | --- |
 | 记忆与检索 | 【待补】 | 【待补】 | 鲁瑞特 |
-| 状态解析与答案生成 | 【待补】 | 【待补】 | 于国庆 |
+| 状态解析与答案生成 | 五个模块文件与三个共享类型完成；16 项单元测试通过；turns 基线端到端跑通；`ruff check .` 通过 | 核心链路完成，真实数据验证待补 | 于国庆 |
 | Web 展示 | 【待补】 | 【待补】 | 许子萌 |
 | 评测与基线 | 【待补】 | 【待补】 | 张崇洋 |
 | 集成与交付 | 【待补】 | 【待补】 | 陈易 |
