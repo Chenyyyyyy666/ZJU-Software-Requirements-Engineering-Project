@@ -11,13 +11,13 @@
 
 ## 当前状态 Status
 
-> 更新于 2026-10-20。
+> 更新于 2026-10-23。
 
 | 事项 | 状态 |
 | --- | --- |
 | 里程碑 1 团队工作流 | 已提交，tag `v0.1-milestone1` |
 | 里程碑 2 Proposal | 已于 10 月 9 日展示，tag `v0.2-proposal` |
-| 里程碑 3 需求规格说明书 | 骨架与约束、数据、评测章节完成，功能需求章节由各负责人供稿；截止 10 月 24 日 24:00 |
+| 里程碑 3 软件需求规格说明书 | 正文已按课程提供的 IEEE Std 830-1998 改编模板重组，包含 5 个系统功能及 18 条可验证功能需求；待评审、导出 PDF 与提交，截止 10 月 24 日 24:00 |
 | 里程碑 4 中期：设计、编码与测试 | 进行中；展示 10 月 22–23 日，材料截止 10 月 24 日 24:00 |
 | 已实现模块 | `src/common/`、`src/memory/`、`src/index/`，以及 `src/reasoning/`（Query 分析、状态关系判定、有效记忆选择与答案生成） |
 | 已开始实现模块 | `src/web/`（本地记忆、证据、问答和关系视图） |
@@ -64,13 +64,15 @@
 | 文档 | 内容 | 收口人 |
 | --- | --- | --- |
 | [docs/proposal.md](docs/proposal.md) | 目标范围、功能路线图、里程碑计划（里程碑 2） | 陈易 |
-| [docs/srs.md](docs/srs.md) | 需求规格说明书（里程碑 3） | 张崇洋 |
+| [docs/srs.md](docs/srs.md) | 软件需求规格说明书（里程碑 3，IEEE 830 改编结构） | 张崇洋 |
 | [docs/design-and-test.md](docs/design-and-test.md) | 中期设计、实现与测试追踪（里程碑 4） | 张崇洋 |
 | [docs/interfaces.md](docs/interfaces.md) | 模块接口与数据结构 | 陈易、于国庆 |
 | [docs/memory-design.md](docs/memory-design.md) | 记忆结构与状态关系设计 | 鲁瑞特 |
 | [docs/team_workflow.md](docs/team_workflow.md) | 团队工作流与阶段计划（里程碑 1） | 陈易 |
 | [docs/git-conventions.md](docs/git-conventions.md) | 分支、提交、PR 与版本标签规范 | 陈易 |
 | [docs/team-roles.md](docs/team-roles.md) | 角色分工、文档责任与会议轮值 | 陈易 |
+
+SRS 使用“引言 → 总体描述 → 系统功能 → 外部接口 → 非功能需求 → 其他需求”的标准结构，并以词汇表、分析模型和待决问题作为附录；项目不涉及的硬件接口和物理安全章节已按实际需求裁剪。
 
 ## 环境搭建 Setup
 
@@ -146,7 +148,7 @@ python -m src.index.context --memory outputs/memory/<sample_id>.json --query "yo
 课程统一约定：数据文件 `locomo.json` 放在仓库根目录，评测入口接收对话编号与问题参数，把答案写入根目录的结果文件。
 
 ```bash
-python [评测入口] --conversation [conv_id] --output answers.json
+python [评测入口] --conversation [conv_id] --questions [questions.json] --output answers.json
 ```
 
 输出要求：每题一句话答案，标明题号与答案。系统内部的记忆结构不要求统一格式。正式格式以助教后续通知为准，入口脚本保持参数化以便适配。
@@ -206,9 +208,9 @@ python [评测入口] --conversation [conv_id] --output answers.json
 - [x] 结构化记忆构建（LoCoMo 对话 → 统一 JSON）
 - [x] 基础检索（BM25 / MiniLM 向量 / RRF 混合）
 - [x] 动态状态解析（RETAIN / UPDATE / SUPERSEDE / CONFLICT）与答案生成
-- [ ] Web 应用与记忆、证据、状态演化可视化
+- [ ] Web 应用与记忆、证据、状态演化可视化（进行中）
 - [ ] 三指标评测与 baseline 对照分析
-- [ ] 中期与最终报告、展示材料
+- [ ] 中期与最终报告、展示材料（中期材料进行中）
 - [ ] 扩展方向（选做）：图记忆与多跳关系、记忆合并压缩、自适应检索与复杂时间推理
 
 ## 参考资料 References
