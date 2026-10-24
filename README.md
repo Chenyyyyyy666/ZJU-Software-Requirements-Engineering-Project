@@ -59,6 +59,18 @@
 
 各目录的用途、命名规则与负责人见目录内的 README：[`docs`](docs/README.md)、[`slides`](slides/README.md)、[`src`](src/README.md)、[`process`](process/README.md)、[`experiments`](experiments/README.md)。
 
+## 技术栈 Technology Stack
+
+以下描述当前仓库已经采用的实现，而不是后续可选的扩展方案。
+
+| 层次 | 当前实现 |
+| --- | --- |
+| 前端 | 原生 HTML5、CSS3 与 JavaScript；不使用 Vue、Vite 或 TypeScript，无前端构建步骤和 Node.js 运行依赖；浏览器通过 Fetch API 调用本地 JSON 接口，并使用 DOM 渲染记忆、证据与关系视图 |
+| 后端 | Python 3.11；Web 接口使用标准库 `ThreadingHTTPServer`，不依赖 Web 框架 |
+| 核心能力 | BM25、MiniLM 向量检索和 RRF 混合排序；DeepSeek 官方接口负责结构化抽取、Query 分析、状态关系判断和答案生成 |
+| 数据存储 | UTF-8 JSON 文件保存 `MemoryBundle`、检索上下文、答案和实验结果；当前不使用 SQLite |
+| 工程工具 | pytest、ruff、pre-commit、Git 与 GitHub Flow |
+
 ### 文档索引 Documents
 
 | 文档 | 内容 | 收口人 |
