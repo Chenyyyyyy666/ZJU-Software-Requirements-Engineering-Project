@@ -59,7 +59,7 @@ context = retrieve_context(index, request)
 
 B 负责人已确认当前暂不做真实 API 测试。本节保留后续操作步骤，不要求现在配置密钥，也不作为 10/16 本轮 SRS、接口与离线验证交付的前置条件。
 
-在本机 `.env` 配置 `DEEPSEEK_API_KEY`，按团队实际可用模型设置 `DEEPSEEK_MODEL`。密钥只在本机使用。把课程数据放到 `locomo.json`，开发调试使用 `conv-26`、`conv-30`、`conv-41`、`conv-42`；独立测试集编号在课程通知前不得自行推定。
+在本机 `.env` 配置 `DEEPSEEK_API_KEY`，按团队实际可用模型设置 `DEEPSEEK_MODEL`。密钥只在本机使用。把课程数据放到 `locomo.json`，开发调试使用 `conv-26`、`conv-30`、`conv-41`、`conv-42`；课程会从其余 6 段中任意选取 2 段作为独立测试集，最终编号在课程通知前不得自行推定。
 
 ```bash
 python -m src.memory.build --data locomo.json --conversation YOUR_CONVERSATION_ID \
