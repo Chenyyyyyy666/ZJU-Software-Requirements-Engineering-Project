@@ -41,7 +41,7 @@ python -m src.web.server
 
 ### 真实数据构建
 
-将课程文件放在根目录 `locomo.json`，复制 `.env.example` 为 `.env` 并填写个人密钥；然后使用真实 sample_id 替换下方占位值。公开数据的 conv-26 只是样例，不能据此推定课程开发集。
+将课程文件放在根目录 `locomo.json`，复制 `.env.example` 为 `.env` 并填写个人密钥；开发调试使用课程已确认的 `conv-26`、`conv-30`、`conv-41`、`conv-42`。独立测试集编号在课程通知前不得自行推定。
 
 ```bash
 python -m src.memory.build --conversation <sample_id> --mode deepseek
