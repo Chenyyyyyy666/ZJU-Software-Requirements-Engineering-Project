@@ -1,10 +1,6 @@
 # 系统设计、编码与测试报告
 
-> 6767 组｜里程碑 4｜主笔：张崇洋｜依据：[SRS](srs.md)、[接口](interfaces.md)
-
 ## 1 总体设计
-
-（陈易）
 
 ### 1.1 设计目标与边界
 
@@ -34,7 +30,7 @@ question ─┬─ index.search：BM25 + 向量召回 → RRF 去重排序 → T
 
 【消费端】
 web：本地 HTTP 服务展示 Memory、原始证据、关系与答案
-eval（规划中）：批量调用同一问答流水线，计算指标并运行基线
+eval：课程 CLI 运行在线问答或读取离线结果，计算三项指标并输出对照数据
 ```
 
 架构采用“离线构建 + 在线检索解析”的分层方式。离线阶段完成代价较高的事实抽取和索引建立；在线阶段只处理当前问题及其候选记忆。检索与状态解析分离，使 Recall@K 可以单独评价；状态解析与答案生成分离，使关系判断错误不会与生成错误混在一起。
@@ -48,7 +44,7 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 | `index/` | 鲁瑞特 | `MemoryBundle`、问题与 K | BM25/向量候选、`RetrievalResult` |
 | `reasoning/` | 于国庆 | 问题、`RetrievalResult` | `QueryAnalysisResult`、`MemoryRelation`、`AnswerRecord` |
 | `web/` | 许子萌 | MemoryBundle、用户问题 | 本地 HTTP 接口与记忆、证据、问答和状态关系页面 |
-| `eval/` | 张崇洋 | 问题集、标准答案与证据 | 三指标结果、基线对照（规划中） |
+| `eval/` | 张崇洋 | 问题集、MemoryBundle、标准答案与证据 | 答案记录、F1、Recall@K、关系准确率、混淆矩阵与 token 汇总 |
 
 模块之间以数据对象和函数接口协作，不直接依赖彼此内部实现。`MemoryBundle`、`SourceRef`、`RetrievalResult`、`MemoryRelation` 和 `AnswerRecord` 定义在 `common/models.py`；字段级契约以 [interfaces.md](interfaces.md) 为准，变更接口时须通知所有消费方。
 
@@ -74,8 +70,6 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 ## 2 详细设计
 
 ### 2.1 记忆与检索
-
-（鲁瑞特；对应 FR-01 至 FR-07）
 
 **构建流程与数据结构。** `memory.locomo` 按对话 ID 读取原始会话，保留轮次顺序、说话人、会话时间和来源 ID，过滤图片链接与空文本；仅将白名单字段交给抽取器，QA、标准答案及标注摘要不进入构建。`memory.build` 按会话分块，默认每块最多 20 轮、12000 字符；单轮超限直接报错，不截断证据。`deepseek` 模式调用官方接口抽取原子事实，`turns` 模式仅逐轮保存文本，并以 `turn_baseline` 明确标记，供离线验证使用。
 
@@ -160,8 +154,6 @@ Memory 保存 `content`、`entity/attribute/value`、`session_time`、`event_tim
 
 ### 2.3 Web 展示
 
-（许子萌）
-
 Web 采用 Python 标准库 `ThreadingHTTPServer` 提供本地 HTTP 服务，前端使用静态 HTML、CSS 与 JavaScript，不增加前端构建工具或运行时依赖。默认只绑定 `127.0.0.1:8000`。记忆文件从 `WEB_MEMORY_DIR` 指定目录读取，默认 `outputs/memory/`；每次请求按 `conversation_id` 加载并校验对应的 `MemoryBundle`，记忆 ID 只在该 bundle 内解析，避免将用户输入拼接为文件路径。
 
 ```mermaid
@@ -203,58 +195,88 @@ flowchart LR
 
 ### 2.4 评测接口
 
-（张崇洋）
-
-评测入口约定为：
+评测模块分为运行层和纯计算层。`src.eval.cli` 负责读取问题、调用在线问答或读取已记录的离线结果，并写出答案与指标；`src.eval.metrics` 只处理已冻结数据，计算指标时不调用模型、不读取 gold 标注以外的输入。课程入口约定为：
 
 ```text
-python -m src.eval.cli --conversation <conv_id> --questions <questions.json> --output answers.json
+python -m src.eval --conversation <conv_id> --questions <questions.json> \
+  --output answers.json --metrics-output metrics.json
 ```
 
-真实问答运行时另传 `--memory <memory.json>`，并在本地 `.env` 配置 `DEEPSEEK_API_KEY`；离线复核可用 `--answers-input` 读取已记录的答案、检索命中和关系标签，不调用模型。标准答案和 gold evidence 只用于评测，不传入记忆构建、索引或推理 prompt。
+真实问答运行时另传 `--memory <memory.json>`，并在本地 `.env` 配置 `DEEPSEEK_API_KEY`；离线复核使用 `--answers-input <recorded.json>` 读取已记录的答案、检索命中和关系标签，不调用模型。标准答案和 gold evidence 只用于评测，不传入记忆构建、索引或推理 prompt。
+
+输出分为两层：
+
+- `answers.json`：逐题保存 `question_id`、对话 ID、问题、系统答案及可用的构建身份，满足课程提交与人工核查。
+- `metrics.json`：保存 QA F1、Recall@1/5、关系准确率、四类混淆矩阵、样本数量和平均 token；缺少某类标签时对应指标为 `null`，不伪造分数。
 
 - M-1：对每题答案做英文词/数字和中文字符级 token F1，汇总宏平均。
 - M-2：把初始 `retrieval.hits[:K]` 中每条 Memory 的 `sources.turn_id` 与 gold evidence 对齐；题目 Top-K 命中至少一条关键证据即记为 1，报告 Recall@1 和 Recall@5。关联历史不计入该指标。
 - M-3：按题目或关系记录统计 RETAIN、UPDATE、SUPERSEDE、CONFLICT 的准确率，并输出四类混淆矩阵。
 - 另记录每题 token 使用量，按 Full Text、Vector RAG、本组方法分别汇总平均值。
 
+当前已实现离线评分和 live 运行骨架，并用合成数据验证 CLI 输出。尚未在四个课程开发集上构建完整 Memory、运行三组方法或生成正式实验结果，因此本节只说明接口与计算口径，不声明效果已达某一指标。
 
 ## 3 编码实现
 
-（各负责人提供，陈易汇编）
+### 3.1 公共契约与工程基础
 
-- 环境与依赖：Python 3.11；依赖见 `requirements.txt`。Web 页面与 API 使用 Python 标准库，问答功能复用现有 `pydantic`、索引和推理依赖。
-- B 模块实现：`src/memory/` 覆盖 FR-01 至 FR-03 的读取、抽取与持久化，`src/index/` 配合 `memory.store` 覆盖 FR-04 至 FR-07 的检索、融合与证据交接；共享契约位于 `src/common/`。基础依赖固定在 `requirements.txt`，向量可选依赖固定在 `requirements-vector.txt`，团队运行时基准由 `.python-version` 指定为 3.11。构建与交接命令见 [b-handoff.md](b-handoff.md)，当前离线验证环境及限制见第 4 节。
-- 目录与需求映射：`src/web/server.py` 与 `src/web/static/` 当前实现 FR-12 至 FR-15（记忆浏览、证据回看、问题提交和关系展示）。FR-16（浏览器上传 LoCoMo JSON 并构建记忆）尚未实现；当前没有上传控件或导入 API。Memory 和证据读取复用 `src/memory/store.py`；检索复用 `src/index/bm25.py`；状态处理复用 `src/reasoning/`。
-- 构建、配置和运行命令：先按项目命令构建 MemoryBundle，再执行 `python -m src.web.server`；默认打开 `http://127.0.0.1:8000`。默认加载 `outputs/memory/`，可用 `WEB_MEMORY_DIR`、`WEB_HOST`、`WEB_PORT` 覆盖。问答需配置 `DEEPSEEK_API_KEY`。
-- 当前完成度及已知限制：Web 页面和本地 HTTP 路由已实现；本次交付记录中尚未执行 Web 手工验收或自动化测试。问答需本地 DeepSeek key；默认 BM25。逐轮 turns 基线缺少实体/属性，不能体现有意义的时态关系；课程真实数据上的端到端演示仍待实际运行确认。
+`src/common/` 定义模块间共享的 Pydantic 数据模型，包括 `SourceRef`、`MemoryBundle`、`RetrievalRequest/Result`、`MemoryRelation` 和 `AnswerRecord`；`json_io.py` 统一 UTF-8 JSON 写入并拒绝非法数值。字段变更以 [interfaces.md](interfaces.md) 为准，并通过消费方测试核对序列化和错误语义。
+
+运行时基准为 Python 3.11。基础依赖在 `requirements.txt`，向量依赖在 `requirements-vector.txt`；提交前使用 pre-commit 运行 Ruff、YAML/TOML/JSON 校验、私钥和大文件检查。项目不配置 CI，本地 pytest、Ruff 和 PR 描述是质量证据。
+
+### 3.2 记忆构建与检索
+
+`src/memory/` 实现 FR-01 至 FR-03：LoCoMo 读取与清洗、按会话分块、DeepSeek 抽取、来源校验和 JSON 持久化。`deepseek` 模式生成真实语义 Memory，`turns` 模式用于无密钥的管线联调并显式标为逐轮基线。
+
+`src/index/` 实现 FR-04 至 FR-07：BM25、MiniLM 向量检索、RRF 混合排序、构建版本校验、来源回溯和可选关联历史。`retrieve_context` 将检索、原文和关联历史组成供推理、Web 与评测消费的上下文对象。构建、索引和交接命令见 [b-handoff.md](b-handoff.md)。
+
+### 3.3 动态状态解析与答案生成
+
+`src/reasoning/query_analyzer.py` 从问题中提取实体、属性、时间范围和置信度；`relation_judge.py` 对同实体属性的候选 Memory 两两判定四类关系；`memory_selector.py` 根据关系和时间范围选择有效记忆；`answer_generator.py` 调用 DeepSeek 生成一句话答案；`pipeline.py` 串联完整在线流程。
+
+RETAIN、UPDATE 和 CONFLICT 记忆保留；SUPERSEDE 在查询当前状态时过滤旧值，在查询过去状态时保留旧值。所有答案携带 `build_id`、有效 Memory ID 和冲突标记，供 Web 与评测回溯。
+
+### 3.4 Web 展示
+
+`src/web/server.py` 与 `src/web/static/` 实现 FR-12 至 FR-15：对话和 Memory 浏览、来源证据回看、BM25 问答接线、状态关系和判定理由展示。服务使用 `ThreadingHTTPServer`，默认绑定 `127.0.0.1:8000`；页面由静态 HTML、CSS 和 JavaScript 组成。
+
+默认读取 `outputs/memory/`，可通过 `WEB_MEMORY_DIR`、`WEB_HOST` 和 `WEB_PORT` 覆盖。浏览数据不需要模型 API；在线问答需要 `DEEPSEEK_API_KEY`。FR-16 的浏览器上传 LoCoMo JSON 并触发构建仍未实现，当前需要通过命令行构建 Memory。
+
+### 3.5 评测与课程接口
+
+`src/eval/cli.py` 提供 live 与离线两种模式，`metrics.py` 实现 token F1、Recall@K、关系准确率和混淆矩阵。`tests/test_eval_metrics.py` 使用合成记录验证指标和离线 CLI；正式课程数据实验、Full Text 与 Vector RAG 对照尚未运行。
+
+### 3.6 集成运行顺序
+
+1. 将课程数据保存为根目录 `locomo.json`，使用 `python -m src.memory.build` 为指定对话生成 MemoryBundle。
+2. 使用 `python -m src.eval --conversation ... --questions ... --memory ... --output ... --metrics-output ...` 运行课程问答和指标计算。
+3. 使用 `python -m src.web.server` 启动本地展示页面，检查 Memory、来源、答案和状态关系。
+
+当前可确认的集成层级是离线契约和合成数据 CLI 链路；真实 DeepSeek 抽取、课程开发集 live 问答、Web 手工验收和双平台复测仍未完成。
 
 ## 4 现阶段测试结果
 
-（张崇洋汇总）
-
-本节只记录 M4 提交时实际完成并取得结果的测试，不作为最终验收结论。
-
-**B 模块复核（2026-10-24）。** 在 Windows、Python 3.13.5 的本地 `.venv` 中，基于 `main` 提交 `92f12aa` 执行以下命令，54 项测试全部通过（0 失败），B 模块 Ruff 检查通过。团队基准 Python 3.11 与 macOS 尚未在本次复核中验证；其他模块的测试环境由对应负责人补充。
+**B 模块复核（2026-10-24）。** 在 Windows、Python 3.13.5 的本地 `.venv` 中，基于 `main` 提交 `92f12aa` 对 B 模块测试执行复核，54 项测试全部通过（0 失败），B 模块 Ruff 检查通过。
 
 ```powershell
 .\.venv\Scripts\python.exe -m pytest -o addopts= tests/test_memory_pipeline.py tests/test_vector_retrieval.py tests/test_reasoning_context.py -q
 .\.venv\Scripts\python.exe -m ruff check src/common src/memory src/index
 ```
 
-上述 B 测试采用合成数据、Mock HTTP 响应与测试编码器，覆盖字段及来源校验、标签隔离、JSON 往返与失败写入保护、抽取重试与缓存、检索过滤与融合、向量缓存失效、历史截断、证据回溯及 CLI 消费链路，不调用真实 DeepSeek API。随后按 `requirements.txt` 补齐依赖，执行 `python -m pytest -o addopts= -q`，全量结果为 **74 passed、1 failed**：`test_judge_pair_deduplicates_sources` 进入实际关系判定 API，因本地占位密钥收到 HTTP 401；该测试未隔离真实请求，需由 C 补充 Mock 后复核。全仓 `ruff check .` 报 `src/web/server.py:102` 一处 E501；`ruff format --check .` 报 8 个既有文件待格式化。上述全仓问题与 B 的 54 项通过结果分别记录，不能声称全仓检查通过。
+上述 B 测试采用合成数据、Mock HTTP 响应与测试编码器，覆盖字段及来源校验、标签隔离、JSON 往返与失败写入保护、抽取重试与缓存、检索过滤与融合、向量缓存失效、历史截断、证据回溯及 CLI 消费链路，不调用真实 DeepSeek API。
+
+**全仓复核（macOS 27.0.0 arm64、Python 3.14.6）。** 基于 `origin/main` 提交 `9011484` 执行 `python -m pytest -o addopts= -q`，结果为 **74 passed、1 failed**。唯一失败是 `test_judge_pair_deduplicates_sources`：该测试直接进入关系判定 API，但未 Mock 客户端，因环境没有 `DEEPSEEK_API_KEY` 抛出 `KeyError`。这是测试隔离问题，不代表其他 74 项失败。
+
+`python -m ruff check .` 报 `src/web/server.py:102` 一处 E501；`ruff format --check .` 报告 8 个既有文件待格式化。`python -m pytest -o addopts= tests/test_eval_metrics.py -q` 为 **5 passed**。团队基准为 Python 3.11；本次运行使用 Python 3.14.6，因此跨平台和基准版本仍不能视为验收完成。
 
 | 测试范围 | 已执行的测试 | 结果 | 证据位置 | 负责人 |
 | --- | --- | --- | --- | --- |
 | 数据结构与记忆构建 | 来源与时间校验、图片过滤、标注隔离、JSON 往返、稳定构建 ID、失败保护、Mock 抽取/重试/缓存、基础检索及离线 CLI | `test_memory_pipeline.py` 35 项通过；真实语义质量未验收 | `tests/test_memory_pipeline.py`；本节 2026-10-24 复核命令 | 鲁瑞特 |
 | 检索与证据回溯 | 向量与 RRF 排序去重、过滤、缓存身份和损坏处理、非法向量、初始 Top-K 保持、关联历史、来源回溯与消费 CLI | `test_vector_retrieval.py` 12 项、`test_reasoning_context.py` 7 项通过；不代替 C 实际模块联调 | 对应两个测试文件；本节 2026-10-24 复核命令 | 鲁瑞特 |
-| 状态解析与答案生成 | python -m pytest tests/test_reasoning.py -q;                        python -m pytest -q | 16 项通过；全量 63 项通过，无回归 | tests/test_reasoning.py`；`src/reasoning/ | 于国庆 |
+| 状态解析与答案生成 | Query 分析、分组判定、无时间冲突、来源去重、关系选择、冲突处理和答案异常；执行 `python -m pytest -o addopts= tests/test_reasoning.py -q` | 15 项通过、1 项失败；失败为关系判定测试未 Mock API | `tests/test_reasoning.py`；第 4 节全仓复核命令 | 于国庆 |
 | Web 与课程接口 | FR-12 至 FR-15 的 Web 代码已加入；FR-16 前端导入及记忆构建接线未实现；Web 手工验收和自动化测试尚未记录 | FR-16 未实现；其余 Web 功能未验收 | `src/web/` | 许子萌、张崇洋 |
-| 集成链路 | 【待补】 | 【待补】 | 【待补】 | 陈易 |
-
-**已有真实向量运行记录。** [2026-10-14 B 交付记录](../process/2026-10-14-b-delivery.md) 保存了公开 LoCoMo `conv-26` 的 419 轮逐轮基线验证：查询 `adoption interviews`，top_k=5、candidate_k=30，BM25/vector/hybrid 均返回 5 条可回溯原文的命中，各连续查询 30 次结果一致；使用 CPU 上的真实 MiniLM 模型和本地缓存。本次核对了本机 `outputs/oct16/verification.json`，未重跑该模型实验。它证明当时的检索与证据链路可运行，不证明真实语义抽取质量或正式 Recall@K；完整环境与性能口径见交付记录。
-
-其余模块的通过/失败数量、环境和集成结果由对应负责人补齐。B 的真实抽取及人物、事件、状态、相对时间人工抽查，正式开发集检索质量，以及与 C/D/E 的完整联调尚未在本节取得验收结果。
+| 评测 CLI 与指标 | 离线 F1、Recall@K、关系准确率/混淆矩阵、token 汇总及 CLI 输出；执行 `python -m pytest -o addopts= tests/test_eval_metrics.py -q` | 5 项通过；真实课程数据与基线未运行 | `tests/test_eval_metrics.py`、`src/eval/` | 张崇洋 |
+| 集成链路 | `test_reasoning_context.py` 覆盖 Memory→检索→上下文→消费方；`test_eval_metrics.py` 覆盖离线答案→评分→指标文件；全仓测试同时执行 | 契约/离线链路通过；真实 DeepSeek、完整 Web 操作和课程端到端未验收 | `tests/test_reasoning_context.py`、`tests/test_eval_metrics.py`；第 4 节复核结果 | 陈易 |
 
 ## 5 阶段总结
 
@@ -263,7 +285,9 @@ python -m src.eval.cli --conversation <conv_id> --questions <questions.json> --o
 | 模块 | 当前成果 | 完成状态 | 负责人 |
 | --- | --- | --- | --- |
 | 记忆与检索 | 已实现 LoCoMo 清洗、带版本及来源的 Memory JSON、DeepSeek 抽取入口、BM25/MiniLM/RRF 检索和证据/历史交接；SRS FR-01 至 FR-07 与接口文档已供稿；本次 54 项离线/Mock 测试及 B 模块 Ruff 检查通过，已有真实 MiniLM 逐轮基线运行记录 | 实现与离线验证完成；真实语义抽取、正式检索质量、Python 3.11/macOS 验证及消费方完整联调待验收 | 鲁瑞特 |
-| 状态解析与答案生成 | 五个模块文件与三个共享类型完成；16 项单元测试通过；turns 基线端到端跑通；`ruff check .` 通过 | 核心链路完成，真实数据验证待补 | 于国庆 |
+| 状态解析与答案生成 | 五个模块文件与三个共享类型完成；16 项单元测试中 15 项通过、1 项因未 Mock API 失败；turns 基线端到端跑通 | 核心链路完成；测试隔离和真实数据验证待补 | 于国庆 |
 | Web 展示 | FR-12 至 FR-15 已有本地页面和 HTTP 接口，覆盖记忆列表、来源轮次、BM25 问答接线和关系结果展示；FR-16 用户上传 LoCoMo JSON 并触发记忆构建尚未实现（无上传控件、导入 API 和构建接线）。现有 Web 功能尚无自动化测试，端到端效果待联调确认 | FR-12 至 FR-15 已实现，未验收；FR-16 未实现、未测试 | 许子萌 |
 | 评测与基线 | 已加入离线 F1、Recall@K、关系准确率/混淆矩阵和课程 CLI 骨架；`src/eval` 尚无正式课程数据结果，Full Text/Vector RAG 对照未运行 | 骨架已实现；正式评测未测试 | 张崇洋 |
-| 集成与交付 | 【待补】 | 【待补】 | 陈易 |
+| 集成与交付 | 完成公共契约、模块接口、Web 与评测 CLI 接线；离线契约测试覆盖 Memory/检索/上下文/评测链路；开发集、测试集和提交材料已配置 | 离线集成框架已完成；真实课程数据 live 联调、跨平台验收、Web 手工测试与最终打包仍待完成 | 陈易 |
+
+**阶段判断。** 核心记忆、检索、状态解析、答案生成、Web 展示和评测骨架均已形成可运行实现；当前主要缺口不是模块结构，而是真实课程数据上的完整运行、基线实验、跨平台验证和失败测试修复。因此本报告可以证明阶段性设计与实现完成度，但不能据此宣称最终准确率或验收已经通过。
