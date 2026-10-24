@@ -195,7 +195,20 @@ flowchart LR
 
 （张崇洋）
 
-【待补：课程 CLI、三项指标计算方式和基线。】
+评测入口约定为：
+
+```text
+python -m src.eval.cli --conversation <conv_id> --questions <questions.json> --output answers.json
+```
+
+真实问答运行时另传 `--memory <memory.json>`，并在本地 `.env` 配置 `DEEPSEEK_API_KEY`；离线复核可用 `--answers-input` 读取已记录的答案、检索命中和关系标签，不调用模型。标准答案和 gold evidence 只用于评测，不传入记忆构建、索引或推理 prompt。
+
+- M-1：对每题答案做英文词/数字和中文字符级 token F1，汇总宏平均。
+- M-2：把初始 `retrieval.hits[:K]` 中每条 Memory 的 `sources.turn_id` 与 gold evidence 对齐；题目 Top-K 命中至少一条关键证据即记为 1，报告 Recall@1 和 Recall@5。关联历史不计入该指标。
+- M-3：按题目或关系记录统计 RETAIN、UPDATE、SUPERSEDE、CONFLICT 的准确率，并输出四类混淆矩阵。
+- 另记录每题 token 使用量，按 Full Text、Vector RAG、本组方法分别汇总平均值。
+
+当前仓库已加入离线指标实现和 CLI 骨架；正式课程数据上的三方法对照仍需取得 `locomo.json`、题目划分和模型配置后运行。
 
 ## 3 编码实现
 
@@ -235,5 +248,5 @@ flowchart LR
 | 记忆与检索 | 【待补】 | 【待补】 | 鲁瑞特 |
 | 状态解析与答案生成 | 五个模块文件与三个共享类型完成；16 项单元测试通过；turns 基线端到端跑通；`ruff check .` 通过 | 核心链路完成，真实数据验证待补 | 于国庆 |
 | Web 展示 | FR-12 至 FR-15 已有本地页面和 HTTP 接口，覆盖记忆列表、来源轮次、BM25 问答接线和关系结果展示；FR-16 用户上传 LoCoMo JSON 并触发记忆构建尚未实现（无上传控件、导入 API 和构建接线）。现有 Web 功能尚无自动化测试，端到端效果待联调确认 | FR-12 至 FR-15 已实现，未验收；FR-16 未实现、未测试 | 许子萌 |
-| 评测与基线 | 【待补】 | 【待补】 | 张崇洋 |
+| 评测与基线 | 已加入离线 F1、Recall@K、关系准确率/混淆矩阵和课程 CLI 骨架；`src/eval` 尚无正式课程数据结果，Full Text/Vector RAG 对照未运行 | 骨架已实现；正式评测未测试 | 张崇洋 |
 | 集成与交付 | 【待补】 | 【待补】 | 陈易 |
