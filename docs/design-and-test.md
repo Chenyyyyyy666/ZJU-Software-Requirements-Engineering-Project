@@ -208,7 +208,7 @@ python -m src.eval.cli --conversation <conv_id> --questions <questions.json> --o
 - M-3：按题目或关系记录统计 RETAIN、UPDATE、SUPERSEDE、CONFLICT 的准确率，并输出四类混淆矩阵。
 - 另记录每题 token 使用量，按 Full Text、Vector RAG、本组方法分别汇总平均值。
 
-当前仓库已加入离线指标实现和 CLI 骨架；正式课程数据上的三方法对照仍需取得 `locomo.json`、题目划分和模型配置后运行。
+
 
 ## 3 编码实现
 
