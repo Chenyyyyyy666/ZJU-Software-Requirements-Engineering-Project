@@ -75,9 +75,19 @@ eval（规划中）：批量调用同一问答流水线，计算指标并运行�
 
 ### 2.1 记忆与检索
 
-（鲁瑞特；可整理 `memory-design.md`、`b-handoff.md`）
+（鲁瑞特；对应 FR-01 至 FR-07）
 
-【待补：核心流程、数据结构、检索与失败处理。】
+**构建流程与数据结构。** `memory.locomo` 按对话 ID 读取原始会话，保留轮次顺序、说话人、会话时间和来源 ID，过滤图片链接与空文本；仅将白名单字段交给抽取器，QA、标准答案及标注摘要不进入构建。`memory.build` 按会话分块，默认每块最多 20 轮、12000 字符；单轮超限直接报错，不截断证据。`deepseek` 模式调用官方接口抽取原子事实，`turns` 模式仅逐轮保存文本，并以 `turn_baseline` 明确标记，供离线验证使用。
+
+Memory 保存 `content`、`entity/attribute/value`、`session_time`、`event_time`、`time_expression` 和 `sources`。会话时间与事件时间分别保存，未知字段为空；新旧状态均保留，由 C 在查询时判断有效性。仅字段及来源完全相同的事实去重，不进行实体别名归并或相似事实合并。`MemoryBundle` 汇总 Memory、原始轮次、schema 版本及 `build_info`；构建身份记录输入哈希、配置、模型与 prompt 版本，外部引用使用对话 ID、`build_id` 和 Memory ID。保存前校验唯一 ID、来源及时间一致性，通过后原子写入 UTF-8 JSON，读取时重新校验。
+
+**检索与交接。** `build_index` 为单个 bundle 建立独立快照；`search_memories` 返回带构建身份的 `RetrievalResult`。BM25 使用内容、实体、属性和值建立词项统计；向量通道使用固定 revision 的本地 MiniLM 编码内容和问题，以余弦相似度排序。混合模式两路各取 `candidate_k`，按 Memory ID 去重，以 `sum(1 / (60 + rank))` 做等权 RRF，最终返回 `top_k`，并保留各通道分数和排名。实体/属性精确过滤先于候选截取；相同分数按 Memory ID 排序，保证结果稳定。
+
+`get_source_turns` 按来源引用回溯原文；`retrieve_context` 将初始检索、证据与可选关联历史序列化给消费方。关联历史必须由调用方明确指定实体和属性，单列返回并标记 `truncated`，不混入初始 Top-K，便于 E 独立计算检索指标。B 提供候选与证据，状态关系和答案由 C 生成。字段及接入示例见 [interfaces.md](interfaces.md) 与 [b-handoff.md](b-handoff.md)。
+
+**缓存与失败处理。** 抽取缓存绑定输入、配置、模型和 prompt；向量缓存绑定 bundle 与编码器身份。非法模型输出、越界来源、截断响应和瞬时网络错误有界重试，默认最多 3 次；认证失败立即报错。构建失败保留已验证块缓存，不导出完整成功结果；损坏缓存不触发隐式付费重试。非法查询、跨对话请求、版本不匹配、模型缺失、向量维度或数值非法均明确失败；混合检索任一路失败时不静默降级。MiniLM 输入超过模型 token 上限时拒绝编码，避免截断事实。合法空对话和无匹配结果返回空集合。
+
+上述设计已实现并通过离线/Mock 测试；真实 DeepSeek 语义抽取质量、正式开发集召回效果与消费方完整联调仍待验收，不能用结构校验或逐轮基线代替。
 
 ### 2.2 状态解析与答案生成
 
@@ -214,6 +224,7 @@ python -m src.eval.cli --conversation <conv_id> --questions <questions.json> --o
 （各负责人提供，陈易汇编）
 
 - 环境与依赖：Python 3.11；依赖见 `requirements.txt`。Web 页面与 API 使用 Python 标准库，问答功能复用现有 `pydantic`、索引和推理依赖。
+- B 模块实现：`src/memory/` 覆盖 FR-01 至 FR-03 的读取、抽取与持久化，`src/index/` 配合 `memory.store` 覆盖 FR-04 至 FR-07 的检索、融合与证据交接；共享契约位于 `src/common/`。基础依赖固定在 `requirements.txt`，向量可选依赖固定在 `requirements-vector.txt`，团队运行时基准由 `.python-version` 指定为 3.11。构建与交接命令见 [b-handoff.md](b-handoff.md)，当前离线验证环境及限制见第 4 节。
 - 目录与需求映射：`src/web/server.py` 与 `src/web/static/` 当前实现 FR-12 至 FR-15（记忆浏览、证据回看、问题提交和关系展示）。FR-16（浏览器上传 LoCoMo JSON 并构建记忆）尚未实现；当前没有上传控件或导入 API。Memory 和证据读取复用 `src/memory/store.py`；检索复用 `src/index/bm25.py`；状态处理复用 `src/reasoning/`。
 - 构建、配置和运行命令：先按项目命令构建 MemoryBundle，再执行 `python -m src.web.server`；默认打开 `http://127.0.0.1:8000`。默认加载 `outputs/memory/`，可用 `WEB_MEMORY_DIR`、`WEB_HOST`、`WEB_PORT` 覆盖。问答需配置 `DEEPSEEK_API_KEY`。
 - 当前完成度及已知限制：Web 页面和本地 HTTP 路由已实现；本次交付记录中尚未执行 Web 手工验收或自动化测试。问答需本地 DeepSeek key；默认 BM25。逐轮 turns 基线缺少实体/属性，不能体现有意义的时态关系；课程真实数据上的端到端演示仍待实际运行确认。
@@ -224,19 +235,26 @@ python -m src.eval.cli --conversation <conv_id> --questions <questions.json> --o
 
 本节只记录 M4 提交时实际完成并取得结果的测试，不作为最终验收结论。
 
-测试环境：【待补】
+**B 模块复核（2026-10-24）。** 在 Windows、Python 3.13.5 的本地 `.venv` 中，基于 `main` 提交 `92f12aa` 执行以下命令，54 项测试全部通过（0 失败），B 模块 Ruff 检查通过。团队基准 Python 3.11 与 macOS 尚未在本次复核中验证；其他模块的测试环境由对应负责人补充。
 
-测试命令：【待补】
+```powershell
+.\.venv\Scripts\python.exe -m pytest -o addopts= tests/test_memory_pipeline.py tests/test_vector_retrieval.py tests/test_reasoning_context.py -q
+.\.venv\Scripts\python.exe -m ruff check src/common src/memory src/index
+```
+
+上述 B 测试采用合成数据、Mock HTTP 响应与测试编码器，覆盖字段及来源校验、标签隔离、JSON 往返与失败写入保护、抽取重试与缓存、检索过滤与融合、向量缓存失效、历史截断、证据回溯及 CLI 消费链路，不调用真实 DeepSeek API。随后按 `requirements.txt` 补齐依赖，执行 `python -m pytest -o addopts= -q`，全量结果为 **74 passed、1 failed**：`test_judge_pair_deduplicates_sources` 进入实际关系判定 API，因本地占位密钥收到 HTTP 401；该测试未隔离真实请求，需由 C 补充 Mock 后复核。全仓 `ruff check .` 报 `src/web/server.py:102` 一处 E501；`ruff format --check .` 报 8 个既有文件待格式化。上述全仓问题与 B 的 54 项通过结果分别记录，不能声称全仓检查通过。
 
 | 测试范围 | 已执行的测试 | 结果 | 证据位置 | 负责人 |
 | --- | --- | --- | --- | --- |
-| 数据结构与记忆构建 | 【待补】 | 【待补】 | 【待补】 | 鲁瑞特 |
-| 检索与证据回溯 | 【待补】 | 【待补】 | 【待补】 | 鲁瑞特 |
+| 数据结构与记忆构建 | 来源与时间校验、图片过滤、标注隔离、JSON 往返、稳定构建 ID、失败保护、Mock 抽取/重试/缓存、基础检索及离线 CLI | `test_memory_pipeline.py` 35 项通过；真实语义质量未验收 | `tests/test_memory_pipeline.py`；本节 2026-10-24 复核命令 | 鲁瑞特 |
+| 检索与证据回溯 | 向量与 RRF 排序去重、过滤、缓存身份和损坏处理、非法向量、初始 Top-K 保持、关联历史、来源回溯与消费 CLI | `test_vector_retrieval.py` 12 项、`test_reasoning_context.py` 7 项通过；不代替 C 实际模块联调 | 对应两个测试文件；本节 2026-10-24 复核命令 | 鲁瑞特 |
 | 状态解析与答案生成 | python -m pytest tests/test_reasoning.py -q;                        python -m pytest -q | 16 项通过；全量 63 项通过，无回归 | tests/test_reasoning.py`；`src/reasoning/ | 于国庆 |
 | Web 与课程接口 | FR-12 至 FR-15 的 Web 代码已加入；FR-16 前端导入及记忆构建接线未实现；Web 手工验收和自动化测试尚未记录 | FR-16 未实现；其余 Web 功能未验收 | `src/web/` | 许子萌、张崇洋 |
 | 集成链路 | 【待补】 | 【待补】 | 【待补】 | 陈易 |
 
-【待补：通过/失败数量及关键失败原因。未执行的项目应写“未测试”，不得填写推测结果。】
+**已有真实向量运行记录。** [2026-10-14 B 交付记录](../process/2026-10-14-b-delivery.md) 保存了公开 LoCoMo `conv-26` 的 419 轮逐轮基线验证：查询 `adoption interviews`，top_k=5、candidate_k=30，BM25/vector/hybrid 均返回 5 条可回溯原文的命中，各连续查询 30 次结果一致；使用 CPU 上的真实 MiniLM 模型和本地缓存。本次核对了本机 `outputs/oct16/verification.json`，未重跑该模型实验。它证明当时的检索与证据链路可运行，不证明真实语义抽取质量或正式 Recall@K；完整环境与性能口径见交付记录。
+
+其余模块的通过/失败数量、环境和集成结果由对应负责人补齐。B 的真实抽取及人物、事件、状态、相对时间人工抽查，正式开发集检索质量，以及与 C/D/E 的完整联调尚未在本节取得验收结果。
 
 ## 5 阶段总结
 
@@ -244,7 +262,7 @@ python -m src.eval.cli --conversation <conv_id> --questions <questions.json> --o
 
 | 模块 | 当前成果 | 完成状态 | 负责人 |
 | --- | --- | --- | --- |
-| 记忆与检索 | 【待补】 | 【待补】 | 鲁瑞特 |
+| 记忆与检索 | 已实现 LoCoMo 清洗、带版本及来源的 Memory JSON、DeepSeek 抽取入口、BM25/MiniLM/RRF 检索和证据/历史交接；SRS FR-01 至 FR-07 与接口文档已供稿；本次 54 项离线/Mock 测试及 B 模块 Ruff 检查通过，已有真实 MiniLM 逐轮基线运行记录 | 实现与离线验证完成；真实语义抽取、正式检索质量、Python 3.11/macOS 验证及消费方完整联调待验收 | 鲁瑞特 |
 | 状态解析与答案生成 | 五个模块文件与三个共享类型完成；16 项单元测试通过；turns 基线端到端跑通；`ruff check .` 通过 | 核心链路完成，真实数据验证待补 | 于国庆 |
 | Web 展示 | FR-12 至 FR-15 已有本地页面和 HTTP 接口，覆盖记忆列表、来源轮次、BM25 问答接线和关系结果展示；FR-16 用户上传 LoCoMo JSON 并触发记忆构建尚未实现（无上传控件、导入 API 和构建接线）。现有 Web 功能尚无自动化测试，端到端效果待联调确认 | FR-12 至 FR-15 已实现，未验收；FR-16 未实现、未测试 | 许子萌 |
 | 评测与基线 | 已加入离线 F1、Recall@K、关系准确率/混淆矩阵和课程 CLI 骨架；`src/eval` 尚无正式课程数据结果，Full Text/Vector RAG 对照未运行 | 骨架已实现；正式评测未测试 | 张崇洋 |
