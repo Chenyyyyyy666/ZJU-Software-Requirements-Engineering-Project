@@ -209,7 +209,6 @@ python -m src.eval.cli --conversation <conv_id> --questions <questions.json> --o
 - 另记录每题 token 使用量，按 Full Text、Vector RAG、本组方法分别汇总平均值。
 
 
-
 ## 3 编码实现
 
 （各负责人提供，陈易汇编）
