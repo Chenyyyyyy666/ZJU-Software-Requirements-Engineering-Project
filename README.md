@@ -59,6 +59,18 @@
 
 各目录的用途、命名规则与负责人见目录内的 README：[`docs`](docs/README.md)、[`slides`](slides/README.md)、[`src`](src/README.md)、[`process`](process/README.md)、[`experiments`](experiments/README.md)。
 
+## 技术栈 Technology Stack
+
+以下描述当前仓库已经采用的实现，而不是后续可选的扩展方案。
+
+| 层次 | 当前实现 |
+| --- | --- |
+| 前端 | 原生 HTML5、CSS3 与 JavaScript；浏览器通过 Fetch API 调用本地 JSON 接口，并使用 DOM 渲染记忆、证据与关系视图 |
+| 后端 | Python 3.11；Web 接口使用标准库 `ThreadingHTTPServer` |
+| 核心能力 | BM25、MiniLM 向量检索和 RRF 混合排序；DeepSeek 官方接口负责结构化抽取、Query 分析、状态关系判断和答案生成 |
+| 数据存储 | UTF-8 JSON 文件保存 `MemoryBundle`、检索上下文、答案和实验结果 |
+| 工程工具 | pytest、ruff、pre-commit、Git 与 GitHub Flow |
+
 ### 文档索引 Documents
 
 | 文档 | 内容 | 收口人 |
@@ -123,7 +135,7 @@ DEEPSEEK_MODEL=deepseek-flash
 
 1. 取得课程提供的数据文件，放在仓库**根目录**下并命名为 `locomo.json`（这是课程评测约定的路径）。
 2. 原始对话为 JSON 格式；数据中的图片链接字段在构建记忆时过滤掉，本项目不使用多模态部分。
-3. 课程使用官方 10 段对话中的 6 段：4 段开发集用于设计与调试，2 段独立测试集用于最终评测，其余 4 段可作扩展评测。具体 `sample_id` 待助教公布后在此补充，不得用公开样例的 conv-26 推定开发集。
+3. 课程使用官方 10 段对话中的 6 段：开发集已确定为 `conv-26`、`conv-30`、`conv-41`、`conv-42`，用于系统设计与调试；独立测试集由课程从其余 6 段中任意选取 2 段，编号不预先固定且仅用于最终盲测。其余对话可作扩展评测，但不得使用可能被选为测试集的对话调参。
 
 ## 使用 Usage
 
