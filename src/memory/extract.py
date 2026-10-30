@@ -3,6 +3,7 @@
 import json
 import os
 import time
+from collections.abc import Callable
 from pathlib import Path
 
 import httpx
@@ -56,6 +57,8 @@ class DeepSeekExtractor:
         client: httpx.Client | None = None,
         api_key: str | None = None,
         base_url: str | None = None,
+        cache_only: bool = False,
+        on_event: Callable[[dict], None] | None = None,
     ) -> None:
         self.model = model
         self.cache_dir = cache_dir
@@ -64,6 +67,8 @@ class DeepSeekExtractor:
         self.max_attempts = max_attempts
         self.max_tokens = max_tokens
         self.client = client
+        self.cache_only = cache_only
+        self.on_event = on_event
         self.api_key = api_key if api_key is not None else os.getenv("DEEPSEEK_API_KEY", "")
         self.base_url = (
             base_url
@@ -91,7 +96,12 @@ class DeepSeekExtractor:
         cache_path = self.cache_dir / "extractions" / f"{cache_key}.json"
         if cache_path.exists():
             # Fail visibly on corrupt cache instead of silently making a paid request.
-            return validate_extraction(json.loads(cache_path.read_text(encoding="utf-8")), turns)
+            facts = validate_extraction(json.loads(cache_path.read_text(encoding="utf-8")), turns)
+            if self.on_event:
+                self.on_event({"kind": "cache_hit", "cache_key": cache_key})
+            return facts
+        if self.cache_only:
+            raise RuntimeError("Cache-only extraction has a missing block; no API request made")
         if not self.api_key or self.api_key == "your_key_here":
             raise ValueError("Set DEEPSEEK_API_KEY in .env or use --mode turns")
         body = {
@@ -106,8 +116,19 @@ class DeepSeekExtractor:
             "max_tokens": self.max_tokens,
         }
         for attempt in range(self.max_attempts):
+            started = time.perf_counter()
+            event = {
+                "kind": "api_attempt",
+                "cache_key": cache_key,
+                "attempt": attempt + 1,
+                "requested_model": self.model,
+                "returned_model": None,
+                "usage": None,
+                "status": "failed",
+            }
             try:
                 response = self._post(body)
+                event["http_status"] = response.status_code
                 if response.status_code == 429 or response.status_code >= 500:
                     raise RuntimeError("Transient DeepSeek HTTP failure")
                 if response.is_error:
@@ -116,6 +137,23 @@ class DeepSeekExtractor:
                 envelope = response.json()
                 if not isinstance(envelope, dict):
                     raise ValueError("Invalid response envelope")
+                event["returned_model"] = envelope.get("model")
+                usage = envelope.get("usage")
+                if isinstance(usage, dict):
+                    event["usage"] = {
+                        key: value
+                        for key, value in usage.items()
+                        if key
+                        in {
+                            "prompt_tokens",
+                            "completion_tokens",
+                            "total_tokens",
+                            "prompt_cache_hit_tokens",
+                            "prompt_cache_miss_tokens",
+                        }
+                        and type(value) is int
+                        and value >= 0
+                    }
                 choice = envelope["choices"][0]
                 if not isinstance(choice, dict):
                     raise ValueError("Invalid response choice")
@@ -124,6 +162,7 @@ class DeepSeekExtractor:
                 payload = json.loads(choice["message"]["content"])
                 facts = validate_extraction(payload, turns)
                 write_json({"memories": [fact.model_dump() for fact in facts]}, cache_path)
+                event["status"] = "accepted"
                 return facts
             except (
                 httpx.TransportError,
@@ -139,6 +178,10 @@ class DeepSeekExtractor:
                         "no complete bundle was saved"
                     ) from None
                 time.sleep(min(2**attempt, 4))
+            finally:
+                event["elapsed_seconds"] = round(time.perf_counter() - started, 6)
+                if self.on_event:
+                    self.on_event(event)
         raise RuntimeError("Extraction did not complete")
 
     def _post(self, body: dict) -> httpx.Response:

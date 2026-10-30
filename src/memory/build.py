@@ -2,7 +2,7 @@
 
 import argparse
 import os
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from itertools import groupby
 from pathlib import Path
 from typing import Literal
@@ -63,7 +63,14 @@ def chunks(turns: list[SourceTurn], config: BuildConfig) -> Iterator[list[Source
             yield block
 
 
-def build_memories(data_path: Path, conversation_id: str, *, config: BuildConfig) -> MemoryBundle:
+def build_memories(
+    data_path: Path,
+    conversation_id: str,
+    *,
+    config: BuildConfig,
+    cache_only: bool = False,
+    on_event: Callable[[dict], None] | None = None,
+) -> MemoryBundle:
     turns = load_conversation(data_path, conversation_id)
     input_hash = digest([turn.model_dump(mode="json") for turn in turns])
     extractor = None
@@ -75,6 +82,8 @@ def build_memories(data_path: Path, conversation_id: str, *, config: BuildConfig
             timeout=config.timeout,
             max_attempts=config.max_attempts,
             max_tokens=config.max_tokens,
+            cache_only=cache_only,
+            on_event=on_event,
         )
     facts = []
     for block_number, block in enumerate(chunks(turns, config), 1):
