@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1",
+  "conversation_id": "demo-state-change",
+  "build_info": {
+    "build_id": "manual-demo-state-change-v1",
+    "method": "manual_course_slide_example",
+    "input_sha256": null,
+    "extractor_config_id": "manual-synthetic-demo-v1",
+    "model": null,
+    "prompt_version": null,
+    "note": "Synthetic demonstration fixture authored for the Web UI; not course data or a model extraction result."
+  },
+  "source_turns": [
+    {
+      "conversation_id": "demo-state-change",
+      "session_id": 1,
+      "turn_id": "S1:1",
+      "speaker": "Alex",
+      "session_time": "2023-05-08T13:00:00",
+      "text": "I am preparing for my adoption agency interview."
+    },
+    {
+      "conversation_id": "demo-state-change",
+      "session_id": 2,
+      "turn_id": "S2:1",
+      "speaker": "Alex",
+      "session_time": "2023-05-22T09:00:00",
+      "text": "I passed the adoption agency interviews. I am one step closer to building a family."
+    }
+  ],
+  "memories": [
+    {
+      "memory_id": "demo_adoption_preparing",
+      "conversation_id": "demo-state-change",
+      "content": "Alex was preparing for an adoption agency interview.",
+      "entity": "Alex",
+      "attribute": "adoption_status",
+      "value": "preparing for interview",
+      "session_time": "2023-05-08T13:00:00",
+      "time_expression": null,
+      "event_time": "2023-05-08T13:00:00",
+      "event_time_precision": "datetime",
+      "sources": [{"session_id": 1, "turn_id": "S1:1"}]
+    },
+    {
+      "memory_id": "demo_adoption_passed",
+      "conversation_id": "demo-state-change",
+      "content": "Alex passed the adoption agency interviews.",
+      "entity": "Alex",
+      "attribute": "adoption_status",
+      "value": "passed interviews",
+      "session_time": "2023-05-22T09:00:00",
+      "time_expression": null,
+      "event_time": "2023-05-22T09:00:00",
+      "event_time_precision": "datetime",
+      "sources": [{"session_id": 2, "turn_id": "S2:1"}]
+    }
+  ]
+}

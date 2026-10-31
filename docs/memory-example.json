@@ -8,7 +8,7 @@
     "extractor_config_id": "manual-example-v1",
     "model": null,
     "prompt_version": null,
-    "note": "人工整理自《0 - Project (2026).pdf》第12页；不是完整对话，不是模型抽取结果，也不表示该对话属于开发集。event_time 为根据课件会话日期进行的人工推导。"
+    "note": "人工整理自《0 - Project (2026).pdf》第12页；conv-26 属于课程开发集，但本文件不是完整对话，也不是模型抽取或评测样本。event_time 为根据课件会话日期进行的人工推导。"
   },
   "source_turns": [
     {
