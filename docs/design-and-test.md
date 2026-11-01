@@ -160,9 +160,6 @@ Web 采用 Python 标准库 `ThreadingHTTPServer` 提供本地 HTTP 服务，前
 flowchart LR
     User[用户浏览器] -->|HTTP| Web[本地 WebHandler]
     Web -->|GET /api/conversations| Files[outputs/memory/*.json]
-    User -.->|POST /api/import（计划中）| Web
-    Web -.->|构建成功后写入| Files
-    Web -.->|调用（计划中）| M[记忆构建模块]
     Web -->|GET /api/memories| Bundle[MemoryBundle]
     Web -->|GET /api/memories/id| Evidence[get_memory + get_source_turns]
     Web -->|POST /api/ask| Search[BM25 检索]
@@ -181,15 +178,12 @@ flowchart LR
 | `GET /api/memories?conversation_id=...` | 对话 ID | 返回该 bundle 的 Memory 列表及 build_id |
 | `GET /api/memories/{memory_id}?conversation_id=...` | 对话 ID、Memory ID | 使用 `get_memory` 和 `get_source_turns` 返回记忆与原始轮次 |
 | `POST /api/ask` | 对话 ID、问题、可选 top_k | 使用 BM25 检索并调用现有 Query 分析、关系判定、有效记忆选择和答案生成，返回检索、关系与答案记录 |
-| `POST /api/import`（计划中） | LoCoMo JSON 文件、可选 `sample_id` | 校验输入并调用记忆构建流程；成功后将 MemoryBundle 写入记忆目录并返回构建状态 |
 
 页面由三部分组成：左栏按对话浏览并搜索记忆；选择记忆后显示来源轮次、说话人、会话时间和原文；问答区显示答案、引用的有效 Memory、记忆关系及关系判定理由。点选关系节点可跳转到其证据。空数据、无匹配项和错误请求均显示页面提示；后端不静默替换 bundle，也不在前端重新推断状态。
 
 当前问答端使用 BM25，模型相关的查询分析、关系判断和答案生成需要本地 `.env` 中配置 DeepSeek API key；API 配置失败时向页面返回通用错误提示，不回传密钥或模型响应正文。当前实现为本地开发/课堂演示用途，不提供认证、跨域或公网部署能力。浏览记忆与证据不需要模型 API。
 
 `examples/demo_dynamic_memory.json` 提供两条人工合成的状态变化记忆，可用于界面操作演示；其 `build_info.method` 标为 `manual_course_slide_example`，不得作为课程数据、自动抽取结果或评测证据。设 `WEB_MEMORY_DIR=examples` 后启动服务即可浏览。在线提问仍会调用 DeepSeek API。
-
-**用户导入对话（FR-16，尚未实现）**：目标是在页面提供 JSON 文件选择与导入操作；服务端校验 LoCoMo 格式及 `sample_id`，调用 `src/memory/` 构建 MemoryBundle，成功后写入 `WEB_MEMORY_DIR` 指向的记忆目录并刷新对话列表。多 sample 文件需由用户指定要构建的 sample。抽取时只读取对话轮次，不能把 QA、gold evidence、observation 或摘要标注传给抽取器。当前页面没有上传控件，服务端没有导入路由，也没有把上传内容接到记忆构建流程；用户目前仍需在终端运行 `python -m src.memory.build`。FR-16 尚未实现、尚未测试和验收，不能将其描述为已完成。
 
 **演示顺序**：启动 Web 服务并打开 `demo-state-change` → 选择“准备参加面试”记忆并展开 S1:1 原文 → 提问 `What is Alex's current adoption progress?` → 展示回答引用及两条记忆的状态关系 → 点击关系节点回看 S2:1 证据。该样例只演示交互与可解释性，关系标签和答案由运行时模型生成，不是预设评测结果。
 
@@ -240,7 +234,7 @@ RETAIN、UPDATE 和 CONFLICT 记忆保留；SUPERSEDE 在查询当前状态时�
 
 `src/web/server.py` 与 `src/web/static/` 实现 FR-12 至 FR-15：对话和 Memory 浏览、来源证据回看、BM25 问答接线、状态关系和判定理由展示。服务使用 `ThreadingHTTPServer`，默认绑定 `127.0.0.1:8000`；页面由静态 HTML、CSS 和 JavaScript 组成。
 
-默认读取 `outputs/memory/`，可通过 `WEB_MEMORY_DIR`、`WEB_HOST` 和 `WEB_PORT` 覆盖。浏览数据不需要模型 API；在线问答需要 `DEEPSEEK_API_KEY`。FR-16 的浏览器上传 LoCoMo JSON 并触发构建仍未实现，当前需要通过命令行构建 Memory。
+默认读取 `outputs/memory/`，可通过 `WEB_MEMORY_DIR`、`WEB_HOST` 和 `WEB_PORT` 覆盖。浏览数据不需要模型 API；在线问答需要 `DEEPSEEK_API_KEY`。Memory 通过命令行构建后由 Web 页面读取。
 
 ### 3.5 评测与课程接口
 
@@ -274,7 +268,7 @@ RETAIN、UPDATE 和 CONFLICT 记忆保留；SUPERSEDE 在查询当前状态时�
 | 数据结构与记忆构建 | 来源与时间校验、图片过滤、标注隔离、JSON 往返、稳定构建 ID、失败保护、Mock 抽取/重试/缓存、基础检索及离线 CLI | `test_memory_pipeline.py` 35 项通过；真实语义质量未验收 | `tests/test_memory_pipeline.py`；本节 2026-10-24 复核命令 | 鲁瑞特 |
 | 检索与证据回溯 | 向量与 RRF 排序去重、过滤、缓存身份和损坏处理、非法向量、初始 Top-K 保持、关联历史、来源回溯与消费 CLI | `test_vector_retrieval.py` 12 项、`test_reasoning_context.py` 7 项通过；不代替 C 实际模块联调 | 对应两个测试文件；本节 2026-10-24 复核命令 | 鲁瑞特 |
 | 状态解析与答案生成 | Query 分析、分组判定、无时间冲突、来源去重、关系选择、冲突处理和答案异常；执行 `python -m pytest -o addopts= tests/test_reasoning.py -q` | 15 项通过、1 项失败；失败为关系判定测试未 Mock API | `tests/test_reasoning.py`；第 4 节全仓复核命令 | 于国庆 |
-| Web 与课程接口 | FR-12 至 FR-15 的 Web 代码已加入；FR-16 前端导入及记忆构建接线未实现；Web 手工验收和自动化测试尚未记录 | FR-16 未实现；其余 Web 功能未验收 | `src/web/` | 许子萌、张崇洋 |
+| Web 与课程接口 | FR-12 至 FR-15 的 Web 代码已加入；Web 手工验收和自动化测试尚未记录 | FR-12 至 FR-15 已实现，未验收 | `src/web/` | 许子萌、张崇洋 |
 | 评测 CLI 与指标 | 离线 F1、Recall@K、关系准确率/混淆矩阵、token 汇总及 CLI 输出；执行 `python -m pytest -o addopts= tests/test_eval_metrics.py -q` | 5 项通过；真实课程数据与基线未运行 | `tests/test_eval_metrics.py`、`src/eval/` | 张崇洋 |
 | 集成链路 | `test_reasoning_context.py` 覆盖 Memory→检索→上下文→消费方；`test_eval_metrics.py` 覆盖离线答案→评分→指标文件；全仓测试同时执行 | 契约/离线链路通过；真实 DeepSeek、完整 Web 操作和课程端到端未验收 | `tests/test_reasoning_context.py`、`tests/test_eval_metrics.py`；第 4 节复核结果 | 陈易 |
 
@@ -286,7 +280,7 @@ RETAIN、UPDATE 和 CONFLICT 记忆保留；SUPERSEDE 在查询当前状态时�
 | --- | --- | --- | --- |
 | 记忆与检索 | 已实现 LoCoMo 清洗、带版本及来源的 Memory JSON、DeepSeek 抽取入口、BM25/MiniLM/RRF 检索和证据/历史交接；SRS FR-01 至 FR-07 与接口文档已供稿；本次 54 项离线/Mock 测试及 B 模块 Ruff 检查通过，已有真实 MiniLM 逐轮基线运行记录 | 实现与离线验证完成；真实语义抽取、正式检索质量、Python 3.11/macOS 验证及消费方完整联调待验收 | 鲁瑞特 |
 | 状态解析与答案生成 | 五个模块文件与三个共享类型完成；16 项单元测试中 15 项通过、1 项因未 Mock API 失败；turns 基线端到端跑通 | 核心链路完成；测试隔离和真实数据验证待补 | 于国庆 |
-| Web 展示 | FR-12 至 FR-15 已有本地页面和 HTTP 接口，覆盖记忆列表、来源轮次、BM25 问答接线和关系结果展示；FR-16 用户上传 LoCoMo JSON 并触发记忆构建尚未实现（无上传控件、导入 API 和构建接线）。现有 Web 功能尚无自动化测试，端到端效果待联调确认 | FR-12 至 FR-15 已实现，未验收；FR-16 未实现、未测试 | 许子萌 |
+| Web 展示 | FR-12 至 FR-15 已有本地页面和 HTTP 接口，覆盖记忆列表、来源轮次、BM25 问答接线和关系结果展示。现有 Web 功能尚无自动化测试，端到端效果待联调确认 | FR-12 至 FR-15 已实现，未验收 | 许子萌 |
 | 评测与基线 | 已加入离线 F1、Recall@K、关系准确率/混淆矩阵和课程 CLI 骨架；`src/eval` 尚无正式课程数据结果，Full Text/Vector RAG 对照未运行 | 骨架已实现；正式评测未测试 | 张崇洋 |
 | 集成与交付 | 完成公共契约、模块接口、Web 与评测 CLI 接线；离线契约测试覆盖 Memory/检索/上下文/评测链路；开发集、测试集和提交材料已配置 | 离线集成框架已完成；真实课程数据 live 联调、跨平台验收、Web 手工测试与最终打包仍待完成 | 陈易 |
 

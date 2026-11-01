@@ -2,6 +2,8 @@
 
 供稿：鲁瑞特（B）｜日期：2026-10-14｜接口版本：Memory 0.1 / Context 0.1。
 
+> 2026-10-29：Milestone 5 已完成四开发集真实构建（951 条记忆）、缓存复验及 47 条定向质量抽查，详见 [B 最终阶段构建说明](milestone5-b-delivery.md) 与 [质量记录](milestone5-b-quality.md)。下文保留 10/14 阶段的交接记录，其中“本轮不执行”仅指当时阶段。
+
 本说明供 C（推理）、D（Web）、E（评测）接入。它记录 B 已提供的接口和验收方式，不代替接收方确认。SRS 需求在 [srs.md](srs.md) 第 3.1、3.2 节，完整字段在 [interfaces.md](interfaces.md)，实际运行结果和未完成项在 [交付记录](../process/2026-10-14-b-delivery.md)。
 
 ## 1 环境与最短接入路径
