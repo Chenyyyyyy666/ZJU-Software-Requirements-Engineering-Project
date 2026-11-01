@@ -1,0 +1,5 @@
+﻿{
+  "dev": ["conv-26", "conv-30", "conv-41", "conv-42"],
+  "test": [],
+  "note": "test 待定；仅在方案冻结后运行一次。调 prompt、检索参数、K 值只用 dev"
+}

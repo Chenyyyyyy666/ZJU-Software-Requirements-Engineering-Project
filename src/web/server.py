@@ -99,7 +99,9 @@ class WebHandler(BaseHTTPRequestHandler):
                 candidate_k=max(30, int(data.get("top_k", os.getenv("RETRIEVAL_TOP_K", "10")))),
                 mode="bm25",
             )
-            retrieval = search_memories(build_index(bundle, config=IndexConfig(mode="bm25")), request)
+            retrieval = search_memories(
+                build_index(bundle, config=IndexConfig(mode="bm25")), request
+            )
             memories = [hit.memory for hit in retrieval.hits]
             analysis = analyze_query(question, conversation_id, retrieval.build_id)
             relations = judge_relations(memories)
