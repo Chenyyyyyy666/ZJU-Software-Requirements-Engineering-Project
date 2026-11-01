@@ -8,8 +8,15 @@
 
 ```text
 experiments/
-├── README.md                    # 本文件
-├── summary.md                   # 结果汇总表（所有实验横向对比）
+├── README.md                     # 本文件：目录说明、运行指引
+├── dev_probe.py                  # 调试探查脚本，用于检查记忆、检索中间结果
+├── evaluate_relations.py         # 关系判定评测主脚本
+├── memory_pairs_gold.csv         # 人工标注真值文件（gold 标准）
+├── relation_eval_results.csv     # 脚本输出：全部样本预测详情
+├── relation-errors.csv           # 脚本输出：错误样本单独汇总
+├── splits.json                   # 数据集划分配置（开发集 / 测试集划分）
+├── 错误案例分析报告.md             # 人工撰写：本轮错误分析文档
+├──summary.md                      #总结实验结果
 └── 2026-10-15-topk-comparison/  # 单次实验：日期 + 实验主题
     ├── config.md                # 实验配置
     ├── results.json             # 指标结果
@@ -17,6 +24,30 @@ experiments/
 ```
 
 单次实验目录命名：`YYYY-MM-DD-<实验主题>`，例如 `2026-10-18-state-relation-ablation`。
+
+## 运行方式
+
+项目根目录使用 `venv` 虚拟环境
+
+```bash
+# 进入项目根目录
+cd ZJU-Software-Requirements-Engineering-Project
+
+# 激活虚拟环境（Windows）
+.venv\Scripts\activate
+```
+
+运行探查脚本：构建记忆、生成记忆对、执行关系预测、缓存中间结果 
+
+```
+python experiments/dev_probe.py 
+```
+
+运行关系评测脚本，对比预测结果与gold标注，输出指标、混淆矩阵、错误表
+
+```
+ python experiments/evaluate_relations.py
+```
 
 ## 每次实验记录什么
 

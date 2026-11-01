@@ -2,14 +2,17 @@
 
 import json
 import os
+import re
 
 from openai import OpenAI
+from pydantic import ValidationError
 
 from src.common.models import Memory, MemoryRelation, SourceRef
 
-PROMPT_VERSION = "relation_v1"
+PROMPT_VERSION = "relation_v2"
 
 SYSTEM_PROMPT = """Compare two memories about the same entity and attribute.
+Memory A is the earlier one and Memory B is the later one.
 Decide the relation of memory B to memory A:
 - RETAIN: both can be true at the same time
 - UPDATE: B adds to or refines A
@@ -42,6 +45,14 @@ def _render(memory: Memory) -> str:
 
 def _has_no_time(memory: Memory) -> bool:
     return memory.event_time is None and memory.session_time is None
+
+
+def _order_key(memory: Memory) -> tuple[str, int, int]:
+    """Order by when the information appeared: session time, session id, turn number."""
+    ref = memory.sources[-1]
+    match = re.search(r"(\d+)$", ref.turn_id)
+    turn_no = int(match.group(1)) if match else 0
+    return (memory.session_time or "", ref.session_id, turn_no)
 
 
 def _merge_sources(a: Memory, b: Memory) -> list[SourceRef]:
@@ -77,6 +88,7 @@ def judge_pair(a: Memory, b: Memory, *, max_attempts: int = 2) -> MemoryRelation
             ],
             response_format={"type": "json_object"},
             extra_body={"thinking": {"type": "disabled"}},
+            temperature=0,
             max_tokens=512,
         )
         raw = resp.choices[0].message.content
@@ -92,7 +104,7 @@ def judge_pair(a: Memory, b: Memory, *, max_attempts: int = 2) -> MemoryRelation
                 reason=data["reason"],
                 sources=sources,
             )
-        except (json.JSONDecodeError, KeyError) as exc:
+        except (json.JSONDecodeError, KeyError, ValidationError) as exc:
             last_error = exc
     return MemoryRelation(
         memory_a=a.memory_id,
@@ -112,6 +124,7 @@ def judge_relations(memories: list[Memory]) -> list[MemoryRelation]:
 
     relations: list[MemoryRelation] = []
     for group in groups.values():
+        group = sorted(group, key=_order_key)  # earlier memory first, so A is always older
         for i in range(len(group)):
             for j in range(i + 1, len(group)):
                 relations.append(judge_pair(group[i], group[j]))

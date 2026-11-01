@@ -10,7 +10,8 @@ PROMPT_VERSION = "answer_v1"
 
 SYSTEM_PROMPT = """Answer the question using only the memories below.
 If a conflict is marked, mention both possibilities.
-Output one sentence."""
+Output one sentence.Each memory shows the date it was said on. Resolve relative expressions such as
+"yesterday" or "last weekend" against that date, and answer with a full date when asked "when"."""
 
 
 def _client() -> OpenAI:
@@ -28,7 +29,10 @@ def generate_answer(
     build_id: str,
     question_id: str | None = None,
 ) -> AnswerRecord:
-    lines = [f"- {m.content}" for m in effective]
+    lines = [
+    f"- (said on {m.session_time}; event time: {m.event_time or 'unknown'}) {m.content}"
+    for m in effective
+]
     if conflict:
         lines.append("[Note: conflicting information exists.]")
     user = "Memories:\n" + "\n".join(lines) + f"\n\nQuestion: {question}"

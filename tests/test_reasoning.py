@@ -157,7 +157,13 @@ def test_judge_pair_deduplicates_sources():
     shared = _source(1, "D1:1")
     a = _memory("m1", "fact a", sources=[shared])
     b = _memory("m2", "fact b", sources=[shared, _source(2, "D2:1")])
-    relation = judge_pair(a, b)
+    fake_resp = MagicMock()
+    fake_resp.choices[0].message.content = json.dumps(
+        {"relation_type": "RETAIN", "reason": "different facts"}
+    )
+    with patch("src.reasoning.relation_judge._client") as mock_client:
+        mock_client.return_value.chat.completions.create.return_value = fake_resp
+        relation = judge_pair(a, b)
     keys = [(s.session_id, s.turn_id) for s in relation.sources]
     assert len(keys) == len(set(keys))
 
