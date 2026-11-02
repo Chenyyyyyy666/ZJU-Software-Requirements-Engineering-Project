@@ -1,5 +1,35 @@
 const state = { conversationId: "", memories: [], buildId: "", selectedId: "", result: null };
 const byId = (id) => document.getElementById(id);
+let selectionVersion = 0;
+
+const views = {
+  memory: { name: "记忆库", eyebrow: "MEMORY LIBRARY", description: "浏览对话中的记忆，回到原文核对每一条信息。" },
+  ask: { name: "智能问答", eyebrow: "ASK YOUR MEMORY", description: "基于当前对话提问，查看回答、状态关系与证据。" },
+};
+function setView(view) {
+  const info = views[view];
+  byId("view-memory").hidden = view !== "memory";
+  byId("view-ask").hidden = view !== "ask";
+  byId("active-view-name").textContent = info.name;
+  byId("page-title").textContent = info.name;
+  byId("page-eyebrow").textContent = info.eyebrow;
+  byId("page-description").textContent = info.description;
+  document.querySelectorAll(".nav-item").forEach((button) => {
+    const active = button.dataset.view === view;
+    button.classList.toggle("active", active);
+    if (active) button.setAttribute("aria-current", "page");
+    else button.removeAttribute("aria-current");
+  });
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll(".nav-item").forEach((button) => {
+  button.addEventListener("click", () => setView(button.dataset.view));
+});
+
+function setEvidence(content) {
+  byId("evidence-area").innerHTML = content;
+  byId("ask-evidence-area").innerHTML = content;
+}
 
 async function request(url, options = {}) {
   const response = await fetch(url, options);
@@ -42,30 +72,34 @@ function renderMemories() {
 }
 
 async function showMemory(memoryId) {
+  const conversationId = state.conversationId;
+  const buildId = state.buildId;
   state.selectedId = memoryId;
   renderMemories();
-  byId("evidence-area").innerHTML = `<div class="loading-state">正在读取来源轮次…</div>`;
+  setEvidence(`<div class="loading-state">正在读取来源轮次…</div>`);
   try {
-    const detail = await request(`/api/memories/${encodeURIComponent(memoryId)}?conversation_id=${encodeURIComponent(state.conversationId)}`);
-    if (detail.build_id !== state.buildId) throw new Error("构建版本已变化，请重新选择对话。");
+    const detail = await request(`/api/memories/${encodeURIComponent(memoryId)}?conversation_id=${encodeURIComponent(conversationId)}`);
+    if (state.conversationId !== conversationId || state.selectedId !== memoryId) return;
+    if (detail.build_id !== buildId || state.buildId !== buildId) throw new Error("构建版本已变化，请重新选择对话。");
     const memory = detail.memory;
     const turns = detail.source_turns.map((turn) => `
       <div class="source-turn">
         <div class="source-header"><span class="speaker">${esc(turn.speaker)}</span><span class="source-id">S${turn.session_id} · ${esc(turn.turn_id)}</span><span class="source-time">${esc(turn.session_time || "时间未知")}</span></div>
         <div class="source-text">${esc(turn.text)}</div>
       </div>`).join("");
-    byId("evidence-area").innerHTML = `
+    setEvidence(`
       <div class="detail-memory"><strong>${esc(memory.entity || "记忆详情")} · ${esc(memory.attribute || "未分类")}</strong><p>${esc(memory.content)}</p></div>
-      ${turns || `<div class="empty-state">这条记忆没有来源轮次。</div>`}`;
+      ${turns || `<div class="empty-state">这条记忆没有来源轮次。</div>`}`);
   } catch (error) {
-    byId("evidence-area").innerHTML = `<div class="error-banner">${esc(error.message)}</div>`;
+    if (state.conversationId === conversationId && state.selectedId === memoryId) setEvidence(`<div class="error-banner">${esc(error.message)}</div>`);
   }
 }
 
 function renderAnswer(result) {
   const answer = result.answer;
+  const shortBuild = answer.build_id.length > 12 ? `${answer.build_id.slice(0, 12)}…` : answer.build_id;
   byId("answer-area").className = "answer-area";
-  byId("answer-area").innerHTML = `<span class="answer-orb">✦</span><div><strong>回答</strong><p>${esc(answer.answer)}</p><p class="memory-meta">使用 ${answer.valid_memory_ids.length} 条有效记忆 · ${esc(answer.build_id)}</p></div>`;
+  byId("answer-area").innerHTML = `<span class="answer-orb">✦</span><div><strong>回答</strong><p>${esc(answer.answer)}</p><p class="memory-meta">使用 ${answer.valid_memory_ids.length} 条有效记忆 · <span title="${esc(answer.build_id)}">版本 ${esc(shortBuild)}</span></p></div>`;
   renderRelations(result);
 }
 
@@ -100,35 +134,51 @@ async function loadConversationList() {
   if (!data.conversations.length) {
     select.innerHTML = `<option value="">暂无记忆数据</option>`;
     byId("memory-list").innerHTML = `<div class="empty-state">未找到 MemoryBundle。请先运行记忆构建流程；默认目录为 <code>outputs/memory/</code>。</div>`;
-    byId("evidence-area").innerHTML = `<div class="empty-state">构建记忆后，可在此回看证据。</div>`;
+    setEvidence(`<div class="empty-state">构建记忆后，可在此回看证据。</div>`);
     byId("memory-count").textContent = "0";
     byId("visible-count").textContent = "0";
     byId("build-id").textContent = "无构建数据";
     return;
   }
   select.innerHTML = data.conversations.map((item) => `<option value="${esc(item.conversation_id)}">${esc(item.conversation_id)}</option>`).join("");
-  await selectConversation(data.conversations[0].conversation_id);
   select.addEventListener("change", () => selectConversation(select.value));
+  await selectConversation(data.conversations[0].conversation_id);
 }
 
 async function selectConversation(conversationId) {
   if (!conversationId) return;
+  const version = ++selectionVersion;
   state.conversationId = conversationId;
+  state.memories = [];
+  state.buildId = "";
+  state.selectedId = "";
   state.result = null;
+  byId("memory-filter").value = "";
+  byId("memory-list").innerHTML = `<div class="empty-state">正在加载记忆…</div>`;
+  byId("visible-count").textContent = "0";
+  byId("memory-count").textContent = "—";
+  byId("build-id").textContent = "正在读取…";
+  byId("build-id").title = "";
   byId("answer-area").className = "answer-area empty-answer";
   byId("answer-area").innerHTML = `<span class="answer-orb">✦</span><div><strong>答案会显示在这里</strong><p>提交问题后，查看答案依据和记忆间的状态关系。</p></div>`;
   byId("relation-area").innerHTML = `<div class="empty-state">提出问题后，关系解析结果会出现在这里。</div>`;
-  byId("evidence-area").innerHTML = `<div class="empty-state">从左侧选择一条记忆，查看它对应的原始对话轮次。</div>`;
+  setEvidence(`<div class="empty-state evidence-empty"><span class="empty-icon">▤</span><strong>选择一条记忆</strong><span>从记忆列表或关系中选择一条记忆，查看原始对话。</span></div>`);
   try {
     const data = await request(`/api/memories?conversation_id=${encodeURIComponent(conversationId)}`);
+    if (version !== selectionVersion) return;
     state.memories = data.memories;
     state.buildId = data.build_id;
     state.selectedId = "";
     byId("memory-count").textContent = String(data.memories.length);
     byId("build-id").textContent = data.build_id;
+    byId("build-id").title = data.build_id;
     renderMemories();
   } catch (error) {
-    toast(error.message);
+    if (version === selectionVersion) {
+      byId("memory-list").innerHTML = `<div class="error-banner">${esc(error.message)}</div>`;
+      byId("build-id").textContent = "加载失败";
+      toast(error.message);
+    }
   }
 }
 
@@ -136,8 +186,10 @@ byId("memory-filter").addEventListener("input", renderMemories);
 byId("question-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   const question = byId("question-input").value.trim();
-  if (!state.conversationId) return toast("请先选择一段对话。");
+  if (!state.conversationId || !state.buildId) return toast("请先选择一段已加载的对话。");
   if (!question) return toast("请输入问题。");
+  const conversationId = state.conversationId;
+  const buildId = state.buildId;
   const button = byId("ask-button");
   button.disabled = true;
   button.textContent = "正在分析…";
@@ -146,15 +198,18 @@ byId("question-form").addEventListener("submit", async (event) => {
     const result = await request("/api/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ conversation_id: state.conversationId, question }),
+      body: JSON.stringify({ conversation_id: conversationId, question }),
     });
-    if (result.build_id !== state.buildId) throw new Error("问答结果对应其他构建版本，请重新提交问题。");
+    if (state.conversationId !== conversationId || state.buildId !== buildId) return;
+    if (result.build_id !== buildId) throw new Error("问答结果对应其他构建版本，请重新提交问题。");
     state.result = result;
     renderAnswer(result);
   } catch (error) {
-    byId("answer-area").className = "error-banner";
-    byId("answer-area").textContent = error.message;
-    byId("relation-area").innerHTML = `<div class="empty-state">本次问答未能完成状态解析。</div>`;
+    if (state.conversationId === conversationId && state.buildId === buildId) {
+      byId("answer-area").className = "error-banner";
+      byId("answer-area").textContent = error.message;
+      byId("relation-area").innerHTML = `<div class="empty-state">本次问答未能完成状态解析。</div>`;
+    }
   } finally {
     button.disabled = false;
     button.innerHTML = "<span>✦</span>分析并回答";
