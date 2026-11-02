@@ -105,6 +105,8 @@ source .venv/bin/activate        # Windows PowerShell: .venv\Scripts\Activate.ps
 
 项目以 Python 3.11 为基准。依赖清单由鲁瑞特维护：基础依赖和 BM25/RRF 使用 `requirements.txt`，MiniLM 向量检索使用 `requirements-vector.txt`。
 
+如果本机没有 Python 3.11，macOS 可先执行 `brew install python@3.11`；Windows 可通过 Python Launcher 使用 `py -3.11 -m venv .venv` 创建虚拟环境。
+
 ```bash
 python -m pip install -r requirements.txt
 python -m pip install -r requirements-vector.txt
