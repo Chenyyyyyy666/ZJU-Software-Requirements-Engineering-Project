@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1680" height="940" viewBox="0 0 1680 940" role="img" aria-labelledby="title desc">
+  <title id="title">智能体动态记忆管理系统总体架构</title>
+  <desc id="desc">离线构建 MemoryBundle，在线检索与状态解析，再输出 Web 展示和课程评测结果。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#858fa2"/></marker>
+    <style>
+      text { font-family: 'Microsoft YaHei', 'Segoe UI', sans-serif; fill: #20283a; }
+      .title { font-size: 38px; font-weight: 700; }
+      .subtitle { font-size: 20px; fill: #667487; }
+      .section { font-size: 22px; font-weight: 700; fill: #5654a8; }
+      .heading { font-size: 22px; font-weight: 700; }
+      .body { font-size: 18px; fill: #596a7e; }
+      .small { font-size: 17px; fill: #64748a; }
+      .card { fill: #fff; stroke: #dfe4ed; stroke-width: 2; }
+      .accent { fill: #f5f4ff; stroke: #d9d6f7; stroke-width: 2; }
+      .wire { fill: none; stroke: #858fa2; stroke-width: 2.5; marker-end: url(#arrow); }
+    </style>
+  </defs>
+  <rect width="1680" height="940" fill="#fff"/>
+  <text class="title" x="60" y="70">智能体动态记忆管理 · 系统总体架构</text>
+  <text class="subtitle" x="60" y="108">离线构建可追溯记忆，在线检索并分析状态，面向 Web 与课程评测提供结果</text>
+
+  <rect x="42" y="137" width="1596" height="225" rx="18" fill="#f7f8fc" stroke="#e8ebf1"/>
+  <text class="section" x="70" y="175">01  离线记忆构建</text>
+  <rect class="card" x="70" y="199" width="295" height="119" rx="12"/>
+  <text class="heading" x="91" y="237">LoCoMo 对话</text><text class="body" x="91" y="270">文本、说话人、轮次与时间</text><text class="small" x="91" y="296">排除图片与评测标注</text>
+  <rect class="card" x="448" y="199" width="295" height="119" rx="12"/>
+  <text class="heading" x="469" y="237">清洗与语义抽取</text><text class="body" x="469" y="270">按会话分块，提取结构化事实</text><text class="small" x="469" y="296">语义模式调用 DeepSeek</text>
+  <rect class="accent" x="826" y="199" width="295" height="119" rx="12"/>
+  <text class="heading" x="847" y="237">MemoryBundle</text><text class="body" x="847" y="270">记忆、原始轮次和来源引用</text><text class="small" x="847" y="296">记录 build_id</text>
+  <rect class="card" x="1204" y="199" width="350" height="119" rx="12"/>
+  <text class="heading" x="1225" y="237">检索能力</text><text class="body" x="1225" y="270">BM25 / MiniLM + RRF 融合</text><text class="small" x="1225" y="296">Web 当前使用 BM25</text>
+  <path class="wire" d="M365 259 H435"/><path class="wire" d="M743 259 H813"/><path class="wire" d="M1121 259 H1191"/>
+
+  <text class="section" x="70" y="413">02  在线问答与状态解析</text>
+  <text class="small" x="715" y="347">输入同一版本的记忆与索引</text>
+  <path class="wire" d="M1379 318 V375 H431 V440"/>
+  <rect class="card" x="70" y="442" width="205" height="126" rx="12"/>
+  <text class="heading" x="90" y="482">问题输入</text><text class="body" x="90" y="516">选择对话并提问</text><text class="small" x="90" y="543">Web / 评测 CLI</text>
+  <rect class="card" x="319" y="442" width="225" height="126" rx="12"/>
+  <text class="heading" x="339" y="482">候选记忆检索</text><text class="body" x="339" y="516">返回 Top-K 与 build_id</text><text class="small" x="339" y="543">可追溯来源</text>
+  <rect class="card" x="588" y="442" width="205" height="126" rx="12"/>
+  <text class="heading" x="608" y="482">Query 分析</text><text class="body" x="608" y="516">实体、属性</text><text class="small" x="608" y="543">时间视角</text>
+  <rect class="accent" x="837" y="442" width="225" height="126" rx="12"/>
+  <text class="heading" x="857" y="482">状态关系判定</text><text class="body" x="857" y="516">保留、更新、替代</text><text class="small" x="857" y="543">或冲突</text>
+  <rect class="card" x="1106" y="442" width="205" height="126" rx="12"/>
+  <text class="heading" x="1126" y="482">有效记忆选择</text><text class="body" x="1126" y="516">结合问题时间</text><text class="small" x="1126" y="543">筛选答案依据</text>
+  <rect class="card" x="1355" y="442" width="235" height="126" rx="12"/>
+  <text class="heading" x="1375" y="482">答案生成</text><text class="body" x="1375" y="516">DeepSeek 生成答案</text><text class="small" x="1375" y="543">保留记忆 ID 与版本</text>
+  <path class="wire" d="M275 505 H306"/><path class="wire" d="M544 505 H575"/><path class="wire" d="M793 505 H824"/><path class="wire" d="M1062 505 H1093"/><path class="wire" d="M1311 505 H1342"/>
+
+  <path class="wire" d="M1473 568 V620 H1084 V655"/><path class="wire" d="M1473 568 V655"/>
+  <text class="section" x="70" y="675">03  结果消费与验证</text>
+  <text class="body" x="70" y="711">原始证据由 MemoryBundle 按来源回溯。</text>
+  <text class="body" x="70" y="744">评测标签仅用于评分，不进入模型输入。</text>
+  <rect class="accent" x="850" y="658" width="468" height="126" rx="12"/>
+  <text class="heading" x="872" y="698">Web 页面</text><text class="body" x="872" y="733">记忆库、答案、状态关系与原始证据</text><text class="small" x="872" y="759">本地 HTTP 服务 · 浏览器展示</text>
+  <rect class="card" x="1350" y="658" width="240" height="126" rx="12"/>
+  <text class="heading" x="1370" y="698">课程评测 CLI</text><text class="body" x="1370" y="733">答案文件与指标</text><text class="small" x="1370" y="759">按配置运行</text>
+
+  <line x1="70" y1="835" x2="1600" y2="835" stroke="#e7eaf0" stroke-width="2"/>
+  <text class="small" x="70" y="875">依据项目接口与当前代码绘制 · 箭头表示主要数据流 · 最终架构由组长复核</text>
+  <text class="small" x="1500" y="875">2026-11-03</text>
+</svg>

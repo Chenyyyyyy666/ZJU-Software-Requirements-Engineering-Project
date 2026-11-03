@@ -1,0 +1,25 @@
+{
+  "captured_at_utc": "2026-11-02T16:15:03.695Z",
+  "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+  "base_commit": "83636d6",
+  "frontend_status": "uncommitted working tree",
+  "input_kind": "synthetic demonstration",
+  "conversation_id": "demo-state-change",
+  "question": "What is Alex's current adoption status?",
+  "memory_count": 2,
+  "mode": "bm25",
+  "build_id": "manual-demo-state-change-v1",
+  "answer": "Alex passed the adoption agency interviews on May 22, 2023.",
+  "valid_memory_count": 2,
+  "relation_types": [
+    "UPDATE"
+  ],
+  "source_evidence_visible": true,
+  "script_errors": 0,
+  "web_source_sha256": {
+    "server.py": "83c94ccb78e3cc34d48a045479e3b4a6fbde6fa1e947d70fa179f71a66f940de",
+    "static/index.html": "eb75cacb3a569363208190016086dca6173276112ef6dc4af2f1b7622fd992a1",
+    "static/app.css": "bdb42ff555b4b246099d2e1945500be79e6ff955f7359553092299cf4ade58a8",
+    "static/app.js": "7e8c598b5b4f33f01b693ad9245c0c9772d98fad862357ab45a4d3dd8e797aaf"
+  }
+}
