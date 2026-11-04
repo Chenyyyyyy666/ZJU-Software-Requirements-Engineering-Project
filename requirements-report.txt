@@ -1,0 +1,2 @@
+# Offline scientific plots used by src.eval.finalize and draw_state_example.
+matplotlib>=3.9,<4
