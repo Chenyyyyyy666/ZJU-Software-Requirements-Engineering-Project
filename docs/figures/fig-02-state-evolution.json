@@ -1,0 +1,122 @@
+{
+  "figure": "fig-02-state-evolution",
+  "kind": "source_fact_timeline",
+  "conversation_id": "conv-26",
+  "build_info": {
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "method": "llm_extraction",
+    "input_sha256": "ed55cb24a37f0a27578ed55b9c3556693b7f4ae8f5abbc48d7125fbe438e41ac",
+    "extractor_config_id": "6a02958d90c918c0",
+    "model": "deepseek-flash",
+    "prompt_version": "memory-facts-v1",
+    "note": null
+  },
+  "bundle_file": "conv-26.json",
+  "bundle_file_sha256": "4834b4a92618e1fccacf793ffdb133af56b4a8d253ff583dfa7b2296a67bebec",
+  "sample_size": {
+    "memories": 3,
+    "questions": 0
+  },
+  "facts": [
+    {
+      "memory": {
+        "content": "Caroline is researching adoption agencies.",
+        "entity": "Caroline",
+        "attribute": "adoption_status",
+        "value": "researching adoption agencies",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 2,
+            "turn_id": "D2:8"
+          }
+        ],
+        "memory_id": "m_5e5e0af5adefa105a974cdcc808c516e37409e918d6d61a2dfadbeeac1ae0c93",
+        "conversation_id": "conv-26",
+        "session_time": "2023-05-25T13:14:00"
+      },
+      "source_turns": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:8",
+          "conversation_id": "conv-26",
+          "speaker": "Caroline",
+          "session_time": "2023-05-25T13:14:00",
+          "text": "Researching adoption agencies — it's been a dream to have a family and give a loving home to kids who need it."
+        }
+      ]
+    },
+    {
+      "memory": {
+        "content": "Caroline applied to adoption agencies this week.",
+        "entity": "Caroline",
+        "attribute": "adoption_status",
+        "value": "applied to adoption agencies",
+        "time_expression": "this week",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 13,
+            "turn_id": "D13:1"
+          }
+        ],
+        "memory_id": "m_3bfa6e1817e405c86ff1224b2c59790115ebf700930836ec66ead2106660c30d",
+        "conversation_id": "conv-26",
+        "session_time": "2023-08-23T15:31:00"
+      },
+      "source_turns": [
+        {
+          "session_id": 13,
+          "turn_id": "D13:1",
+          "conversation_id": "conv-26",
+          "speaker": "Caroline",
+          "session_time": "2023-08-23T15:31:00",
+          "text": "Hi Melanie! Hope you're doing good. Guess what I did this week? I took the first step towards becoming a mom - I applied to adoption agencies! It's a big decision, but I think I'm ready to give all my love to a child. I got lots of help from this adoption advice/assistance group I attended. It was great!"
+        }
+      ]
+    },
+    {
+      "memory": {
+        "content": "Caroline passed the adoption agency interviews last Friday.",
+        "entity": "Caroline",
+        "attribute": "adoption_interview_status",
+        "value": "passed",
+        "time_expression": "last Friday",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 19,
+            "turn_id": "D19:1"
+          }
+        ],
+        "memory_id": "m_e2a1d71fd1c12d5b6bdb6ae230244df8a4f331e3fd934cd92b0a1d5636184e70",
+        "conversation_id": "conv-26",
+        "session_time": "2023-10-22T09:55:00"
+      },
+      "source_turns": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:1",
+          "conversation_id": "conv-26",
+          "speaker": "Caroline",
+          "session_time": "2023-10-22T09:55:00",
+          "text": "Woohoo Melanie! I passed the adoption agency interviews last Friday! I'm so excited and thankful. This is a big move towards my goal of having a family."
+        }
+      ]
+    }
+  ],
+  "predicted_relations": [],
+  "relation_evaluation_status": "not_run",
+  "limitations": [
+    "Arrows indicate source order, not system-predicted or human-gold relation labels.",
+    "The final fact has a different extracted attribute, so the current exact (entity, attribute) grouping does not compare it with the first two.",
+    "Session time is when a fact was said; it is not necessarily the event date.",
+    "This qualitative example is not an accuracy or acceptance-test result."
+  ],
+  "generated_date": "2026-11-04",
+  "generator": "experiments/draw_state_example.py"
+}
