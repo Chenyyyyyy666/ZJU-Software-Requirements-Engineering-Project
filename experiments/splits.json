@@ -1,5 +1,11 @@
-﻿{
+{
   "dev": ["conv-26", "conv-30", "conv-41", "conv-42"],
-  "test": [],
-  "note": "test 待定；仅在方案冻结后运行一次。调 prompt、检索参数、K 值只用 dev"
+  "test": ["conv-43", "conv-44"],
+  "selection_record": {
+    "selected_on": "2026-11-04",
+    "selected_by": "张崇洋授权后固定",
+    "reason": "用户确认可任选两段非开发对话；按编号固定43和44，不依据其评测结果选择",
+    "test_labels_used_for_tuning": false
+  },
+  "note": "先完成开发集实验，再生成outputs/final/freeze.json；独立测试运行必须验证该冻结记录。"
 }
