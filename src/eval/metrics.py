@@ -10,9 +10,12 @@ from __future__ import annotations
 import re
 from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
+from math import isfinite
+from statistics import median
 from typing import Any
 
 RELATION_LABELS = ("RETAIN", "UPDATE", "SUPERSEDE", "CONFLICT")
+SCORER_VERSION = "project-token-f1-v1"
 _TOKEN_RE = re.compile(r"[a-z0-9]+|[\u3400-\u9fff]")
 
 
@@ -43,10 +46,17 @@ def macro_token_f1(rows: Iterable[Mapping[str, Any]]) -> float | None:
     for row in rows:
         prediction = _first(row, "answer", "prediction", "generated_answer")
         reference = _first(row, "gold_answer", "reference_answer", "expected_answer")
-        if prediction is None or reference is None:
+        references = valid_references(reference)
+        if not references:
             continue
-        scores.append(token_f1(str(prediction), str(reference)))
+        scores.append(max(token_f1(str(prediction or ""), value) for value in references))
     return sum(scores) / len(scores) if scores else None
+
+
+def valid_references(value: Any) -> list[str]:
+    """Return nonempty references, accepting a scalar or alternative answers."""
+    values = value if isinstance(value, list) else [value]
+    return [str(item).strip() for item in values if item is not None and str(item).strip()]
 
 
 def _first(mapping: Mapping[str, Any], *keys: str) -> Any:
@@ -158,7 +168,11 @@ def _row_relation(row: Mapping[str, Any]) -> str | None:
 def recall_summary(
     rows: Iterable[Mapping[str, Any]], ks: Sequence[int] = (1, 5)
 ) -> dict[str, float | None]:
-    rows = list(rows)
+    rows = [
+        row
+        for row in rows
+        if row.get("method") != "full_text" and row.get("retrieval_applicable") is not False
+    ]
     result: dict[str, float | None] = {}
     for k in ks:
         values = [
@@ -173,10 +187,11 @@ def recall_summary(
 def relation_accuracy(predicted: Sequence[Any], expected: Sequence[Any]) -> float | None:
     """Calculate accuracy over the four relation labels."""
     pairs = []
-    for prediction, reference in zip(predicted, expected, strict=False):
+    for index, reference in enumerate(expected):
+        prediction = predicted[index] if index < len(predicted) else None
         p = _relation_value(prediction)
         e = _relation_value(reference)
-        if p is not None and e is not None:
+        if e is not None:
             pairs.append(p == e)
     return sum(pairs) / len(pairs) if pairs else None
 
@@ -213,6 +228,7 @@ def evaluate_rows(rows: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
     relation_pairs = [(p, e) for p, e in relations if e is not None]
     predicted, expected = zip(*relation_pairs, strict=False) if relation_pairs else ([], [])
     result: dict[str, Any] = {
+        "scorer_version": SCORER_VERSION,
         "rows": len(rows),
         "qa_f1": macro_token_f1(rows),
         "relation_accuracy": relation_accuracy(predicted, expected),
@@ -220,16 +236,38 @@ def evaluate_rows(rows: Iterable[Mapping[str, Any]]) -> dict[str, Any]:
         **recall_summary(rows),
     }
     token_values = []
+    elapsed_values = []
     for row in rows:
         value = _first(row, "token_usage", "tokens", "total_tokens")
-        if isinstance(value, int | float):
+        if isinstance(value, Mapping):
+            value = value.get("total_tokens")
+        if isinstance(value, int | float) and not isinstance(value, bool) and isfinite(value):
             token_values.append(float(value))
+        elapsed = row.get("elapsed_seconds")
+        if isinstance(elapsed, int | float) and not isinstance(elapsed, bool) and isfinite(elapsed):
+            elapsed_values.append(float(elapsed))
     result["average_tokens"] = sum(token_values) / len(token_values) if token_values else None
+    result["token_rows"] = len(token_values)
+    result["average_elapsed_seconds"] = (
+        sum(elapsed_values) / len(elapsed_values) if elapsed_values else None
+    )
+    result["median_elapsed_seconds"] = median(elapsed_values) if elapsed_values else None
+    result["elapsed_rows"] = len(elapsed_values)
+    result["qa_rows"] = sum(
+        bool(valid_references(_first(row, "gold_answer", "reference_answer", "expected_answer")))
+        for row in rows
+    )
     result["answer_rows"] = sum(
         _first(row, "answer", "prediction", "generated_answer") is not None for row in rows
     )
     result["evidence_rows"] = sum(
-        bool(_gold_evidence_keys(_row_gold_evidence(row))) for row in rows
+        bool(_gold_evidence_keys(_row_gold_evidence(row)))
+        for row in rows
+        if row.get("method") != "full_text" and row.get("retrieval_applicable") is not False
     )
+    result["failed_rows"] = sum(row.get("status") in ("failed", "error") for row in rows)
     result["relation_rows"] = len(relation_pairs)
+    result["relation_failed_rows"] = sum(
+        _relation_value(p) is None and _relation_value(e) is not None for p, e in relation_pairs
+    )
     return result
