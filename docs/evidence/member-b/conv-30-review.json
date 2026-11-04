@@ -1,0 +1,408 @@
+{
+  "build_id": "5b7d91ba3e9c84ccc4e500116540a3fa969e8b4aea32f6d2f05d644b75f49133",
+  "review_status": "reviewed_with_findings",
+  "samples": [
+    {
+      "memory": {
+        "content": "Jon lost his job as a banker yesterday.",
+        "entity": "Jon",
+        "attribute": "employment_status",
+        "value": "lost job as a banker",
+        "time_expression": "yesterday",
+        "event_time": "2023-01-19",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 1,
+            "turn_id": "D1:2"
+          }
+        ],
+        "memory_id": "m_aaacfb329822147235c2a83be9c712f101be790d82654b0c149b3bfab3db0d08",
+        "conversation_id": "conv-30",
+        "session_time": "2023-01-20T16:04:00"
+      },
+      "categories": [
+        "person",
+        "dated_event",
+        "time_expression",
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:2",
+          "conversation_id": "conv-30",
+          "speaker": "Jon",
+          "session_time": "2023-01-20T16:04:00",
+          "text": "Hey Gina! Good to see you too. Lost my job as a banker yesterday, so I'm gonna take a shot at starting my own business."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D1:2 explicitly says Jon lost his banker job yesterday. Session 2023-01-20 gives 2023-01-19; correct person and date."
+    },
+    {
+      "memory": {
+        "content": "Jon is determined to make his dance studio work.",
+        "entity": "Jon",
+        "attribute": "determination",
+        "value": "determined to make the studio work",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 9,
+            "turn_id": "D9:3"
+          }
+        ],
+        "memory_id": "m_53b64feaa6689732a0565dfdb012084a45a86bbb832b7cae29252980b88ece87",
+        "conversation_id": "conv-30",
+        "session_time": "2023-04-09T10:33:00"
+      },
+      "categories": [
+        "person"
+      ],
+      "evidence": [
+        {
+          "session_id": 9,
+          "turn_id": "D9:3",
+          "conversation_id": "conv-30",
+          "speaker": "Jon",
+          "session_time": "2023-04-09T10:33:00",
+          "text": "Thanks, Gina! I'm determined to make this studio work. Losing my job was tough but it gave me the push I needed to do what I love."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D9:3 supports determination to make the studio work. Dance-studio context is confirmed by surrounding conversation; no unsupported date inferred."
+    },
+    {
+      "memory": {
+        "content": "Jon says he won't quit and will keep going whatever comes his way.",
+        "entity": "Jon",
+        "attribute": "commitment",
+        "value": "won't quit and will keep going",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 19,
+            "turn_id": "D19:11"
+          }
+        ],
+        "memory_id": "m_98cebc035f70eda9a7f2b6ce324e3a5898514363e2894321e7754d395999eb14",
+        "conversation_id": "conv-30",
+        "session_time": "2023-07-23T18:46:00"
+      },
+      "categories": [
+        "person",
+        "unknown_time"
+      ],
+      "evidence": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:11",
+          "conversation_id": "conv-30",
+          "speaker": "Jon",
+          "session_time": "2023-07-23T18:46:00",
+          "text": "Thanks, Gina! I won't quit. I'm gonna keep going, whatever comes my way."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D19:11 explicitly expresses perseverance. Preserved as commitment rather than an accomplished event."
+    },
+    {
+      "memory": {
+        "content": "Gina had an interview for a design internship yesterday.",
+        "entity": "Gina",
+        "attribute": "interview_status",
+        "value": "had interview for design internship",
+        "time_expression": "yesterday",
+        "event_time": "2023-05-10",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 11,
+            "turn_id": "D11:14"
+          }
+        ],
+        "memory_id": "m_391d11fbee87fb6321bdc5506f7f933865693b579342b302b5712f4a6ff6f854",
+        "conversation_id": "conv-30",
+        "session_time": "2023-05-11T15:14:00"
+      },
+      "categories": [
+        "dated_event"
+      ],
+      "evidence": [
+        {
+          "session_id": 11,
+          "turn_id": "D11:14",
+          "conversation_id": "conv-30",
+          "speaker": "Gina",
+          "session_time": "2023-05-11T15:14:00",
+          "text": "Thanks! Really appreciate you keeping me in the loop on this cool project. Can't wait to hear more and watch it come to life! Oh, btw, I had an interview for a design internship yesterday! It was so cool."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D11:14 explicitly says Gina had a design-internship interview yesterday. 2023-05-11 minus one day is 2023-05-10."
+    },
+    {
+      "memory": {
+        "content": "Jon started learning marketing and analytics tools to push his business forward today.",
+        "entity": "Jon",
+        "attribute": "learning_activity",
+        "value": "learning marketing and analytics tools",
+        "time_expression": "today",
+        "event_time": "2023-07-09",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 17,
+            "turn_id": "D17:4"
+          }
+        ],
+        "memory_id": "m_202b6d860c502e355cfbff87b635aaa5dcb19e0d36ef91fd98ec24160593339a",
+        "conversation_id": "conv-30",
+        "session_time": "2023-07-09T13:25:00"
+      },
+      "categories": [
+        "dated_event"
+      ],
+      "evidence": [
+        {
+          "session_id": 17,
+          "turn_id": "D17:4",
+          "conversation_id": "conv-30",
+          "speaker": "Jon",
+          "session_time": "2023-07-09T13:25:00",
+          "text": "Thanks! Your support and encouragement means a lot. Losing my job was a bummer, but it pushed me to take the plunge and go for my biz dreams. Started to learn all these marketing and analytics tools to push the biz forward today. It's been tricky, but I'm up for the challenge and I'm gonna make this work!"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D17:4 explicitly anchors starting to learn marketing and analytics tools to today. 2023-07-09 is correct."
+    },
+    {
+      "memory": {
+        "content": "Gina started her own online clothing store not so long ago.",
+        "entity": "Gina",
+        "attribute": "business_status",
+        "value": "started an online clothing store",
+        "time_expression": "not so long ago",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 10,
+            "turn_id": "D10:2"
+          }
+        ],
+        "memory_id": "m_85350aa407a015f49d54eeb171be3d0a0828444cb1183a709fb532286320040d",
+        "conversation_id": "conv-30",
+        "session_time": "2023-04-25T11:24:00"
+      },
+      "categories": [
+        "time_expression"
+      ],
+      "evidence": [
+        {
+          "session_id": 10,
+          "turn_id": "D10:2",
+          "conversation_id": "conv-30",
+          "speaker": "Gina",
+          "session_time": "2023-04-25T11:24:00",
+          "text": "Hey Jon, congrats on the fair! It's awesome to see your hard work paying off. Keep on pushing, pal, you're headed for greatness. Oh, and BTW, I started my own online clothing store not so long ago - pretty cool, huh?"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D10:2 supports Gina starting an online clothing store not so long ago. This vague phrase cannot support a day; null is appropriate."
+    },
+    {
+      "memory": {
+        "content": "Gina attended dance class with a group of friends last Friday.",
+        "entity": "Gina",
+        "attribute": "dance_class_attendance",
+        "value": "attended dance class with a group of friends",
+        "time_expression": "last Friday",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 19,
+            "turn_id": "D19:6"
+          }
+        ],
+        "memory_id": "m_935de37fbe67d0a1d487bdadc76ff9d9ce1ec9c4900f3de4a4236cc3dc767cea",
+        "conversation_id": "conv-30",
+        "session_time": "2023-07-23T18:46:00"
+      },
+      "categories": [
+        "time_expression"
+      ],
+      "evidence": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:6",
+          "conversation_id": "conv-30",
+          "speaker": "Gina",
+          "session_time": "2023-07-23T18:46:00",
+          "text": "Hah, yeah!) But really having a creative space for dancers is so important. Last Friday at dance class with a group of friends I felt it. Your studio will be a go-to spot for self-expression. Keep up the good work and don't forget your passion for dance."
+        }
+      ],
+      "review_status": "issue",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D19:6 says last Friday at dance class. Given the Sunday session date 2023-07-23, the ordinary most-recent-Friday interpretation is 2023-07-21. The model retains null, losing a resolvable date (under-extraction), while preserving the source expression."
+    },
+    {
+      "memory": {
+        "content": "Jon plans to start his own business.",
+        "entity": "Jon",
+        "attribute": "business_plan",
+        "value": "starting his own business",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 1,
+            "turn_id": "D1:2"
+          }
+        ],
+        "memory_id": "m_4897d18e75c1cabe12b6eb09174a1d55b816dced13690a85b38c8efcd02258b1",
+        "conversation_id": "conv-30",
+        "session_time": "2023-01-20T16:04:00"
+      },
+      "categories": [
+        "unknown_time"
+      ],
+      "evidence": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:2",
+          "conversation_id": "conv-30",
+          "speaker": "Jon",
+          "session_time": "2023-01-20T16:04:00",
+          "text": "Hey Gina! Good to see you too. Lost my job as a banker yesterday, so I'm gonna take a shot at starting my own business."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D1:2 expresses a plan to start a business, not a completed launch. The plan and later ownership statement D11:9 are both retained."
+    },
+    {
+      "memory": {
+        "content": "Jon lost his job.",
+        "entity": "Jon",
+        "attribute": "employment_status",
+        "value": "lost his job",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 9,
+            "turn_id": "D9:3"
+          }
+        ],
+        "memory_id": "m_7a7bd30a1b21137903bacb2d8f3e5f059217b6bc526ada33c681d08095e54e64",
+        "conversation_id": "conv-30",
+        "session_time": "2023-04-09T10:33:00"
+      },
+      "categories": [
+        "unknown_time"
+      ],
+      "evidence": [
+        {
+          "session_id": 9,
+          "turn_id": "D9:3",
+          "conversation_id": "conv-30",
+          "speaker": "Jon",
+          "session_time": "2023-04-09T10:33:00",
+          "text": "Thanks, Gina! I'm determined to make this studio work. Losing my job was tough but it gave me the push I needed to do what I love."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D9:3 retrospectively mentions losing his job; the event date is not the April session date. Keeping null avoids inventing a new job loss."
+    },
+    {
+      "memory": {
+        "content": "Jon owns his own dance studio and teaches others.",
+        "entity": "Jon",
+        "attribute": "business_ownership",
+        "value": "owns own dance studio",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 11,
+            "turn_id": "D11:9"
+          }
+        ],
+        "memory_id": "m_b03cfd0ffd122b681069cd135ad5eaba8eca70e2523ea852e475040f3c4ae9a5",
+        "conversation_id": "conv-30",
+        "session_time": "2023-05-11T15:14:00"
+      },
+      "categories": [
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 11,
+          "turn_id": "D11:9",
+          "conversation_id": "conv-30",
+          "speaker": "Jon",
+          "session_time": "2023-05-11T15:14:00",
+          "text": "Yep! Dancing is like second nature to me. I'm living my dream by having my own dance studio and teaching others."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D11:9 explicitly supports owning a dance studio and teaching. It coexists with the earlier business plan, preserving history."
+    },
+    {
+      "memory": {
+        "content": "Jon is sprucing up his business plan and tweaking his pitch to investors.",
+        "entity": "Jon",
+        "attribute": "business_plan_status",
+        "value": "sprucing up biz plan and tweaking pitch to investors",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 18,
+            "turn_id": "D18:10"
+          }
+        ],
+        "memory_id": "m_306a58fd7cc7fe46e80ccfb8d6ce748124f5bb6946730c0eb8970f60e80ec17f",
+        "conversation_id": "conv-30",
+        "session_time": "2023-07-21T17:44:00"
+      },
+      "categories": [
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 18,
+          "turn_id": "D18:10",
+          "conversation_id": "conv-30",
+          "speaker": "Jon",
+          "session_time": "2023-07-21T17:44:00",
+          "text": "Taking your advice, I'm sprucing up my biz plan and tweaking my pitch to investors. I'm also working on an online platform to show off the dance studio's stuff."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D18:10 explicitly supports refining the business plan and investor pitch; correct ongoing status."
+    }
+  ],
+  "review_method": "Codex compared cited source text and session dates; targeted non-random sample; not a human annotation or corpus accuracy estimate",
+  "reviewed_date": "2026-10-29"
+}

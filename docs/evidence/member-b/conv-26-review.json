@@ -1,0 +1,447 @@
+{
+  "build_id": "dc8bb69cee733b7d9e472df748e2467c47421f295fb1565d1b80b4681468e6eb",
+  "review_status": "reviewed_with_findings",
+  "samples": [
+    {
+      "memory": {
+        "content": "Caroline went to a LGBTQ support group yesterday.",
+        "entity": "Caroline",
+        "attribute": "event_attendance",
+        "value": "attended an LGBTQ support group",
+        "time_expression": "yesterday",
+        "event_time": "2023-05-07",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 1,
+            "turn_id": "D1:3"
+          }
+        ],
+        "memory_id": "m_ed4b0a9d8dd40fbb96d41063582e92f851ea886c71417329285484823e4072f0",
+        "conversation_id": "conv-26",
+        "session_time": "2023-05-08T13:56:00"
+      },
+      "categories": [
+        "person",
+        "dated_event",
+        "time_expression",
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:3",
+          "conversation_id": "conv-26",
+          "speaker": "Caroline",
+          "session_time": "2023-05-08T13:56:00",
+          "text": "I went to a LGBTQ support group yesterday and it was so powerful."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D1:3 is Caroline speaking about attending the LGBTQ support group yesterday. Session date 2023-05-08 minus one day is 2023-05-07."
+    },
+    {
+      "memory": {
+        "content": "Melanie feels lucky to be with her family and have their love.",
+        "entity": "Melanie",
+        "attribute": "feelings_about_family",
+        "value": "lucky to be with family and have their love",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 10,
+            "turn_id": "D10:22"
+          }
+        ],
+        "memory_id": "m_3c15f18e7c1a92a15ad70e641bdde5ddd63b4b9a462615fc525c314f186c178c",
+        "conversation_id": "conv-26",
+        "session_time": "2023-07-20T20:56:00"
+      },
+      "categories": [
+        "person"
+      ],
+      "evidence": [
+        {
+          "session_id": 10,
+          "turn_id": "D10:22",
+          "conversation_id": "conv-26",
+          "speaker": "Melanie",
+          "session_time": "2023-07-20T20:56:00",
+          "text": "Yeah, they sure are. It's special moments like these that make me appreciate life and how lucky I am to be with my family and have our love."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D10:22 directly supports Melanie feeling lucky to have her family and their love; no unsupported event date added."
+    },
+    {
+      "memory": {
+        "content": "Caroline wants to pass the same support she received to anyone who needs it.",
+        "entity": "Caroline",
+        "attribute": "intention",
+        "value": "pass support to others who need it",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 19,
+            "turn_id": "D19:9"
+          }
+        ],
+        "memory_id": "m_46c1898d7b69d11e8ecbdaa547e24a52d29095abc445a7b033cd565ec8507221",
+        "conversation_id": "conv-26",
+        "session_time": "2023-10-22T09:55:00"
+      },
+      "categories": [
+        "person",
+        "unknown_time",
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:9",
+          "conversation_id": "conv-26",
+          "speaker": "Caroline",
+          "session_time": "2023-10-22T09:55:00",
+          "text": "Thanks, Melanie. Transitioning wasn't easy and acceptance wasn't either, but the help I got from friends, family and people I looked up to was invaluable. They boosted me through tough times and helped me find out who I really am. That's why I want to pass that same support to anyone who needs it. Bringing others comfort and helping them grow brings me such joy."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D19:9 explicitly expresses a wish to pass on support. Preserved as intention, not an accomplished action."
+    },
+    {
+      "memory": {
+        "content": "Melanie celebrated her daughter's birthday with a concert last night.",
+        "entity": "Melanie",
+        "attribute": "event_participation",
+        "value": "celebrated daughter's birthday with a concert",
+        "time_expression": "last night",
+        "event_time": "2023-08-13",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 11,
+            "turn_id": "D11:1"
+          }
+        ],
+        "memory_id": "m_5580b8d29f9b787315caa252beb465266964a247bd96c88925adee7584ef3662",
+        "conversation_id": "conv-26",
+        "session_time": "2023-08-14T14:24:00"
+      },
+      "categories": [
+        "dated_event",
+        "time_expression"
+      ],
+      "evidence": [
+        {
+          "session_id": 11,
+          "turn_id": "D11:1",
+          "conversation_id": "conv-26",
+          "speaker": "Melanie",
+          "session_time": "2023-08-14T14:24:00",
+          "text": "Hey Caroline! Last night was amazing! We celebrated my daughter's birthday with a concert surrounded by music, joy and the warm summer breeze. Seeing my kids' smiles was so awesome, and I'm so thankful for our special moments together."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D11:1 says last night they celebrated her daughter's birthday with a concert. 2023-08-14 minus one day is 2023-08-13."
+    },
+    {
+      "memory": {
+        "content": "Melanie bought figurines yesterday.",
+        "entity": "Melanie",
+        "attribute": "purchase",
+        "value": "figurines",
+        "time_expression": "yesterday",
+        "event_time": "2023-10-21",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 19,
+            "turn_id": "D19:2"
+          }
+        ],
+        "memory_id": "m_617418c623cb44919f94a82ec24ed41893facc8c49cba37039ae19b8fedecb00",
+        "conversation_id": "conv-26",
+        "session_time": "2023-10-22T09:55:00"
+      },
+      "categories": [
+        "dated_event",
+        "time_expression"
+      ],
+      "evidence": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:2",
+          "conversation_id": "conv-26",
+          "speaker": "Melanie",
+          "session_time": "2023-10-22T09:55:00",
+          "text": "Congrats, Caroline! Adoption sounds awesome. I'm so happy for you. These figurines I bought yesterday remind me of family love. Tell me, what's your vision for the future?"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D19:2 is Melanie speaking about buying figurines yesterday. 2023-10-22 minus one day is 2023-10-21."
+    },
+    {
+      "memory": {
+        "content": "Caroline found the transgender stories at the support group inspiring.",
+        "entity": "Caroline",
+        "attribute": "reaction_to_support_group",
+        "value": "inspired by transgender stories",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 1,
+            "turn_id": "D1:5"
+          }
+        ],
+        "memory_id": "m_49111de0548b8ff5c75c882c3e844a6d5ad0d39d361f2a91a9ad946d0f70d633",
+        "conversation_id": "conv-26",
+        "session_time": "2023-05-08T13:56:00"
+      },
+      "categories": [
+        "unknown_time"
+      ],
+      "evidence": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:5",
+          "conversation_id": "conv-26",
+          "speaker": "Caroline",
+          "session_time": "2023-05-08T13:56:00",
+          "text": "The transgender stories were so inspiring! I was so happy and thankful for all the support."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D1:5 supports being inspired by transgender stories; support-group context is supplied by D1:3. No exact event date inferred."
+    },
+    {
+      "memory": {
+        "content": "Melanie's youngest daughter took her first steps.",
+        "entity": "Melanie",
+        "attribute": "family_memory",
+        "value": "youngest daughter took her first steps",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 10,
+            "turn_id": "D10:20"
+          }
+        ],
+        "memory_id": "m_13e8213a2b7366bdb6c2c6776cfb2ca04e42dd7bcdafad97f24eab88827b7069",
+        "conversation_id": "conv-26",
+        "session_time": "2023-07-20T20:56:00"
+      },
+      "categories": [
+        "unknown_time"
+      ],
+      "evidence": [
+        {
+          "session_id": 10,
+          "turn_id": "D10:20",
+          "conversation_id": "conv-26",
+          "speaker": "Melanie",
+          "session_time": "2023-07-20T20:56:00",
+          "text": "I'll never forget the day my youngest took her first steps. Seeing her wobble as she took those initial steps really put into perspective how fleeting life is and how lucky I am to be able to share these moments."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D10:20 says my youngest took her first steps. Correctly retained as a family memory; date is unspecified and remains null."
+    },
+    {
+      "memory": {
+        "content": "Caroline went to a pride parade a few weeks ago.",
+        "entity": "Caroline",
+        "attribute": "activity",
+        "value": "attended pride parade",
+        "time_expression": "a few weeks ago",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 8,
+            "turn_id": "D8:17"
+          }
+        ],
+        "memory_id": "m_6ca4b8bb92367b308040a5fb7448cb84fb9af72e78ae952727509817f8fb815a",
+        "conversation_id": "conv-26",
+        "session_time": "2023-07-15T13:51:00"
+      },
+      "categories": [
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:17",
+          "conversation_id": "conv-26",
+          "speaker": "Caroline",
+          "session_time": "2023-07-15T13:51:00",
+          "text": "Wow, nice pic! You both looked amazing. One special memory for me was this pride parade I went to a few weeks ago."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D8:17 supports Caroline attending a pride parade a few weeks ago. The vague date appropriately remains null."
+    },
+    {
+      "memory": {
+        "content": "Caroline is researching adoption agencies.",
+        "entity": "Caroline",
+        "attribute": "adoption_status",
+        "value": "researching adoption agencies",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 2,
+            "turn_id": "D2:8"
+          }
+        ],
+        "memory_id": "m_5e5e0af5adefa105a974cdcc808c516e37409e918d6d61a2dfadbeeac1ae0c93",
+        "conversation_id": "conv-26",
+        "session_time": "2023-05-25T13:14:00"
+      },
+      "categories": [
+        "supplemental_state_and_person"
+      ],
+      "evidence": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:8",
+          "conversation_id": "conv-26",
+          "speaker": "Caroline",
+          "session_time": "2023-05-25T13:14:00",
+          "text": "Researching adoption agencies — it's been a dream to have a family and give a loving home to kids who need it."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D2:8 supports researching adoption agencies as an earlier state."
+    },
+    {
+      "memory": {
+        "content": "Caroline applied to adoption agencies this week.",
+        "entity": "Caroline",
+        "attribute": "adoption_status",
+        "value": "applied to adoption agencies",
+        "time_expression": "this week",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 13,
+            "turn_id": "D13:1"
+          }
+        ],
+        "memory_id": "m_3bfa6e1817e405c86ff1224b2c59790115ebf700930836ec66ead2106660c30d",
+        "conversation_id": "conv-26",
+        "session_time": "2023-08-23T15:31:00"
+      },
+      "categories": [
+        "supplemental_state_and_person"
+      ],
+      "evidence": [
+        {
+          "session_id": 13,
+          "turn_id": "D13:1",
+          "conversation_id": "conv-26",
+          "speaker": "Caroline",
+          "session_time": "2023-08-23T15:31:00",
+          "text": "Hi Melanie! Hope you're doing good. Guess what I did this week? I took the first step towards becoming a mom - I applied to adoption agencies! It's a big decision, but I think I'm ready to give all my love to a child. I got lots of help from this adoption advice/assistance group I attended. It was great!"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D13:1 explicitly says she applied to adoption agencies this week. The date remains null; this and the earlier research state are both preserved."
+    },
+    {
+      "memory": {
+        "content": "Caroline passed the adoption agency interviews last Friday.",
+        "entity": "Caroline",
+        "attribute": "adoption_interview_status",
+        "value": "passed",
+        "time_expression": "last Friday",
+        "event_time": "2023-10-20",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 19,
+            "turn_id": "D19:1"
+          }
+        ],
+        "memory_id": "m_b8809e53ae56d84692f4510d1f5ae4572c9963ea474172bf036958bf86cea4f0",
+        "conversation_id": "conv-26",
+        "session_time": "2023-10-22T09:55:00"
+      },
+      "categories": [
+        "supplemental_state_and_person"
+      ],
+      "evidence": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:1",
+          "conversation_id": "conv-26",
+          "speaker": "Caroline",
+          "session_time": "2023-10-22T09:55:00",
+          "text": "Woohoo Melanie! I passed the adoption agency interviews last Friday! I'm so excited and thankful. This is a big move towards my goal of having a family."
+        }
+      ],
+      "review_status": "issue",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D19:1 supports passing adoption interviews last Friday (2023-10-20 relative to 2023-10-22). However this uses adoption_interview_status while earlier stages use adoption_status. Exact attribute history lookup cannot link the entire process. Attribute-normalization limitation, not a factual error."
+    },
+    {
+      "memory": {
+        "content": "Melanie's friend adopted last year.",
+        "entity": "Melanie's friend",
+        "attribute": "adoption_status",
+        "value": "adopted last year",
+        "time_expression": "last year",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 17,
+            "turn_id": "D17:4"
+          }
+        ],
+        "memory_id": "m_55bc5859c2de4b3094b0ca018edc15d3c315832953867e048ae2f29749c60f45",
+        "conversation_id": "conv-26",
+        "session_time": "2023-10-13T10:31:00"
+      },
+      "categories": [
+        "supplemental_state_and_person"
+      ],
+      "evidence": [
+        {
+          "session_id": 17,
+          "turn_id": "D17:4",
+          "conversation_id": "conv-26",
+          "speaker": "Melanie",
+          "session_time": "2023-10-13T10:31:00",
+          "text": "Yeah, a buddy of mine adopted last year. It was a long process, but now they're super happy with their new kid. Makes me feel like maybe I should do it too!"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D17:4 concerns a friend of Melanie, correctly assigned to Melanie's friend rather than Melanie. Last year is not precise to a day and remains null."
+    }
+  ],
+  "review_method": "Codex compared cited source text and session dates; targeted non-random sample; not a human annotation or corpus accuracy estimate",
+  "reviewed_date": "2026-10-29"
+}

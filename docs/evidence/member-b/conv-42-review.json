@@ -1,0 +1,445 @@
+{
+  "build_id": "75b55b0f11bd1ed05b9e53b9aab797e1ecdc5987d0834b6fdeaec669bc6d6c98",
+  "review_status": "reviewed_with_findings",
+  "samples": [
+    {
+      "memory": {
+        "content": "Joanna has been working on a project lately.",
+        "entity": "Joanna",
+        "attribute": "current_project",
+        "value": "working on a project",
+        "time_expression": "lately",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 1,
+            "turn_id": "D1:2"
+          }
+        ],
+        "memory_id": "m_03212fb5982be5cd0f6df4ff214dbb14eef6a2dc63f550f290aeaa9b3aae91b4",
+        "conversation_id": "conv-42",
+        "session_time": "2022-01-21T19:31:00"
+      },
+      "categories": [
+        "person",
+        "time_expression",
+        "unknown_time",
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:2",
+          "conversation_id": "conv-42",
+          "speaker": "Joanna",
+          "session_time": "2022-01-21T19:31:00",
+          "text": "Hey Nate! Long time no see! I've been working on a project lately - it's been pretty cool. What about you - any fun projects or hobbies?"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D1:2 supports Joanna working on a project lately. This vague time correctly remains null."
+    },
+    {
+      "memory": {
+        "content": "Nate agreed to give Joanna the recipe tomorrow.",
+        "entity": "Nate",
+        "attribute": "commitment",
+        "value": "will give Joanna the recipe tomorrow",
+        "time_expression": "tomorrow",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 16,
+            "turn_id": "D16:10"
+          }
+        ],
+        "memory_id": "m_eeb5d2b8f096fb0bf0d5f67b7358f51cbba953fd248e7420c9250fde0b9a994b",
+        "conversation_id": "conv-42",
+        "session_time": "2022-06-24T10:55:00"
+      },
+      "categories": [
+        "person"
+      ],
+      "evidence": [
+        {
+          "session_id": 16,
+          "turn_id": "D16:10",
+          "conversation_id": "conv-42",
+          "speaker": "Nate",
+          "session_time": "2022-06-24T10:55:00",
+          "text": "Sure thing! I can give it to you tomorrow, how does that sound?"
+        }
+      ],
+      "review_status": "issue",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D16:10 commits to giving the recipe tomorrow; D16:8-9 establish the vegan-ice-cream recipe. The future target date can be 2022-06-25, but event_time is null. Record as missing planned-event date, not proof that the recipe was actually delivered."
+    },
+    {
+      "memory": {
+        "content": "Joanna accepted Nate's offer to try the ice cream.",
+        "entity": "Joanna",
+        "attribute": "response_to_offer",
+        "value": "accepted the offer to try the ice cream",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 29,
+            "turn_id": "D29:13"
+          }
+        ],
+        "memory_id": "m_458d50e807be38f6d86e1769a6a53b9086fb71a697156102febd9a2602a7ee42",
+        "conversation_id": "conv-42",
+        "session_time": "2022-11-11T00:06:00"
+      },
+      "categories": [
+        "person",
+        "unknown_time"
+      ],
+      "evidence": [
+        {
+          "session_id": 29,
+          "turn_id": "D29:13",
+          "conversation_id": "conv-42",
+          "speaker": "Joanna",
+          "session_time": "2022-11-11T00:06:00",
+          "text": "Definitely, Nate! That ice cream looks mouthwatering. Thanks so much for offering!"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D29:13 directly accepts the offer of ice cream. It does not claim she already ate it."
+    },
+    {
+      "memory": {
+        "content": "Nate won his first video game tournament last week.",
+        "entity": "Nate",
+        "attribute": "tournament_win",
+        "value": "won first video game tournament",
+        "time_expression": "last week",
+        "event_time": "2022-01-14",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 1,
+            "turn_id": "D1:3"
+          }
+        ],
+        "memory_id": "m_4951835de8ffb0e2ce1e95096547f1afe0ca36b26767c5537c4502ac9301c53e",
+        "conversation_id": "conv-42",
+        "session_time": "2022-01-21T19:31:00"
+      },
+      "categories": [
+        "dated_event"
+      ],
+      "evidence": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:3",
+          "conversation_id": "conv-42",
+          "speaker": "Nate",
+          "session_time": "2022-01-21T19:31:00",
+          "text": "Hey Joanna! That's cool! I won my first video game tournament last week - so exciting!"
+        }
+      ],
+      "review_status": "issue",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D1:3 only says last week; this is an interval, not exactly seven days ago. Assigning 2022-01-14 invents day precision. Keep event_time null and preserve last week unless stronger evidence supplies a day."
+    },
+    {
+      "memory": {
+        "content": "Joanna tried her newest dairy-free recipe yesterday and it was a winner with her family.",
+        "entity": "Joanna",
+        "attribute": "recipe_experiment",
+        "value": "tried newest dairy-free recipe successfully",
+        "time_expression": "Yesterday",
+        "event_time": "2022-10-05",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 22,
+            "turn_id": "D22:1"
+          }
+        ],
+        "memory_id": "m_38ff23281cbefff41c24231dbc6bef6d1156b2a5cc3c264f3072293dac25a222",
+        "conversation_id": "conv-42",
+        "session_time": "2022-10-06T11:15:00"
+      },
+      "categories": [
+        "dated_event"
+      ],
+      "evidence": [
+        {
+          "session_id": 22,
+          "turn_id": "D22:1",
+          "conversation_id": "conv-42",
+          "speaker": "Joanna",
+          "session_time": "2022-10-06T11:15:00",
+          "text": "Hey Nate, hi! Yesterday, I tried my newest dairy-free recipe and it was a winner with my family! Mixing and matching flavors is fun and I'm always trying new things. How about you?"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D22:1 explicitly says yesterday she tried the dairy-free recipe and her family liked it. 2022-10-06 minus one day is 2022-10-05."
+    },
+    {
+      "memory": {
+        "content": "Nate took his turtles to the beach in Tampa yesterday.",
+        "entity": "Nate",
+        "attribute": "activity",
+        "value": "took his turtles to the beach in Tampa",
+        "time_expression": "yesterday",
+        "event_time": "2022-11-10",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 29,
+            "turn_id": "D29:6"
+          }
+        ],
+        "memory_id": "m_f28480aca7a88b69db0d09b3d91dbecb804990e13f012a28c8a3d8f88fe1fae3",
+        "conversation_id": "conv-42",
+        "session_time": "2022-11-11T00:06:00"
+      },
+      "categories": [
+        "dated_event",
+        "time_expression"
+      ],
+      "evidence": [
+        {
+          "session_id": 29,
+          "turn_id": "D29:6",
+          "conversation_id": "conv-42",
+          "speaker": "Nate",
+          "session_time": "2022-11-11T00:06:00",
+          "text": "Wow Joanna, that must have been so exciting! It's incredible when you get those moments of joy. Anyway, I took my turtles to the beach in Tampa yesterday! They always bring me peace in the craziness of life."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D29:6 supports Nate taking his turtles to the beach in Tampa yesterday. 2022-11-11 minus one day is 2022-11-10."
+    },
+    {
+      "memory": {
+        "content": "Nate won an international tournament yesterday.",
+        "entity": "Nate",
+        "attribute": "tournament_result",
+        "value": "won an international tournament",
+        "time_expression": "yesterday",
+        "event_time": "2022-08-21",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 19,
+            "turn_id": "D19:1"
+          }
+        ],
+        "memory_id": "m_4b382e8df1efc088500ffdbc8b5f640793d45d5f67190486834bb927f270a853",
+        "conversation_id": "conv-42",
+        "session_time": "2022-08-22T10:57:00"
+      },
+      "categories": [
+        "time_expression"
+      ],
+      "evidence": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:1",
+          "conversation_id": "conv-42",
+          "speaker": "Nate",
+          "session_time": "2022-08-22T10:57:00",
+          "text": "Woah Joanna, I won an international tournament yesterday! It was wild. Gaming has brought me so much success and now I'm able to make a living at something I'm passionate about - I'm loving it."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D19:1 explicitly says Nate won an international tournament yesterday. 2022-08-22 minus one day is 2022-08-21."
+    },
+    {
+      "memory": {
+        "content": "Joanna asked Nate for the vegan ice cream recipe.",
+        "entity": "Joanna",
+        "attribute": "request",
+        "value": "asked for the vegan ice cream recipe",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 16,
+            "turn_id": "D16:9"
+          }
+        ],
+        "memory_id": "m_e19fab835ab843d7e2e5472c66edfb5aaf92640dcce613451c696ec824481eb6",
+        "conversation_id": "conv-42",
+        "session_time": "2022-06-24T10:55:00"
+      },
+      "categories": [
+        "unknown_time"
+      ],
+      "evidence": [
+        {
+          "session_id": 16,
+          "turn_id": "D16:9",
+          "conversation_id": "conv-42",
+          "speaker": "Joanna",
+          "session_time": "2022-06-24T10:55:00",
+          "text": "Mm, yum! Can you give me the recipe for that? It sounds like it'd be a good recipe!"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D16:9 asks for the recipe; D16:8 supplies vegan-ice-cream context. Correct requester Joanna, no unsupported event date."
+    },
+    {
+      "memory": {
+        "content": "Joanna will let Nate know how the recipe turns out.",
+        "entity": "Joanna",
+        "attribute": "intention",
+        "value": "let Nate know how the recipe turns out",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 8,
+            "turn_id": "D8:22"
+          }
+        ],
+        "memory_id": "m_c94b58afcf37447d4cce8149ca23c3caf2a188897e1741a85480c5b4105aa991",
+        "conversation_id": "conv-42",
+        "session_time": "2022-04-17T18:44:00"
+      },
+      "categories": [
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:22",
+          "conversation_id": "conv-42",
+          "speaker": "Joanna",
+          "session_time": "2022-04-17T18:44:00",
+          "text": "Got it, Nate. I'll definitely let you know how it turns out. Thanks for sharing the recipe!"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D8:22 promises feedback, correctly retained as intention rather than completed feedback."
+    },
+    {
+      "memory": {
+        "content": "Joanna is writing another movie script, a love story with lots of challenges.",
+        "entity": "Joanna",
+        "attribute": "activity",
+        "value": "writing another movie script",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 27,
+            "turn_id": "D27:6"
+          }
+        ],
+        "memory_id": "m_2dfbd64b19fab899471221e14eaafc68dfe7a112b62960dfe21fc4c1e331fdb5",
+        "conversation_id": "conv-42",
+        "session_time": "2022-11-07T20:10:00"
+      },
+      "categories": [
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 27,
+          "turn_id": "D27:6",
+          "conversation_id": "conv-42",
+          "speaker": "Joanna",
+          "session_time": "2022-11-07T20:10:00",
+          "text": "I am writing another movie script! It's a love story with lots of challenges. I've put lots of hard work into it and I'm hoping to get it on the big screen."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D27:6 explicitly says Joanna is writing another movie script, a love story with challenges; correctly retained as ongoing work."
+    },
+    {
+      "memory": {
+        "content": "Joanna finished her first full screenplay and printed it last Friday.",
+        "entity": "Joanna",
+        "attribute": "screenplay_status",
+        "value": "finished first full screenplay and printed it",
+        "time_expression": "last Friday",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 2,
+            "turn_id": "D2:3"
+          }
+        ],
+        "memory_id": "m_2da31bb3053d0213b6f27de42b165e589bdffd38f58c5bc23583aa0bc37d66f0",
+        "conversation_id": "conv-42",
+        "session_time": "2022-01-23T14:01:00"
+      },
+      "categories": [
+        "supplemental_project_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:3",
+          "conversation_id": "conv-42",
+          "speaker": "Joanna",
+          "session_time": "2022-01-23T14:01:00",
+          "text": "Woo! I finally finished my first full screenplay and printed it last Friday. I've been working on for a while, such a relief to have it all done!"
+        }
+      ],
+      "review_status": "issue",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D2:3 supports finishing the first full screenplay and printing it last Friday. Relative to Sunday 2022-01-23, printing ordinarily resolves to 2022-01-21, but event_time is null. Earlier completed screenplay and later new-script progress are both preserved; the printing date is under-extracted."
+    },
+    {
+      "memory": {
+        "content": "Joanna just finished the intro to her next movie script.",
+        "entity": "Joanna",
+        "attribute": "script_progress",
+        "value": "finished intro to next movie script",
+        "time_expression": "just",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 27,
+            "turn_id": "D27:28"
+          }
+        ],
+        "memory_id": "m_0dbd8d0779528dc9e2f943a7a42bab0b4d58b3a0837bcee98b694a49fe8bffc3",
+        "conversation_id": "conv-42",
+        "session_time": "2022-11-07T20:10:00"
+      },
+      "categories": [
+        "supplemental_project_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 27,
+          "turn_id": "D27:28",
+          "conversation_id": "conv-42",
+          "speaker": "Joanna",
+          "session_time": "2022-11-07T20:10:00",
+          "text": "Great to hear! I just finished with the intro to my next movie script, and I decided to include this at the begining."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D27:28 says she finished only the INTRO of her next movie script. Correctly retains partial progress, not completion of the whole new script. Coexists with completion of the earlier screenplay in D2:3."
+    }
+  ],
+  "review_method": "Codex compared cited source text and session dates; targeted non-random sample; not a human annotation or corpus accuracy estimate",
+  "reviewed_date": "2026-10-29"
+}

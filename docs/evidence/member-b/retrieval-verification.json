@@ -1,0 +1,295 @@
+{
+  "kind": "engineering_smoke_test_not_recall_evaluation",
+  "encoder": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+    "dimension": 384,
+    "device": "cpu",
+    "libraries": {
+      "sentence-transformers": "5.1.2",
+      "transformers": "4.57.1",
+      "torch": "2.8.0",
+      "tokenizers": "0.22.2"
+    },
+    "encoding": "normalized-content-only-v1",
+    "max_tokens": 256
+  },
+  "conversations": [
+    {
+      "conversation_id": "conv-26",
+      "build_id": "dc8bb69cee733b7d9e472df748e2467c47421f295fb1565d1b80b4681468e6eb",
+      "checks": [
+        {
+          "mode": "bm25",
+          "query": "Caroline went to a LGBTQ support group yesterday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "bm25",
+          "query": "Melanie feels lucky to be with her family and have their love.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "bm25",
+          "query": "Caroline wants to pass the same support she received to anyone who needs it.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Caroline went to a LGBTQ support group yesterday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Melanie feels lucky to be with her family and have their love.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Caroline wants to pass the same support she received to anyone who needs it.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Caroline went to a LGBTQ support group yesterday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Melanie feels lucky to be with her family and have their love.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Caroline wants to pass the same support she received to anyone who needs it.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv-30",
+      "build_id": "5b7d91ba3e9c84ccc4e500116540a3fa969e8b4aea32f6d2f05d644b75f49133",
+      "checks": [
+        {
+          "mode": "bm25",
+          "query": "Jon lost his job as a banker yesterday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "bm25",
+          "query": "Jon is determined to make his dance studio work.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "bm25",
+          "query": "Jon says he won't quit and will keep going whatever comes his way.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Jon lost his job as a banker yesterday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Jon is determined to make his dance studio work.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Jon says he won't quit and will keep going whatever comes his way.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Jon lost his job as a banker yesterday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Jon is determined to make his dance studio work.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Jon says he won't quit and will keep going whatever comes his way.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv-41",
+      "build_id": "c92b818bc1dc8bf0b58f024d53b2b0573260dc8bb05b498e8db232537f7c0552",
+      "checks": [
+        {
+          "mode": "bm25",
+          "query": "John got back from a family road trip yesterday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "bm25",
+          "query": "Maria wants everyone to join forces to create a safe and bustling environment for the community and others.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "bm25",
+          "query": "Maria volunteered at the shelter front desk last Friday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "John got back from a family road trip yesterday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Maria wants everyone to join forces to create a safe and bustling environment for the community and others.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Maria volunteered at the shelter front desk last Friday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "John got back from a family road trip yesterday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Maria wants everyone to join forces to create a safe and bustling environment for the community and others.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Maria volunteered at the shelter front desk last Friday.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        }
+      ]
+    },
+    {
+      "conversation_id": "conv-42",
+      "build_id": "75b55b0f11bd1ed05b9e53b9aab797e1ecdc5987d0834b6fdeaec669bc6d6c98",
+      "checks": [
+        {
+          "mode": "bm25",
+          "query": "Joanna has been working on a project lately.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "bm25",
+          "query": "Nate agreed to give Joanna the recipe tomorrow.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "bm25",
+          "query": "Joanna accepted Nate's offer to try the ice cream.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Joanna has been working on a project lately.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Nate agreed to give Joanna the recipe tomorrow.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "vector",
+          "query": "Joanna accepted Nate's offer to try the ice cream.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Joanna has been working on a project lately.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Nate agreed to give Joanna the recipe tomorrow.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        },
+        {
+          "mode": "hybrid",
+          "query": "Joanna accepted Nate's offer to try the ice cream.",
+          "hits": 5,
+          "all_evidence_resolved": true,
+          "repeat_identical": true
+        }
+      ]
+    }
+  ]
+}
