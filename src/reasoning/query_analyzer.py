@@ -7,6 +7,7 @@ from openai import OpenAI
 from pydantic import ValidationError
 
 from src.common.models import QueryAnalysisResult
+from src.reasoning.telemetry import tracked_completion
 
 load_dotenv()
 
@@ -27,6 +28,8 @@ Example JSON output: {"entity": ["Caroline"], "time_scope": "current",
 
 def _client() -> OpenAI:
     return OpenAI(
+        max_retries=0,
+        timeout=60,
         api_key=os.environ["DEEPSEEK_API_KEY"],
         base_url=os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
     )
@@ -39,7 +42,8 @@ def analyze_query(
     client = _client()
     for _ in range(max_attempts):
         try:
-            resp = client.chat.completions.create(
+            resp = tracked_completion(
+                client,
                 model=os.environ.get("DEEPSEEK_MODEL", "deepseek-flash"),
                 messages=[
                     {"role": "system", "content": SYSTEM_PROMPT},
@@ -47,6 +51,7 @@ def analyze_query(
                 ],
                 response_format={"type": "json_object"},
                 extra_body={"thinking": {"type": "disabled"}},
+                temperature=0,
                 max_tokens=512,
             )
         except openai.AuthenticationError:
