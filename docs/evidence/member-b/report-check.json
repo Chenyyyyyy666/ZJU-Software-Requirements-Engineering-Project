@@ -1,0 +1,96 @@
+{
+  "date": "2026-11-04",
+  "code_baseline": "c830cb5",
+  "archive_normalization": "JSON whitespace only: CRLF to LF",
+  "historical_build_date": "2026-10-29",
+  "counts_recomputed_from_original_artifacts": [
+    {
+      "conversation_id": "conv-26",
+      "turns": 419,
+      "memories": 204,
+      "blocks": 28,
+      "input_tokens": 45607,
+      "output_tokens": 15460
+    },
+    {
+      "conversation_id": "conv-30",
+      "turns": 369,
+      "memories": 161,
+      "blocks": 27,
+      "input_tokens": 39354,
+      "output_tokens": 11757
+    },
+    {
+      "conversation_id": "conv-41",
+      "turns": 663,
+      "memories": 282,
+      "blocks": 46,
+      "input_tokens": 71396,
+      "output_tokens": 21068
+    },
+    {
+      "conversation_id": "conv-42",
+      "turns": 629,
+      "memories": 304,
+      "blocks": 44,
+      "input_tokens": 66084,
+      "output_tokens": 23270
+    }
+  ],
+  "pytest": {
+    "command": "python -m pytest tests/test_memory_devbuild.py tests/test_memory_pipeline.py tests/test_reasoning_context.py tests/test_vector_retrieval.py -q",
+    "passed": 58,
+    "exit_code": 0,
+    "environment": "Windows / Python 3.13.5",
+    "scope": "Selected offline module tests; not full repository acceptance"
+  },
+  "files": [
+    {
+      "file": "build-manifest.json",
+      "original_sha256": "563083d82a8be6f001b048ce7e307180710d0d9da50bc3db1c088ab845bc5a54",
+      "archived_lf_sha256": "563083d82a8be6f001b048ce7e307180710d0d9da50bc3db1c088ab845bc5a54"
+    },
+    {
+      "file": "retrieval-verification.json",
+      "original_sha256": "36b48c372945a851e2240e08b5c458720e51af48a6894de4a021fa9405224f3e",
+      "archived_lf_sha256": "36b48c372945a851e2240e08b5c458720e51af48a6894de4a021fa9405224f3e"
+    },
+    {
+      "file": "closeout-verification.json",
+      "original_sha256": "9075ec61edd5d3bfda27adcacafd00c0a40ffa96161a9f8272444de545b79d1d",
+      "archived_lf_sha256": "9075ec61edd5d3bfda27adcacafd00c0a40ffa96161a9f8272444de545b79d1d"
+    },
+    {
+      "file": "conv-26-review.json",
+      "original_sha256": "f1437a5d605143563b8c702534c0df6e2183dbec986f9519573b5159d1b587b4",
+      "archived_lf_sha256": "f1437a5d605143563b8c702534c0df6e2183dbec986f9519573b5159d1b587b4"
+    },
+    {
+      "file": "conv-30-review.json",
+      "original_sha256": "588d03afc5d1d0e72721900dd2aa8e215d37b26018295d92deb541a6594de936",
+      "archived_lf_sha256": "588d03afc5d1d0e72721900dd2aa8e215d37b26018295d92deb541a6594de936"
+    },
+    {
+      "file": "conv-41-review.json",
+      "original_sha256": "2a66471f37d27e64c03add042aeb0ea20993c7c8ab0d759969b91c5692fc4ade",
+      "archived_lf_sha256": "2a66471f37d27e64c03add042aeb0ea20993c7c8ab0d759969b91c5692fc4ade"
+    },
+    {
+      "file": "conv-42-review.json",
+      "original_sha256": "714e158fe86c8aa38324a2c26846f899da7a09d339f88aaff3325295f19f776c",
+      "archived_lf_sha256": "714e158fe86c8aa38324a2c26846f899da7a09d339f88aaff3325295f19f776c"
+    }
+  ],
+  "limitations": [
+    "Public source identity not confirmed against course file",
+    "No formal QA/Recall/state scores inferred",
+    "No new human signoff"
+  ],
+  "bm25_cli_smoke": {
+    "date": "2026-11-04",
+    "hits": 5,
+    "source_turns": 5,
+    "api_calls": 0,
+    "mode": "bm25"
+  }
+}

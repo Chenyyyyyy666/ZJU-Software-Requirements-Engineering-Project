@@ -1,0 +1,458 @@
+{
+  "build_id": "c92b818bc1dc8bf0b58f024d53b2b0573260dc8bb05b498e8db232537f7c0552",
+  "review_status": "reviewed_with_findings",
+  "samples": [
+    {
+      "memory": {
+        "content": "John got back from a family road trip yesterday.",
+        "entity": "John",
+        "attribute": "recent_activity",
+        "value": "returned from a family road trip",
+        "time_expression": "yesterday",
+        "event_time": "2022-12-16",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 1,
+            "turn_id": "D1:2"
+          }
+        ],
+        "memory_id": "m_19dfaba009dc81262339980b0b2a61174196c6488e636d506d5a9027faa3691e",
+        "conversation_id": "conv-41",
+        "session_time": "2022-12-17T11:01:00"
+      },
+      "categories": [
+        "person",
+        "dated_event",
+        "time_expression",
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:2",
+          "conversation_id": "conv-41",
+          "speaker": "John",
+          "session_time": "2022-12-17T11:01:00",
+          "text": "Hey Maria! Good to see you. Just got back from a family road trip yesterday, it was fun! Anything exciting happening for you?"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D1:2 explicitly says John returned from a family road trip yesterday; 2022-12-17 minus one day is 2022-12-16."
+    },
+    {
+      "memory": {
+        "content": "Maria wants everyone to join forces to create a safe and bustling environment for the community and others.",
+        "entity": "Maria",
+        "attribute": "community_improvement_goal",
+        "value": "join forces to create a safe and bustling environment",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 14,
+            "turn_id": "D14:22"
+          }
+        ],
+        "memory_id": "m_4b558d4763cb82df731c25beae14ee7edf9a54ff61c4b3f36e58e1313fc19085",
+        "conversation_id": "conv-41",
+        "session_time": "2023-05-06T17:04:00"
+      },
+      "categories": [
+        "person",
+        "unknown_time"
+      ],
+      "evidence": [
+        {
+          "session_id": 14,
+          "turn_id": "D14:22",
+          "conversation_id": "conv-41",
+          "speaker": "Maria",
+          "session_time": "2023-05-06T17:04:00",
+          "text": "Yep, John! We should all join forces to create a safe and bustling environment for our community, and others too. Let's make some real change."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D14:22 supports the community-improvement goal, not a completed improvement. The date is correctly left unspecified."
+    },
+    {
+      "memory": {
+        "content": "Maria volunteered at the shelter front desk last Friday.",
+        "entity": "Maria",
+        "attribute": "volunteering_activity",
+        "value": "volunteered at the shelter front desk",
+        "time_expression": "last Friday",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 32,
+            "turn_id": "D32:14"
+          }
+        ],
+        "memory_id": "m_55a1dfb46342544a35096865df8d817cfeb03e5777acb68424b24a8b51ab8297",
+        "conversation_id": "conv-41",
+        "session_time": "2023-08-16T11:08:00"
+      },
+      "categories": [
+        "person",
+        "time_expression",
+        "unknown_time"
+      ],
+      "evidence": [
+        {
+          "session_id": 32,
+          "turn_id": "D32:14",
+          "conversation_id": "conv-41",
+          "speaker": "Maria",
+          "session_time": "2023-08-16T11:08:00",
+          "text": "Hey John, I'm here for you. Last Friday, I spent some time at the shelter volunteering at the front desk. Seeing the smiles on their faces when they got food or a bed really made me feel good. We have the power to make a difference in people's lives."
+        }
+      ],
+      "review_status": "issue",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D32:14 says last Friday. Given Wednesday 2023-08-16, the ordinary most-recent-Friday interpretation is 2023-08-11; leaving event_time null loses a resolvable date."
+    },
+    {
+      "memory": {
+        "content": "A car ran a red light and hit Maria and the kids, but everyone is okay.",
+        "entity": "Maria",
+        "attribute": "car_accident",
+        "value": "hit by a car that ran a red light; everyone okay",
+        "time_expression": "yesterday",
+        "event_time": "2023-07-02",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 21,
+            "turn_id": "D21:3"
+          },
+          {
+            "session_id": 21,
+            "turn_id": "D21:5"
+          }
+        ],
+        "memory_id": "m_77cc15932388157812f834f6fbceb149690552937b5c12f605545978b1e40417",
+        "conversation_id": "conv-41",
+        "session_time": "2023-07-03T20:43:00"
+      },
+      "categories": [
+        "dated_event"
+      ],
+      "evidence": [
+        {
+          "session_id": 21,
+          "turn_id": "D21:3",
+          "conversation_id": "conv-41",
+          "speaker": "Maria",
+          "session_time": "2023-07-03T20:43:00",
+          "text": "Hey John! They were great, their smiles warmed my heart. But something not so great happened yesterday..."
+        },
+        {
+          "session_id": 21,
+          "turn_id": "D21:5",
+          "conversation_id": "conv-41",
+          "speaker": "Maria",
+          "session_time": "2023-07-03T20:43:00",
+          "text": "A car ran a red light and hit us, but thankfully everyone is okay. Besides that, my cousin just had a tough time recently, so I'm lending a hand in helping her find a new place."
+        }
+      ],
+      "review_status": "issue",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D21:3 and D21:5 support the accident on 2023-07-02 and everyone being okay. However D21:5 only says hit us. D21:1 mentions shelter children but never explicitly places them in the car. Adding and the kids is an unsupported pronoun resolution; use Maria and unspecified companions unless stronger evidence exists."
+    },
+    {
+      "memory": {
+        "content": "Maria got a puppy named Coco two weeks ago.",
+        "entity": "Maria",
+        "attribute": "pet_ownership",
+        "value": "got a puppy named Coco",
+        "time_expression": "two weeks ago",
+        "event_time": "2023-07-28",
+        "event_time_precision": "day",
+        "sources": [
+          {
+            "session_id": 30,
+            "turn_id": "D30:1"
+          }
+        ],
+        "memory_id": "m_ab99361da29931a6155a63ba55495132222c968aa53e547fb7a1bd7d4022b8ee",
+        "conversation_id": "conv-41",
+        "session_time": "2023-08-11T00:10:00"
+      },
+      "categories": [
+        "dated_event"
+      ],
+      "evidence": [
+        {
+          "session_id": 30,
+          "turn_id": "D30:1",
+          "conversation_id": "conv-41",
+          "speaker": "Maria",
+          "session_time": "2023-08-11T00:10:00",
+          "text": "Hey John! Long time no talk! Guess what - I got a puppy two weeks ago! Her name's Coco and she's adorable."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D30:1 supports Maria getting Coco two weeks earlier. Exact two-week subtraction from 2023-08-11 gives 2023-07-28 under the literal date interpretation."
+    },
+    {
+      "memory": {
+        "content": "Last week, John realized how much veterans have done and wanted to show appreciation.",
+        "entity": "John",
+        "attribute": "motivation_realization",
+        "value": "wanted to show appreciation to veterans",
+        "time_expression": "last week",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 15,
+            "turn_id": "D15:3"
+          }
+        ],
+        "memory_id": "m_1f30f17a35b96d487f0c50ade140d5e2a2bdc594153b0492759aaf48f9b310f4",
+        "conversation_id": "conv-41",
+        "session_time": "2023-05-20T19:38:00"
+      },
+      "categories": [
+        "time_expression"
+      ],
+      "evidence": [
+        {
+          "session_id": 15,
+          "turn_id": "D15:3",
+          "conversation_id": "conv-41",
+          "speaker": "John",
+          "session_time": "2023-05-20T19:38:00",
+          "text": "Hi Maria, thanks for asking. I've always been passionate about veterans and their rights. Last week, I realized again how much they've done for us and wanted to show my appreciation in some way. So, I worked on a project to support them. It's my way of giving back."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D15:3 supports John reflecting on veterans last week. A week interval cannot be represented as an exact day; null is appropriate."
+    },
+    {
+      "memory": {
+        "content": "Maria volunteers at the homeless shelter.",
+        "entity": "Maria",
+        "attribute": "volunteering",
+        "value": "homeless shelter",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 1,
+            "turn_id": "D1:3"
+          }
+        ],
+        "memory_id": "m_13dd0e9524f76fcb1d89f0d7e4e20df18692b808dd4769659ffff647f28a77d5",
+        "conversation_id": "conv-41",
+        "session_time": "2022-12-17T11:01:00"
+      },
+      "categories": [
+        "unknown_time"
+      ],
+      "evidence": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:3",
+          "conversation_id": "conv-41",
+          "speaker": "Maria",
+          "session_time": "2022-12-17T11:01:00",
+          "text": "Been busy volunteering at the homeless shelter and keeping fit. Just started doing aerial yoga, it's great. Have you tried any other cool workout classes?"
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D1:3 directly supports Maria volunteering at the homeless shelter. No unsupported date supplied."
+    },
+    {
+      "memory": {
+        "content": "Maria took a photo at the beach last month.",
+        "entity": "Maria",
+        "attribute": "photo_location",
+        "value": "beach",
+        "time_expression": "last month",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 3,
+            "turn_id": "D3:14"
+          }
+        ],
+        "memory_id": "m_26448c87dd5a5b63872a85ec86e8a79d736d3f16d753ac321fef42d3f2719d82",
+        "conversation_id": "conv-41",
+        "session_time": "2023-01-01T20:30:00"
+      },
+      "categories": [
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 3,
+          "turn_id": "D3:14",
+          "conversation_id": "conv-41",
+          "speaker": "Maria",
+          "session_time": "2023-01-01T20:30:00",
+          "text": "I took it at the beach last month. Watching the sunset was so peaceful, it made me feel connected to nature and appreciate life's small moments."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D3:14 supports taking the picture at the beach last month; D3:13 confirms photo context. The month-only time appropriately remains null in a day-only schema."
+    },
+    {
+      "memory": {
+        "content": "John believes striving for progress is crucial.",
+        "entity": "John",
+        "attribute": "belief",
+        "value": "striving for progress is crucial",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 21,
+            "turn_id": "D21:28"
+          }
+        ],
+        "memory_id": "m_dc9bf9d99dd5796b578ebf52a3901d3026e793ba628bb6da74a106a5800cd1b4",
+        "conversation_id": "conv-41",
+        "session_time": "2023-07-03T20:43:00"
+      },
+      "categories": [
+        "state_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 21,
+          "turn_id": "D21:28",
+          "conversation_id": "conv-41",
+          "speaker": "John",
+          "session_time": "2023-07-03T20:43:00",
+          "text": "Thanks, Maria! It really is. Striving for progress is crucial."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D21:28 directly states striving for progress is crucial; attributed to John correctly."
+    },
+    {
+      "memory": {
+        "content": "Maria adopted a puppy from a shelter last week.",
+        "entity": "Maria",
+        "attribute": "pet_adoption",
+        "value": "adopted a puppy from a shelter",
+        "time_expression": "last week",
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 31,
+            "turn_id": "D31:2"
+          }
+        ],
+        "memory_id": "m_020f1b0d5bdeab2c8df9c513ecff5cbdddc4fd50f47a77d02ab7bb1683a2db77",
+        "conversation_id": "conv-41",
+        "session_time": "2023-08-13T15:14:00"
+      },
+      "categories": [
+        "supplemental_pet_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 31,
+          "turn_id": "D31:2",
+          "conversation_id": "conv-41",
+          "speaker": "Maria",
+          "session_time": "2023-08-13T15:14:00",
+          "text": "Wow, John! You're doing great things. Kudos for helping kids learn. On another note, I just adopted this cute pup from a shelter last week. She brings so much joy! I feel blessed to be able to give her a home."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D31:2 says Maria adopted a puppy from a shelter last week. Kept as an additional event alongside Coco acquisition; last week is not resolved to a fabricated day."
+    },
+    {
+      "memory": {
+        "content": "Maria's newly adopted puppy is named Shadow.",
+        "entity": "Maria",
+        "attribute": "new_puppy_name",
+        "value": "Shadow",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 31,
+            "turn_id": "D31:4"
+          }
+        ],
+        "memory_id": "m_f61aadd61a857820301beb8fcc6a5a528ddd20d90c275ab9372c892cbd130f45",
+        "conversation_id": "conv-41",
+        "session_time": "2023-08-13T15:14:00"
+      },
+      "categories": [
+        "supplemental_pet_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 31,
+          "turn_id": "D31:4",
+          "conversation_id": "conv-41",
+          "speaker": "Maria",
+          "session_time": "2023-08-13T15:14:00",
+          "text": "Her name is Shadow! She's full of energy and always puts a smile on my face. She's been a great addition to my life. They get along great."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D31:4 explicitly names the new puppy Shadow. D31:3 asks about her other dog, so preserving Coco and Shadow separately is supported; do not overwrite Coco as a renamed pet."
+    },
+    {
+      "memory": {
+        "content": "Maria's new puppy gets along great with her other dog.",
+        "entity": "Maria",
+        "attribute": "pets_relationship",
+        "value": "get along great",
+        "time_expression": null,
+        "event_time": null,
+        "event_time_precision": "unknown",
+        "sources": [
+          {
+            "session_id": 31,
+            "turn_id": "D31:4"
+          }
+        ],
+        "memory_id": "m_bbdc8475be7af510a87cf9329330d6d53dd79d5752479d5c739ac53cb71008e1",
+        "conversation_id": "conv-41",
+        "session_time": "2023-08-13T15:14:00"
+      },
+      "categories": [
+        "supplemental_pet_history"
+      ],
+      "evidence": [
+        {
+          "session_id": 31,
+          "turn_id": "D31:4",
+          "conversation_id": "conv-41",
+          "speaker": "Maria",
+          "session_time": "2023-08-13T15:14:00",
+          "text": "Her name is Shadow! She's full of energy and always puts a smile on my face. She's been a great addition to my life. They get along great."
+        }
+      ],
+      "review_status": "pass",
+      "reviewer": "Codex source-evidence review (not human sign-off)",
+      "findings": "D31:4 says they get along great; D31:3 supplies the two-dog context. Correct relationship fact, with no fabricated date."
+    }
+  ],
+  "review_method": "Codex compared cited source text and session dates; targeted non-random sample; not a human annotation or corpus accuracy estimate",
+  "reviewed_date": "2026-10-29"
+}
