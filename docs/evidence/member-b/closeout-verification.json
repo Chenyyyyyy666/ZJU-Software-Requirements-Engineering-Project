@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-30",
+  "mode": "isolated_archive_unpack_sources_reconstructed_from_bundle",
+  "note": "Checks archived caches without original raw dataset or local extraction cache; does not establish identity with course data. _post replaced by hard failure.",
+  "conversations": [
+    {
+      "conversation_id": "conv-26",
+      "identical_bundle": true,
+      "cache_hits": 28,
+      "api_calls": 0,
+      "bundle_sha256": "6ff022cd697d03a41f48d7ac7d8f6e8a0faa276adfe5d0c0c7c16ea99775edb2"
+    },
+    {
+      "conversation_id": "conv-30",
+      "identical_bundle": true,
+      "cache_hits": 27,
+      "api_calls": 0,
+      "bundle_sha256": "e1cd5a52ed755a23281b0a34a1fb377b617dabc56bfed2ee75b896755eb672cf"
+    },
+    {
+      "conversation_id": "conv-41",
+      "identical_bundle": true,
+      "cache_hits": 46,
+      "api_calls": 0,
+      "bundle_sha256": "ca585c3d1a766bc7d245f6b018e63b53fe522058f5720565baba9170729aaef8"
+    },
+    {
+      "conversation_id": "conv-42",
+      "identical_bundle": true,
+      "cache_hits": 44,
+      "api_calls": 0,
+      "bundle_sha256": "fbdcba257413f0c27a0ef7f7b71b8dd54fd0eed3c3e22122929be8b36fef8eda"
+    }
+  ],
+  "package_versions": {
+    "pydantic": "2.13.4",
+    "httpx": "0.28.1",
+    "python-dotenv": "1.1.0",
+    "pytest": "8.3.5",
+    "ruff": "0.11.13",
+    "sentence-transformers": "5.1.2",
+    "transformers": "4.57.1",
+    "torch": "2.8.0",
+    "numpy": "2.3.3"
+  }
+}
