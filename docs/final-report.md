@@ -345,7 +345,7 @@ locomo.json
 
 这一规则对应 `memory-design.md` 中「询问过去状态时，旧事实仍可能是所需答案依据」。
 
-![image-20261104022711437](C:\Users\yuguoqing\AppData\Roaming\Typora\typora-user-images\image-20261104022711437.png)
+##### ![图2 conv-30 记忆状态演化](fig-02-state-evolution.png)
 
 ### 5.4 答案生成
 

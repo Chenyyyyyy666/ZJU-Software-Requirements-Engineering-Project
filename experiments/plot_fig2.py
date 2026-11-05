@@ -1,16 +1,19 @@
 """Generate Figure 2: a real state-evolution case from conv-30."""
-import matplotlib
-matplotlib.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei', 'Arial Unicode MS']
-matplotlib.rcParams['axes.unicode_minus'] = False
+
 import json
 from pathlib import Path
 
+import matplotlib
 import matplotlib.pyplot as plt
 from dotenv import load_dotenv
 from matplotlib.patches import FancyArrowPatch
 
 from src.common.models import MemoryBundle
 from src.reasoning.relation_judge import judge_relations
+
+# matplotlib 配置放在全部 import 之后
+matplotlib.rcParams["font.sans-serif"] = ["SimHei", "Microsoft YaHei", "Arial Unicode MS"]
+matplotlib.rcParams["axes.unicode_minus"] = False
 
 load_dotenv()
 
@@ -22,9 +25,7 @@ NEW_ID_PREFIX = "m_c5bdb6cd"
 
 
 def main() -> None:
-    bundle = MemoryBundle.model_validate(
-        json.loads(BUNDLE.read_text(encoding="utf-8"))
-    )
+    bundle = MemoryBundle.model_validate(json.loads(BUNDLE.read_text(encoding="utf-8")))
     old = next(m for m in bundle.memories if m.memory_id.startswith(OLD_ID_PREFIX))
     new = next(m for m in bundle.memories if m.memory_id.startswith(NEW_ID_PREFIX))
     relations = judge_relations([old, new])
@@ -59,38 +60,72 @@ def main() -> None:
     )
 
     ax.text(
-        2, 3.4, old_text, ha="center", va="bottom", fontsize=9,
-        bbox=dict(boxstyle="round,pad=0.6", facecolor="#f0f0f0", edgecolor="#666666"),
+        2,
+        3.4,
+        old_text,
+        ha="center",
+        va="bottom",
+        fontsize=9,
+        bbox={"boxstyle": "round,pad=0.6", "facecolor": "#f0f0f0", "edgecolor": "#666666"},
     )
     ax.text(
-        8, 3.4, new_text, ha="center", va="bottom", fontsize=9,
-        bbox=dict(boxstyle="round,pad=0.6", facecolor="#e8f4ff", edgecolor="#3366aa"),
+        8,
+        3.4,
+        new_text,
+        ha="center",
+        va="bottom",
+        fontsize=9,
+        bbox={"boxstyle": "round,pad=0.6", "facecolor": "#e8f4ff", "edgecolor": "#3366aa"},
     )
 
     arrow = FancyArrowPatch(
-        (2.8, 3), (7.2, 3), arrowstyle="->", mutation_scale=20,
-        color="#cc3333", linewidth=2, zorder=3,
+        (2.8, 3),
+        (7.2, 3),
+        arrowstyle="->",
+        mutation_scale=20,
+        color="#cc3333",
+        linewidth=2,
+        zorder=3,
     )
     ax.add_patch(arrow)
     ax.text(
-        5, 3.25, rel.relation_type, ha="center", va="bottom",
-        fontsize=12, color="#cc3333", fontweight="bold",
+        5,
+        3.25,
+        rel.relation_type,
+        ha="center",
+        va="bottom",
+        fontsize=12,
+        color="#cc3333",
+        fontweight="bold",
     )
     ax.text(
-        5, 2.7, f"reason: {rel.reason}", ha="center", va="top",
-        fontsize=8, style="italic", wrap=True,
+        5,
+        2.7,
+        f"reason: {rel.reason}",
+        ha="center",
+        va="top",
+        fontsize=8,
+        style="italic",
+        wrap=True,
     )
 
     ax.text(
-        5, 5.5,
+        5,
+        5.5,
         f"图 2：conv-30 中 Jon 就业状态的真实演化（build_id: {bundle.build_info.build_id[:12]}…）",
-        ha="center", fontsize=11, fontweight="bold",
+        ha="center",
+        fontsize=11,
+        fontweight="bold",
     )
     ax.text(
-        5, 0.6,
-        "数据来源：outputs/memory/conv-30.json（llm_extraction, deepseek-flash, memory-facts-v1）\n"
-        "关系判定由 src/reasoning/relation_judge.judge_relations 实际运行产生；本图不涉及合成数据。",
-        ha="center", fontsize=8, color="#555555",
+        5,
+        0.6,
+        "数据来源：outputs/memory/conv-30.json（llm_extraction, deepseek-flash, "
+        "memory-facts-v1）\n关系判定由 src/reasoning/relation_judge.judge_relations "
+        "实际运行产生；本图不涉及合成数据。",
+        ha="center",
+        fontsize=8,
+        color="#555555",
     )
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
