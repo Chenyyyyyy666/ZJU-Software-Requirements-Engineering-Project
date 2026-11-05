@@ -703,12 +703,20 @@ python -m src.memory.devbuild --data cache/public_locomo10.json --source-kind pu
 **许子萌（待本人核对并确认）：** Web 应用与可视化，包括页面和 HTTP 接口、记忆及来源展示、问答和状态关系视图；为最终报告提供 Web 章节、演示截图、总体架构图与本模块测试记录。新版前端目前包含本地未提交修改，最终交付版本和个人贡献应结合 Git / PR 记录确认。
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> eb692adc9c002d7c3850f55eb21edec8d231120e
 **于国庆：**负责动态状态解析模块
 
 - **代码**：`src/reasoning/` 下 `query_analyzer`、`relation_judge`、`memory_selector`、`answer_generator`、`pipeline` 五个文件；`src/common/models.py` 新增 `QueryAnalysisResult`、`MemoryRelation`、`AnswerRecord`。
 - **测试**：`tests/test_reasoning.py` 16 项单元测试，模型调用全部 mock；全量回归 75 passed。
 - **文档**：SRS 3.3–3.5 节、Proposal 技术方案、M4 报告 2.2 节、最终报告 2.2 / 2.3 / 5.3 / 5.4 / 6.2 / 6.4 / 7.3。
 - **实验**：`experiments/relation-samples.json` 32 条人工标注关系样例。
+<<<<<<< HEAD
 =======
 **鲁瑞特（B，模块供稿）：** 负责LoCoMo白名单读取与清洗、DeepSeek结构化记忆构建、来源与版本契约、缓存与JSON存储，以及BM25、MiniLM和RRF检索和证据交接；完成四开发集真实构建、缓存复验、质量问题记录和36组检索工程检查。本轮填写§2.1、§5.1、§5.2，补充摘要、设计、测试、局限及附录供稿，并整理可核对的运行证据。相关历史交付见PR #35、#36；最终报告本轮基于`c830cb5`。质量核查使用Codex辅助，未代填其他成员人工签字；对C的§5.3、§5.4及§7.3的正式交叉复核需在其最终正文和实验数据齐备后完成。
 >>>>>>> e5ea72bf03ce50c4483320b3d2540111cb2a87b9
+=======
+
+**鲁瑞特（B，模块供稿）：** 负责LoCoMo白名单读取与清洗、DeepSeek结构化记忆构建、来源与版本契约、缓存与JSON存储，以及BM25、MiniLM和RRF检索和证据交接；完成四开发集真实构建、缓存复验、质量问题记录和36组检索工程检查。本轮填写§2.1、§5.1、§5.2，补充摘要、设计、测试、局限及附录供稿，并整理可核对的运行证据。相关历史交付见PR #35、#36；最终报告本轮基于`c830cb5`。质量核查使用Codex辅助，未代填其他成员人工签字；对C的§5.3、§5.4及§7.3的正式交叉复核需在其最终正文和实验数据齐备后完成。
+>>>>>>> eb692adc9c002d7c3850f55eb21edec8d231120e
