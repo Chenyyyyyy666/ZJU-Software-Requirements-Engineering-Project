@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1152pt" height="590.4pt" viewBox="0 0 1152 590.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-04T14:16:27.845008</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 590.4
+L 1152 590.4
+L 1152 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 50.688 402.847632
+L 357.12 402.847632
+Q 370.2528 402.847632 370.2528 396.36504
+L 370.2528 126.25704
+Q 370.2528 119.774448 357.12 119.774448
+L 50.688 119.774448
+Q 37.5552 119.774448 37.5552 126.25704
+L 37.5552 396.36504
+Q 37.5552 402.847632 50.688 402.847632
+z
+" clip-path="url(#pae5e28535c)" style="fill: #f4f8fb; stroke: #bdccd7; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 422.784 402.847632
+L 729.216 402.847632
+Q 742.3488 402.847632 742.3488 396.36504
+L 742.3488 126.25704
+Q 742.3488 119.774448 729.216 119.774448
+L 422.784 119.774448
+Q 409.6512 119.774448 409.6512 126.25704
+L 409.6512 396.36504
+Q 409.6512 402.847632 422.784 402.847632
+z
+" clip-path="url(#pae5e28535c)" style="fill: #f4f8fb; stroke: #bdccd7; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 794.88 402.847632
+L 1101.312 402.847632
+Q 1114.4448 402.847632 1114.4448 396.36504
+L 1114.4448 126.25704
+Q 1114.4448 119.774448 1101.312 119.774448
+L 794.88 119.774448
+Q 781.7472 119.774448 781.7472 126.25704
+L 781.7472 396.36504
+Q 781.7472 402.847632 794.88 402.847632
+z
+" clip-path="url(#pae5e28535c)" style="fill: #f4f8fb; stroke: #bdccd7; stroke-width: 1.25; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 378.816694 204.58836
+Q 389.950932 204.58836 399.408119 204.58836
+" clip-path="url(#pae5e28535c)" style="fill: none; stroke: #8093a3; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 393.808119 201.78836
+L 399.408119 204.58836
+L 393.808119 207.38836
+z
+" clip-path="url(#pae5e28535c)" style="fill: #8093a3; stroke: #8093a3; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 750.912694 204.58836
+Q 762.046932 204.58836 771.504119 204.58836
+" clip-path="url(#pae5e28535c)" style="fill: none; stroke: #8093a3; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 765.904119 201.78836
+L 771.504119 204.58836
+L 765.904119 207.38836
+z
+" clip-path="url(#pae5e28535c)" style="fill: #8093a3; stroke: #8093a3; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d43" x="50.688" y="57.399511" transform="rotate(-0 50.688 57.399511)">Source-backed adoption timeline | conv-26</text>
+   </g>
+   <g id="text_2">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #526579" x="50.688" y="77.6376" transform="rotate(-0 50.688 77.6376)">Three extracted facts and their original evidence; no relation labels inferred</text>
+   </g>
+   <g id="text_3">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #2c647e" x="66.0096" y="156.627881" transform="rotate(-0 66.0096 156.627881)">1  |  2023-05-25</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; fill: #182d43" transform="translate(66.0096 191.590685)">Caroline is researching adoption</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; fill: #182d43" transform="translate(66.0096 211.890685)">agencies.</text>
+   </g>
+   <g id="text_5">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(66.0096 264.472331)">Attribute</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(66.0096 278.009128)">adoption_status</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d43" x="66.0096" y="315.587681" transform="rotate(-0 66.0096 315.587681)">Original source: D2:8</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(66.0096 340.063157)">Researching adoption agencies — it's been a</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(66.0096 353.698157)">dream to have a family and give a loving</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(66.0096 368.311594)">home to kids who need it.</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #526579" x="66.0096" y="416.709034" transform="rotate(-0 66.0096 416.709034)">Memory ID: m_5e5e0af5adefa105…</text>
+   </g>
+   <g id="text_9">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #2c647e" x="438.1056" y="156.627881" transform="rotate(-0 438.1056 156.627881)">2  |  2023-08-23</text>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; fill: #182d43" transform="translate(438.1056 191.590685)">Caroline applied to adoption</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; fill: #182d43" transform="translate(438.1056 211.890685)">agencies this week.</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(438.1056 264.472331)">Attribute</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(438.1056 278.009128)">adoption_status</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d43" x="438.1056" y="315.587681" transform="rotate(-0 438.1056 315.587681)">Original source: D13:1</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(438.1056 340.063157)">Hi Melanie! Hope you're doing good. Guess</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(438.1056 353.698157)">what I did this week? I took the first step</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(438.1056 367.333157)">towards becoming a mom - I applied to</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(438.1056 380.968157)">adoption agencies! It's a big decision, …</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #526579" x="438.1056" y="416.709034" transform="rotate(-0 438.1056 416.709034)">Memory ID: m_3bfa6e1817e405c8…</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #2c647e" x="810.2016" y="156.627881" transform="rotate(-0 810.2016 156.627881)">3  |  2023-10-22</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; fill: #182d43" transform="translate(810.2016 191.590685)">Caroline passed the adoption agency</text>
+    <text style="font-size: 14px; font-family: 'DejaVu Sans'; fill: #182d43" transform="translate(810.2016 211.890685)">interviews last Friday.</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(810.2016 264.472331)">Attribute</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(810.2016 278.009128)">adoption_interview_status</text>
+   </g>
+   <g id="text_18">
+    <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d43" x="810.2016" y="315.587681" transform="rotate(-0 810.2016 315.587681)">Original source: D19:1</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(810.2016 340.063157)">Woohoo Melanie! I passed the adoption</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(810.2016 353.698157)">agency interviews last Friday! I'm so</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(810.2016 367.333157)">excited and thankful. This is a big move</text>
+    <text style="font-size: 10.1px; font-family: 'DejaVu Sans'; fill: #526579" transform="translate(810.2016 380.968157)">towards my goal of having a family.</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #526579" x="810.2016" y="416.709034" transform="rotate(-0 810.2016 416.709034)">Memory ID: m_e2a1d71fd1c12d5b…</text>
+   </g>
+   <g id="text_21">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #182d43" x="576" y="453.08772" transform="rotate(-0 576 453.08772)">Arrows show later source order, not RETAIN / UPDATE / SUPERSEDE / CONFLICT.</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #526579" x="50.688" y="488.20176" transform="rotate(-0 50.688 488.20176)">Implementation limit: adoption_interview_status differs from adoption_status; exact attribute grouping may split this history.</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #526579" x="50.688" y="512.51148" transform="rotate(-0 50.688 512.51148)">Build: f52d278777f4a07ae1df4343…  |  Config: 6a02958d90c918c0  |  Generated: 2026-11-04</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #526579" x="50.688" y="536.8212" transform="rotate(-0 50.688 536.8212)">Source: supplied MemoryBundle and original SourceTurns. Full Memory IDs, evidence and limitations are saved in the companion JSON.</text>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pae5e28535c">
+   <rect x="28.8" y="23.616" width="1094.4" height="540.216"/>
+  </clipPath>
+ </defs>
+</svg>

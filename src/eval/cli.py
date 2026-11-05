@@ -9,7 +9,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
+from time import perf_counter
 from typing import Any
 
 from src.common.json_io import write_json
@@ -68,7 +70,8 @@ def _record_offline_answers(
                 "offline mode requires answer/prediction/generated_answer in every row; "
                 "use --memory for live model execution"
             )
-        records.append(
+        record = dict(question)
+        record.update(
             {
                 "question_id": _question_id(question, index),
                 "conversation_id": conversation,
@@ -82,6 +85,7 @@ def _record_offline_answers(
                 "token_usage": question.get("token_usage", question.get("tokens")),
             }
         )
+        records.append(record)
     return records
 
 
@@ -97,7 +101,8 @@ def _run_live(
 ) -> list[dict[str, Any]]:
     from src.index.bm25 import IndexConfig, build_index, search_memories
     from src.memory.store import load_memories
-    from src.reasoning.pipeline import answer
+    from src.reasoning.pipeline import answer_with_details
+    from src.reasoning.telemetry import capture_usage
 
     bundle = load_memories(memory_path)
     if bundle.conversation_id != conversation:
@@ -113,6 +118,7 @@ def _run_live(
     )
     records = []
     for index_number, question in enumerate(questions):
+        started = perf_counter()
         text = _question_text(question)
         request = RetrievalRequest(
             conversation_id=conversation,
@@ -123,8 +129,11 @@ def _run_live(
             entity=question.get("entity"),
             attribute=question.get("attribute"),
         )
-        retrieval = search_memories(index, request)
-        answer_record = answer(text, retrieval, question_id=_question_id(question, index_number))
+        with capture_usage() as stats:
+            retrieval = search_memories(index, request)
+            answer_record, analysis, relations = answer_with_details(
+                text, retrieval, question_id=_question_id(question, index_number)
+            )
         records.append(
             {
                 "question_id": answer_record.question_id,
@@ -138,6 +147,11 @@ def _run_live(
                 "gold_evidence": question.get("gold_evidence", question.get("evidence")),
                 "gold_relation": question.get("gold_relation", question.get("relation_gold")),
                 "retrieval": retrieval.model_dump(mode="json"),
+                "query_analysis": analysis.model_dump(mode="json"),
+                "relations": [relation.model_dump(mode="json") for relation in relations],
+                "token_usage": stats.to_dict(),
+                "elapsed_seconds": round(perf_counter() - started, 6),
+                "model": os.environ.get("DEEPSEEK_MODEL", "deepseek-flash"),
             }
         )
     return records

@@ -1,0 +1,2895 @@
+{
+  "scope": {
+    "selection": "dev: conv-26/30/41/42 first q-1..q-3; test: conv-43/44 first q-1..q-4, natural question_id order",
+    "method": "ours",
+    "total_questions": 20,
+    "source_bundle_dir": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory",
+    "answers_files": {
+      "dev": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/final/dev/ours/answers.json",
+      "test": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/final/test/ours/answers.json"
+    }
+  },
+  "rows": [
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-26",
+      "question_id": "q-1",
+      "question": "When did Caroline go to the LGBTQ support group?",
+      "answer": "Caroline went to the LGBTQ support group on 2023-05-07.",
+      "gold_answer": "7 May 2023",
+      "gold_evidence": [
+        "D1:3"
+      ],
+      "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+      "bundle_build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-26.json",
+      "valid_memory_ids": [
+        "m_a7c09332872fb584b554de63915457fd190673e5077c42aec93bdc7caba05a69",
+        "m_bc6ead74e29d41f6f34e7c0f7e8fe3de0df0da005491756c61745760541f7cf3",
+        "m_008a56f277c069fa17abaf32f719830826ab35de19802f40712e517a11164de6",
+        "m_c171c6a422b4f8c135be1973784512a31f415467b0da1b4a422bdb6f14997891",
+        "m_e720faf95e8a2bfcdc964f7a4e3a12b7655fa0541a2ce3b351b5c0494edaf2fa"
+      ],
+      "retrieved_memory_ids": [
+        "m_a7c09332872fb584b554de63915457fd190673e5077c42aec93bdc7caba05a69",
+        "m_bc6ead74e29d41f6f34e7c0f7e8fe3de0df0da005491756c61745760541f7cf3",
+        "m_008a56f277c069fa17abaf32f719830826ab35de19802f40712e517a11164de6",
+        "m_c171c6a422b4f8c135be1973784512a31f415467b0da1b4a422bdb6f14997891",
+        "m_e720faf95e8a2bfcdc964f7a4e3a12b7655fa0541a2ce3b351b5c0494edaf2fa"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_a7c09332872fb584b554de63915457fd190673e5077c42aec93bdc7caba05a69",
+          "content": "Caroline went to a LGBTQ support group yesterday.",
+          "entity": "Caroline",
+          "attribute": "lgbtq_support_group_attendance",
+          "sources": [
+            {
+              "source_key": "1:D1:3",
+              "found": true,
+              "speaker": "Caroline",
+              "session_time": "2023-05-08T13:56:00",
+              "text": "I went to a LGBTQ support group yesterday and it was so powerful."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_bc6ead74e29d41f6f34e7c0f7e8fe3de0df0da005491756c61745760541f7cf3",
+          "content": "Caroline joined a new LGBTQ activist group last Tuesday.",
+          "entity": "Caroline",
+          "attribute": "group_membership",
+          "sources": [
+            {
+              "source_key": "10:D10:3",
+              "found": true,
+              "speaker": "Caroline",
+              "session_time": "2023-07-20T20:56:00",
+              "text": "Hey Mel! A lot's happened since we last chatted - I just joined a new LGBTQ activist group last Tues. I'm meeting so many cool people who are as passionate as I am about rights and community support. I'm giving my voice and making a real difference, plus it's fulfilling in so many ways. It's just great, you know?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_008a56f277c069fa17abaf32f719830826ab35de19802f40712e517a11164de6",
+          "content": "Caroline's group is named 'Connected LGBTQ Activists'.",
+          "entity": "Caroline",
+          "attribute": "group_name",
+          "sources": [
+            {
+              "source_key": "10:D10:5",
+              "found": true,
+              "speaker": "Caroline",
+              "session_time": "2023-07-20T20:56:00",
+              "text": "Thanks, Melanie! It's awesome to have our own platform to be ourselves and support others' rights. Our group, 'Connected LGBTQ Activists', is made of all kinds of people investing in positive changes. We have regular meetings, plan events and campaigns, to get together and support each other."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_c171c6a422b4f8c135be1973784512a31f415467b0da1b4a422bdb6f14997891",
+          "content": "Caroline volunteers for the LGBTQ+ community.",
+          "entity": "Caroline",
+          "attribute": "volunteering",
+          "sources": [
+            {
+              "source_key": "16:D16:5",
+              "found": true,
+              "speaker": "Caroline",
+              "session_time": "2023-09-13T00:09:00",
+              "text": "I'm inspired seeing my work make a difference for the LGBTQ+ community. Knowing I'm helping create a more loving world is amazing. I'm really thankful for my friends, family and mentors' support. It inspires me to keep making art, too."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_e720faf95e8a2bfcdc964f7a4e3a12b7655fa0541a2ce3b351b5c0494edaf2fa",
+          "content": "Caroline went to an LGBTQ conference two days before the conversation.",
+          "entity": "Caroline",
+          "attribute": "event_attendance",
+          "sources": [
+            {
+              "source_key": "7:D7:1",
+              "found": true,
+              "speaker": "Caroline",
+              "session_time": "2023-07-12T16:33:00",
+              "text": "Hey Mel, great to chat with you again! So much has happened since we last spoke - I went to an LGBTQ conference two days ago and it was really special. I got the chance to meet and connect with people who've gone through similar journeys. It was such a welcoming environment and I felt totally accepted. I'm really thankful for this amazing community - it's shown me how important it is to fight for trans rights and spread awareness."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-26",
+      "question_id": "q-2",
+      "question": "When did Melanie paint a sunrise?",
+      "answer": "Melanie painted a lake sunrise in 2022 (as of the May 8, 2023 statement saying she painted it \"last year\").",
+      "gold_answer": 2022,
+      "gold_evidence": [
+        "D1:12"
+      ],
+      "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+      "bundle_build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-26.json",
+      "valid_memory_ids": [
+        "m_073d170e2561ba7feea2f91e082dd0d84e1895188cb303e324414eea7f4fc697",
+        "m_5bf60b2119f97c4f61f54cf3fe85215822708366792ca2e34ac179e6b5b78b4f",
+        "m_c943bcca5984f4366b931b62e92e5b0ac2adb6cb4cfa71dd8162d321779532f8",
+        "m_e76cafe825ab74397d7d12e766965a2c3211c820d297405d46821da631076a47",
+        "m_305349b2500a52387466e25ca148c7e505053c973ca5fc6baf78e30ccbf02d29"
+      ],
+      "retrieved_memory_ids": [
+        "m_073d170e2561ba7feea2f91e082dd0d84e1895188cb303e324414eea7f4fc697",
+        "m_5bf60b2119f97c4f61f54cf3fe85215822708366792ca2e34ac179e6b5b78b4f",
+        "m_c943bcca5984f4366b931b62e92e5b0ac2adb6cb4cfa71dd8162d321779532f8",
+        "m_e76cafe825ab74397d7d12e766965a2c3211c820d297405d46821da631076a47",
+        "m_305349b2500a52387466e25ca148c7e505053c973ca5fc6baf78e30ccbf02d29"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_073d170e2561ba7feea2f91e082dd0d84e1895188cb303e324414eea7f4fc697",
+          "content": "Melanie painted a lake sunrise last year.",
+          "entity": "Melanie",
+          "attribute": "painting_subject",
+          "sources": [
+            {
+              "source_key": "1:D1:14",
+              "found": true,
+              "speaker": "Melanie",
+              "session_time": "2023-05-08T13:56:00",
+              "text": "Yeah, I painted that lake sunrise last year! It's special to me."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_5bf60b2119f97c4f61f54cf3fe85215822708366792ca2e34ac179e6b5b78b4f",
+          "content": "Melanie painted a sunset-inspired painting last week.",
+          "entity": "Melanie",
+          "attribute": "artwork",
+          "sources": [
+            {
+              "source_key": "17:D17:12",
+              "found": true,
+              "speaker": "Melanie",
+              "session_time": "2023-10-13T10:31:00",
+              "text": "Yeah, Here's one I did last week. It's inspired by the sunsets. The colors make me feel calm. What have you been up to lately, artistically?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_c943bcca5984f4366b931b62e92e5b0ac2adb6cb4cfa71dd8162d321779532f8",
+          "content": "Melanie painted a horse painting recently.",
+          "entity": "Melanie",
+          "attribute": "artwork",
+          "sources": [
+            {
+              "source_key": "13:D13:8",
+              "found": true,
+              "speaker": "Melanie",
+              "session_time": "2023-08-23T15:31:00",
+              "text": "Wow, that sounds great - I agree, they're awesome. Here's a photo of my horse painting I did recently."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_e76cafe825ab74397d7d12e766965a2c3211c820d297405d46821da631076a47",
+          "content": "Melanie is planning a few paintings inspired by autumn.",
+          "entity": "Melanie",
+          "attribute": "art_project",
+          "sources": [
+            {
+              "source_key": "14:D14:32",
+              "found": true,
+              "speaker": "Melanie",
+              "session_time": "2023-08-25T13:33:00",
+              "text": "I'm feeling inspired by autumn so I'm planning a few. You got any cool art projects coming up?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_305349b2500a52387466e25ca148c7e505053c973ca5fc6baf78e30ccbf02d29",
+          "content": "Melanie made a plate in pottery class yesterday.",
+          "entity": "Melanie",
+          "attribute": "pottery_activity",
+          "sources": [
+            {
+              "source_key": "14:D14:4",
+              "found": true,
+              "speaker": "Melanie",
+              "session_time": "2023-08-25T13:33:00",
+              "text": "Yeah, I made it in pottery class yesterday. I love it! Pottery's so relaxing and creative. Have you tried it yet?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-26",
+      "question_id": "q-3",
+      "question": "What fields would Caroline be likely to pursue in her educaton?",
+      "answer": "Caroline would likely pursue counseling or mental health in her education.",
+      "gold_answer": "Psychology, counseling certification",
+      "gold_evidence": [
+        "D1:9",
+        "D1:11"
+      ],
+      "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+      "bundle_build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-26.json",
+      "valid_memory_ids": [
+        "m_15ba9e05ec108ca00d00f74e1aa1df0fa71fb56dd381eddd722cea9327c23be2",
+        "m_31df328936190a19841568e9b6cf4024466070985791e30b02b224322a057d7b",
+        "m_25b1eb999572847ed5cde310b20f3e0bf6f7e2fa0c9612d41311d61aee34ebb4",
+        "m_acc05d3bd4d08986bba84294c3f5cfa6aa7dcd1dc3d2223ba75ef8b60d575b01",
+        "m_dce9525ef76cbfa3319a06c5939bed9988272f325b195e6cee76a5909092cf12"
+      ],
+      "retrieved_memory_ids": [
+        "m_15ba9e05ec108ca00d00f74e1aa1df0fa71fb56dd381eddd722cea9327c23be2",
+        "m_31df328936190a19841568e9b6cf4024466070985791e30b02b224322a057d7b",
+        "m_25b1eb999572847ed5cde310b20f3e0bf6f7e2fa0c9612d41311d61aee34ebb4",
+        "m_acc05d3bd4d08986bba84294c3f5cfa6aa7dcd1dc3d2223ba75ef8b60d575b01",
+        "m_dce9525ef76cbfa3319a06c5939bed9988272f325b195e6cee76a5909092cf12"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_15ba9e05ec108ca00d00f74e1aa1df0fa71fb56dd381eddd722cea9327c23be2",
+          "content": "Caroline's own journey and the support she received motivated her to pursue counseling.",
+          "entity": "Caroline",
+          "attribute": "motivation_for_counseling",
+          "sources": [
+            {
+              "source_key": "4:D4:15",
+              "found": true,
+              "speaker": "Caroline",
+              "session_time": "2023-06-27T10:37:00",
+              "text": "Thanks, Melanie. It really mattered. My own journey and the support I got made a huge difference. Now I want to help people go through it too. I saw how counseling and support groups improved my life, so I started caring more about mental health and understanding myself. Now I'm passionate about creating a safe, inviting place for people to grow."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_31df328936190a19841568e9b6cf4024466070985791e30b02b224322a057d7b",
+          "content": "Caroline is interested in counseling or working in mental health.",
+          "entity": "Caroline",
+          "attribute": "career_interest",
+          "sources": [
+            {
+              "source_key": "1:D1:11",
+              "found": true,
+              "speaker": "Caroline",
+              "session_time": "2023-05-08T13:56:00",
+              "text": "I'm keen on counseling or working in mental health - I'd love to support those with similar issues."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_25b1eb999572847ed5cde310b20f3e0bf6f7e2fa0c9612d41311d61aee34ebb4",
+          "content": "Caroline wants to use her story to help others.",
+          "entity": "Caroline",
+          "attribute": "aspiration",
+          "sources": [
+            {
+              "source_key": "5:D5:3",
+              "found": true,
+              "speaker": "Caroline",
+              "session_time": "2023-07-03T13:36:00",
+              "text": "Thanks, Mel! It really motivated me for sure. Talking to the community made me want to use my story to help others too - I'm still thinking that counseling and mental health is the way to go. I'm super excited to give back."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_acc05d3bd4d08986bba84294c3f5cfa6aa7dcd1dc3d2223ba75ef8b60d575b01",
+          "content": "Caroline plans to continue her education and check out career options.",
+          "entity": "Caroline",
+          "attribute": "education_plan",
+          "sources": [
+            {
+              "source_key": "1:D1:9",
+              "found": true,
+              "speaker": "Caroline",
+              "session_time": "2023-05-08T13:56:00",
+              "text": "Gonna continue my edu and check out career options, which is pretty exciting!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_dce9525ef76cbfa3319a06c5939bed9988272f325b195e6cee76a5909092cf12",
+          "content": "Caroline finds it helpful to have people around her who accept and support her.",
+          "entity": "Caroline",
+          "attribute": "support_system",
+          "sources": [
+            {
+              "source_key": "12:D12:1",
+              "found": true,
+              "speaker": "Caroline",
+              "session_time": "2023-08-17T13:50:00",
+              "text": "Hey Mel! How're ya doin'? Recently, I had a not-so-great experience on a hike. I ran into a group of religious conservatives who said something that really upset me. It made me think how much work we still have to do for LGBTQ rights. It's been so helpful to have people around me who accept and support me, so I know I'll be ok!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-30",
+      "question_id": "q-1",
+      "question": "When Jon has lost his job as a banker?",
+      "answer": "Jon lost his job as a banker on 2023-01-19, though conflicting information suggests he may have left his secure 9-5 job as a banker at an unknown time.",
+      "gold_answer": "19 January, 2023",
+      "gold_evidence": [
+        "D1:2"
+      ],
+      "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+      "bundle_build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-30.json",
+      "valid_memory_ids": [
+        "m_aaacfb329822147235c2a83be9c712f101be790d82654b0c149b3bfab3db0d08",
+        "m_f1ea524e95473efad8d6b10d216cde955f88f2b574ba2e83b43a2520f65ccc28",
+        "m_7a7bd30a1b21137903bacb2d8f3e5f059217b6bc526ada33c681d08095e54e64",
+        "m_26863426f1ac275c7b4a7193f0f189c97a257d40cc18cbb2b315a9c8839544ac",
+        "m_81dce44a61b4b530ac07c2871fa0e85269e78d8550a1e62f02f030a773e2298e"
+      ],
+      "retrieved_memory_ids": [
+        "m_aaacfb329822147235c2a83be9c712f101be790d82654b0c149b3bfab3db0d08",
+        "m_f1ea524e95473efad8d6b10d216cde955f88f2b574ba2e83b43a2520f65ccc28",
+        "m_7a7bd30a1b21137903bacb2d8f3e5f059217b6bc526ada33c681d08095e54e64",
+        "m_26863426f1ac275c7b4a7193f0f189c97a257d40cc18cbb2b315a9c8839544ac",
+        "m_81dce44a61b4b530ac07c2871fa0e85269e78d8550a1e62f02f030a773e2298e"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_aaacfb329822147235c2a83be9c712f101be790d82654b0c149b3bfab3db0d08",
+          "content": "Jon lost his job as a banker yesterday.",
+          "entity": "Jon",
+          "attribute": "employment_status",
+          "sources": [
+            {
+              "source_key": "1:D1:2",
+              "found": true,
+              "speaker": "Jon",
+              "session_time": "2023-01-20T16:04:00",
+              "text": "Hey Gina! Good to see you too. Lost my job as a banker yesterday, so I'm gonna take a shot at starting my own business."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_f1ea524e95473efad8d6b10d216cde955f88f2b574ba2e83b43a2520f65ccc28",
+          "content": "Jon left his secure 9-5 job as a banker.",
+          "entity": "Jon",
+          "attribute": "employment_status",
+          "sources": [
+            {
+              "source_key": "5:D5:10",
+              "found": true,
+              "speaker": "Jon",
+              "session_time": "2023-02-08T09:32:00",
+              "text": "Yeah, I totally agree - taking risks is key for success. It's made me grow, and even got me out of my secure 9-5 as a banker. Now, I'm aiming to turn my dancing passion into a business. I'm determined to make it work, I just know it! That being said, I definitely don't underestimate the difficulties - it ain't been a walk in the park, that's for sure."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_7a7bd30a1b21137903bacb2d8f3e5f059217b6bc526ada33c681d08095e54e64",
+          "content": "Jon lost his job.",
+          "entity": "Jon",
+          "attribute": "employment_status",
+          "sources": [
+            {
+              "source_key": "9:D9:3",
+              "found": true,
+              "speaker": "Jon",
+              "session_time": "2023-04-09T10:33:00",
+              "text": "Thanks, Gina! I'm determined to make this studio work. Losing my job was tough but it gave me the push I needed to do what I love."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_26863426f1ac275c7b4a7193f0f189c97a257d40cc18cbb2b315a9c8839544ac",
+          "content": "Jon lost his job.",
+          "entity": "Jon",
+          "attribute": "employment_status",
+          "sources": [
+            {
+              "source_key": "16:D16:8",
+              "found": true,
+              "speaker": "Jon",
+              "session_time": "2023-06-21T14:15:00",
+              "text": "Thanks! It's been tough going since I lost my job, but I'm sure investing my time in my business will pay off eventually. I really appreciate your help."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_81dce44a61b4b530ac07c2871fa0e85269e78d8550a1e62f02f030a773e2298e",
+          "content": "Jon lost his job.",
+          "entity": "Jon",
+          "attribute": "employment_status",
+          "sources": [
+            {
+              "source_key": "6:D6:11",
+              "found": true,
+              "speaker": "Jon",
+              "session_time": "2023-03-16T14:35:00",
+              "text": "Thanks for askin', Gina! Losing my job was hard, but I'm livin' my dreams now. Startin' my biz has been tough but I'm gonna make it! I keep facing new challenges, but I'm sure it'll be worth it in the end."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-30",
+      "question_id": "q-2",
+      "question": "When Gina has lost her job at Door Dash?",
+      "answer": "Gina lost her job at Door Dash in January 2023 (as stated on 2023-01-20) or by March 16, 2023 (as stated on that date).",
+      "gold_answer": "January, 2023",
+      "gold_evidence": [
+        "D1:3"
+      ],
+      "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+      "bundle_build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-30.json",
+      "valid_memory_ids": [
+        "m_9b7329a39df3e1f117b17846b3bb52b010cbdce6a368439e11002318a2b1c93e",
+        "m_a4cc999564b3e98dd67841cebd2cb0595f8c952b7c6eefc3bf1e950d9c98d3d4",
+        "m_0c7f8044b5784ad51678f22e343ea634538e2fdf91d3e7d579040d26402980ef",
+        "m_a87455c0c56e2769d94c080db2c3420689075c0544c4f367fdf3d45d7cf2c75e",
+        "m_df50b42893fba6b50b7b71e5bce79bcd2329e49a5dd684431a17f5ba732e7db1"
+      ],
+      "retrieved_memory_ids": [
+        "m_9b7329a39df3e1f117b17846b3bb52b010cbdce6a368439e11002318a2b1c93e",
+        "m_a4cc999564b3e98dd67841cebd2cb0595f8c952b7c6eefc3bf1e950d9c98d3d4",
+        "m_0c7f8044b5784ad51678f22e343ea634538e2fdf91d3e7d579040d26402980ef",
+        "m_a87455c0c56e2769d94c080db2c3420689075c0544c4f367fdf3d45d7cf2c75e",
+        "m_df50b42893fba6b50b7b71e5bce79bcd2329e49a5dd684431a17f5ba732e7db1"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_9b7329a39df3e1f117b17846b3bb52b010cbdce6a368439e11002318a2b1c93e",
+          "content": "Gina lost her job at Door Dash.",
+          "entity": "Gina",
+          "attribute": "employment_status",
+          "sources": [
+            {
+              "source_key": "6:D6:4",
+              "found": true,
+              "speaker": "Gina",
+              "session_time": "2023-03-16T14:35:00",
+              "text": "Thanks, Jon! Appreciate your offer. Since I lost my job at Door Dash, things have been tough. But here's some good news - I've got something to share!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_a4cc999564b3e98dd67841cebd2cb0595f8c952b7c6eefc3bf1e950d9c98d3d4",
+          "content": "Gina lost her job at Door Dash this month.",
+          "entity": "Gina",
+          "attribute": "employment_status",
+          "sources": [
+            {
+              "source_key": "1:D1:3",
+              "found": true,
+              "speaker": "Gina",
+              "session_time": "2023-01-20T16:04:00",
+              "text": "Sorry about your job Jon, but starting your own business sounds awesome! Unfortunately, I also lost my job at Door Dash this month. What business are you thinking of?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_0c7f8044b5784ad51678f22e343ea634538e2fdf91d3e7d579040d26402980ef",
+          "content": "Gina lost her job.",
+          "entity": "Gina",
+          "attribute": "employment_status",
+          "sources": [
+            {
+              "source_key": "10:D10:4",
+              "found": true,
+              "speaker": "Gina",
+              "session_time": "2023-04-25T11:24:00",
+              "text": "Thanks, Jon! After losing my job, I wanted to take control of my own destiny and this seemed like the perfect way to do it. It's been a tough journey, but very rewarding."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_a87455c0c56e2769d94c080db2c3420689075c0544c4f367fdf3d45d7cf2c75e",
+          "content": "Gina became an entrepreneur after losing her job.",
+          "entity": "Gina",
+          "attribute": "employment_status",
+          "sources": [
+            {
+              "source_key": "14:D14:8",
+              "found": true,
+              "speaker": "Gina",
+              "session_time": "2023-06-16T21:38:00",
+              "text": "Ha, yeah, Jon. I've been one 'cause I lost my job. I opened an online clothing store and it's been great! Being my own boss and doing something I love is awesome."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_df50b42893fba6b50b7b71e5bce79bcd2329e49a5dd684431a17f5ba732e7db1",
+          "content": "Gina has a store.",
+          "entity": "Gina",
+          "attribute": "store_ownership",
+          "sources": [
+            {
+              "source_key": "8:D8:21",
+              "found": true,
+              "speaker": "Jon",
+              "session_time": "2023-04-03T13:26:00",
+              "text": "Gina, good luck with your store!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-30",
+      "question_id": "q-3",
+      "question": "How do Jon and Gina both like to destress?",
+      "answer": "The memories do not indicate how Jon and Gina both like to destress.",
+      "gold_answer": "by dancing",
+      "gold_evidence": [
+        "D1:7",
+        "D1:6"
+      ],
+      "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+      "bundle_build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-30.json",
+      "valid_memory_ids": [
+        "m_d4c081bd26fdc8c1b59eab54dfc4204e7fdf9f79a72b053a0b7e10ee88e19967",
+        "m_d7fbe4672ee0ced8b063edeaecadd239b5bf722f9566263a6960686b3defd21c",
+        "m_37b2d082bea01c302175905304241ec109c33334360c2461d87f4c19f1879c81",
+        "m_be83a4359bc8a4442b73035c757bd1c54677113d8dd0b7374682258b439f3f35",
+        "m_12d6aaa6de8bbdfa12c020c37b31b998b016302fdc8b91a9a7cb389df6c4c751"
+      ],
+      "retrieved_memory_ids": [
+        "m_d4c081bd26fdc8c1b59eab54dfc4204e7fdf9f79a72b053a0b7e10ee88e19967",
+        "m_d7fbe4672ee0ced8b063edeaecadd239b5bf722f9566263a6960686b3defd21c",
+        "m_37b2d082bea01c302175905304241ec109c33334360c2461d87f4c19f1879c81",
+        "m_be83a4359bc8a4442b73035c757bd1c54677113d8dd0b7374682258b439f3f35",
+        "m_12d6aaa6de8bbdfa12c020c37b31b998b016302fdc8b91a9a7cb389df6c4c751"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_d4c081bd26fdc8c1b59eab54dfc4204e7fdf9f79a72b053a0b7e10ee88e19967",
+          "content": "Gina plans to see Jon tomorrow and says goodbye.",
+          "entity": "Gina",
+          "attribute": "planned_meeting",
+          "sources": [
+            {
+              "source_key": "15:D15:22",
+              "found": true,
+              "speaker": "Gina",
+              "session_time": "2023-06-19T10:04:00",
+              "text": "See you tomorrow. Bye!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_d7fbe4672ee0ced8b063edeaecadd239b5bf722f9566263a6960686b3defd21c",
+          "content": "Jon plans to meet Gina tomorrow and says goodbye.",
+          "entity": "Jon",
+          "attribute": "planned_meeting",
+          "sources": [
+            {
+              "source_key": "15:D15:21",
+              "found": true,
+              "speaker": "Jon",
+              "session_time": "2023-06-19T10:04:00",
+              "text": "Definitely! Let's make tomorrow unforgettable, Gina. See you there! Bye!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_37b2d082bea01c302175905304241ec109c33334360c2461d87f4c19f1879c81",
+          "content": "Gina wants customers to feel like they're in a cool oasis and want to come back.",
+          "entity": "Gina",
+          "attribute": "customer_experience_goal",
+          "sources": [
+            {
+              "source_key": "3:D3:8",
+              "found": true,
+              "speaker": "Gina",
+              "session_time": "2023-02-01T00:48:00",
+              "text": "Thanks! Making my spot comfortable and inviting for my customers is key. I want 'em to feel like they're in a cool oasis. Just creating an experience that'll make 'em wanna come back."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_be83a4359bc8a4442b73035c757bd1c54677113d8dd0b7374682258b439f3f35",
+          "content": "Gina encouraged Jon to keep going for his dreams and not quit.",
+          "entity": "Gina",
+          "attribute": "encouragement",
+          "sources": [
+            {
+              "source_key": "13:D13:22",
+              "found": true,
+              "speaker": "Gina",
+              "session_time": "2023-06-13T20:29:00",
+              "text": "Thanks! Keep going for your dreams and don't quit!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_12d6aaa6de8bbdfa12c020c37b31b998b016302fdc8b91a9a7cb389df6c4c751",
+          "content": "Gina wanted to blend her love for dance and fashion.",
+          "entity": "Gina",
+          "attribute": "interest",
+          "sources": [
+            {
+              "source_key": "6:D6:8",
+              "found": true,
+              "speaker": "Gina",
+              "session_time": "2023-03-16T14:35:00",
+              "text": "Thanks! I'm passionate about fashion trends and finding unique pieces. Plus, I wanted to blend my love for dance and fashion, so it was a perfect match."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-41",
+      "question_id": "q-1",
+      "question": "Who did Maria have dinner with on May 3, 2023?",
+      "answer": "Maria had dinner with her mom on May 3, 2023.",
+      "gold_answer": "her mother",
+      "gold_evidence": [
+        "D13:16"
+      ],
+      "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+      "bundle_build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-41.json",
+      "valid_memory_ids": [
+        "m_1a32cf2a0f64d862880f868f93bfd52ff7b0bcceeef585dcd9f1ce7c5e2bf41e",
+        "m_6b72e3fef3dbc6b8abcace84edd0df338c7d9e204aa0122f4a0c4f8dd993171b",
+        "m_3cf7392b8b01a19b5af9e10d841eb7f9c767e93ee8ef9d67e4870495c91fddc3",
+        "m_114332a3bf1e5c306b80153d0f5b7976fb3475baa49c4408ef8de94c53740b6a",
+        "m_41cdf27f8e37531275880c504fc9754c0185c08f57607d01f9fafc9d3bb1784f"
+      ],
+      "retrieved_memory_ids": [
+        "m_1a32cf2a0f64d862880f868f93bfd52ff7b0bcceeef585dcd9f1ce7c5e2bf41e",
+        "m_6b72e3fef3dbc6b8abcace84edd0df338c7d9e204aa0122f4a0c4f8dd993171b",
+        "m_3cf7392b8b01a19b5af9e10d841eb7f9c767e93ee8ef9d67e4870495c91fddc3",
+        "m_114332a3bf1e5c306b80153d0f5b7976fb3475baa49c4408ef8de94c53740b6a",
+        "m_41cdf27f8e37531275880c504fc9754c0185c08f57607d01f9fafc9d3bb1784f"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_1a32cf2a0f64d862880f868f93bfd52ff7b0bcceeef585dcd9f1ce7c5e2bf41e",
+          "content": "Maria is going to have dinner with friends from the gym.",
+          "entity": "Maria",
+          "attribute": "planned_activity",
+          "sources": [
+            {
+              "source_key": "23:D23:14",
+              "found": true,
+              "speaker": "Maria",
+              "session_time": "2023-07-07T18:29:00",
+              "text": "For sure! We can keep doing great stuff and making a difference. Well, I'm off to have dinner with some friends from the gym. Talk to you later!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_6b72e3fef3dbc6b8abcace84edd0df338c7d9e204aa0122f4a0c4f8dd993171b",
+          "content": "Maria and her mom made dinner together last night.",
+          "entity": "Maria",
+          "attribute": "recent_activity",
+          "sources": [
+            {
+              "source_key": "13:D13:16",
+              "found": true,
+              "speaker": "Maria",
+              "session_time": "2023-05-04T15:18:00",
+              "text": "Wow, John! It's great when you have that kind of support. My mom and I made some dinner together last night!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_3cf7392b8b01a19b5af9e10d841eb7f9c767e93ee8ef9d67e4870495c91fddc3",
+          "content": "Maria had a picnic with friends from church last weekend.",
+          "entity": "Maria",
+          "attribute": "recent_activity",
+          "sources": [
+            {
+              "source_key": "24:D24:6",
+              "found": true,
+              "speaker": "Maria",
+              "session_time": "2023-07-17T15:34:00",
+              "text": "Yeah, last weekend I had a picnic with some friends from church. We chilled under the trees, played games, and ate yummy food. It was great!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_114332a3bf1e5c306b80153d0f5b7976fb3475baa49c4408ef8de94c53740b6a",
+          "content": "Maria is now friends with one of her fellow volunteers.",
+          "entity": "Maria",
+          "attribute": "friendship_status",
+          "sources": [
+            {
+              "source_key": "4:D4:1",
+              "found": true,
+              "speaker": "Maria",
+              "session_time": "2023-01-09T19:06:00",
+              "text": "Hey John, great news - I'm now friends with one of my fellow volunteers! We both love helping others. How have you been since we last chatted?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_41cdf27f8e37531275880c504fc9754c0185c08f57607d01f9fafc9d3bb1784f",
+          "content": "Maria had a conversation with David at the charity event.",
+          "entity": "Maria",
+          "attribute": "interaction",
+          "sources": [
+            {
+              "source_key": "6:D6:5",
+              "found": true,
+              "speaker": "Maria",
+              "session_time": "2023-02-05T14:33:00",
+              "text": "Yeah, at the event, I had a conversation with someone named David. Hearing his story of hardship and how he ended up in difficult circumstances was so humbling. It just showed me that everyone has their own story and deserves understanding."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-41",
+      "question_id": "q-2",
+      "question": "When did Maria donate her car?",
+      "answer": "Maria donated her old car to a homeless shelter on 2022-12-21.",
+      "gold_answer": "21 December 2022",
+      "gold_evidence": [
+        "D2:1"
+      ],
+      "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+      "bundle_build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-41.json",
+      "valid_memory_ids": [
+        "m_d083a82ec0a9de7a7d23610754c793af0ae93024cc1fca710478e23d5766d9b0",
+        "m_7b628c0a2c831ac542539d85877d393182741ff0257fc3ea14cdd400501bf874",
+        "m_114332a3bf1e5c306b80153d0f5b7976fb3475baa49c4408ef8de94c53740b6a",
+        "m_0f6ada0e9139f391ad57f32947bf48c6a34e470c9ba3a38b5c2a35924dd79e7d",
+        "m_9b7a7ea1831ad646f7e7d440313a2f87cd7a6f509cd4177be8e02c48671edc82"
+      ],
+      "retrieved_memory_ids": [
+        "m_d083a82ec0a9de7a7d23610754c793af0ae93024cc1fca710478e23d5766d9b0",
+        "m_7b628c0a2c831ac542539d85877d393182741ff0257fc3ea14cdd400501bf874",
+        "m_114332a3bf1e5c306b80153d0f5b7976fb3475baa49c4408ef8de94c53740b6a",
+        "m_0f6ada0e9139f391ad57f32947bf48c6a34e470c9ba3a38b5c2a35924dd79e7d",
+        "m_9b7a7ea1831ad646f7e7d440313a2f87cd7a6f509cd4177be8e02c48671edc82"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_d083a82ec0a9de7a7d23610754c793af0ae93024cc1fca710478e23d5766d9b0",
+          "content": "Maria donated her old car to a homeless shelter yesterday.",
+          "entity": "Maria",
+          "attribute": "car_donation",
+          "sources": [
+            {
+              "source_key": "2:D2:1",
+              "found": true,
+              "speaker": "Maria",
+              "session_time": "2022-12-22T18:10:00",
+              "text": "Hey John, been a few days since we chatted. In the meantime, I donated my old car to a homeless shelter I volunteer at yesterday. How's the campaign going? I'm keen to hearabout it."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_7b628c0a2c831ac542539d85877d393182741ff0257fc3ea14cdd400501bf874",
+          "content": "Maria challenged herself last Friday and did a charity event.",
+          "entity": "Maria",
+          "attribute": "charity_event_participation",
+          "sources": [
+            {
+              "source_key": "6:D6:1",
+              "found": true,
+              "speaker": "Maria",
+              "session_time": "2023-02-05T14:33:00",
+              "text": "Hey John! Long time no talk. I just wanted to let you know I challenged myself last Friday and did a charity event. It was great! I truly felt the power of our collective effort to help people in need, so heartwarming."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_114332a3bf1e5c306b80153d0f5b7976fb3475baa49c4408ef8de94c53740b6a",
+          "content": "Maria is now friends with one of her fellow volunteers.",
+          "entity": "Maria",
+          "attribute": "friendship_status",
+          "sources": [
+            {
+              "source_key": "4:D4:1",
+              "found": true,
+              "speaker": "Maria",
+              "session_time": "2023-01-09T19:06:00",
+              "text": "Hey John, great news - I'm now friends with one of my fellow volunteers! We both love helping others. How have you been since we last chatted?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_0f6ada0e9139f391ad57f32947bf48c6a34e470c9ba3a38b5c2a35924dd79e7d",
+          "content": "When Maria was younger, her family had money problems and relied on outside help from their auntie.",
+          "entity": "Maria",
+          "attribute": "childhood_financial_situation",
+          "sources": [
+            {
+              "source_key": "6:D6:9",
+              "found": true,
+              "speaker": "Maria",
+              "session_time": "2023-02-05T14:33:00",
+              "text": "Thanks, John. When I was younger, we had some money problems and had to rely on outside help from out auntie. It was a tough learning experience about the importance of helping others who struggle."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_9b7a7ea1831ad646f7e7d440313a2f87cd7a6f509cd4177be8e02c48671edc82",
+          "content": "Maria got the idea for her decoration from a trip to England a few years ago.",
+          "entity": "Maria",
+          "attribute": "travel_history",
+          "sources": [
+            {
+              "source_key": "8:D8:15",
+              "found": true,
+              "speaker": "Maria",
+              "session_time": "2023-03-06T18:03:00",
+              "text": "Thanks, John! I got the idea from that trip to England a few years ago - I was mesmerized by the castles. I wanted to bring that same magic to my home, like a reminder of the world's beauty. I made a painting too!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-41",
+      "question_id": "q-3",
+      "question": "What martial arts has John done?",
+      "answer": "John has done weight training, but the memories do not mention any martial arts.",
+      "gold_answer": "Kickboxing, Taekwondo",
+      "gold_evidence": [
+        "D2:28",
+        "D1:4"
+      ],
+      "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+      "bundle_build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-41.json",
+      "valid_memory_ids": [
+        "m_e795f03391e0487a2256f0a9f0393257116b30a83b67d8a7ebca8acab37bb8dc",
+        "m_bb82f245d71bb26ac7514ff2ceb666856646ba157752bb0f792ae439e075e313",
+        "m_2b3b8892f525b2dfcb94ca0af88398a0515a2a984092cbeaf58b037ebe3f65c0",
+        "m_7d56ace7253013cd827cc89efbe52c5370860b5282220362cd570752bba46de3",
+        "m_7646822cdd34e94d70a4efd9807fc500242789106a96746887c3e97ed8ac90af"
+      ],
+      "retrieved_memory_ids": [
+        "m_e795f03391e0487a2256f0a9f0393257116b30a83b67d8a7ebca8acab37bb8dc",
+        "m_bb82f245d71bb26ac7514ff2ceb666856646ba157752bb0f792ae439e075e313",
+        "m_2b3b8892f525b2dfcb94ca0af88398a0515a2a984092cbeaf58b037ebe3f65c0",
+        "m_7d56ace7253013cd827cc89efbe52c5370860b5282220362cd570752bba46de3",
+        "m_7646822cdd34e94d70a4efd9807fc500242789106a96746887c3e97ed8ac90af"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_e795f03391e0487a2256f0a9f0393257116b30a83b67d8a7ebca8acab37bb8dc",
+          "content": "John has done weight training.",
+          "entity": "John",
+          "attribute": "exercise_experience",
+          "sources": [
+            {
+              "source_key": "25:D25:17",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-07-22T18:21:00",
+              "text": "I've done weight training so far too. It was challenging but peaceful, kinda like yoga."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_bb82f245d71bb26ac7514ff2ceb666856646ba157752bb0f792ae439e075e313",
+          "content": "John has been experiencing tough times lately.",
+          "entity": "John",
+          "attribute": "emotional_state",
+          "sources": [
+            {
+              "source_key": "30:D30:12",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-08-11T00:10:00",
+              "text": "Thanks, Maria! I'm glad my photos can capture that feeling. They help me take a step back and appreciate the little things in life - especially these days. There've been some tough times lately for me."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_2b3b8892f525b2dfcb94ca0af88398a0515a2a984092cbeaf58b037ebe3f65c0",
+          "content": "John has been feeling a bit stressed out.",
+          "entity": "John",
+          "attribute": "emotional_state",
+          "sources": [
+            {
+              "source_key": "3:D3:11",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-01-01T20:30:00",
+              "text": "Thanks, Maria! I really appreciate your support, It means a lot to me. Especially after I failed the military aptitude test recently, I've been feeling a bit stressed out."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_7d56ace7253013cd827cc89efbe52c5370860b5282220362cd570752bba46de3",
+          "content": "John has always had great respect for the military and wanted to show support.",
+          "entity": "John",
+          "attribute": "attitude_toward_military",
+          "sources": [
+            {
+              "source_key": "21:D21:24",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-07-03T20:43:00",
+              "text": "I've always had a great respect for our military and wanted to show my support. I think it's important to stand up for what we believe in."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_7646822cdd34e94d70a4efd9807fc500242789106a96746887c3e97ed8ac90af",
+          "content": "John has been networking with people to get their input.",
+          "entity": "John",
+          "attribute": "networking_activity",
+          "sources": [
+            {
+              "source_key": "2:D2:2",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2022-12-22T18:10:00",
+              "text": "Hi Maria! It's been an interesting ride so far. I've been networking with some people to get their input."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-42",
+      "question_id": "q-1",
+      "question": "Is it likely that Nate has friends besides Joanna?",
+      "answer": "Yes, it is likely that Nate has friends besides Joanna, since he planned to invite tournament friends, old friends, and teammates from other tournaments to a party and made friends at a convention who love games like him.",
+      "gold_answer": "Yesteammates on hisvideo game team.",
+      "gold_evidence": [
+        "D1:7"
+      ],
+      "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+      "bundle_build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-42.json",
+      "valid_memory_ids": [
+        "m_edb7865a9d8104a904d6f74e16ba09ee0bedff8fe2e8d128c8df92666c891dbd",
+        "m_f0eb4fff5217480742c63285f7d8b9f93b70521ad3820ec081445483ac77561f",
+        "m_0b0549c684caa2d878b4cb19aa048926ffe3e7c54dcc65c71f51c013d6d2f9b5",
+        "m_ead8ee3e050f1c7810385bfeb545ed36592abfda4c6faabaf7ed7d68681a86e2",
+        "m_58f9e33ab5b50a27082da780999833f470c26c8a7d1b997e508a0bb5bad820ce"
+      ],
+      "retrieved_memory_ids": [
+        "m_edb7865a9d8104a904d6f74e16ba09ee0bedff8fe2e8d128c8df92666c891dbd",
+        "m_f0eb4fff5217480742c63285f7d8b9f93b70521ad3820ec081445483ac77561f",
+        "m_0b0549c684caa2d878b4cb19aa048926ffe3e7c54dcc65c71f51c013d6d2f9b5",
+        "m_ead8ee3e050f1c7810385bfeb545ed36592abfda4c6faabaf7ed7d68681a86e2",
+        "m_58f9e33ab5b50a27082da780999833f470c26c8a7d1b997e508a0bb5bad820ce"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_edb7865a9d8104a904d6f74e16ba09ee0bedff8fe2e8d128c8df92666c891dbd",
+          "content": "Nate encourages Joanna to keep it up.",
+          "entity": "Nate",
+          "attribute": "encouragement",
+          "sources": [
+            {
+              "source_key": "13:D13:23",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-05-25T15:00:00",
+              "text": "No worries! You've got this. Keep it up!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_f0eb4fff5217480742c63285f7d8b9f93b70521ad3820ec081445483ac77561f",
+          "content": "Nate is planning a party and will invite tournament friends, old friends, and teammates from other tournaments.",
+          "entity": "Nate",
+          "attribute": "party_plans",
+          "sources": [
+            {
+              "source_key": "14:D14:22",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-06-03T17:44:00",
+              "text": "Definitely! And some old friends and teamates from other tournaments."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_0b0549c684caa2d878b4cb19aa048926ffe3e7c54dcc65c71f51c013d6d2f9b5",
+          "content": "Nate and the couple share little in common besides love of animals.",
+          "entity": "Nate",
+          "attribute": "relationship_with_couple",
+          "sources": [
+            {
+              "source_key": "13:D13:5",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-05-25T15:00:00",
+              "text": "They actually didn't share a whole lot in common with me besides the love of animals, but I think that was all we needed to share in common to be good friends!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_ead8ee3e050f1c7810385bfeb545ed36592abfda4c6faabaf7ed7d68681a86e2",
+          "content": "Nate made friends at the convention who love games like him and planned a gaming session together.",
+          "entity": "Nate",
+          "attribute": "social_connections",
+          "sources": [
+            {
+              "source_key": "23:D23:3",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-10-09T10:58:00",
+              "text": "Yeah, you're right! We can have great experiences if we take risks. I even made some friends at the convention who love games just like me. We already planned a gaming session together - it's cool to meet people who have the same interests!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_58f9e33ab5b50a27082da780999833f470c26c8a7d1b997e508a0bb5bad820ce",
+          "content": "Nate offered to share the recipe with Joanna and sent it to her.",
+          "entity": "Nate",
+          "attribute": "recipe_sharing",
+          "sources": [
+            {
+              "source_key": "18:D18:10",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-08-14T18:12:00",
+              "text": "I've been really into making this lately - it's creamy, rich, dairy-free and a new recipe! Wanna try it? I can share the recipe with you if you'd like!"
+            },
+            {
+              "source_key": "18:D18:12",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-08-14T18:12:00",
+              "text": "No problem, Joanna! Always happy to share them with you. Sending you the recipe now!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 6,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-42",
+      "question_id": "q-2",
+      "question": "What kind of interests do Joanna and Nate share?",
+      "answer": "Joanna and Nate share a love of animals and an interest in sharing dessert recipes.",
+      "gold_answer": "Watching movies, making desserts",
+      "gold_evidence": [
+        "D1:10",
+        "D1:11",
+        "D1:12",
+        "D3:4",
+        "D4:9",
+        "D10:9",
+        "D20:2"
+      ],
+      "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+      "bundle_build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-42.json",
+      "valid_memory_ids": [
+        "m_db1bc5d2d031743b2631e971e375d0d7de607a78dc8d92dbd339278576db5515",
+        "m_b393eea9fc34b88fded0a110951a2f36d639f28e9969c5599f0e99be38cd1c7c",
+        "m_0b0549c684caa2d878b4cb19aa048926ffe3e7c54dcc65c71f51c013d6d2f9b5",
+        "m_58f9e33ab5b50a27082da780999833f470c26c8a7d1b997e508a0bb5bad820ce",
+        "m_2ec5d4ef5cd104a0d9f363f2c1fe7b908c350845e1f850ac0eb46b01205c771d"
+      ],
+      "retrieved_memory_ids": [
+        "m_db1bc5d2d031743b2631e971e375d0d7de607a78dc8d92dbd339278576db5515",
+        "m_b393eea9fc34b88fded0a110951a2f36d639f28e9969c5599f0e99be38cd1c7c",
+        "m_0b0549c684caa2d878b4cb19aa048926ffe3e7c54dcc65c71f51c013d6d2f9b5",
+        "m_58f9e33ab5b50a27082da780999833f470c26c8a7d1b997e508a0bb5bad820ce",
+        "m_2ec5d4ef5cd104a0d9f363f2c1fe7b908c350845e1f850ac0eb46b01205c771d"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_db1bc5d2d031743b2631e971e375d0d7de607a78dc8d92dbd339278576db5515",
+          "content": "Joanna will bring some of her recipes so she and Nate can both share desserts.",
+          "entity": "Joanna",
+          "attribute": "plan",
+          "sources": [
+            {
+              "source_key": "26:D26:21",
+              "found": true,
+              "speaker": "Joanna",
+              "session_time": "2022-11-04T15:56:00",
+              "text": "Awesome! I'll bring some of my recipes so we can both share deserts!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_b393eea9fc34b88fded0a110951a2f36d639f28e9969c5599f0e99be38cd1c7c",
+          "content": "Nate and Joanna plan to watch one of Joanna's movies together or go to the park.",
+          "entity": "Nate and Joanna",
+          "attribute": "activity_plan",
+          "sources": [
+            {
+              "source_key": "28:D28:29",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-11-09T17:54:00",
+              "text": "Definitely! I'd love to have you over again. Maybe we can watch one of your movies together or go to the park!"
+            },
+            {
+              "source_key": "28:D28:30",
+              "found": true,
+              "speaker": "Joanna",
+              "session_time": "2022-11-09T17:54:00",
+              "text": "For sure! I'd love to do either of those things with you!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_0b0549c684caa2d878b4cb19aa048926ffe3e7c54dcc65c71f51c013d6d2f9b5",
+          "content": "Nate and the couple share little in common besides love of animals.",
+          "entity": "Nate",
+          "attribute": "relationship_with_couple",
+          "sources": [
+            {
+              "source_key": "13:D13:5",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-05-25T15:00:00",
+              "text": "They actually didn't share a whole lot in common with me besides the love of animals, but I think that was all we needed to share in common to be good friends!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_58f9e33ab5b50a27082da780999833f470c26c8a7d1b997e508a0bb5bad820ce",
+          "content": "Nate offered to share the recipe with Joanna and sent it to her.",
+          "entity": "Nate",
+          "attribute": "recipe_sharing",
+          "sources": [
+            {
+              "source_key": "18:D18:10",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-08-14T18:12:00",
+              "text": "I've been really into making this lately - it's creamy, rich, dairy-free and a new recipe! Wanna try it? I can share the recipe with you if you'd like!"
+            },
+            {
+              "source_key": "18:D18:12",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-08-14T18:12:00",
+              "text": "No problem, Joanna! Always happy to share them with you. Sending you the recipe now!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_2ec5d4ef5cd104a0d9f363f2c1fe7b908c350845e1f850ac0eb46b01205c771d",
+          "content": "Nate makes money doing what he loves.",
+          "entity": "Nate",
+          "attribute": "income_source",
+          "sources": [
+            {
+              "source_key": "17:D17:1",
+              "found": true,
+              "speaker": "Nate",
+              "session_time": "2022-07-10T14:34:00",
+              "text": "Hey Joanna, check this out! I won my fourth video game tournament on Friday! It was awesome competing and showing off my skills - and the victory was indescribable. I'm really proud that I can make money doing what I love. This one was online!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 7,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "dev",
+      "conversation_id": "conv-42",
+      "question_id": "q-3",
+      "question": "When did Joanna first watch \"Eternal Sunshine of the Spotless Mind?",
+      "answer": "Joanna first watched \"Eternal Sunshine of the Spotless Mind\" around 2019 (approximately 3 years before 2022-01-21).",
+      "gold_answer": "2019",
+      "gold_evidence": [
+        "D1:18"
+      ],
+      "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+      "bundle_build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-42.json",
+      "valid_memory_ids": [
+        "m_3771c704bdc5d18a7cf58bea447bde4fee3b09380f76d450cf1e819144449deb",
+        "m_bce086fc167704ba4611b880add02d2c7e3ba6c70a960be25dc4125b52930950",
+        "m_1d8e5ac1142bc146f0851112d91d2d5b1f64a1cfb6ca2bb98f395bdd8b30d296",
+        "m_05e2731656e7b147f1558dc55a5e02b8575c3d21160b38ad5e715ea5dcec79cb",
+        "m_9bc6779e3ee6c1fb307601ef56274b61a74e238735ddb3649e5f0812c5f7a857"
+      ],
+      "retrieved_memory_ids": [
+        "m_3771c704bdc5d18a7cf58bea447bde4fee3b09380f76d450cf1e819144449deb",
+        "m_bce086fc167704ba4611b880add02d2c7e3ba6c70a960be25dc4125b52930950",
+        "m_1d8e5ac1142bc146f0851112d91d2d5b1f64a1cfb6ca2bb98f395bdd8b30d296",
+        "m_05e2731656e7b147f1558dc55a5e02b8575c3d21160b38ad5e715ea5dcec79cb",
+        "m_9bc6779e3ee6c1fb307601ef56274b61a74e238735ddb3649e5f0812c5f7a857"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_3771c704bdc5d18a7cf58bea447bde4fee3b09380f76d450cf1e819144449deb",
+          "content": "Joanna first watched the romantic drama about memory and relationships around 3 years ago.",
+          "entity": "Joanna",
+          "attribute": "first_watched_movie",
+          "sources": [
+            {
+              "source_key": "1:D1:18",
+              "found": true,
+              "speaker": "Joanna",
+              "session_time": "2022-01-21T19:31:00",
+              "text": "Yep, that movie is awesome. I first watched it around 3 years ago. I even went out and got a physical copy!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_bce086fc167704ba4611b880add02d2c7e3ba6c70a960be25dc4125b52930950",
+          "content": "Joanna did her first play and forgot her lines out of nervousness.",
+          "entity": "Joanna",
+          "attribute": "acting_experience",
+          "sources": [
+            {
+              "source_key": "9:D9:5",
+              "found": true,
+              "speaker": "Joanna",
+              "session_time": "2022-04-21T19:44:00",
+              "text": "Yeah, I bet the nerves and excitement are quite a rush! I remember when I did my first play, I was so nervous I forgot my lines. It was embarrassing, but it taught me how important it is to prepare and stay in the moment."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_1d8e5ac1142bc146f0851112d91d2d5b1f64a1cfb6ca2bb98f395bdd8b30d296",
+          "content": "Joanna contributed to a movie script that was shown on the big screen for the first time last Sunday.",
+          "entity": "Joanna",
+          "attribute": "movie_screening_event",
+          "sources": [
+            {
+              "source_key": "25:D25:2",
+              "found": true,
+              "speaker": "Joanna",
+              "session_time": "2022-10-25T20:16:00",
+              "text": "Hey Nate! Another movie script that I contributed to was shown on the big screen last Sunday for the first time! It was such a surreal experience to see everything come together. I felt a mix of emotions, but overall, it was a satisfying moment. I've been waiting for this for a long time!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_05e2731656e7b147f1558dc55a5e02b8575c3d21160b38ad5e715ea5dcec79cb",
+          "content": "Joanna's first passion was acting, but she now focuses on writing.",
+          "entity": "Joanna",
+          "attribute": "passion",
+          "sources": [
+            {
+              "source_key": "9:D9:7",
+              "found": true,
+              "speaker": "Joanna",
+              "session_time": "2022-04-21T19:44:00",
+              "text": "Yeah, that's me in that photo! Acting was my first passion, but now I really shine in writing. It helps me express myself in a new way, but who knows, maybe I'll go back to acting someday. Never say never!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_9bc6779e3ee6c1fb307601ef56274b61a74e238735ddb3649e5f0812c5f7a857",
+          "content": "Joanna started on a book recently since her movie did well.",
+          "entity": "Joanna",
+          "attribute": "writing_project",
+          "sources": [
+            {
+              "source_key": "17:D17:14",
+              "found": true,
+              "speaker": "Joanna",
+              "session_time": "2022-07-10T14:34:00",
+              "text": "I will! I actually started on a book recently since my movie did well!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "test",
+      "conversation_id": "conv-43",
+      "question_id": "q-1",
+      "question": "what are John's goals with regards to his basketball career?",
+      "answer": "John's goals are to improve his shooting percentage, keep reaching for new goals, and be known as a consistent performer who helps his team.",
+      "gold_answer": "improve shooting percentage, win a championship",
+      "gold_evidence": [
+        "D1:9",
+        "D6:15",
+        "D11:17"
+      ],
+      "build_id": "11332665334cc15fa74f0c2fc9c22c9ac632766a3491e4231a5fc8936680504d",
+      "bundle_build_id": "11332665334cc15fa74f0c2fc9c22c9ac632766a3491e4231a5fc8936680504d",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-43.json",
+      "valid_memory_ids": [
+        "m_97b57ca59d2b3e768f884f23ee952da27be7773ec7d4996151ec666f4070c7d1",
+        "m_c3de6e14ecd59aebd174e32361a94caa3796caf432f6c2e2677cd13c6df24f54",
+        "m_25b7e109c5ac5e3fd4917a6dcf8b8abba65e760123edcc769e7a793784484ae7",
+        "m_54c2d65c21adf8c770f14358d26dcb0fa60e003ae0c4c8d732db1c9112c15a00",
+        "m_453b18c436db5eadf0eb0e1be88f1994ad4a65abffe0e70db74daa815ae9cbe6"
+      ],
+      "retrieved_memory_ids": [
+        "m_97b57ca59d2b3e768f884f23ee952da27be7773ec7d4996151ec666f4070c7d1",
+        "m_c3de6e14ecd59aebd174e32361a94caa3796caf432f6c2e2677cd13c6df24f54",
+        "m_25b7e109c5ac5e3fd4917a6dcf8b8abba65e760123edcc769e7a793784484ae7",
+        "m_54c2d65c21adf8c770f14358d26dcb0fa60e003ae0c4c8d732db1c9112c15a00",
+        "m_453b18c436db5eadf0eb0e1be88f1994ad4a65abffe0e70db74daa815ae9cbe6"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_97b57ca59d2b3e768f884f23ee952da27be7773ec7d4996151ec666f4070c7d1",
+          "content": "John wants to be known as a consistent performer and help his team.",
+          "entity": "John",
+          "attribute": "career_aspiration",
+          "sources": [
+            {
+              "source_key": "11:D11:17",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-09-21T20:17:00",
+              "text": "Definitely! I'm focusing on better shooting and making more of an impact on the court. I want to be known as a consistent performer and help my team. Off the court, I'm also looking into more endorsements and building my brand. It's important for me to think about life after basketball."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_c3de6e14ecd59aebd174e32361a94caa3796caf432f6c2e2677cd13c6df24f54",
+          "content": "John wants to keep reaching for new goals.",
+          "entity": "John",
+          "attribute": "goal_aspiration",
+          "sources": [
+            {
+              "source_key": "4:D4:12",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-08-02T16:17:00",
+              "text": "Thanks! They really do. I want to keep reaching for new goals."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_25b7e109c5ac5e3fd4917a6dcf8b8abba65e760123edcc769e7a793784484ae7",
+          "content": "John has played basketball since he was a kid, watching NBA games with his dad.",
+          "entity": "John",
+          "attribute": "sport",
+          "sources": [
+            {
+              "source_key": "6:D6:13",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-08-11T13:08:00",
+              "text": "Thanks! Basketball has been a part of my life ever since I was a kid. I'd watch NBA games with my dad and dream of playing on those big courts. When I turned ten, dad signed me up for a local league, and I've been playing ever since. I kept playing through middle and high school before earning a college scholarship. And after college, I was drafted by a team – my dream come true!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_54c2d65c21adf8c770f14358d26dcb0fa60e003ae0c4c8d732db1c9112c15a00",
+          "content": "John had a career-high in assists last Friday in a big game against their rival.",
+          "entity": "John",
+          "attribute": "basketball_achievement",
+          "sources": [
+            {
+              "source_key": "23:D23:3",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-12-11T20:28:00",
+              "text": "Thanks! It's a bummer about your English lit class, but you did your best. By the way, I had a career-high in assists last Friday in our big game against our rival. Yay!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_453b18c436db5eadf0eb0e1be88f1994ad4a65abffe0e70db74daa815ae9cbe6",
+          "content": "John's goal is to improve his shooting percentage.",
+          "entity": "John",
+          "attribute": "goal",
+          "sources": [
+            {
+              "source_key": "1:D1:9",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-05-21T19:48:00",
+              "text": "Yeah, my goal is to improve my shooting percentage. Been practicing hard and gonna make it happen."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "test",
+      "conversation_id": "conv-43",
+      "question_id": "q-2",
+      "question": "What are John's goals for his career that are not related to his basketball skills?",
+      "answer": "John's career goals outside his basketball skills are to use his contacts in the basketball industry and marketing skills to make endorsement connections (as said on 2023-07-16) and to keep reaching for new goals (as said on 2023-08-02).",
+      "gold_answer": "get endorsements, build his brand, do charity work",
+      "gold_evidence": [
+        "D6:15",
+        "D11:17"
+      ],
+      "build_id": "11332665334cc15fa74f0c2fc9c22c9ac632766a3491e4231a5fc8936680504d",
+      "bundle_build_id": "11332665334cc15fa74f0c2fc9c22c9ac632766a3491e4231a5fc8936680504d",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-43.json",
+      "valid_memory_ids": [
+        "m_ed35761c72f66c007f19dc9774daf7c6b54b5c5b6b1f765afc2fe9e61bb807ac",
+        "m_91c8a88ac289d0c33572a6c9ca7322ccbfc60aabd5982bfcd94cf8489272c6c4",
+        "m_c3de6e14ecd59aebd174e32361a94caa3796caf432f6c2e2677cd13c6df24f54",
+        "m_97b57ca59d2b3e768f884f23ee952da27be7773ec7d4996151ec666f4070c7d1",
+        "m_12c5486d92e05c8b1b72a212498e2011d363f720044ec35f1f5e48d7e8faa290"
+      ],
+      "retrieved_memory_ids": [
+        "m_ed35761c72f66c007f19dc9774daf7c6b54b5c5b6b1f765afc2fe9e61bb807ac",
+        "m_91c8a88ac289d0c33572a6c9ca7322ccbfc60aabd5982bfcd94cf8489272c6c4",
+        "m_c3de6e14ecd59aebd174e32361a94caa3796caf432f6c2e2677cd13c6df24f54",
+        "m_97b57ca59d2b3e768f884f23ee952da27be7773ec7d4996151ec666f4070c7d1",
+        "m_12c5486d92e05c8b1b72a212498e2011d363f720044ec35f1f5e48d7e8faa290"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_ed35761c72f66c007f19dc9774daf7c6b54b5c5b6b1f765afc2fe9e61bb807ac",
+          "content": "John used his contacts in the basketball industry and marketing skills to make endorsement connections.",
+          "entity": "John",
+          "attribute": "networking_method",
+          "sources": [
+            {
+              "source_key": "3:D3:11",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-07-16T16:21:00",
+              "text": "I used my contacts in the basketball industry and my marketing skills to make connections. Networking plays a big role in getting endorsements, and I'm grateful for the support I've received."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_91c8a88ac289d0c33572a6c9ca7322ccbfc60aabd5982bfcd94cf8489272c6c4",
+          "content": "John is motivated by his teammates believing in him and his love for improving his skills.",
+          "entity": "John",
+          "attribute": "motivation_sources",
+          "sources": [
+            {
+              "source_key": "15:D15:18",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-10-21T17:51:00",
+              "text": "My teammates believing in me and my love for improving my skills keep me going, even when things get tough. I don't want to let them down."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_c3de6e14ecd59aebd174e32361a94caa3796caf432f6c2e2677cd13c6df24f54",
+          "content": "John wants to keep reaching for new goals.",
+          "entity": "John",
+          "attribute": "goal_aspiration",
+          "sources": [
+            {
+              "source_key": "4:D4:12",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-08-02T16:17:00",
+              "text": "Thanks! They really do. I want to keep reaching for new goals."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_97b57ca59d2b3e768f884f23ee952da27be7773ec7d4996151ec666f4070c7d1",
+          "content": "John wants to be known as a consistent performer and help his team.",
+          "entity": "John",
+          "attribute": "career_aspiration",
+          "sources": [
+            {
+              "source_key": "11:D11:17",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-09-21T20:17:00",
+              "text": "Definitely! I'm focusing on better shooting and making more of an impact on the court. I want to be known as a consistent performer and help my team. Off the court, I'm also looking into more endorsements and building my brand. It's important for me to think about life after basketball."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_12c5486d92e05c8b1b72a212498e2011d363f720044ec35f1f5e48d7e8faa290",
+          "content": "John's favorite basketball player is LeBron, admiring his skills and leadership.",
+          "entity": "John",
+          "attribute": "favorite_basketball_player",
+          "sources": [
+            {
+              "source_key": "12:D12:20",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-10-02T15:00:00",
+              "text": "Thanks! The Wolves are my team for sure. And LeBron is the man - love his skills and leadership."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "test",
+      "conversation_id": "conv-43",
+      "question_id": "q-3",
+      "question": "What items does John collect?",
+      "answer": "John collects jerseys and sneakers.",
+      "gold_answer": "sneakers, fantasy movie DVDs, jerseys",
+      "gold_evidence": [
+        "D1:15",
+        "D12:18",
+        "D27:20"
+      ],
+      "build_id": "11332665334cc15fa74f0c2fc9c22c9ac632766a3491e4231a5fc8936680504d",
+      "bundle_build_id": "11332665334cc15fa74f0c2fc9c22c9ac632766a3491e4231a5fc8936680504d",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-43.json",
+      "valid_memory_ids": [
+        "m_2de3c6c9e470fa5c4bfa81a6b539a8ba267d11fe04cbf4e02c63a660d22a3bc9",
+        "m_19972ac924fcf5c3bf7343c5bed65c0b9d463acd58f9f7651ea3305a15ecdff6",
+        "m_f7e5b9ca90a16e1db6e39bb23646d5920308eb24e5c668c80122df5fbc72bf30",
+        "m_1db17c899575c1ab8fe93952e60ea450179d45bb3d047ad8bf5747f090b31dd9",
+        "m_193aba0d131e29fe66f3f8dfb23288596f6022a610b520417ecfda2f8cf6d568"
+      ],
+      "retrieved_memory_ids": [
+        "m_2de3c6c9e470fa5c4bfa81a6b539a8ba267d11fe04cbf4e02c63a660d22a3bc9",
+        "m_19972ac924fcf5c3bf7343c5bed65c0b9d463acd58f9f7651ea3305a15ecdff6",
+        "m_f7e5b9ca90a16e1db6e39bb23646d5920308eb24e5c668c80122df5fbc72bf30",
+        "m_1db17c899575c1ab8fe93952e60ea450179d45bb3d047ad8bf5747f090b31dd9",
+        "m_193aba0d131e29fe66f3f8dfb23288596f6022a610b520417ecfda2f8cf6d568"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_2de3c6c9e470fa5c4bfa81a6b539a8ba267d11fe04cbf4e02c63a660d22a3bc9",
+          "content": "John likes to collect jerseys.",
+          "entity": "John",
+          "attribute": "hobby",
+          "sources": [
+            {
+              "source_key": "12:D12:18",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-10-02T15:00:00",
+              "text": "That's great Tim! Books and movies make us escape to different places. I like to collect jerseys."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_19972ac924fcf5c3bf7343c5bed65c0b9d463acd58f9f7651ea3305a15ecdff6",
+          "content": "John has a sneaker collection.",
+          "entity": "John",
+          "attribute": "hobby",
+          "sources": [
+            {
+              "source_key": "1:D1:15",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-05-21T19:48:00",
+              "text": "That's great! Loving it when people are passionate about their work. What kind of collaborations are you involved in for the fan project? I love talking to people about my sneaker collection."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_f7e5b9ca90a16e1db6e39bb23646d5920308eb24e5c668c80122df5fbc72bf30",
+          "content": "John loves his job.",
+          "entity": "John",
+          "attribute": "attitude_toward_job",
+          "sources": [
+            {
+              "source_key": "12:D12:28",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-10-02T15:00:00",
+              "text": "The energy was incredible! It's moments like these that make me love my job."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_1db17c899575c1ab8fe93952e60ea450179d45bb3d047ad8bf5747f090b31dd9",
+          "content": "John loves the ocean.",
+          "entity": "John",
+          "attribute": "ocean_affinity",
+          "sources": [
+            {
+              "source_key": "3:D3:23",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-07-16T16:21:00",
+              "text": "Thanks! Can't wait for the seafood too. I love the ocean."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_193aba0d131e29fe66f3f8dfb23288596f6022a610b520417ecfda2f8cf6d568",
+          "content": "John loves discovering new cities.",
+          "entity": "John",
+          "attribute": "interest",
+          "sources": [
+            {
+              "source_key": "9:D9:6",
+              "found": true,
+              "speaker": "John",
+              "session_time": "2023-08-26T18:59:00",
+              "text": "Wow, Tim, that's an awesome book collection! It's cool to escape to different worlds with a hobby. By the way, I love discovering new cities - check out this pic from one of my trips to New York City!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "test",
+      "conversation_id": "conv-43",
+      "question_id": "q-4",
+      "question": "Would Tim enjoy reading books by C. S. Lewis or John Greene?",
+      "answer": "Tim would likely enjoy reading books by C. S. Lewis, since his favorite books include Harry Potter and Game of Thrones and he enjoys fantasy.",
+      "gold_answer": "C. S.Lewis",
+      "gold_evidence": [
+        "D1:14",
+        "D1:16",
+        "D1:18"
+      ],
+      "build_id": "11332665334cc15fa74f0c2fc9c22c9ac632766a3491e4231a5fc8936680504d",
+      "bundle_build_id": "11332665334cc15fa74f0c2fc9c22c9ac632766a3491e4231a5fc8936680504d",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-43.json",
+      "valid_memory_ids": [
+        "m_6dd99efd99d99f653116bc09ed60d6880cc26af0a67b442c3985ab6e0e7fb53e",
+        "m_cc4072166e75f4a663b9da1c78adc8d3e62c12980383b533752a5bb0a612a606",
+        "m_65c0fbbf4ba57e1964627dcd5ee851ee852541e811d12d3f30b30de799b53f6d",
+        "m_cda0e46912c23dfb7ed304794f7b9df3f14fa6b10e37c28ac869d10419dabc15",
+        "m_05fe37a89700b5a1d8146cee27382f9df280ee246f5fd577e13a21effc29aa15"
+      ],
+      "retrieved_memory_ids": [
+        "m_6dd99efd99d99f653116bc09ed60d6880cc26af0a67b442c3985ab6e0e7fb53e",
+        "m_cc4072166e75f4a663b9da1c78adc8d3e62c12980383b533752a5bb0a612a606",
+        "m_65c0fbbf4ba57e1964627dcd5ee851ee852541e811d12d3f30b30de799b53f6d",
+        "m_cda0e46912c23dfb7ed304794f7b9df3f14fa6b10e37c28ac869d10419dabc15",
+        "m_05fe37a89700b5a1d8146cee27382f9df280ee246f5fd577e13a21effc29aa15"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_6dd99efd99d99f653116bc09ed60d6880cc26af0a67b442c3985ab6e0e7fb53e",
+          "content": "Tim has been reading fantasy books.",
+          "entity": "Tim",
+          "attribute": "reading_status",
+          "sources": [
+            {
+              "source_key": "8:D8:12",
+              "found": true,
+              "speaker": "Tim",
+              "session_time": "2023-08-21T16:29:00",
+              "text": "Things have been great since we last talked - I've been focusing on school and reading a bunch of fantasy books. It's a nice way to take a break from all the stress. I've also started learning how to play the piano - it's a learning curve, but it's so satisfying seeing the progress I make! Life's good."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_cc4072166e75f4a663b9da1c78adc8d3e62c12980383b533752a5bb0a612a606",
+          "content": "Tim and John both enjoy fantasy books and movies.",
+          "entity": "Tim and John",
+          "attribute": "shared_interest",
+          "sources": [
+            {
+              "source_key": "20:D20:17",
+              "found": true,
+              "speaker": "Tim",
+              "session_time": "2023-12-01T09:52:00",
+              "text": "Glad we're friends! Plus, bonus points for both being into fantasy books and movies. I just reorganized my book shelf, speaking of."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_65c0fbbf4ba57e1964627dcd5ee851ee852541e811d12d3f30b30de799b53f6d",
+          "content": "Tim enjoys reading books in his free time.",
+          "entity": "Tim",
+          "attribute": "hobby",
+          "sources": [
+            {
+              "source_key": "15:D15:29",
+              "found": true,
+              "speaker": "Tim",
+              "session_time": "2023-10-21T17:51:00",
+              "text": "I love going on road trips with friends and family, exploring and hiking or playing board games. And in my free time, I enjoy curling up with a good book, escaping reality and getting lost in different worlds. That's what I'm talking about."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_cda0e46912c23dfb7ed304794f7b9df3f14fa6b10e37c28ac869d10419dabc15",
+          "content": "Tim's favorite books are Harry Potter and Game of Thrones.",
+          "entity": "Tim",
+          "attribute": "favorite_books",
+          "sources": [
+            {
+              "source_key": "19:D19:15",
+              "found": true,
+              "speaker": "Tim",
+              "session_time": "2023-11-21T10:22:00",
+              "text": "Yes, they are still my favorites - I love how they take me to other places. What other books do you like?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_05fe37a89700b5a1d8146cee27382f9df280ee246f5fd577e13a21effc29aa15",
+          "content": "Tim loves to get lost in good books in his downtime.",
+          "entity": "Tim",
+          "attribute": "leisure_activity",
+          "sources": [
+            {
+              "source_key": "26:D26:26",
+              "found": true,
+              "speaker": "Tim",
+              "session_time": "2023-12-26T15:35:00",
+              "text": "In my downtime, I still love to get lost in good books, and this series is one of my favorites. It's a magical world to escape to."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "test",
+      "conversation_id": "conv-44",
+      "question_id": "q-1",
+      "question": "Which year did Audrey adopt the first three of her dogs?",
+      "answer": "The memories do not specify which year Audrey adopted the first three of her dogs.",
+      "gold_answer": "2020",
+      "gold_evidence": [
+        "D1:7"
+      ],
+      "build_id": "5b48acc17ac7f033dd7916f7e371d16775a5064bb2086dd7c2b01d92f76d2a22",
+      "bundle_build_id": "5b48acc17ac7f033dd7916f7e371d16775a5064bb2086dd7c2b01d92f76d2a22",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-44.json",
+      "valid_memory_ids": [
+        "m_5a1f8dcb04be6d423f6537fadb11ba144a0a9614eedc7712130adf1605e6aec6",
+        "m_6656f9de4c6ee7056bf411c30bb4fd166f49a857174561950bdf1eed60d39b76",
+        "m_45fab62c5b68f89360cda1c28b5724c528dd2b377480054ff74837459f9a851b",
+        "m_2c31e1408654cf19e068c26d681a38aa26dc9a3b54e719b260f5f80d918e077a",
+        "m_ab1a5e04b385ffaff45ad755924a66efc930767bd8a38737b72f4a5fb4d39f5e"
+      ],
+      "retrieved_memory_ids": [
+        "m_5a1f8dcb04be6d423f6537fadb11ba144a0a9614eedc7712130adf1605e6aec6",
+        "m_6656f9de4c6ee7056bf411c30bb4fd166f49a857174561950bdf1eed60d39b76",
+        "m_45fab62c5b68f89360cda1c28b5724c528dd2b377480054ff74837459f9a851b",
+        "m_2c31e1408654cf19e068c26d681a38aa26dc9a3b54e719b260f5f80d918e077a",
+        "m_ab1a5e04b385ffaff45ad755924a66efc930767bd8a38737b72f4a5fb4d39f5e"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_5a1f8dcb04be6d423f6537fadb11ba144a0a9614eedc7712130adf1605e6aec6",
+          "content": "Audrey has four dogs.",
+          "entity": "Audrey",
+          "attribute": "number_of_dogs",
+          "sources": [
+            {
+              "source_key": "27:D27:2",
+              "found": true,
+              "speaker": "Audrey",
+              "session_time": "2023-11-04T19:59:00",
+              "text": "That's cool! I love checking out new parks with my four pups. Last weekend was so fun - our dogs were able to run around and get some fresh air. On top of that, I recently joined a dog owners group to learn how to better take care of them."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_6656f9de4c6ee7056bf411c30bb4fd166f49a857174561950bdf1eed60d39b76",
+          "content": "Audrey has four dogs.",
+          "entity": "Audrey",
+          "attribute": "number_of_dogs",
+          "sources": [
+            {
+              "source_key": "15:D15:1",
+              "found": true,
+              "speaker": "Audrey",
+              "session_time": "2023-08-16T21:58:00",
+              "text": "Hey Andrew, since we last spoke I got another tattoo of my four dogs on my arm! They really mean a lot to me so I thought it'd be nice to have them with me wherever I go. What've you been up to?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_45fab62c5b68f89360cda1c28b5724c528dd2b377480054ff74837459f9a851b",
+          "content": "Audrey took all her dogs to the vet for a checkup.",
+          "entity": "Audrey",
+          "attribute": "vet_visit",
+          "sources": [
+            {
+              "source_key": "15:D15:3",
+              "found": true,
+              "speaker": "Audrey",
+              "session_time": "2023-08-16T21:58:00",
+              "text": "Sounds great! I'd love to have more, but four is enough for now. They keep me busy and I want to make sure I give each of them the attention they deserve - four dogs is already a lot! I took them all to the vet and got them checked up, it was such a havoc that next time I'll bring them one by one."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_2c31e1408654cf19e068c26d681a38aa26dc9a3b54e719b260f5f80d918e077a",
+          "content": "Audrey has four dogs, all mutts.",
+          "entity": "Audrey",
+          "attribute": "number_of_dogs",
+          "sources": [
+            {
+              "source_key": "10:D10:7",
+              "found": true,
+              "speaker": "Audrey",
+              "session_time": "2023-07-03T20:32:00",
+              "text": "They're all mutts. Two of them are Jack Russell mixes and the other two are Chihuahua mixes. They love running and playing fetch, you should see them sometimes."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_ab1a5e04b385ffaff45ad755924a66efc930767bd8a38737b72f4a5fb4d39f5e",
+          "content": "Audrey took her dogs to the pet salon last Friday.",
+          "entity": "Audrey",
+          "attribute": "pet_grooming_event",
+          "sources": [
+            {
+              "source_key": "28:D28:1",
+              "found": true,
+              "speaker": "Audrey",
+              "session_time": "2023-11-22T09:02:00",
+              "text": "Hey Andrew! Long time no talk! Last Friday I took my fur kids to the pet salon - they were so psyched and their tails were wagging like crazy! It took a while for them to calm down, but all cut up they looked so cute!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "test",
+      "conversation_id": "conv-44",
+      "question_id": "q-2",
+      "question": "When did Andrew start his new job as a financial analyst?",
+      "answer": "Andrew started his new job as a Financial Analyst in the week before March 27, 2023, likely around March 20, 2023.",
+      "gold_answer": "The week before March 27, 2023",
+      "gold_evidence": [
+        "D1:2"
+      ],
+      "build_id": "5b48acc17ac7f033dd7916f7e371d16775a5064bb2086dd7c2b01d92f76d2a22",
+      "bundle_build_id": "5b48acc17ac7f033dd7916f7e371d16775a5064bb2086dd7c2b01d92f76d2a22",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-44.json",
+      "valid_memory_ids": [
+        "m_169846a1bd541e38b6aa544d2f4f2843f7246659086d0075879f304fd15cf88a",
+        "m_6c33cc4ca891f50322ff0cc16860a4c3392126d9d8a5640703e25c6d8b8a8cc1",
+        "m_51b0415da4c99e966e86fccd4150f6282d65345be7a9bd4915de8d6db882e9aa",
+        "m_4f029698f09d6d3da875419b6004e7f7a6440c7cc7a8b367cdb9ac3957f2c995",
+        "m_430172c921ff23638f7684b74833363350d380927ad548d44e85896cd40c3176"
+      ],
+      "retrieved_memory_ids": [
+        "m_169846a1bd541e38b6aa544d2f4f2843f7246659086d0075879f304fd15cf88a",
+        "m_6c33cc4ca891f50322ff0cc16860a4c3392126d9d8a5640703e25c6d8b8a8cc1",
+        "m_51b0415da4c99e966e86fccd4150f6282d65345be7a9bd4915de8d6db882e9aa",
+        "m_4f029698f09d6d3da875419b6004e7f7a6440c7cc7a8b367cdb9ac3957f2c995",
+        "m_430172c921ff23638f7684b74833363350d380927ad548d44e85896cd40c3176"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_169846a1bd541e38b6aa544d2f4f2843f7246659086d0075879f304fd15cf88a",
+          "content": "Andrew started a new job as a Financial Analyst last week.",
+          "entity": "Andrew",
+          "attribute": "employment_status",
+          "sources": [
+            {
+              "source_key": "1:D1:2",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-03-27T13:10:00",
+              "text": "Hey Audrey! So, I started a new job as a Financial Analyst last week - it's been quite a change from my previous job. How about you? Anything interesting happening?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_6c33cc4ca891f50322ff0cc16860a4c3392126d9d8a5640703e25c6d8b8a8cc1",
+          "content": "Andrew took a break from work yesterday and checked out a new cafe.",
+          "entity": "Andrew",
+          "attribute": "activity",
+          "sources": [
+            {
+              "source_key": "16:D16:1",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-08-19T21:19:00",
+              "text": "Hey Audrey, hope you're doing good! So I've decided to take a break from work yesterday and check out a new cafe. It was a nice change and reminded me of how the great outdoors is always there to offer you peace. Here's a photo from my last hike - so serene! How's your month been so far?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_51b0415da4c99e966e86fccd4150f6282d65345be7a9bd4915de8d6db882e9aa",
+          "content": "Andrew tried out a new cafe in the city with his girlfriend last weekend.",
+          "entity": "Andrew",
+          "attribute": "recent_activity",
+          "sources": [
+            {
+              "source_key": "3:D3:1",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-04-16T16:19:00",
+              "text": "Hey Audrey! What's up? Missed chatting with ya! Check it out, my girl & I tried out that new cafe scene in the city last weekend! Super fun but kinda sad not being out in nature - that's when I feel like I'm really thriving. Oh man, I miss the peacefulness of being out on a hike."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_4f029698f09d6d3da875419b6004e7f7a6440c7cc7a8b367cdb9ac3957f2c995",
+          "content": "Andrew has been getting into cooking and trying new recipes.",
+          "entity": "Andrew",
+          "attribute": "hobby",
+          "sources": [
+            {
+              "source_key": "10:D10:12",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-07-03T20:32:00",
+              "text": "Lately I've been finding new hobbies since I can't hike. I've been getting into cooking more and trying out new recipes - it's been enjoyable. Do you enjoy cooking? Any favorite recipes?"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_430172c921ff23638f7684b74833363350d380927ad548d44e85896cd40c3176",
+          "content": "Andrew's work has been piling up and stressful.",
+          "entity": "Andrew",
+          "attribute": "work_status",
+          "sources": [
+            {
+              "source_key": "12:D12:3",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-07-11T10:05:00",
+              "text": "Haha yeah! Toby's definitely bringing a lot of joy. Since we last talked, work has been piling up and I've been stuck inside. I miss the peace and feeling of freedom that comes with going for a hike."
+            },
+            {
+              "source_key": "12:D12:5",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-07-11T10:05:00",
+              "text": "Yeah work's been stressful lately and I need a break. I have plans for a hike next month and thought it'd be cool if you and the pups could come along. We can enjoy nature and have a fun time!"
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 6,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "test",
+      "conversation_id": "conv-44",
+      "question_id": "q-3",
+      "question": "What kind of indoor activities has Andrew pursued with his girlfriend?",
+      "answer": "Andrew tried out a new cafe in the city with his girlfriend on the weekend of April 15–16, 2023.",
+      "gold_answer": "boardgames, volunteering at pet shelter, wine tasting, growing flowers",
+      "gold_evidence": [
+        "D13:1",
+        "D23:1",
+        "D25:1",
+        "D19:15"
+      ],
+      "build_id": "5b48acc17ac7f033dd7916f7e371d16775a5064bb2086dd7c2b01d92f76d2a22",
+      "bundle_build_id": "5b48acc17ac7f033dd7916f7e371d16775a5064bb2086dd7c2b01d92f76d2a22",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-44.json",
+      "valid_memory_ids": [
+        "m_10c776bb6ac0e07626e515ab02774fc2d9312b3e2f90be0d6001618554179eb2",
+        "m_4587300c356a951e5fa11432ec6855385dbe1e6faab34f2873e7ec2cd8643e7e",
+        "m_16c16019ab181bc8c5aa0a746958538bdf4b2007fdbb242c22ec89d9ff18fd4f",
+        "m_1707903770fefacac7b0e4126137a78cfebd87b32dd711133b23ddadbd188936",
+        "m_51b0415da4c99e966e86fccd4150f6282d65345be7a9bd4915de8d6db882e9aa"
+      ],
+      "retrieved_memory_ids": [
+        "m_10c776bb6ac0e07626e515ab02774fc2d9312b3e2f90be0d6001618554179eb2",
+        "m_4587300c356a951e5fa11432ec6855385dbe1e6faab34f2873e7ec2cd8643e7e",
+        "m_16c16019ab181bc8c5aa0a746958538bdf4b2007fdbb242c22ec89d9ff18fd4f",
+        "m_1707903770fefacac7b0e4126137a78cfebd87b32dd711133b23ddadbd188936",
+        "m_51b0415da4c99e966e86fccd4150f6282d65345be7a9bd4915de8d6db882e9aa"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_10c776bb6ac0e07626e515ab02774fc2d9312b3e2f90be0d6001618554179eb2",
+          "content": "Andrew has a girlfriend.",
+          "entity": "Andrew",
+          "attribute": "relationship_status",
+          "sources": [
+            {
+              "source_key": "27:D27:1",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-11-04T19:59:00",
+              "text": "Hey Audrey, had a great weekend! My girlfriend and I went on a bike ride and stumbled upon a cool park outside of town. It was awesome to get away from the city and be surrounded by nature."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_4587300c356a951e5fa11432ec6855385dbe1e6faab34f2873e7ec2cd8643e7e",
+          "content": "Andrew had a picnic with his girlfriend last Friday.",
+          "entity": "Andrew",
+          "attribute": "recent_activity",
+          "sources": [
+            {
+              "source_key": "11:D11:1",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-07-08T09:48:00",
+              "text": "Hey how's it going? Last Friday was amazing - I had a picnic with my girlfriend and it was so much fun! Being in the nature can be so refreshing and it always brings me joy."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_16c16019ab181bc8c5aa0a746958538bdf4b2007fdbb242c22ec89d9ff18fd4f",
+          "content": "Andrew has a picnic date with his girlfriend on Sunday.",
+          "entity": "Andrew",
+          "attribute": "sunday_plan",
+          "sources": [
+            {
+              "source_key": "26:D26:20",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-10-28T14:36:00",
+              "text": "Yay! Does Saturday sound good? We can grab some snacks and have a blast exploring. Because on Sunday I am going on a picnic date with my girlfriend."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_1707903770fefacac7b0e4126137a78cfebd87b32dd711133b23ddadbd188936",
+          "content": "Andrew has a girlfriend.",
+          "entity": "Andrew",
+          "attribute": "relationship_status",
+          "sources": [
+            {
+              "source_key": "3:D3:1",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-04-16T16:19:00",
+              "text": "Hey Audrey! What's up? Missed chatting with ya! Check it out, my girl & I tried out that new cafe scene in the city last weekend! Super fun but kinda sad not being out in nature - that's when I feel like I'm really thriving. Oh man, I miss the peacefulness of being out on a hike."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_51b0415da4c99e966e86fccd4150f6282d65345be7a9bd4915de8d6db882e9aa",
+          "content": "Andrew tried out a new cafe in the city with his girlfriend last weekend.",
+          "entity": "Andrew",
+          "attribute": "recent_activity",
+          "sources": [
+            {
+              "source_key": "3:D3:1",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-04-16T16:19:00",
+              "text": "Hey Audrey! What's up? Missed chatting with ya! Check it out, my girl & I tried out that new cafe scene in the city last weekend! Super fun but kinda sad not being out in nature - that's when I feel like I'm really thriving. Oh man, I miss the peacefulness of being out on a hike."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    },
+    {
+      "dataset": "test",
+      "conversation_id": "conv-44",
+      "question_id": "q-4",
+      "question": "What kind of places have Andrew and his girlfriend checked out around the city?",
+      "answer": "Andrew and his girlfriend have checked out new places to eat around the city, including a new cafe he tried with her last weekend (the weekend of April 8–9, 2023).",
+      "gold_answer": "cafes, new places to eat, open space for hikes, pet shelter, wine tasting event, park",
+      "gold_evidence": [
+        "D3:1",
+        "D3:11",
+        "D4:2",
+        "D6:1",
+        "D13:1",
+        "D23:3",
+        "D25:1",
+        "D27:1"
+      ],
+      "build_id": "5b48acc17ac7f033dd7916f7e371d16775a5064bb2086dd7c2b01d92f76d2a22",
+      "bundle_build_id": "5b48acc17ac7f033dd7916f7e371d16775a5064bb2086dd7c2b01d92f76d2a22",
+      "memory_bundle_path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-44.json",
+      "valid_memory_ids": [
+        "m_f53672becfac6583d80d746c39a18374919763a2a388664bb5397a1df8619b46",
+        "m_45dab3ea31e9264fe84dbf0e87c0de31f6ca66c6897c271ad7e3749379fe78da",
+        "m_51b0415da4c99e966e86fccd4150f6282d65345be7a9bd4915de8d6db882e9aa",
+        "m_7812109e1755f4f35adf099ec5f7ee14bbb368b38d686c032c141e1790265d43",
+        "m_98b7b6b639bcbf336be1efb796f80b2ab3409acafd80dec3aed1aa8bfd4bc895"
+      ],
+      "retrieved_memory_ids": [
+        "m_f53672becfac6583d80d746c39a18374919763a2a388664bb5397a1df8619b46",
+        "m_45dab3ea31e9264fe84dbf0e87c0de31f6ca66c6897c271ad7e3749379fe78da",
+        "m_51b0415da4c99e966e86fccd4150f6282d65345be7a9bd4915de8d6db882e9aa",
+        "m_7812109e1755f4f35adf099ec5f7ee14bbb368b38d686c032c141e1790265d43",
+        "m_98b7b6b639bcbf336be1efb796f80b2ab3409acafd80dec3aed1aa8bfd4bc895"
+      ],
+      "memory_sources": [
+        {
+          "memory_id": "m_f53672becfac6583d80d746c39a18374919763a2a388664bb5397a1df8619b46",
+          "content": "Andrew and his girlfriend love discovering new places to eat around town.",
+          "entity": "Andrew",
+          "attribute": "hobby",
+          "sources": [
+            {
+              "source_key": "3:D3:11",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-04-16T16:19:00",
+              "text": "My girlfriend and I love to discover new places to eat around town. It's a great way to try something new and wind down after a long week."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_45dab3ea31e9264fe84dbf0e87c0de31f6ca66c6897c271ad7e3749379fe78da",
+          "content": "Andrew lives in the city.",
+          "entity": "Andrew",
+          "attribute": "residence",
+          "sources": [
+            {
+              "source_key": "27:D27:9",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-11-04T19:59:00",
+              "text": "Thanks Audrey! That's so nice of you. I think I've managed to make it work with dogs while still living in the city."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_51b0415da4c99e966e86fccd4150f6282d65345be7a9bd4915de8d6db882e9aa",
+          "content": "Andrew tried out a new cafe in the city with his girlfriend last weekend.",
+          "entity": "Andrew",
+          "attribute": "recent_activity",
+          "sources": [
+            {
+              "source_key": "3:D3:1",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-04-16T16:19:00",
+              "text": "Hey Audrey! What's up? Missed chatting with ya! Check it out, my girl & I tried out that new cafe scene in the city last weekend! Super fun but kinda sad not being out in nature - that's when I feel like I'm really thriving. Oh man, I miss the peacefulness of being out on a hike."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_7812109e1755f4f35adf099ec5f7ee14bbb368b38d686c032c141e1790265d43",
+          "content": "Andrew lives in the city.",
+          "entity": "Andrew",
+          "attribute": "residence",
+          "sources": [
+            {
+              "source_key": "21:D21:5",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-10-04T16:18:00",
+              "text": "Haven't been to the beach in a while. Miss being outdoors. It's hard to find open spaces in the city. Used to hike a lot, but it's more challenging now with my work life balance."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        },
+        {
+          "memory_id": "m_98b7b6b639bcbf336be1efb796f80b2ab3409acafd80dec3aed1aa8bfd4bc895",
+          "content": "Andrew lives in the city.",
+          "entity": "Andrew",
+          "attribute": "residence",
+          "sources": [
+            {
+              "source_key": "23:D23:23",
+              "found": true,
+              "speaker": "Andrew",
+              "session_time": "2023-10-13T16:22:00",
+              "text": "Yeah, living in the city, I do miss nature a lot. Whenever I can, I try to go to nearby parks or on hikes. It's such a peaceful and joyful experience for me."
+            }
+          ],
+          "in_valid_memory_ids": true,
+          "in_retrieved_memory_ids": true
+        }
+      ],
+      "missing_valid_memory_ids": [],
+      "missing_retrieved_memory_ids": [],
+      "missing_source_refs": [],
+      "checks": {
+        "answer_build_id_matches_bundle": true,
+        "valid_memory_ids_field_present": true,
+        "valid_memory_ids_all_in_bundle": true,
+        "retrieved_memory_ids_derived_from_hits_all_in_bundle": true,
+        "all_selected_memory_source_refs_resolve": true,
+        "retrieval_hits_count": 5,
+        "valid_memory_count": 5,
+        "source_reference_count": 5,
+        "valid_memory_ids_nonempty": true,
+        "retrieval_hit_ids_all_present": true,
+        "valid_ids_subset_of_retrieved_ids": true,
+        "retrieval_build_id_matches_bundle": true,
+        "query_analysis_build_id_matches_bundle": true,
+        "conversation_ids_match": true,
+        "retrieved_memory_snapshots_match_bundle": true,
+        "each_selected_memory_has_source_ref": true,
+        "referenced_source_turn_conversation_ids_match": true
+      },
+      "semantic_review_status": "not_automatically_assessed; source resolution does not establish answer correctness or human acceptance"
+    }
+  ],
+  "summary": {
+    "question_count": 20,
+    "all_automatic_checks_passed": true,
+    "pass_counts_by_check": {
+      "answer_build_id_matches_bundle": 20,
+      "valid_memory_ids_field_present": 20,
+      "valid_memory_ids_all_in_bundle": 20,
+      "retrieved_memory_ids_derived_from_hits_all_in_bundle": 20,
+      "all_selected_memory_source_refs_resolve": 20,
+      "valid_memory_ids_nonempty": 20,
+      "retrieval_hit_ids_all_present": 20,
+      "valid_ids_subset_of_retrieved_ids": 20,
+      "retrieval_build_id_matches_bundle": 20,
+      "query_analysis_build_id_matches_bundle": 20,
+      "conversation_ids_match": 20,
+      "retrieved_memory_snapshots_match_bundle": 20,
+      "each_selected_memory_has_source_ref": 20,
+      "referenced_source_turn_conversation_ids_match": 20
+    },
+    "valid_memory_reference_occurrences": 100,
+    "retrieved_memory_reference_occurrences": 100,
+    "source_reference_occurrences": 104,
+    "unique_memories_count": 93,
+    "unique_source_turns_count": 95,
+    "missing_valid_memory_ids_count": 0,
+    "missing_retrieved_memory_ids_count": 0,
+    "missing_source_refs_count": 0,
+    "human_semantic_acceptance": "not_performed_by_this_audit"
+  },
+  "provenance": {
+    "read_only": true,
+    "external_api_calls": 0,
+    "files": [
+      {
+        "path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/final/dev/ours/answers.json",
+        "sha256": "d89c287c13c03d866bf4b982c4a6dda7111a52853320fedc9e1378704e351d7e"
+      },
+      {
+        "path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/final/test/ours/answers.json",
+        "sha256": "259c14e2e2051a2d8ea7056aeb5f27535337138734071eb268f5e49d316769bd"
+      },
+      {
+        "path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-26.json",
+        "sha256": "4834b4a92618e1fccacf793ffdb133af56b4a8d253ff583dfa7b2296a67bebec"
+      },
+      {
+        "path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-30.json",
+        "sha256": "a9ebd12c7c83c7e2054e7f49a88e6a0b9fb2da1be969af1a3216e7eee9cc2631"
+      },
+      {
+        "path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-41.json",
+        "sha256": "2097d4bc3f2a75e503a3d124b37861e702968432593bdba1d600a5e9a8f8732e"
+      },
+      {
+        "path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-42.json",
+        "sha256": "5395d0142c1ab31fd8c94e9e9d67a291197ebe60cd6655e1ec454197e4c1f848"
+      },
+      {
+        "path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-43.json",
+        "sha256": "81db05c6cb7e60f6325ef62d5ae940182f2ad5c63de6f3fbc652201146e65c4a"
+      },
+      {
+        "path": "/Users/zhangchongyang/Desktop/软工/软件需求工程/ZJU-Software-Requirements-Engineering-Project_副本/outputs/locomo-public/memory/conv-44.json",
+        "sha256": "a2281ea0130ae10b9b4c8c42d7f41d22a787d4c230d5031ba7df2a8ff20ae2be"
+      }
+    ]
+  }
+}
