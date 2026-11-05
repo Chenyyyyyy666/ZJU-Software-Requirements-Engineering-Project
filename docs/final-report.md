@@ -353,13 +353,13 @@ UPDATE 当前没有实现独立的结构化合并操作，不能把“保留供�
 | D13:1 | 2023-08-23 | 已申请收养机构 | adoption_status |
 | D19:1 | 2023-10-22 | 已通过收养机构面试 | adoption_interview_status |
 
-![图 2 已核对来源的收养进展事实时间线](figures/fig-02-state-evolution.png)
+![图 2 已核对来源的收养进展事实时间线](figures/fig-02-source-backed-adoption-conv26.png)
 
 *图 2：从本轮 `conv-26` MemoryBundle 自动读取的真实事实与原文。样本量：3 条 Memory，0 个评测问题；抽取配置：`6a02958d90c918c0`，`build_id=f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a`；生成日期：2026-11-04。箭头仅表示来源先后，不是系统预测或人工 gold 的关系类型。生成脚本：`experiments/draw_state_example.py`；可编辑 SVG 与完整 Memory ID、原文、构建身份及局限见同名 `.svg`、`.json`。*
 
 三条事实对应 Memory ID 前缀为 `m_5e5e0af5`、`m_3bfa6e18`、`m_e2a1d71f`。最后一条属性不同，当前分组规则可能漏掉跨属性关联。图 2 没有填写未经运行的 UPDATE 等关系标签；完整状态关系演化解释需以人工复核标签与冻结版运行补充。
 
-![图 2 补充：conv-30 的就业状态更新关系](figures/fig-02-state-relation-conv30.png)
+![图 2 补充：conv-30 的就业状态更新关系](figures/fig-02-state-evolution.png)
 
 *图 2 补充：该图来自 `conv-30` 的真实 Memory 与关系判定输出，箭头表示系统运行时判定的 UPDATE 关系，不是人工 gold。该案例用于展示状态解析机制；最终效果仍以独立测试集上的冻结版指标为准。*
 
