@@ -1,430 +1,378 @@
+"""Evaluate human-labelled memory pairs, or rescore recorded predictions offline.
 
-# experiments/evaluate_relations.py
+Use ``python -m experiments.evaluate_relations --help`` from the repository root.
+Gold labels, annotation rationale and evidence annotations are never passed to
+``judge_pair``. Every pair is bound to one immutable MemoryBundle build_id.
+"""
 
-import sys
+from __future__ import annotations
+
+import argparse
 import csv
+import hashlib
 import json
+import os
+import time
+from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
-# 项目根目录
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
 from dotenv import load_dotenv
 
-load_dotenv(PROJECT_ROOT / ".env")
-from src.common.models import Memory
-from src.reasoning.relation_judge import judge_pair
+from experiments.prepare_relation_labels import IDENTITY_FIELDS
+from src.common.json_io import write_json as atomic_write_json
+from src.common.models import Memory, MemoryBundle
+from src.memory.store import load_memories
+from src.reasoning.relation_judge import PROMPT_VERSION, SYSTEM_PROMPT, judge_pair
+
+LABELS = ("RETAIN", "UPDATE", "SUPERSEDE", "CONFLICT")
+PREDICTION_FIELDS = (
+    *IDENTITY_FIELDS,
+    "status",
+    "predicted_relation",
+    "model_reason",
+    "error",
+    "elapsed_seconds",
+    "total_tokens",
+    "model",
+    "prompt_version",
+)
 
 
-# =========================
-# 路径配置
-# =========================
-
-EXPERIMENT_DIR = Path(__file__).resolve().parent
-
-# 人工关系标注表
-SAMPLE_PATH = EXPERIMENT_DIR / "memory_pairs_gold.csv"
-
-# 自动生成的记忆文件
-MEMORY_DIR = PROJECT_ROOT / "outputs" / "memory"
-
-# 评估结果
-RESULT_OUT_PATH = EXPERIMENT_DIR / "relation_eval_results.csv"
-
-# 错误记录
-ERROR_OUT_PATH = EXPERIMENT_DIR / "relation-errors.csv"
-
-# 四种关系类型
-LABELS = ["RETAIN", "UPDATE", "SUPERSEDE", "CONFLICT"]
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-# =========================
-# 读取人工标注 CSV
-# =========================
-
-def load_samples() -> list[dict]:
-    if not SAMPLE_PATH.exists():
-        raise FileNotFoundError(
-            f"找不到人工标注文件：{SAMPLE_PATH}"
-        )
-
-    with open(
-        SAMPLE_PATH,
-        "r",
-        encoding="utf-8-sig",
-        newline=""
-    ) as f:
-        reader = csv.DictReader(f)
-        samples = list(reader)
-
-        required_fields = {
-            "pair_id",
-            "conversation_id",
-            "memory_a_id",
-            "memory_b_id",
-            "gold_relation",
-            "evidence",
-        }
-
-        actual_fields = set(reader.fieldnames or [])
-        missing = required_fields - actual_fields
-
+def read_csv(path: Path) -> list[dict[str, str]]:
+    with path.open(encoding="utf-8-sig", newline="") as handle:
+        reader = csv.DictReader(handle)
+        if reader.fieldnames is None:
+            raise ValueError(f"empty CSV: {path}")
+        missing = set(IDENTITY_FIELDS) - set(reader.fieldnames)
         if missing:
-            raise ValueError(
-                f"CSV 缺少必要字段：{missing}"
+            raise ValueError(f"CSV missing identity columns: {sorted(missing)}")
+        return [{key: (value or "").strip() for key, value in row.items()} for row in reader]
+
+
+def load_samples(path: Path) -> list[dict[str, str]]:
+    rows = read_csv(path)
+    if not rows:
+        raise ValueError("gold CSV contains no pairs")
+    seen = set()
+    for row in rows:
+        if any(not row.get(field) for field in IDENTITY_FIELDS):
+            raise ValueError("all identity fields, including build_id, must be non-empty")
+        if row["pair_id"] in seen:
+            raise ValueError(f"duplicate pair_id: {row['pair_id']}")
+        seen.add(row["pair_id"])
+        if row.get("gold_relation") not in LABELS:
+            raise ValueError(f"unlabelled/invalid gold_relation for {row['pair_id']}")
+        if not row.get("evidence"):
+            raise ValueError(f"missing human evidence references for {row['pair_id']}")
+        if not row.get("annotator"):
+            raise ValueError(f"missing annotator for {row['pair_id']}")
+    return rows
+
+
+def validate_pairs(
+    samples: list[dict[str, str]], memory_dir: Path
+) -> tuple[dict[str, tuple[Memory, Memory]], dict[str, str]]:
+    bundles: dict[str, MemoryBundle] = {}
+    inputs = {}
+    pairs = {}
+    for sample in samples:
+        conversation = sample["conversation_id"]
+        if conversation not in bundles:
+            path = memory_dir / f"{conversation}.json"
+            bundle = load_memories(path)
+            if bundle.conversation_id != conversation:
+                raise ValueError(f"MemoryBundle conversation mismatch: {conversation}")
+            bundles[conversation] = bundle
+            inputs[str(path)] = sha256_file(path)
+        bundle = bundles[conversation]
+        if bundle.build_info.build_id != sample["build_id"]:
+            raise ValueError(f"build_id mismatch for {sample['pair_id']}")
+        memories = {memory.memory_id: memory for memory in bundle.memories}
+        try:
+            a, b = memories[sample["memory_a_id"]], memories[sample["memory_b_id"]]
+        except KeyError as exc:
+            raise ValueError(f"missing memory ID for {sample['pair_id']}") from exc
+        if a.memory_id == b.memory_id:
+            raise ValueError(f"self-pair is invalid: {sample['pair_id']}")
+        if (
+            a.entity is None
+            or a.attribute is None
+            or (a.entity, a.attribute)
+            != (
+                b.entity,
+                b.attribute,
             )
-
-    if not samples:
-        raise ValueError("人工标注 CSV 没有数据")
-
-    return samples
-
-
-# =========================
-# 加载记忆文件
-# =========================
-
-def load_memory_bundle(conversation_id: str) -> dict:
-    """
-    加载一个 conversation 对应的记忆文件。
-    返回 memory_id -> memory_data 的字典。
-    """
-
-    bundle_path = MEMORY_DIR / f"{conversation_id}.json"
-
-    if not bundle_path.exists():
-        raise FileNotFoundError(
-            f"找不到记忆文件：{bundle_path}"
-        )
-
-    with open(bundle_path, "r", encoding="utf-8") as f:
-        bundle = json.load(f)
-
-    memories = bundle.get("memories", [])
-
-    return {
-        memory["memory_id"]: memory
-        for memory in memories
-    }
+        ):
+            raise ValueError(f"pair must share one non-empty entity/attribute: {sample['pair_id']}")
+        order = {turn.key: i for i, turn in enumerate(bundle.source_turns)}
+        if order[a.sources[-1].key] > order[b.sources[-1].key]:
+            raise ValueError(f"A must appear no later than B: {sample['pair_id']}")
+        allowed_evidence = {f"{ref.session_id}:{ref.turn_id}" for ref in [*a.sources, *b.sources]}
+        evidence = {item.strip() for item in sample["evidence"].split(";") if item.strip()}
+        if not evidence or not evidence <= allowed_evidence:
+            raise ValueError(
+                f"evidence must reference this pair's source keys: {sample['pair_id']}"
+            )
+        pairs[sample["pair_id"]] = a, b
+    return pairs, inputs
 
 
-# =========================
-# 构建 Memory 对象
-# =========================
+def read_predictions(path: Path, samples: list[dict[str, str]]) -> dict[str, dict[str, Any]]:
+    if path.suffix.lower() == ".csv":
+        rows = read_csv(path)
+    else:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        rows = payload.get("predictions", []) if isinstance(payload, dict) else payload
+        if not isinstance(rows, list):
+            raise ValueError("predictions JSON must be a list or contain predictions")
+    lookup = {sample["pair_id"]: sample for sample in samples}
+    predictions = {}
+    for row in rows:
+        pair_id = row.get("pair_id")
+        if pair_id not in lookup:
+            raise ValueError(f"prediction not in gold set: {pair_id}")
+        if pair_id in predictions:
+            raise ValueError(f"duplicate prediction: {pair_id}")
+        for field in IDENTITY_FIELDS:
+            if row.get(field) != lookup[pair_id][field]:
+                raise ValueError(f"prediction {field} mismatch: {pair_id}")
+        if (
+            row.get("status", "success") == "success"
+            and row.get("predicted_relation") not in LABELS
+        ):
+            raise ValueError(f"invalid predicted relation: {pair_id}")
+        predictions[pair_id] = {**row, "status": row.get("status", "success")}
+    return predictions
 
-def build_memory(memory_data: dict) -> Memory:
-    """
-    使用原始记忆数据构建 Memory 对象。
-    保留原始 entity、attribute、时间和 sources 等字段。
-    """
 
-    return Memory.model_validate(memory_data)
-
-
-# =========================
-# 标签规范化
-# =========================
-
-def normalize_label(label) -> str:
-    if hasattr(label, "value"):
-        label = label.value
-
-    return str(label).strip().upper()
-
-
-# =========================
-# Macro-F1 计算
-# =========================
-
-def calculate_macro_f1(cm: dict) -> float:
-    f1_scores = []
-
+def summarize(samples: list[dict], predictions: dict[str, dict]) -> dict[str, Any]:
+    cm = {gold: dict.fromkeys(LABELS, 0) for gold in LABELS}
+    failed_by_class = dict.fromkeys(LABELS, 0)
+    errors = []
+    correct = 0
+    for sample in samples:
+        pair_id = sample["pair_id"]
+        prediction = predictions.get(pair_id)
+        gold = sample["gold_relation"]
+        if prediction is None or prediction.get("status") != "success":
+            failed_by_class[gold] += 1
+            errors.append({**sample, "predicted_relation": "ERROR", "issue": "failed_or_missing"})
+            continue
+        predicted = prediction["predicted_relation"]
+        cm[gold][predicted] += 1
+        correct += predicted == gold
+        if predicted != gold:
+            errors.append({**sample, **prediction, "issue": "prediction_mismatch"})
+    successful = sum(sum(row.values()) for row in cm.values())
+    per_class = {}
     for label in LABELS:
         tp = cm[label][label]
-
-        fp = sum(
-            cm[gold][label]
-            for gold in LABELS
-            if gold != label
-        )
-
-        fn = sum(
-            cm[label][pred]
-            for pred in LABELS
-            if pred != label
-        )
-
-        precision = tp / (tp + fp) if tp + fp > 0 else 0.0
-        recall = tp / (tp + fn) if tp + fn > 0 else 0.0
-
-        if precision + recall == 0:
-            f1 = 0.0
-        else:
-            f1 = 2 * precision * recall / (precision + recall)
-
-        f1_scores.append(f1)
-
-    return sum(f1_scores) / len(f1_scores)
-
-
-# =========================
-# 主评估流程
-# =========================
-
-def main():
-
-    samples = load_samples()
-
-    # 缓存已经加载的 conversation 记忆
-    memory_cache = {}
-
-    # 混淆矩阵：行是真实标签，列是预测标签
-    confusion_matrix = {
-        gold: dict.fromkeys(LABELS, 0)
-        for gold in LABELS
+        support = sum(cm[label].values()) + failed_by_class[label]
+        predicted_count = sum(cm[gold][label] for gold in LABELS)
+        precision = tp / predicted_count if predicted_count else 0.0
+        recall = tp / support if support else 0.0
+        f1 = 2 * precision * recall / (precision + recall) if precision + recall else 0.0
+        per_class[label] = {
+            "support": support,
+            "successfully_evaluated": sum(cm[label].values()),
+            "failed_or_missing": failed_by_class[label],
+            "precision": precision,
+            "recall": recall,
+            "f1": f1,
+        }
+    return {
+        "total_pairs": len(samples),
+        "successfully_evaluated": successful,
+        "failed_or_missing": len(samples) - successful,
+        "correct": correct,
+        "accuracy": correct / len(samples),
+        "accuracy_successful_only": correct / successful if successful else None,
+        "macro_f1": sum(item["f1"] for item in per_class.values()) / len(LABELS),
+        "labels": list(LABELS),
+        "confusion_matrix": cm,
+        "failed_by_class": failed_by_class,
+        "per_class": per_class,
+        "denominator_policy": "accuracy and per-class recall include failed/missing predictions",
+        "sampling_limit": (
+            "targeted same-entity/attribute pairs; not an unbiased population estimate"
+        ),
+        "errors": errors,
     }
 
-    total = 0
-    correct = 0
-    failed = 0
 
-    result_rows = []
-    error_rows = []
+def write_json(path: Path, data: Any) -> None:
+    atomic_write_json(data, path)
 
-    print("=" * 60)
-    print("Dynamic Memory Relation Evaluation")
-    print("=" * 60)
-    print(f"Annotation samples: {len(samples)}")
-    print(f"Annotation file: {SAMPLE_PATH}")
-    print()
 
-    for index, sample in enumerate(samples, start=1):
-
-        pair_id = sample["pair_id"].strip()
-        conversation_id = sample["conversation_id"].strip()
-
-        memory_a_id = sample["memory_a_id"].strip()
-        memory_b_id = sample["memory_b_id"].strip()
-
-        gold_label = normalize_label(
-            sample["gold_relation"]
+def write_outputs(output_dir: Path, samples: list[dict], predictions: dict[str, dict]) -> dict:
+    ordered = [
+        predictions[pair_id]
+        for pair_id in (s["pair_id"] for s in samples)
+        if pair_id in predictions
+    ]
+    write_json(output_dir / "predictions.json", ordered)
+    with (output_dir / "relation_eval_results.csv").open(
+        "w", encoding="utf-8-sig", newline=""
+    ) as f:
+        writer = csv.DictWriter(f, fieldnames=PREDICTION_FIELDS, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(ordered)
+    summary = summarize(samples, predictions)
+    errors = summary.pop("errors")
+    write_json(output_dir / "metrics.json", summary)
+    error_fields = (
+        *IDENTITY_FIELDS,
+        "gold_relation",
+        "predicted_relation",
+        "issue",
+        "evidence",
+        "model_reason",
+    )
+    with (output_dir / "relation-errors.csv").open("w", encoding="utf-8-sig", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=error_fields, extrasaction="ignore")
+        writer.writeheader()
+        writer.writerows(errors)
+    parts = [
+        "# State relation evaluation",
+        "",
+        f"- Pairs: {summary['total_pairs']}",
+        f"- Success: {summary['successfully_evaluated']}; "
+        f"failed/missing: {summary['failed_or_missing']}",
+        f"- Accuracy (all pairs): {summary['accuracy']:.6f}",
+        f"- Macro-F1 (four fixed classes): {summary['macro_f1']:.6f}",
+        "- Rows = human gold, columns = prediction. API failures are reported separately.",
+        "- Targeted candidate sampling; this result does not estimate all possible memory pairs.",
+        "",
+        "| Gold / Pred | " + " | ".join(LABELS) + " | Failed |",
+        "| --- | " + " | ".join("---:" for _ in LABELS) + " | ---: |",
+    ]
+    for label in LABELS:
+        parts.append(
+            f"| {label} | "
+            + " | ".join(str(summary["confusion_matrix"][label][p]) for p in LABELS)
+            + f" | {summary['failed_by_class'][label]} |"
         )
+    (output_dir / "summary.md").write_text("\n".join(parts) + "\n", encoding="utf-8")
+    return summary
 
-        evidence = sample.get("evidence", "")
 
-        try:
+def live_prediction(sample: dict, pair: tuple[Memory, Memory], model: str) -> dict:
+    # This function receives only pair identity plus the two model Memory objects.
+    # Gold/evidence/annotator/rationale are intentionally not passed to judge_pair.
+    from src.reasoning.telemetry import capture_usage
 
-            # 检查人工标签
-            if gold_label not in LABELS:
-                raise ValueError(
-                    f"非法人工标签：{gold_label}"
-                )
+    identity = {field: sample[field] for field in IDENTITY_FIELDS}
+    started = time.perf_counter()
+    stats = None
+    try:
+        with capture_usage() as stats:
+            relation = judge_pair(*pair)
+        if relation.reason.startswith("judge failed:"):
+            raise ValueError("invalid model response after retries")
+        return {
+            **identity,
+            "status": "success",
+            "predicted_relation": relation.relation_type,
+            "model_reason": relation.reason,
+            "elapsed_seconds": time.perf_counter() - started,
+            "token_usage": stats.to_dict(),
+            "total_tokens": stats.to_dict().get("total_tokens"),
+            "model": model,
+            "prompt_version": PROMPT_VERSION,
+        }
+    except Exception as exc:
+        return {
+            **identity,
+            "status": "failed",
+            "predicted_relation": "",
+            "error": type(exc).__name__,
+            "elapsed_seconds": time.perf_counter() - started,
+            "token_usage": stats.to_dict() if stats is not None else None,
+            "total_tokens": stats.to_dict().get("total_tokens") if stats is not None else None,
+            "model": model,
+            "prompt_version": PROMPT_VERSION,
+        }
 
-            # 加载当前 conversation 的记忆
-            if conversation_id not in memory_cache:
-                memory_cache[conversation_id] = (
-                    load_memory_bundle(conversation_id)
-                )
 
-            memory_map = memory_cache[conversation_id]
-
-            # 检查 memory ID
-            if memory_a_id not in memory_map:
-                raise KeyError(
-                    f"memory_a_id 不存在：{memory_a_id}"
-                )
-
-            if memory_b_id not in memory_map:
-                raise KeyError(
-                    f"memory_b_id 不存在：{memory_b_id}"
-                )
-
-            # 构建两个 Memory 对象
-            mem_a = build_memory(
-                memory_map[memory_a_id]
+def main() -> None:
+    load_dotenv(Path.cwd() / ".env")
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--memory-dir", type=Path, required=True)
+    parser.add_argument("--gold", type=Path, required=True)
+    parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--predictions-input", type=Path, help="Offline: no model/API calls")
+    parser.add_argument("--model", default=os.environ.get("DEEPSEEK_MODEL", "deepseek-flash"))
+    parser.add_argument("--resume", action="store_true", help="Reuse successes; retry failed pairs")
+    parser.add_argument("--validate-only", action="store_true")
+    args = parser.parse_args()
+    samples = load_samples(args.gold)
+    pairs, memory_hashes = validate_pairs(samples, args.memory_dir)
+    if args.validate_only:
+        print(f"Validated {len(samples)} human-labelled, build-bound pairs; no API calls")
+        return
+    config = {
+        "gold_file": str(args.gold),
+        "gold_sha256": sha256_file(args.gold),
+        "evaluator_sha256": sha256_file(Path(__file__)),
+        "judge_sha256": sha256_file(
+            Path(__file__).resolve().parents[1] / "src/reasoning/relation_judge.py"
+        ),
+        "memory_sha256": memory_hashes,
+        "model": args.model,
+        "base_url": os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
+        "prompt_version": PROMPT_VERSION,
+        "prompt_sha256": hashlib.sha256(SYSTEM_PROMPT.encode()).hexdigest(),
+        "mode": "offline" if args.predictions_input else "live",
+        "predictions_sha256": sha256_file(args.predictions_input)
+        if args.predictions_input
+        else None,
+    }
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    manifest_path = args.output_dir / "manifest.json"
+    previous = {}
+    if manifest_path.exists():
+        previous = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if not args.resume or previous.get("config") != config:
+            parser.error(
+                "output exists; use a new output directory or --resume with identical inputs"
             )
-
-            mem_b = build_memory(
-                memory_map[memory_b_id]
-            )
-
-            # 调用关系判断模块
-            res = judge_pair(mem_a, mem_b)
-
-            pred_label = normalize_label(
-                res.relation_type
-            )
-
-            model_reason = getattr(
-                res,
-                "reason",
-                ""
-            )
-
-            if pred_label not in LABELS:
-                raise ValueError(
-                    f"模型返回非法标签：{pred_label}"
-                )
-
-            total += 1
-
-            # 更新混淆矩阵
-            confusion_matrix[gold_label][pred_label] += 1
-
-            is_correct = gold_label == pred_label
-
-            if is_correct:
-                correct += 1
-                status = "OK"
-            else:
-                status = "WRONG"
-
-            print(
-                f"[{status}] {pair_id:5} | "
-                f"gold={gold_label:10} "
-                f"pred={pred_label:10}"
-            )
-
-            # 保存每条预测结果
-            result_rows.append([
-                pair_id,
-                conversation_id,
-                memory_a_id,
-                memory_b_id,
-                gold_label,
-                pred_label,
-                is_correct,
-                evidence,
-                model_reason,
-            ])
-
-            # 保存预测错误的样本
-            if not is_correct:
-                error_rows.append([
-                    pair_id,
-                    gold_label,
-                    pred_label,
-                    "prediction mismatch",
-                    evidence,
-                    model_reason,
-                ])
-
-        except Exception as e:
-
-            failed += 1
-
-            print(
-                f"[FAIL] {pair_id} | "
-                f"{type(e).__name__}: {e}"
-            )
-
-            error_rows.append([
-                pair_id,
-                gold_label,
-                "ERROR",
-                str(e),
-                evidence,
-                "",
-            ])
-
-    # =========================
-    # 计算评估指标
-    # =========================
-
-    accuracy = correct / total if total > 0 else 0.0
-
-    macro_f1 = calculate_macro_f1(
-        confusion_matrix
+    started_at = previous.get("started_at", datetime.now(UTC).isoformat())
+    write_json(manifest_path, {"config": config, "started_at": started_at})
+    if args.predictions_input:
+        predictions = read_predictions(args.predictions_input, samples)
+    else:
+        load_dotenv(Path.cwd() / ".env")
+        os.environ["DEEPSEEK_MODEL"] = args.model
+        checkpoint = args.output_dir / "predictions.json"
+        predictions = (
+            read_predictions(checkpoint, samples) if args.resume and checkpoint.exists() else {}
+        )
+        for sample in samples:
+            pair_id = sample["pair_id"]
+            if predictions.get(pair_id, {}).get("status") == "success":
+                continue
+            predictions[pair_id] = live_prediction(sample, pairs[pair_id], args.model)
+            # Save each result before the next API call, so interrupted runs resume.
+            write_outputs(args.output_dir, samples, predictions)
+            print(f"{pair_id}: {predictions[pair_id]['status']}", flush=True)
+    summary = write_outputs(args.output_dir, samples, predictions)
+    write_json(
+        manifest_path,
+        {
+            "config": config,
+            "started_at": started_at,
+            "completed_at": datetime.now(UTC).isoformat(),
+            "summary": summary,
+        },
     )
-
-    print("\n" + "=" * 60)
-    print("Evaluation Summary")
-    print("=" * 60)
-
-    print(f"Total annotation pairs: {len(samples)}")
-    print(f"Successfully evaluated: {total}")
-    print(f"Correct predictions: {correct}")
-    print(f"Failed samples: {failed}")
-    print(f"Accuracy: {accuracy:.4f}")
-    print(f"Macro-F1: {macro_f1:.4f}")
-
-    # =========================
-    # 输出混淆矩阵
-    # =========================
-
-    print("\nConfusion Matrix (Gold / Predicted)")
-
-    print(
-        f"{'Gold / Pred':<14}"
-        + "".join(f"{label:<12}" for label in LABELS)
-    )
-
-    for gold in LABELS:
-
-        row = f"{gold:<14}"
-
-        for pred in LABELS:
-            row += f"{confusion_matrix[gold][pred]:<12}"
-
-        print(row)
-
-    # =========================
-    # 保存预测结果
-    # =========================
-
-    with open(
-        RESULT_OUT_PATH,
-        "w",
-        encoding="utf-8-sig",
-        newline=""
-    ) as f:
-
-        writer = csv.writer(f)
-
-        writer.writerow([
-            "pair_id",
-            "conversation_id",
-            "memory_a_id",
-            "memory_b_id",
-            "gold_relation",
-            "predicted_relation",
-            "correct",
-            "evidence",
-            "model_reason",
-        ])
-
-        writer.writerows(result_rows)
-
-    # =========================
-    # 保存错误记录
-    # =========================
-
-    with open(
-        ERROR_OUT_PATH,
-        "w",
-        encoding="utf-8-sig",
-        newline=""
-    ) as f:
-
-        writer = csv.writer(f)
-
-        writer.writerow([
-            "pair_id",
-            "gold_relation",
-            "predicted_relation",
-            "issue",
-            "evidence",
-            "model_reason",
-        ])
-
-        writer.writerows(error_rows)
-
-    print("\n" + "=" * 60)
-    print("Output Files")
-    print("=" * 60)
-
-    print(f"Prediction results: {RESULT_OUT_PATH}")
-    print(f"Error cases: {ERROR_OUT_PATH}")
+    print(json.dumps(summary, ensure_ascii=False, indent=2))
+    if summary["failed_or_missing"]:
+        raise SystemExit(2)
 
 
 if __name__ == "__main__":

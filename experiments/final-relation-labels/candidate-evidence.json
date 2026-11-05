@@ -1,0 +1,3662 @@
+[
+  {
+    "pair_id": "p_f3188f20210ab7fa5f20",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_1a8a4934accdf4d4ab88a96b2107f24b1f1e2a5deb6c94de404937c3db06d695",
+    "memory_b_id": "m_051aef9f7f93b082f947df4e230df756ff21e23041c6d32f80a5fb975eca8c09",
+    "memory_a": {
+      "content": "Caroline is learning the piano.",
+      "entity": "Caroline",
+      "attribute": "activity",
+      "value": "learning the piano",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 5,
+          "turn_id": "D5:5"
+        }
+      ],
+      "memory_id": "m_1a8a4934accdf4d4ab88a96b2107f24b1f1e2a5deb6c94de404937c3db06d695",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-03T13:36:00"
+    },
+    "memory_b": {
+      "content": "Caroline is creating a library for when she has kids.",
+      "entity": "Caroline",
+      "attribute": "activity",
+      "value": "creating a library for future kids",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 6,
+          "turn_id": "D6:7"
+        }
+      ],
+      "memory_id": "m_051aef9f7f93b082f947df4e230df756ff21e23041c6d32f80a5fb975eca8c09",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-06T20:18:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 5,
+        "turn_id": "D5:5",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-03T13:36:00",
+        "text": "Wow, Melanie! I'm getting creative too, just learning the piano. What made you try pottery?"
+      },
+      {
+        "session_id": 6,
+        "turn_id": "D6:7",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-06T20:18:00",
+        "text": "Being a mom is awesome. I'm creating a library for when I have kids. I'm really looking forward to reading to them and opening up their minds."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_1218786d83fd4a4f91c4",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_5e5e0af5adefa105a974cdcc808c516e37409e918d6d61a2dfadbeeac1ae0c93",
+    "memory_b_id": "m_70a73225ee15a21ec4f05497b6952f5619f434a8e8630d00e2660a86006ec05d",
+    "memory_a": {
+      "content": "Caroline is researching adoption agencies.",
+      "entity": "Caroline",
+      "attribute": "adoption_status",
+      "value": "researching adoption agencies",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:8"
+        }
+      ],
+      "memory_id": "m_5e5e0af5adefa105a974cdcc808c516e37409e918d6d61a2dfadbeeac1ae0c93",
+      "conversation_id": "conv-26",
+      "session_time": "2023-05-25T13:14:00"
+    },
+    "memory_b": {
+      "content": "Caroline is determined to adopt.",
+      "entity": "Caroline",
+      "attribute": "adoption_status",
+      "value": "determined to adopt",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:9"
+        }
+      ],
+      "memory_id": "m_70a73225ee15a21ec4f05497b6952f5619f434a8e8630d00e2660a86006ec05d",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-15T13:51:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 2,
+        "turn_id": "D2:8",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-05-25T13:14:00",
+        "text": "Researching adoption agencies — it's been a dream to have a family and give a loving home to kids who need it."
+      },
+      {
+        "session_id": 8,
+        "turn_id": "D8:9",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-15T13:51:00",
+        "text": "That photo is stunning! So glad you bonded over our love of nature. Last Friday I went to a council meeting for adoption. It was inspiring and emotional - so many people wanted to create loving homes for children in need. It made me even more determined to adopt."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_21eac39dccd0d1f1c4cf",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_5156466f093e5b9c5a7ec37df863519474181f2914a9b26524eb1aff39386d4b",
+    "memory_b_id": "m_74a79c739bb6de75c73368cfaacba229fea97b5da79812c39ec27351b1a15d8b",
+    "memory_a": {
+      "content": "Caroline's art represents inclusivity and diversity.",
+      "entity": "Caroline",
+      "attribute": "art_theme",
+      "value": "inclusivity and diversity",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 11,
+          "turn_id": "D11:8"
+        }
+      ],
+      "memory_id": "m_5156466f093e5b9c5a7ec37df863519474181f2914a9b26524eb1aff39386d4b",
+      "conversation_id": "conv-26",
+      "session_time": "2023-08-14T14:24:00"
+    },
+    "memory_b": {
+      "content": "Caroline's art is about expressing her trans experience.",
+      "entity": "Caroline",
+      "attribute": "art_theme",
+      "value": "expressing her trans experience",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 11,
+          "turn_id": "D11:10"
+        }
+      ],
+      "memory_id": "m_74a79c739bb6de75c73368cfaacba229fea97b5da79812c39ec27351b1a15d8b",
+      "conversation_id": "conv-26",
+      "session_time": "2023-08-14T14:24:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 11,
+        "turn_id": "D11:8",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-08-14T14:24:00",
+        "text": "That pic is cool! Representing inclusivity and diversity in my art is important to me. I also use it to speak up for the LGBTQ+ community and push for acceptance. Here's a recent painting!"
+      },
+      {
+        "session_id": 11,
+        "turn_id": "D11:10",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-08-14T14:24:00",
+        "text": "My art is about expressing my trans experience. It's my way of showing my story and helping people understand the trans community."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_452fbf6a92334cfe045d",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_a53f308d5536723a399941f1db74c5e602904268e8e8effcba0ccc1f336b2ea7",
+    "memory_b_id": "m_d6282e0f8b7b765d933f4052afc40d3ca739c57371354949ce1b28bf95fd2c6d",
+    "memory_a": {
+      "content": "Caroline created a painting titled 'Embracing Identity'.",
+      "entity": "Caroline",
+      "attribute": "artwork",
+      "value": "Embracing Identity",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 11,
+          "turn_id": "D11:12"
+        }
+      ],
+      "memory_id": "m_a53f308d5536723a399941f1db74c5e602904268e8e8effcba0ccc1f336b2ea7",
+      "conversation_id": "conv-26",
+      "session_time": "2023-08-14T14:24:00"
+    },
+    "memory_b": {
+      "content": "Caroline made a self-portrait last week.",
+      "entity": "Caroline",
+      "attribute": "artwork",
+      "value": "self-portrait",
+      "time_expression": "last week",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 13,
+          "turn_id": "D13:11"
+        }
+      ],
+      "memory_id": "m_d6282e0f8b7b765d933f4052afc40d3ca739c57371354949ce1b28bf95fd2c6d",
+      "conversation_id": "conv-26",
+      "session_time": "2023-08-23T15:31:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 11,
+        "turn_id": "D11:12",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-08-14T14:24:00",
+        "text": "Thanks, Melanie. Here's one- 'Embracing Identity' is all about finding comfort and love in being yourself. The woman in the painting stands for the journey of acceptance. My aim was to show warmth, love and self-acceptance."
+      },
+      {
+        "session_id": 13,
+        "turn_id": "D13:11",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-08-23T15:31:00",
+        "text": "Painting's great for expressing myself. I love creating art! Here's a recent self-portrait I made last week."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_cab3b3e560da93b53a39",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_31df328936190a19841568e9b6cf4024466070985791e30b02b224322a057d7b",
+    "memory_b_id": "m_bf832b5c0384a6f2a5fb02beec8e1748f471b679701a14f9cf7ea5f3563375b3",
+    "memory_a": {
+      "content": "Caroline is interested in counseling or working in mental health.",
+      "entity": "Caroline",
+      "attribute": "career_interest",
+      "value": "counseling or mental health",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:11"
+        }
+      ],
+      "memory_id": "m_31df328936190a19841568e9b6cf4024466070985791e30b02b224322a057d7b",
+      "conversation_id": "conv-26",
+      "session_time": "2023-05-08T13:56:00"
+    },
+    "memory_b": {
+      "content": "Caroline is looking into counseling and mental health as a career.",
+      "entity": "Caroline",
+      "attribute": "career_interest",
+      "value": "counseling and mental health",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 4,
+          "turn_id": "D4:11"
+        }
+      ],
+      "memory_id": "m_bf832b5c0384a6f2a5fb02beec8e1748f471b679701a14f9cf7ea5f3563375b3",
+      "conversation_id": "conv-26",
+      "session_time": "2023-06-27T10:37:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 1,
+        "turn_id": "D1:11",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-05-08T13:56:00",
+        "text": "I'm keen on counseling or working in mental health - I'd love to support those with similar issues."
+      },
+      {
+        "session_id": 4,
+        "turn_id": "D4:11",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-06-27T10:37:00",
+        "text": "Lately, I've been looking into counseling and mental health as a career. I want to help people who have gone through the same things as me."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_cde8ade2e195b2c78559",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_967586709a560f913ebead0e99a1146fe07fede410b6fd84baba42cf27393e42",
+    "memory_b_id": "m_b62c9193c5486e72cc2849fc616e40b69229a399805416701dea9a54ffc59d9c",
+    "memory_a": {
+      "content": "Caroline felt proud and grateful, found the vibes amazing, and felt comforted knowing she is not alone and has a great community around her.",
+      "entity": "Caroline",
+      "attribute": "emotional_state",
+      "value": "proud, grateful, comforted by community support",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:21"
+        }
+      ],
+      "memory_id": "m_967586709a560f913ebead0e99a1146fe07fede410b6fd84baba42cf27393e42",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-15T13:51:00"
+    },
+    "memory_b": {
+      "content": "Caroline felt it was awesome being around people who embrace and back her up, and it inspired her.",
+      "entity": "Caroline",
+      "attribute": "emotional_state",
+      "value": "inspired by supportive people",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:23"
+        }
+      ],
+      "memory_id": "m_b62c9193c5486e72cc2849fc616e40b69229a399805416701dea9a54ffc59d9c",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-15T13:51:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 8,
+        "turn_id": "D8:21",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-15T13:51:00",
+        "text": "I felt so proud and grateful - the vibes were amazing and it was comforting to know I'm not alone and have a great community around me."
+      },
+      {
+        "session_id": 8,
+        "turn_id": "D8:23",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-15T13:51:00",
+        "text": "It was awesome, Melanie! Being around people who embrace and back me up is beyond words. It really inspired me."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_158398ad40fe83124775",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_e720faf95e8a2bfcdc964f7a4e3a12b7655fa0541a2ce3b351b5c0494edaf2fa",
+    "memory_b_id": "m_6e5cc1ee5cafde8f6cdaf4fe35f4c38f27b62b72a258a4d0d7971470706f2a97",
+    "memory_a": {
+      "content": "Caroline went to an LGBTQ conference two days before the conversation.",
+      "entity": "Caroline",
+      "attribute": "event_attendance",
+      "value": "attended an LGBTQ conference",
+      "time_expression": "two days ago",
+      "event_time": "2023-07-10",
+      "event_time_precision": "day",
+      "sources": [
+        {
+          "session_id": 7,
+          "turn_id": "D7:1"
+        }
+      ],
+      "memory_id": "m_e720faf95e8a2bfcdc964f7a4e3a12b7655fa0541a2ce3b351b5c0494edaf2fa",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-12T16:33:00"
+    },
+    "memory_b": {
+      "content": "Caroline went to a poetry reading last Friday.",
+      "entity": "Caroline",
+      "attribute": "event_attendance",
+      "value": "attended a poetry reading",
+      "time_expression": "last Fri",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 17,
+          "turn_id": "D17:17"
+        }
+      ],
+      "memory_id": "m_6e5cc1ee5cafde8f6cdaf4fe35f4c38f27b62b72a258a4d0d7971470706f2a97",
+      "conversation_id": "conv-26",
+      "session_time": "2023-10-13T10:31:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 7,
+        "turn_id": "D7:1",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-12T16:33:00",
+        "text": "Hey Mel, great to chat with you again! So much has happened since we last spoke - I went to an LGBTQ conference two days ago and it was really special. I got the chance to meet and connect with people who've gone through similar journeys. It was such a welcoming environment and I felt totally accepted. I'm really thankful for this amazing community - it's shown me how important it is to fight for trans rights and spread awareness."
+      },
+      {
+        "session_id": 17,
+        "turn_id": "D17:17",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-10-13T10:31:00",
+        "text": "Yeah, it's very calming. It's awesome how art can show emotions. By the way, I went to a poetry reading last Fri - it was really powerful! Ever been to one?"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_436055a9b0570fd1e366",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_1972d6162b5bb35146a6211650591984e4830cba9a43541cc13a8e3110c812d4",
+    "memory_b_id": "m_3cc915312c70ffeddcb3dfdd711ae5cf1c04305ec689b34f100ec88254a1aa96",
+    "memory_a": {
+      "content": "Caroline is transgender.",
+      "entity": "Caroline",
+      "attribute": "gender_identity",
+      "value": "transgender",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 9,
+          "turn_id": "D9:6"
+        }
+      ],
+      "memory_id": "m_1972d6162b5bb35146a6211650591984e4830cba9a43541cc13a8e3110c812d4",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-17T14:31:00"
+    },
+    "memory_b": {
+      "content": "Caroline is trans.",
+      "entity": "Caroline",
+      "attribute": "gender_identity",
+      "value": "trans",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 11,
+          "turn_id": "D11:10"
+        }
+      ],
+      "memory_id": "m_3cc915312c70ffeddcb3dfdd711ae5cf1c04305ec689b34f100ec88254a1aa96",
+      "conversation_id": "conv-26",
+      "session_time": "2023-08-14T14:24:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 9,
+        "turn_id": "D9:6",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-17T14:31:00",
+        "text": "I mentor a transgender teen just like me. We've been working on building up confidence and finding positive strategies, and it's really been paying off! We had a great time at the LGBT pride event last month."
+      },
+      {
+        "session_id": 11,
+        "turn_id": "D11:10",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-08-14T14:24:00",
+        "text": "My art is about expressing my trans experience. It's my way of showing my story and helping people understand the trans community."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_20461745817d54748c24",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_e6ec059a83c61765c217000287b796b4b0cc5cb756050586cf09a16d169b17d5",
+    "memory_b_id": "m_c106fac880ae4d0f9494a2475aa8845232729f75c216b3bb81726975001490e6",
+    "memory_a": {
+      "content": "Caroline wants to live authentically and help others do the same.",
+      "entity": "Caroline",
+      "attribute": "goal",
+      "value": "live authentically and help others do the same",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 13,
+          "turn_id": "D13:15"
+        }
+      ],
+      "memory_id": "m_e6ec059a83c61765c217000287b796b4b0cc5cb756050586cf09a16d169b17d5",
+      "conversation_id": "conv-26",
+      "session_time": "2023-08-23T15:31:00"
+    },
+    "memory_b": {
+      "content": "Caroline's goal is to have a family.",
+      "entity": "Caroline",
+      "attribute": "goal",
+      "value": "having a family",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:1"
+        }
+      ],
+      "memory_id": "m_c106fac880ae4d0f9494a2475aa8845232729f75c216b3bb81726975001490e6",
+      "conversation_id": "conv-26",
+      "session_time": "2023-10-22T09:55:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 13,
+        "turn_id": "D13:15",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-08-23T15:31:00",
+        "text": "Thanks, Melanie. Art gives me a sense of freedom, but so does having supportive people around, promoting LGBTQ rights and being true to myself. I want to live authentically and help others to do the same."
+      },
+      {
+        "session_id": 19,
+        "turn_id": "D19:1",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-10-22T09:55:00",
+        "text": "Woohoo Melanie! I passed the adoption agency interviews last Friday! I'm so excited and thankful. This is a big move towards my goal of having a family."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_edb68602520b468db784",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_2cfdadf6638f8c15617069d5154f1a1fb2a7b31463747494ad7547433b77b2c6",
+    "memory_b_id": "m_429ec7cb6196929483103d9e20a448f3f18f7cbb4f9a2460ff1b6b8e5bd3231d",
+    "memory_a": {
+      "content": "Caroline has always had a love for horses.",
+      "entity": "Caroline",
+      "attribute": "interest",
+      "value": "love for horses",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 13,
+          "turn_id": "D13:7"
+        }
+      ],
+      "memory_id": "m_2cfdadf6638f8c15617069d5154f1a1fb2a7b31463747494ad7547433b77b2c6",
+      "conversation_id": "conv-26",
+      "session_time": "2023-08-23T15:31:00"
+    },
+    "memory_b": {
+      "content": "Caroline loves creating art.",
+      "entity": "Caroline",
+      "attribute": "interest",
+      "value": "creating art",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 13,
+          "turn_id": "D13:11"
+        }
+      ],
+      "memory_id": "m_429ec7cb6196929483103d9e20a448f3f18f7cbb4f9a2460ff1b6b8e5bd3231d",
+      "conversation_id": "conv-26",
+      "session_time": "2023-08-23T15:31:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 13,
+        "turn_id": "D13:7",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-08-23T15:31:00",
+        "text": "That's so funny! I used to go horseback riding with my dad when I was a kid, we'd go through the fields, feeling the wind. It was so special. I've always had a love for horses!"
+      },
+      {
+        "session_id": 13,
+        "turn_id": "D13:11",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-08-23T15:31:00",
+        "text": "Painting's great for expressing myself. I love creating art! Here's a recent self-portrait I made last week."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_5b9a4570e79abe8e27c6",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_7b163b15e0a70276a3f7185f45590b4296b013332c17b3a21c54f54df161f26d",
+    "memory_b_id": "m_63e2d9249a82f981a3f480f042517dd34835025b6fcff3b3978c7f72165bc0a9",
+    "memory_a": {
+      "content": "Caroline painted a painting after visiting an LGBTQ center, aiming to capture everyone's unity and strength.",
+      "entity": "Caroline",
+      "attribute": "painting_inspiration",
+      "value": "visited an LGBTQ center; wanted to capture unity and strength",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 9,
+          "turn_id": "D9:16"
+        }
+      ],
+      "memory_id": "m_7b163b15e0a70276a3f7185f45590b4296b013332c17b3a21c54f54df161f26d",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-17T14:31:00"
+    },
+    "memory_b": {
+      "content": "Caroline painted a sunset after visiting the beach last week.",
+      "entity": "Caroline",
+      "attribute": "painting_inspiration",
+      "value": "painted a sunset after visiting the beach",
+      "time_expression": "last week",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 14,
+          "turn_id": "D14:7"
+        }
+      ],
+      "memory_id": "m_63e2d9249a82f981a3f480f042517dd34835025b6fcff3b3978c7f72165bc0a9",
+      "conversation_id": "conv-26",
+      "session_time": "2023-08-25T13:33:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 9,
+        "turn_id": "D9:16",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-17T14:31:00",
+        "text": "Thanks, Melanie! I painted this after I visited a LGBTQ center. I wanted to capture everyone's unity and strength."
+      },
+      {
+        "session_id": 14,
+        "turn_id": "D14:7",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-08-25T13:33:00",
+        "text": "Thanks, Melanie! I painted it after I visited the beach last week. Just seeing the sun dip below the horizon, all the amazing colors - it was amazing and calming. So I just had to try to capture that feeling in my painting."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_55bc9cf21db48b016b37",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_2b69c3bc5b63d7124ecfc097d5201f930b8c16dfaff57ddc27a45e34928a1089",
+    "memory_b_id": "m_061b9472ef0796493a24978217c3a27723eea81c93bc89cbf1a29bfb02538dac",
+    "memory_a": {
+      "content": "Caroline went to an LGBTQ+ counseling workshop last Friday.",
+      "entity": "Caroline",
+      "attribute": "recent_activity",
+      "value": "attended an LGBTQ+ counseling workshop",
+      "time_expression": "last Friday",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 4,
+          "turn_id": "D4:13"
+        }
+      ],
+      "memory_id": "m_2b69c3bc5b63d7124ecfc097d5201f930b8c16dfaff57ddc27a45e34928a1089",
+      "conversation_id": "conv-26",
+      "session_time": "2023-06-27T10:37:00"
+    },
+    "memory_b": {
+      "content": "Caroline had a picnic with friends and family last week.",
+      "entity": "Caroline",
+      "attribute": "recent_activity",
+      "value": "picnic with friends and family",
+      "time_expression": "last week",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 6,
+          "turn_id": "D6:11"
+        }
+      ],
+      "memory_id": "m_061b9472ef0796493a24978217c3a27723eea81c93bc89cbf1a29bfb02538dac",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-06T20:18:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 4,
+        "turn_id": "D4:13",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-06-27T10:37:00",
+        "text": "I'm still figuring out the details, but I'm thinking of working with trans people, helping them accept themselves and supporting their mental health. Last Friday, I went to an LGBTQ+ counseling workshop and it was really enlightening. They talked about different therapeutic methods and how to best work with trans people. Seeing how passionate these pros were about making a safe space for people like me was amazing."
+      },
+      {
+        "session_id": 6,
+        "turn_id": "D6:11",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-06T20:18:00",
+        "text": "Wow, that's great! It sure shows how important friendship and compassion are. It's made me appreciate how lucky I am to have my friends and family helping with my transition. They make all the difference. We even had a picnic last week!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_5c01560bd8966d56e8ac",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_030d47e8a82d398bfbee201766db38f68498f3639377dc76ab10b73b9dfd4fcd",
+    "memory_b_id": "m_dce9525ef76cbfa3319a06c5939bed9988272f325b195e6cee76a5909092cf12",
+    "memory_a": {
+      "content": "Caroline's friends and family are helping with her transition.",
+      "entity": "Caroline",
+      "attribute": "support_system",
+      "value": "friends and family helping with transition",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 6,
+          "turn_id": "D6:11"
+        }
+      ],
+      "memory_id": "m_030d47e8a82d398bfbee201766db38f68498f3639377dc76ab10b73b9dfd4fcd",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-06T20:18:00"
+    },
+    "memory_b": {
+      "content": "Caroline finds it helpful to have people around her who accept and support her.",
+      "entity": "Caroline",
+      "attribute": "support_system",
+      "value": "helpful to have accepting and supportive people",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 12,
+          "turn_id": "D12:1"
+        }
+      ],
+      "memory_id": "m_dce9525ef76cbfa3319a06c5939bed9988272f325b195e6cee76a5909092cf12",
+      "conversation_id": "conv-26",
+      "session_time": "2023-08-17T13:50:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 6,
+        "turn_id": "D6:11",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-06T20:18:00",
+        "text": "Wow, that's great! It sure shows how important friendship and compassion are. It's made me appreciate how lucky I am to have my friends and family helping with my transition. They make all the difference. We even had a picnic last week!"
+      },
+      {
+        "session_id": 12,
+        "turn_id": "D12:1",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-08-17T13:50:00",
+        "text": "Hey Mel! How're ya doin'? Recently, I had a not-so-great experience on a hike. I ran into a group of religious conservatives who said something that really upset me. It made me think how much work we still have to do for LGBTQ rights. It's been so helpful to have people around me who accept and support me, so I know I'll be ok!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_cafd79c09419a90055b5",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_ca6021bb9f8e7d911a30a0a1238b9088ac7e3335cd5d54cab935d61000f67a38",
+    "memory_b_id": "m_3537f81ef72bd9237c9271e8f2415d415f6d76fb3aa5b8f2a5d079260182479b",
+    "memory_a": {
+      "content": "Caroline said the best part was realizing she can be herself without fear and having the courage to transition.",
+      "entity": "Caroline",
+      "attribute": "transition_status",
+      "value": "has courage to transition; can be herself without fear",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:25"
+        }
+      ],
+      "memory_id": "m_ca6021bb9f8e7d911a30a0a1238b9088ac7e3335cd5d54cab935d61000f67a38",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-15T13:51:00"
+    },
+    "memory_b": {
+      "content": "Caroline transitioned, which was not easy.",
+      "entity": "Caroline",
+      "attribute": "transition_status",
+      "value": "transitioned",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:9"
+        }
+      ],
+      "memory_id": "m_3537f81ef72bd9237c9271e8f2415d415f6d76fb3aa5b8f2a5d079260182479b",
+      "conversation_id": "conv-26",
+      "session_time": "2023-10-22T09:55:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 8,
+        "turn_id": "D8:25",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-15T13:51:00",
+        "text": "Realizing I can be me without fear and having the courage to transition was the best part. It's so freeing to express myself authentically and have people back me up."
+      },
+      {
+        "session_id": 19,
+        "turn_id": "D19:9",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-10-22T09:55:00",
+        "text": "Thanks, Melanie. Transitioning wasn't easy and acceptance wasn't either, but the help I got from friends, family and people I looked up to was invaluable. They boosted me through tough times and helped me find out who I really am. That's why I want to pass that same support to anyone who needs it. Bringing others comfort and helping them grow brings me such joy."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_2af4137cedfe521c44df",
+    "conversation_id": "conv-26",
+    "build_id": "f52d278777f4a07ae1df43430f48b08598ffa08a01fbbfb57e22fccc0f82a76a",
+    "memory_a_id": "m_b9e1444b1cf5d163b64582d553544e59fa7ff6468a3ff19d587eb35928106e4d",
+    "memory_b_id": "m_54c0a6046552ade9cfad20c92c8f6510e6618903332b0d221ea76b538b2e6596",
+    "memory_a": {
+      "content": "Caroline is going to a transgender conference this month.",
+      "entity": "Caroline",
+      "attribute": "upcoming_event",
+      "value": "attending a transgender conference",
+      "time_expression": "this month",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 5,
+          "turn_id": "D5:13"
+        }
+      ],
+      "memory_id": "m_b9e1444b1cf5d163b64582d553544e59fa7ff6468a3ff19d587eb35928106e4d",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-03T13:36:00"
+    },
+    "memory_b": {
+      "content": "Caroline is having an LGBTQ art show with her paintings next month.",
+      "entity": "Caroline",
+      "attribute": "upcoming_event",
+      "value": "LGBTQ art show with her paintings",
+      "time_expression": "next month",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 9,
+          "turn_id": "D9:12"
+        }
+      ],
+      "memory_id": "m_54c0a6046552ade9cfad20c92c8f6510e6618903332b0d221ea76b538b2e6596",
+      "conversation_id": "conv-26",
+      "session_time": "2023-07-17T14:31:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 5,
+        "turn_id": "D5:13",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-03T13:36:00",
+        "text": "Thanks Mel! I'm going to a transgender conference this month. I'm so excited to meet other people in the community and learn more about advocacy. It's gonna be great!"
+      },
+      {
+        "session_id": 9,
+        "turn_id": "D9:12",
+        "conversation_id": "conv-26",
+        "speaker": "Caroline",
+        "session_time": "2023-07-17T14:31:00",
+        "text": "Yay! Next month I'm having an LGBTQ art show with my paintings - can't wait!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_4c132518ac3f938a1adb",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_721cf3f65786ff4407fc9bac7c22e34f868fc14d178bb7085db3a4208ce88325",
+    "memory_b_id": "m_973210ee28bbc00a0d4dda28f6e82f5a769a4cfad1641587127bd24adcf7302e",
+    "memory_a": {
+      "content": "Gina is working on building relationships and creating a strong brand image for her store.",
+      "entity": "Gina",
+      "attribute": "business_focus",
+      "value": "building relationships and creating a strong brand image",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 7,
+          "turn_id": "D7:6"
+        }
+      ],
+      "memory_id": "m_721cf3f65786ff4407fc9bac7c22e34f868fc14d178bb7085db3a4208ce88325",
+      "conversation_id": "conv-30",
+      "session_time": "2023-03-23T19:28:00"
+    },
+    "memory_b": {
+      "content": "Gina combines dance and fashion in her clothing business.",
+      "entity": "Gina",
+      "attribute": "business_focus",
+      "value": "combining dance and fashion",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:8"
+        }
+      ],
+      "memory_id": "m_973210ee28bbc00a0d4dda28f6e82f5a769a4cfad1641587127bd24adcf7302e",
+      "conversation_id": "conv-30",
+      "session_time": "2023-04-03T13:26:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 7,
+        "turn_id": "D7:6",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-03-23T19:28:00",
+        "text": "Thanks for the advice, Jon! Building relationships and creating a strong brand image for my store is something I'm always working on. You're right, staying positive is key. What helps you stay motivated with your dance studio business?"
+      },
+      {
+        "session_id": 8,
+        "turn_id": "D8:8",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-04-03T13:26:00",
+        "text": "Thanks! I'm passionate about dance and fashion so combining them lets me show my creativity and share my love with others. Plus, I can add dance-inspired items to my store!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_880446d31f52b4d0154f",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_89c557b96536babaaa695023d16092042efb67188c577790dd116ea236e40a70",
+    "memory_b_id": "m_698f1b1e660dd349d161f3e85b8f2d571e588a50ddc57403917a01f8b8ca535f",
+    "memory_a": {
+      "content": "Gina owns a clothing store.",
+      "entity": "Gina",
+      "attribute": "business_ownership",
+      "value": "owns a clothing store",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:1"
+        }
+      ],
+      "memory_id": "m_89c557b96536babaaa695023d16092042efb67188c577790dd116ea236e40a70",
+      "conversation_id": "conv-30",
+      "session_time": "2023-01-29T14:32:00"
+    },
+    "memory_b": {
+      "content": "Gina started her own online clothing store not so long ago.",
+      "entity": "Gina",
+      "attribute": "business_ownership",
+      "value": "started an online clothing store",
+      "time_expression": "not so long ago",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 10,
+          "turn_id": "D10:2"
+        }
+      ],
+      "memory_id": "m_698f1b1e660dd349d161f3e85b8f2d571e588a50ddc57403917a01f8b8ca535f",
+      "conversation_id": "conv-30",
+      "session_time": "2023-04-25T11:24:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 2,
+        "turn_id": "D2:1",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-01-29T14:32:00",
+        "text": "Hey Jon! Long time no see! Things have been hectic lately. I just launched an ad campaign for my clothing store in hopes of growing the business. Starting my own store and taking risks is both scary and rewarding. I'm excited to see where it takes me!"
+      },
+      {
+        "session_id": 10,
+        "turn_id": "D10:2",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-04-25T11:24:00",
+        "text": "Hey Jon, congrats on the fair! It's awesome to see your hard work paying off. Keep on pushing, pal, you're headed for greatness. Oh, and BTW, I started my own online clothing store not so long ago - pretty cool, huh?"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_b25f4c6bc3503949b43c",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_d8de5f592ec92bcac75d81cd34e0b82e7e9a3b32b66fa6dade6af17b84090b0f",
+    "memory_b_id": "m_d03a7b2f167bb4086a6e02d04b19ecd2d5d39310f16d9fa38657b16ed9328088",
+    "memory_a": {
+      "content": "Gina owns an online clothing store.",
+      "entity": "Gina",
+      "attribute": "business_type",
+      "value": "online clothing store",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 7,
+          "turn_id": "D7:2"
+        }
+      ],
+      "memory_id": "m_d8de5f592ec92bcac75d81cd34e0b82e7e9a3b32b66fa6dade6af17b84090b0f",
+      "conversation_id": "conv-30",
+      "session_time": "2023-03-23T19:28:00"
+    },
+    "memory_b": {
+      "content": "Gina opened an online clothing store.",
+      "entity": "Gina",
+      "attribute": "business_type",
+      "value": "online clothing store",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 14,
+          "turn_id": "D14:8"
+        }
+      ],
+      "memory_id": "m_d03a7b2f167bb4086a6e02d04b19ecd2d5d39310f16d9fa38657b16ed9328088",
+      "conversation_id": "conv-30",
+      "session_time": "2023-06-16T21:38:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 7,
+        "turn_id": "D7:2",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-03-23T19:28:00",
+        "text": "Hey Jon, my online clothing store has been a roller coaster but rewarding. Starting a business takes courage - you hang in there too!"
+      },
+      {
+        "session_id": 14,
+        "turn_id": "D14:8",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-06-16T21:38:00",
+        "text": "Ha, yeah, Jon. I've been one 'cause I lost my job. I opened an online clothing store and it's been great! Being my own boss and doing something I love is awesome."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_c3ca425d58265fc0b9ae",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_a4cc999564b3e98dd67841cebd2cb0595f8c952b7c6eefc3bf1e950d9c98d3d4",
+    "memory_b_id": "m_9b7329a39df3e1f117b17846b3bb52b010cbdce6a368439e11002318a2b1c93e",
+    "memory_a": {
+      "content": "Gina lost her job at Door Dash this month.",
+      "entity": "Gina",
+      "attribute": "employment_status",
+      "value": "lost job at Door Dash",
+      "time_expression": "this month",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:3"
+        }
+      ],
+      "memory_id": "m_a4cc999564b3e98dd67841cebd2cb0595f8c952b7c6eefc3bf1e950d9c98d3d4",
+      "conversation_id": "conv-30",
+      "session_time": "2023-01-20T16:04:00"
+    },
+    "memory_b": {
+      "content": "Gina lost her job at Door Dash.",
+      "entity": "Gina",
+      "attribute": "employment_status",
+      "value": "lost job at Door Dash",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 6,
+          "turn_id": "D6:4"
+        }
+      ],
+      "memory_id": "m_9b7329a39df3e1f117b17846b3bb52b010cbdce6a368439e11002318a2b1c93e",
+      "conversation_id": "conv-30",
+      "session_time": "2023-03-16T14:35:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 1,
+        "turn_id": "D1:3",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-01-20T16:04:00",
+        "text": "Sorry about your job Jon, but starting your own business sounds awesome! Unfortunately, I also lost my job at Door Dash this month. What business are you thinking of?"
+      },
+      {
+        "session_id": 6,
+        "turn_id": "D6:4",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-03-16T14:35:00",
+        "text": "Thanks, Jon! Appreciate your offer. Since I lost my job at Door Dash, things have been tough. But here's some good news - I've got something to share!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_33c03ca23938485b667c",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_12d6aaa6de8bbdfa12c020c37b31b998b016302fdc8b91a9a7cb389df6c4c751",
+    "memory_b_id": "m_f516147069ef9c2bf00517ee50cb7581032d548363be914b3e6db6cfb706d004",
+    "memory_a": {
+      "content": "Gina wanted to blend her love for dance and fashion.",
+      "entity": "Gina",
+      "attribute": "interest",
+      "value": "dance and fashion",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 6,
+          "turn_id": "D6:8"
+        }
+      ],
+      "memory_id": "m_12d6aaa6de8bbdfa12c020c37b31b998b016302fdc8b91a9a7cb389df6c4c751",
+      "conversation_id": "conv-30",
+      "session_time": "2023-03-16T14:35:00"
+    },
+    "memory_b": {
+      "content": "Gina is passionate about fashion trends and finding unique pieces.",
+      "entity": "Gina",
+      "attribute": "interest",
+      "value": "fashion trends and finding unique pieces",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 6,
+          "turn_id": "D6:8"
+        }
+      ],
+      "memory_id": "m_f516147069ef9c2bf00517ee50cb7581032d548363be914b3e6db6cfb706d004",
+      "conversation_id": "conv-30",
+      "session_time": "2023-03-16T14:35:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 6,
+        "turn_id": "D6:8",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-03-16T14:35:00",
+        "text": "Thanks! I'm passionate about fashion trends and finding unique pieces. Plus, I wanted to blend my love for dance and fashion, so it was a perfect match."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_a5606b4ea76f83bcb332",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_2a97221b7f8f766ebef6591c2f17f2539429d37dc2e7784f095f1d4800d6e8a0",
+    "memory_b_id": "m_fcede8624e2664da8ecd70e9518f3da30b113906e93bf00687a150b932e398fa",
+    "memory_a": {
+      "content": "Gina plans to work with fashion bloggers and influencers in the next few months.",
+      "entity": "Gina",
+      "attribute": "marketing_plan",
+      "value": "work with fashion bloggers and influencers",
+      "time_expression": "next few months",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:12"
+        }
+      ],
+      "memory_id": "m_2a97221b7f8f766ebef6591c2f17f2539429d37dc2e7784f095f1d4800d6e8a0",
+      "conversation_id": "conv-30",
+      "session_time": "2023-04-03T13:26:00"
+    },
+    "memory_b": {
+      "content": "Gina plans to do more ads to reach more people.",
+      "entity": "Gina",
+      "attribute": "marketing_plan",
+      "value": "do more ads",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:12"
+        }
+      ],
+      "memory_id": "m_fcede8624e2664da8ecd70e9518f3da30b113906e93bf00687a150b932e398fa",
+      "conversation_id": "conv-30",
+      "session_time": "2023-04-03T13:26:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 8,
+        "turn_id": "D8:12",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-04-03T13:26:00",
+        "text": "Yeah, I have a few plans. I'm thinking of working with some fashion bloggers and influencers in the next few months to get more attention for my store. Plus, I'm going to do more ads so I can reach more people. I'm really focused on building my customer base and making my store a top destination for fashion fans. It's awesome to see it all coming together! You, Jon? What do you have going for your dance studio?"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_9260b5cfa3a7dc06920c",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_9dde481e7766491a1c5a2a80b8989c7de214aa72834b3d43bf3065868013af8e",
+    "memory_b_id": "m_5a6e9b099660e44f5438e7d4ae6d86ab0b836bc12d9a850c639dc35302a22122",
+    "memory_a": {
+      "content": "Jon runs his own dance studio.",
+      "entity": "Jon",
+      "attribute": "business_ownership",
+      "value": "runs his own dance studio",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 5,
+          "turn_id": "D5:4"
+        }
+      ],
+      "memory_id": "m_9dde481e7766491a1c5a2a80b8989c7de214aa72834b3d43bf3065868013af8e",
+      "conversation_id": "conv-30",
+      "session_time": "2023-02-08T09:32:00"
+    },
+    "memory_b": {
+      "content": "Jon owns a dance studio.",
+      "entity": "Jon",
+      "attribute": "business_ownership",
+      "value": "dance studio",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 12,
+          "turn_id": "D12:7"
+        }
+      ],
+      "memory_id": "m_5a6e9b099660e44f5438e7d4ae6d86ab0b836bc12d9a850c639dc35302a22122",
+      "conversation_id": "conv-30",
+      "session_time": "2023-05-27T19:18:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 5,
+        "turn_id": "D5:4",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-02-08T09:32:00",
+        "text": "Thanks, Gina! I love running my own studio. It's great having the freedom to create a space and help dancers of all ages and levels express themselves. I'm super thrilled about dancing each day and seeing my students progress. It's so fulfilling."
+      },
+      {
+        "session_id": 12,
+        "turn_id": "D12:7",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-05-27T19:18:00",
+        "text": "It sounds great! Could it spark any ideas for your dance studio?"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_066247f554b357f4ab87",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_4897d18e75c1cabe12b6eb09174a1d55b816dced13690a85b38c8efcd02258b1",
+    "memory_b_id": "m_867d35e038194fd0b243ea611c67b99fe79b72073a71a2a1869da358b28a5c89",
+    "memory_a": {
+      "content": "Jon plans to start his own business.",
+      "entity": "Jon",
+      "attribute": "business_plan",
+      "value": "starting his own business",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:2"
+        }
+      ],
+      "memory_id": "m_4897d18e75c1cabe12b6eb09174a1d55b816dced13690a85b38c8efcd02258b1",
+      "conversation_id": "conv-30",
+      "session_time": "2023-01-20T16:04:00"
+    },
+    "memory_b": {
+      "content": "Jon plans to go full-time with his business idea.",
+      "entity": "Jon",
+      "attribute": "business_plan",
+      "value": "going full-time with his biz idea",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 17,
+          "turn_id": "D17:2"
+        }
+      ],
+      "memory_id": "m_867d35e038194fd0b243ea611c67b99fe79b72073a71a2a1869da358b28a5c89",
+      "conversation_id": "conv-30",
+      "session_time": "2023-07-09T13:25:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 1,
+        "turn_id": "D1:2",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-01-20T16:04:00",
+        "text": "Hey Gina! Good to see you too. Lost my job as a banker yesterday, so I'm gonna take a shot at starting my own business."
+      },
+      {
+        "session_id": 17,
+        "turn_id": "D17:2",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-07-09T13:25:00",
+        "text": "Hey Gina! Congrats on the fashion editors reach-out, that's awesome! Dance practice has been fun and exhausting. I'm gonna stay determined and make my own path by going full-time with my biz idea."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_9521556af4e3dfeba17c",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_60f597064901a9fb72cbcb0111c1143e3ed9e6ee494614ed076771f5219fd3e5",
+    "memory_b_id": "m_306a58fd7cc7fe46e80ccfb8d6ce748124f5bb6946730c0eb8970f60e80ec17f",
+    "memory_a": {
+      "content": "Jon is wrapping up the business plan and looking for investors.",
+      "entity": "Jon",
+      "attribute": "business_plan_status",
+      "value": "wrapping up business plan and looking for investors",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 12,
+          "turn_id": "D12:12"
+        }
+      ],
+      "memory_id": "m_60f597064901a9fb72cbcb0111c1143e3ed9e6ee494614ed076771f5219fd3e5",
+      "conversation_id": "conv-30",
+      "session_time": "2023-05-27T19:18:00"
+    },
+    "memory_b": {
+      "content": "Jon is sprucing up his business plan and tweaking his pitch to investors.",
+      "entity": "Jon",
+      "attribute": "business_plan_status",
+      "value": "sprucing up biz plan and tweaking pitch to investors",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 18,
+          "turn_id": "D18:10"
+        }
+      ],
+      "memory_id": "m_306a58fd7cc7fe46e80ccfb8d6ce748124f5bb6946730c0eb8970f60e80ec17f",
+      "conversation_id": "conv-30",
+      "session_time": "2023-07-21T17:44:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 12,
+        "turn_id": "D12:12",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-05-27T19:18:00",
+        "text": "I'm wrapping up the business plan and looking for investors. My passion for the project and belief in its success are driving me."
+      },
+      {
+        "session_id": 18,
+        "turn_id": "D18:10",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-07-21T17:44:00",
+        "text": "Taking your advice, I'm sprucing up my biz plan and tweaking my pitch to investors. I'm also working on an online platform to show off the dance studio's stuff."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_8201190129bd97d7a690",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_de39a3abcf593d8261f7dd465118dae6bdc8a927c36c206fd15a9d161bd20257",
+    "memory_b_id": "m_d9dcd58dd98bb8d4bfef569ba7bd14e751d61ba2f175510157b87e5c0cde8055",
+    "memory_a": {
+      "content": "Jon started his own business.",
+      "entity": "Jon",
+      "attribute": "business_status",
+      "value": "started his own business",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 6,
+          "turn_id": "D6:11"
+        }
+      ],
+      "memory_id": "m_de39a3abcf593d8261f7dd465118dae6bdc8a927c36c206fd15a9d161bd20257",
+      "conversation_id": "conv-30",
+      "session_time": "2023-03-16T14:35:00"
+    },
+    "memory_b": {
+      "content": "Jon is starting his own business, a dance studio.",
+      "entity": "Jon",
+      "attribute": "business_status",
+      "value": "starting own dance studio",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 13,
+          "turn_id": "D13:4"
+        }
+      ],
+      "memory_id": "m_d9dcd58dd98bb8d4bfef569ba7bd14e751d61ba2f175510157b87e5c0cde8055",
+      "conversation_id": "conv-30",
+      "session_time": "2023-06-13T20:29:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 6,
+        "turn_id": "D6:11",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-03-16T14:35:00",
+        "text": "Thanks for askin', Gina! Losing my job was hard, but I'm livin' my dreams now. Startin' my biz has been tough but I'm gonna make it! I keep facing new challenges, but I'm sure it'll be worth it in the end."
+      },
+      {
+        "session_id": 13,
+        "turn_id": "D13:4",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-06-13T20:29:00",
+        "text": "Proud of you for starting your own business! It takes strength to stay hopeful. What are you doing to prep for your dance studio? I have developed a video presentation to teach how to style my fashion pieces, btw."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_24974e467bb496044d75",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_b1adb98fdd2d134a9a92fc26da425dc75d563c61f54c2d2c93da326c6db4f5bc",
+    "memory_b_id": "m_d347d4e2e779c0c4968ab3c734e6d991a0c1c60f4e65f7bffb68df0a5d21c9a6",
+    "memory_a": {
+      "content": "Jon is starting a dance studio.",
+      "entity": "Jon",
+      "attribute": "business_type",
+      "value": "dance studio",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:4"
+        }
+      ],
+      "memory_id": "m_b1adb98fdd2d134a9a92fc26da425dc75d563c61f54c2d2c93da326c6db4f5bc",
+      "conversation_id": "conv-30",
+      "session_time": "2023-01-20T16:04:00"
+    },
+    "memory_b": {
+      "content": "Jon runs a dance studio business.",
+      "entity": "Jon",
+      "attribute": "business_type",
+      "value": "dance studio",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 7,
+          "turn_id": "D7:6"
+        }
+      ],
+      "memory_id": "m_d347d4e2e779c0c4968ab3c734e6d991a0c1c60f4e65f7bffb68df0a5d21c9a6",
+      "conversation_id": "conv-30",
+      "session_time": "2023-03-23T19:28:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 1,
+        "turn_id": "D1:4",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-01-20T16:04:00",
+        "text": "Sorry to hear that! I'm starting a dance studio 'cause I'm passionate about dancing and it'd be great to share it with others."
+      },
+      {
+        "session_id": 7,
+        "turn_id": "D7:6",
+        "conversation_id": "conv-30",
+        "speaker": "Gina",
+        "session_time": "2023-03-23T19:28:00",
+        "text": "Thanks for the advice, Jon! Building relationships and creating a strong brand image for my store is something I'm always working on. You're right, staying positive is key. What helps you stay motivated with your dance studio business?"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_223a92dfd159aa988600",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_ab010703fbc368efda3010b2dbb12034d21f289fbad0f173a1d9b3c47ca31dda",
+    "memory_b_id": "m_0ce43ca0956fa787960caa6914cd241c8a9aeaafb60d08176b4d2499e1f1f2b6",
+    "memory_a": {
+      "content": "Jon says he will not give up on his dreams.",
+      "entity": "Jon",
+      "attribute": "commitment_to_dreams",
+      "value": "not giving up",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 5,
+          "turn_id": "D5:22"
+        }
+      ],
+      "memory_id": "m_ab010703fbc368efda3010b2dbb12034d21f289fbad0f173a1d9b3c47ca31dda",
+      "conversation_id": "conv-30",
+      "session_time": "2023-02-08T09:32:00"
+    },
+    "memory_b": {
+      "content": "Jon says he won't give up and will keep pushing and working to make his dreams happen.",
+      "entity": "Jon",
+      "attribute": "commitment_to_dreams",
+      "value": "won't give up and will keep pushing and working to make dreams happen",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 13,
+          "turn_id": "D13:23"
+        }
+      ],
+      "memory_id": "m_0ce43ca0956fa787960caa6914cd241c8a9aeaafb60d08176b4d2499e1f1f2b6",
+      "conversation_id": "conv-30",
+      "session_time": "2023-06-13T20:29:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 5,
+        "turn_id": "D5:22",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-02-08T09:32:00",
+        "text": "Thanks, Gina! Your pep-talk really meant a lot. I'm not gonna give up on my dreams - my dance studio and biz ventures need the hard work I'm putting in. Love having you in my corner, thanks for always being there!"
+      },
+      {
+        "session_id": 13,
+        "turn_id": "D13:23",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-06-13T20:29:00",
+        "text": "I won't give up, Gina! I'll keep pushing and working to make my dreams happen. Thanks for the support!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_fde9557b8493ec2a00fb",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_5aacb0e1193606965ffc35c0797742a6723d504fd11f46d0fec55ac14b167d0f",
+    "memory_b_id": "m_4c3368f3cf61e26aa4ea9ea290df6ff000afc31a5b5b7514ba5c985f54a3223e",
+    "memory_a": {
+      "content": "Jon is looking for a location for his dance studio.",
+      "entity": "Jon",
+      "attribute": "dance_studio_location_status",
+      "value": "searching for a location",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:4"
+        }
+      ],
+      "memory_id": "m_5aacb0e1193606965ffc35c0797742a6723d504fd11f46d0fec55ac14b167d0f",
+      "conversation_id": "conv-30",
+      "session_time": "2023-01-29T14:32:00"
+    },
+    "memory_b": {
+      "content": "Jon is still searching for a place to open his dance studio.",
+      "entity": "Jon",
+      "attribute": "dance_studio_location_status",
+      "value": "still searching for a place",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 3,
+          "turn_id": "D3:1"
+        }
+      ],
+      "memory_id": "m_4c3368f3cf61e26aa4ea9ea290df6ff000afc31a5b5b7514ba5c985f54a3223e",
+      "conversation_id": "conv-30",
+      "session_time": "2023-02-01T00:48:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 2,
+        "turn_id": "D2:4",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-01-29T14:32:00",
+        "text": "Hey Gina! Thanks for asking. I'm on the hunt for the ideal spot for my dance studio and it's been quite a journey! I've been looking at different places and picturing how the space would look. I even found a place with great natural light! Oh, I've been to Paris yesterday! It was sooo cool."
+      },
+      {
+        "session_id": 3,
+        "turn_id": "D3:1",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-02-01T00:48:00",
+        "text": "Hey Gina, hope you're doing ok! Still following my passion for dance. It's been bumpy, but I'm determined to make it work. I'm still searching for a place to open my dance studio."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_e5527a1d71b71c626bb4",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_38a3d42b74636c73824226ae906f6057e28f55524130aced0a44beaa534a43e2",
+    "memory_b_id": "m_5e881d865edbc67fe34e97c10ba1a48f48258e041d6fb7f6276ade7a4b0be135",
+    "memory_a": {
+      "content": "Jon is still working on the dance studio.",
+      "entity": "Jon",
+      "attribute": "dance_studio_status",
+      "value": "still working on it",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 11,
+          "turn_id": "D11:1"
+        }
+      ],
+      "memory_id": "m_38a3d42b74636c73824226ae906f6057e28f55524130aced0a44beaa534a43e2",
+      "conversation_id": "conv-30",
+      "session_time": "2023-05-11T15:14:00"
+    },
+    "memory_b": {
+      "content": "Jon's dance studio is on tenuous grounds right now.",
+      "entity": "Jon",
+      "attribute": "dance_studio_status",
+      "value": "on tenuous grounds",
+      "time_expression": "right now",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 18,
+          "turn_id": "D18:2"
+        }
+      ],
+      "memory_id": "m_5e881d865edbc67fe34e97c10ba1a48f48258e041d6fb7f6276ade7a4b0be135",
+      "conversation_id": "conv-30",
+      "session_time": "2023-07-21T17:44:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 11,
+        "turn_id": "D11:1",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-05-11T15:14:00",
+        "text": "Hi! Since we last spoke I am still working on the dance studio and things are looking up!"
+      },
+      {
+        "session_id": 18,
+        "turn_id": "D18:2",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-07-21T17:44:00",
+        "text": "Hey Gina, congrats on the clothing store! The dance studio is on tenuous grounds right now, but I'm staying positive. I got a temp job to help cover expenses while I look for investors. It's tough, but I'm sure it'll be worth it."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_22f045f609eeed423235",
+    "conversation_id": "conv-30",
+    "build_id": "9fb78732b0f885dc54c2021c33da773dad173344f26362b4f56a2eccda6b3ed9",
+    "memory_a_id": "m_aaacfb329822147235c2a83be9c712f101be790d82654b0c149b3bfab3db0d08",
+    "memory_b_id": "m_f1ea524e95473efad8d6b10d216cde955f88f2b574ba2e83b43a2520f65ccc28",
+    "memory_a": {
+      "content": "Jon lost his job as a banker yesterday.",
+      "entity": "Jon",
+      "attribute": "employment_status",
+      "value": "lost job as a banker",
+      "time_expression": "yesterday",
+      "event_time": "2023-01-19",
+      "event_time_precision": "day",
+      "sources": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:2"
+        }
+      ],
+      "memory_id": "m_aaacfb329822147235c2a83be9c712f101be790d82654b0c149b3bfab3db0d08",
+      "conversation_id": "conv-30",
+      "session_time": "2023-01-20T16:04:00"
+    },
+    "memory_b": {
+      "content": "Jon left his secure 9-5 job as a banker.",
+      "entity": "Jon",
+      "attribute": "employment_status",
+      "value": "left his secure 9-5 job as a banker",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 5,
+          "turn_id": "D5:10"
+        }
+      ],
+      "memory_id": "m_f1ea524e95473efad8d6b10d216cde955f88f2b574ba2e83b43a2520f65ccc28",
+      "conversation_id": "conv-30",
+      "session_time": "2023-02-08T09:32:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 1,
+        "turn_id": "D1:2",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-01-20T16:04:00",
+        "text": "Hey Gina! Good to see you too. Lost my job as a banker yesterday, so I'm gonna take a shot at starting my own business."
+      },
+      {
+        "session_id": 5,
+        "turn_id": "D5:10",
+        "conversation_id": "conv-30",
+        "speaker": "Jon",
+        "session_time": "2023-02-08T09:32:00",
+        "text": "Yeah, I totally agree - taking risks is key for success. It's made me grow, and even got me out of my secure 9-5 as a banker. Now, I'm aiming to turn my dancing passion into a business. I'm determined to make it work, I just know it! That being said, I definitely don't underestimate the difficulties - it ain't been a walk in the park, that's for sure."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_90187bc77913778c9c4c",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_0556b8a8dee32b8e69cdf5248a4f4ed23f882a6404577172acfd031ecf693822",
+    "memory_b_id": "m_22c5b4bab17a66670c8a86cb344119c2f89c5d29e3bd6a22ed34847073792863",
+    "memory_a": {
+      "content": "John is off to do taekwondo.",
+      "entity": "John",
+      "attribute": "activity",
+      "value": "doing taekwondo",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:28"
+        }
+      ],
+      "memory_id": "m_0556b8a8dee32b8e69cdf5248a4f4ed23f882a6404577172acfd031ecf693822",
+      "conversation_id": "conv-41",
+      "session_time": "2022-12-22T18:10:00"
+    },
+    "memory_b": {
+      "content": "John started a weekend yoga class with a colleague.",
+      "entity": "John",
+      "attribute": "activity",
+      "value": "started a weekend yoga class with a colleague",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 10,
+          "turn_id": "D10:1"
+        }
+      ],
+      "memory_id": "m_22c5b4bab17a66670c8a86cb344119c2f89c5d29e3bd6a22ed34847073792863",
+      "conversation_id": "conv-41",
+      "session_time": "2023-04-07T00:24:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 2,
+        "turn_id": "D2:28",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2022-12-22T18:10:00",
+        "text": "Yep, let's keep making great memories with our loved ones and cherishing the time we have. I'm off to do some taekwondo!"
+      },
+      {
+        "session_id": 10,
+        "turn_id": "D10:1",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-04-07T00:24:00",
+        "text": "Hey Maria, I'm so excited to tell you I started a weekend yoga class with a colleague - it's awesome! I feel great, both mentally and physically after each session. I'd been wanting to try yoga for a while and finally took the plunge. Simple stretching and breathing is having such a positive effect on my wellbeing. And the instructor is great too."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_d14d58fc8a02c4739aaa",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_1c1e44b5bef861158b396a6c8496cbd514baaf4d4724da7ce9023450ec1c4e96",
+    "memory_b_id": "m_f57674f08f5c93e2d38b9dad75f1cdba818a5681e42b71957b413d76bf435020",
+    "memory_a": {
+      "content": "John believes it is important to stand up for what one believes in.",
+      "entity": "John",
+      "attribute": "belief",
+      "value": "important to stand up for what one believes in",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 21,
+          "turn_id": "D21:24"
+        }
+      ],
+      "memory_id": "m_1c1e44b5bef861158b396a6c8496cbd514baaf4d4724da7ce9023450ec1c4e96",
+      "conversation_id": "conv-41",
+      "session_time": "2023-07-03T20:43:00"
+    },
+    "memory_b": {
+      "content": "John believes it is important to try to make a difference through activism.",
+      "entity": "John",
+      "attribute": "belief",
+      "value": "important to make a difference through activism",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 21,
+          "turn_id": "D21:26"
+        }
+      ],
+      "memory_id": "m_f57674f08f5c93e2d38b9dad75f1cdba818a5681e42b71957b413d76bf435020",
+      "conversation_id": "conv-41",
+      "session_time": "2023-07-03T20:43:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 21,
+        "turn_id": "D21:24",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-07-03T20:43:00",
+        "text": "I've always had a great respect for our military and wanted to show my support. I think it's important to stand up for what we believe in."
+      },
+      {
+        "session_id": 21,
+        "turn_id": "D21:26",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-07-03T20:43:00",
+        "text": "Thanks Maria, it was amazing being around others who shared the same values and passion as me. It reminded me how important it is to try and make a difference through activism. It really motivated me."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_c6ca5ef4fba6838c8a1c",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_66d76601dcbfa3baf152cc69858b157c29413046a87edef17326a45dedc4b907",
+    "memory_b_id": "m_c6b20651860070ecce83fba259720d64070e25e61e720b54986c82edc4c6d964",
+    "memory_a": {
+      "content": "John had a film camera as a kid and took plenty of beach pics.",
+      "entity": "John",
+      "attribute": "childhood_possession",
+      "value": "film camera",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 3,
+          "turn_id": "D3:15"
+        }
+      ],
+      "memory_id": "m_66d76601dcbfa3baf152cc69858b157c29413046a87edef17326a45dedc4b907",
+      "conversation_id": "conv-41",
+      "session_time": "2023-01-01T20:30:00"
+    },
+    "memory_b": {
+      "content": "John had a little doll like the one in the photo during his childhood.",
+      "entity": "John",
+      "attribute": "childhood_possession",
+      "value": "a little doll",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 5,
+          "turn_id": "D5:13"
+        }
+      ],
+      "memory_id": "m_c6b20651860070ecce83fba259720d64070e25e61e720b54986c82edc4c6d964",
+      "conversation_id": "conv-41",
+      "session_time": "2023-01-28T13:17:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 3,
+        "turn_id": "D3:15",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-01-01T20:30:00",
+        "text": "Wow, nature can be so beautiful! It reminds me of the film camera I had as a kid, I took plenty of beach pics. Thanks for sharing."
+      },
+      {
+        "session_id": 5,
+        "turn_id": "D5:13",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-01-28T13:17:00",
+        "text": "It reminds me of something from my childhood. I had a little doll like this and it always made me feel better. It reminds me to always look out for others, especially when they're feeling down."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_345fa6619963cbef88c4",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_44c321bcef4c0a181bb1b13e9d3aca08bb88ae4dcf640ac22c1b77937e812f91",
+    "memory_b_id": "m_d777dfbc5e36d1616af0396df5104caabb1d6b8579d87d0d5fb40f536e924580",
+    "memory_a": {
+      "content": "John wants to work together with Maria to make a real difference in the neighborhood.",
+      "entity": "John",
+      "attribute": "collaboration_intent",
+      "value": "work together with Maria to make a real difference",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 14,
+          "turn_id": "D14:21"
+        }
+      ],
+      "memory_id": "m_44c321bcef4c0a181bb1b13e9d3aca08bb88ae4dcf640ac22c1b77937e812f91",
+      "conversation_id": "conv-41",
+      "session_time": "2023-05-06T17:04:00"
+    },
+    "memory_b": {
+      "content": "John wants to keep working together with Maria to make the neighborhood something to be proud of.",
+      "entity": "John",
+      "attribute": "collaboration_intent",
+      "value": "keep working together to make the neighborhood something to be proud of",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 14,
+          "turn_id": "D14:23"
+        }
+      ],
+      "memory_id": "m_d777dfbc5e36d1616af0396df5104caabb1d6b8579d87d0d5fb40f536e924580",
+      "conversation_id": "conv-41",
+      "session_time": "2023-05-06T17:04:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 14,
+        "turn_id": "D14:21",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-05-06T17:04:00",
+        "text": "Sure, Maria! Let's work together to make a real difference. Our neighborhood deserves it! I want to work on improving my old area, West County, too."
+      },
+      {
+        "session_id": 14,
+        "turn_id": "D14:23",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-05-06T17:04:00",
+        "text": "Yeah, Maria, let's keep working together to make our neighborhood something to be proud of! We'll keep going and never give up."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_20dac2c8ac759e124bc9",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_2b3b8892f525b2dfcb94ca0af88398a0515a2a984092cbeaf58b037ebe3f65c0",
+    "memory_b_id": "m_af839ca06e47990ff1d661c2721c1b4824edddf3fb05f7543f5c008ecae72575",
+    "memory_a": {
+      "content": "John has been feeling a bit stressed out.",
+      "entity": "John",
+      "attribute": "emotional_state",
+      "value": "stressed out",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 3,
+          "turn_id": "D3:11"
+        }
+      ],
+      "memory_id": "m_2b3b8892f525b2dfcb94ca0af88398a0515a2a984092cbeaf58b037ebe3f65c0",
+      "conversation_id": "conv-41",
+      "session_time": "2023-01-01T20:30:00"
+    },
+    "memory_b": {
+      "content": "John felt motivated by being around others who shared his values and passion.",
+      "entity": "John",
+      "attribute": "emotional_state",
+      "value": "motivated by shared values and passion",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 21,
+          "turn_id": "D21:26"
+        }
+      ],
+      "memory_id": "m_af839ca06e47990ff1d661c2721c1b4824edddf3fb05f7543f5c008ecae72575",
+      "conversation_id": "conv-41",
+      "session_time": "2023-07-03T20:43:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 3,
+        "turn_id": "D3:11",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-01-01T20:30:00",
+        "text": "Thanks, Maria! I really appreciate your support, It means a lot to me. Especially after I failed the military aptitude test recently, I've been feeling a bit stressed out."
+      },
+      {
+        "session_id": 21,
+        "turn_id": "D21:26",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-07-03T20:43:00",
+        "text": "Thanks Maria, it was amazing being around others who shared the same values and passion as me. It reminded me how important it is to try and make a difference through activism. It really motivated me."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_a4123fa2b824264159c7",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_7daeac8bdade5c06d4cd44f5cb9a6eb7b5a7a5f3584f190842002aaef13af780",
+    "memory_b_id": "m_9f204a4214815c77033f2d823bf057c776b367bfe9b8bb2080de1c8860f8ff41",
+    "memory_a": {
+      "content": "John got promoted at work to assistant manager.",
+      "entity": "John",
+      "attribute": "employment_status",
+      "value": "promoted to assistant manager",
+      "time_expression": "since we last spoke",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 19,
+          "turn_id": "D19:6"
+        },
+        {
+          "session_id": 19,
+          "turn_id": "D19:8"
+        }
+      ],
+      "memory_id": "m_7daeac8bdade5c06d4cd44f5cb9a6eb7b5a7a5f3584f190842002aaef13af780",
+      "conversation_id": "conv-41",
+      "session_time": "2023-06-16T19:20:00"
+    },
+    "memory_b": {
+      "content": "John lost his job at the mechanical engineering company.",
+      "entity": "John",
+      "attribute": "employment_status",
+      "value": "lost job at mechanical engineering company",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 28,
+          "turn_id": "D28:1"
+        }
+      ],
+      "memory_id": "m_9f204a4214815c77033f2d823bf057c776b367bfe9b8bb2080de1c8860f8ff41",
+      "conversation_id": "conv-41",
+      "session_time": "2023-08-05T17:19:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 19,
+        "turn_id": "D19:6",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-06-16T19:20:00",
+        "text": "Yeah, sure thing. I'll let you know. Oh, also...something massive happened since we last spoke. I got promoted at work! It's been a loooong time coming, and I'm over the moon about it!"
+      },
+      {
+        "session_id": 19,
+        "turn_id": "D19:8",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-06-16T19:20:00",
+        "text": "Thanks, Maria! I was really excited. It feels like all the hard work I've put in has paid off now that I'm an assistant manager- it's like a stepping stone for bigger things."
+      },
+      {
+        "session_id": 28,
+        "turn_id": "D28:1",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-08-05T17:19:00",
+        "text": "Hey Maria, great chatting with you again! Crazy thing happened since we last talked. I lost my job at the mechanical engineering company. They tanked and it's been really rough. Never saw this coming."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_a881121ca0c2e128b6c3",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_5ea59e93542ef24a1bab95ffab46027c843a7526a59981d853e87475e3d4883b",
+    "memory_b_id": "m_09caa94a18f93a0ca952fbfa20e786fd6f71893fc9ff97e546c78596674fa819",
+    "memory_a": {
+      "content": "John's family loves climbing, sliding, and playing games at a playground.",
+      "entity": "John",
+      "attribute": "family_activities",
+      "value": "climbing, sliding, and playing games at a playground",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:16"
+        }
+      ],
+      "memory_id": "m_5ea59e93542ef24a1bab95ffab46027c843a7526a59981d853e87475e3d4883b",
+      "conversation_id": "conv-41",
+      "session_time": "2022-12-22T18:10:00"
+    },
+    "memory_b": {
+      "content": "John's family enjoys outdoor activities like hikes, park outings, and picnics, plus board games and movie nights at home.",
+      "entity": "John",
+      "attribute": "family_activities",
+      "value": "outdoor activities, board games, movie nights",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 31,
+          "turn_id": "D31:19"
+        }
+      ],
+      "memory_id": "m_09caa94a18f93a0ca952fbfa20e786fd6f71893fc9ff97e546c78596674fa819",
+      "conversation_id": "conv-41",
+      "session_time": "2023-08-13T15:14:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 2,
+        "turn_id": "D2:16",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2022-12-22T18:10:00",
+        "text": "Thanks, Maria! We love climbing, sliding, and playing games. It's an awesome way to connect and have a blast. What do you enjoy doing with your family?"
+      },
+      {
+        "session_id": 31,
+        "turn_id": "D31:19",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-08-13T15:14:00",
+        "text": "Thanks, Maria! We love being outdoors - going for hikes, hanging out at the park, having picnics - plus playing board games and having movie nights at home."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_76ed8bc5afff537c5d89",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_079e0d44e3ec973bafd40c69f2f3d095914cddb342a4dde43955b999f79401c5",
+    "memory_b_id": "m_77b6672736fa4dbeea1114682868915636e0bac4a48707df1ce2ab64ce51df44",
+    "memory_a": {
+      "content": "John offered to help with Maria's fundraiser.",
+      "entity": "John",
+      "attribute": "fundraiser_help",
+      "value": "offered to help",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 16,
+          "turn_id": "D16:3"
+        }
+      ],
+      "memory_id": "m_079e0d44e3ec973bafd40c69f2f3d095914cddb342a4dde43955b999f79401c5",
+      "conversation_id": "conv-41",
+      "session_time": "2023-05-25T13:24:00"
+    },
+    "memory_b": {
+      "content": "John will spread the word about the chili cook-off poster.",
+      "entity": "John",
+      "attribute": "fundraiser_help",
+      "value": "spread the word about the poster",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 16,
+          "turn_id": "D16:5"
+        }
+      ],
+      "memory_id": "m_77b6672736fa4dbeea1114682868915636e0bac4a48707df1ce2ab64ce51df44",
+      "conversation_id": "conv-41",
+      "session_time": "2023-05-25T13:24:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 16,
+        "turn_id": "D16:3",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-05-25T13:24:00",
+        "text": "Wow, Maria! Raising money is crucial for those in need. Is there any way I can help out with your fundraiser?"
+      },
+      {
+        "session_id": 16,
+        "turn_id": "D16:5",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-05-25T13:24:00",
+        "text": "Wow, it looks awesome! I'll make sure to spread the word about it. Is there anything else I can do to assist?"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_0b2c1e182682399642ba",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_37a9f23519bce8f290e0f418ba92237af87f8e32d6c4b3878e7efff660759777",
+    "memory_b_id": "m_dd7894fa7f3e31506b6f74d1c3895dc2c19d36796c21a7fefbeb601b045388cb",
+    "memory_a": {
+      "content": "John joined a service-focused online group last week.",
+      "entity": "John",
+      "attribute": "group_membership",
+      "value": "joined a service-focused online group last week",
+      "time_expression": "last week",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 3,
+          "turn_id": "D3:1"
+        }
+      ],
+      "memory_id": "m_37a9f23519bce8f290e0f418ba92237af87f8e32d6c4b3878e7efff660759777",
+      "conversation_id": "conv-41",
+      "session_time": "2023-01-01T20:30:00"
+    },
+    "memory_b": {
+      "content": "John is a member of a virtual support group.",
+      "entity": "John",
+      "attribute": "group_membership",
+      "value": "virtual support group",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 27,
+          "turn_id": "D27:1"
+        }
+      ],
+      "memory_id": "m_dd7894fa7f3e31506b6f74d1c3895dc2c19d36796c21a7fefbeb601b045388cb",
+      "conversation_id": "conv-41",
+      "session_time": "2023-08-03T18:20:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 3,
+        "turn_id": "D3:1",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-01-01T20:30:00",
+        "text": "Hey Maria, great to chat again! I joined a service-focused online group last week and it's been an emotional ride. Everyone there is incredible with their own inspiring stories. They've opened my eyes to new perspectives, and I'm feeling a sense of connection and purpose with them."
+      },
+      {
+        "session_id": 27,
+        "turn_id": "D27:1",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-08-03T18:20:00",
+        "text": "Hey Maria, hope you're doing OK. I had to share something cool with you - I asked family and friends to join the virtual support group I am a part of and be advocates for the military. It's been awesome seeing so many people coming together to back the courageous people serving our nation."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_bbc4c9fc91d94908d0b4",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_f23eeb5c3f1feef6077caff45ae33153b6b8787928f3b0e13cab7ab1c8c3c0b5",
+    "memory_b_id": "m_b1e9df6e6f2100ec489ab016e8747350507e839a3b101e791919b1ea139b89cf",
+    "memory_a": {
+      "content": "John feels a strong urge to serve his country and community.",
+      "entity": "John",
+      "attribute": "motivation",
+      "value": "strong urge to serve country and community",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 6,
+          "turn_id": "D6:4"
+        }
+      ],
+      "memory_id": "m_f23eeb5c3f1feef6077caff45ae33153b6b8787928f3b0e13cab7ab1c8c3c0b5",
+      "conversation_id": "conv-41",
+      "session_time": "2023-02-05T14:33:00"
+    },
+    "memory_b": {
+      "content": "John decided to act because of the effect unemployment has on neighbors.",
+      "entity": "John",
+      "attribute": "motivation",
+      "value": "effect of unemployment on neighbors",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 6,
+          "turn_id": "D6:12"
+        }
+      ],
+      "memory_id": "m_b1e9df6e6f2100ec489ab016e8747350507e839a3b101e791919b1ea139b89cf",
+      "conversation_id": "conv-41",
+      "session_time": "2023-02-05T14:33:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 6,
+        "turn_id": "D6:4",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-02-05T14:33:00",
+        "text": "I feel a strong urge to serve my country and community. Running for office was my chance to make an impact. But anyway, tell me more about your charity event. Did something special happen that made it meaningful for you?"
+      },
+      {
+        "session_id": 6,
+        "turn_id": "D6:12",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-02-05T14:33:00",
+        "text": "Seeing the effect unemployment has on our neighbors made me decide to act. I wanted to help out in these tough times by doing a community food drive. We can all make a difference!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_4e627b3be60e98df8171",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_9b4bf4c82583406da7b91ce5cb6395da756aabe94dd13ca2802651dd65e42875",
+    "memory_b_id": "m_15431af7894fbf341efa552bb665cb764f43239dcdee7efb4201c156ca89739d",
+    "memory_a": {
+      "content": "John set up a 5K charity run in his neighborhood to help veterans and their families.",
+      "entity": "John",
+      "attribute": "organized_event",
+      "value": "5K charity run to help veterans and their families",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 29,
+          "turn_id": "D29:4"
+        }
+      ],
+      "memory_id": "m_9b4bf4c82583406da7b91ce5cb6395da756aabe94dd13ca2802651dd65e42875",
+      "conversation_id": "conv-41",
+      "session_time": "2023-08-09T20:06:00"
+    },
+    "memory_b": {
+      "content": "John worked with a local organization that helps victims of domestic abuse, raising awareness and funds.",
+      "entity": "John",
+      "attribute": "organized_event",
+      "value": "event raising awareness and funds for victims of domestic abuse",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 29,
+          "turn_id": "D29:10"
+        }
+      ],
+      "memory_id": "m_15431af7894fbf341efa552bb665cb764f43239dcdee7efb4201c156ca89739d",
+      "conversation_id": "conv-41",
+      "session_time": "2023-08-09T20:06:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 29,
+        "turn_id": "D29:4",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-08-09T20:06:00",
+        "text": "I set up a 5K charity run in our neighborhood. It was all for a good cause - to help out veterans and their families. We were able to raise some funds! Here's a pic from the day."
+      },
+      {
+        "session_id": 29,
+        "turn_id": "D29:10",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-08-09T20:06:00",
+        "text": "Yep, we worked with a local organization that helps victims of domestic abuse. We raised awareness and funds at the event for the cause — it's unfortunate how many people suffer from it."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_b8689a753a58d90dd32f",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_a8a2bd668e45a3763b3c48429323e6b0fbfa06785183540723bb4a81af242f12",
+    "memory_b_id": "m_8489295b097668fe91f3f645be8726930e74931b8004f1b143e0882e3a265626",
+    "memory_a": {
+      "content": "John has a picture of his workmates from a hiking trip.",
+      "entity": "John",
+      "attribute": "photo_subject",
+      "value": "workmates on a hiking trip",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 16,
+          "turn_id": "D16:1"
+        }
+      ],
+      "memory_id": "m_a8a2bd668e45a3763b3c48429323e6b0fbfa06785183540723bb4a81af242f12",
+      "conversation_id": "conv-41",
+      "session_time": "2023-05-25T13:24:00"
+    },
+    "memory_b": {
+      "content": "John shared a picture of his family at the beach.",
+      "entity": "John",
+      "attribute": "photo_subject",
+      "value": "family at the beach",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 16,
+          "turn_id": "D16:11"
+        }
+      ],
+      "memory_id": "m_8489295b097668fe91f3f645be8726930e74931b8004f1b143e0882e3a265626",
+      "conversation_id": "conv-41",
+      "session_time": "2023-05-25T13:24:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 16,
+        "turn_id": "D16:1",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-05-25T13:24:00",
+        "text": "Hey Maria, I've been busy doing the petition I started - it's tricky but it's been cool getting back in touch with my buddies and gaining support. I got this picture of my workmates when we went on a hiking trip, they really make me keep going! What have you been up to? Anything new with your charity?"
+      },
+      {
+        "session_id": 16,
+        "turn_id": "D16:11",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-05-25T13:24:00",
+        "text": "Yeah, Maria! We're making a difference and we'll keep it up! Here's a pic of my fam at the beach."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_a58fb1b7d4d9093408db",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_4203a8155d9f774be2249cb80fc796c003db19242e702b4f9f89042a4fc2643e",
+    "memory_b_id": "m_fdfc239c4611f3308e81af0160a3a243857f8092b761e64a782fd5ce5b3f689c",
+    "memory_a": {
+      "content": "John has been looking into local politics, talking to community leaders, and learning about the neighborhood's needs and hopes.",
+      "entity": "John",
+      "attribute": "political_activity",
+      "value": "looking into local politics and talking to community leaders",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 4,
+          "turn_id": "D4:12"
+        }
+      ],
+      "memory_id": "m_4203a8155d9f774be2249cb80fc796c003db19242e702b4f9f89042a4fc2643e",
+      "conversation_id": "conv-41",
+      "session_time": "2023-01-09T19:06:00"
+    },
+    "memory_b": {
+      "content": "John ran for office to make an impact.",
+      "entity": "John",
+      "attribute": "political_activity",
+      "value": "ran for office",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 6,
+          "turn_id": "D6:4"
+        }
+      ],
+      "memory_id": "m_fdfc239c4611f3308e81af0160a3a243857f8092b761e64a782fd5ce5b3f689c",
+      "conversation_id": "conv-41",
+      "session_time": "2023-02-05T14:33:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 4,
+        "turn_id": "D4:12",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-01-09T19:06:00",
+        "text": "I've been keeping busy since we last talked! I've been looking into local politics, talking to community leaders, and getting to know the needs and hopes of our neighborhood. It's been super informative, and I'm feeling optimistic about it all."
+      },
+      {
+        "session_id": 6,
+        "turn_id": "D6:4",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-02-05T14:33:00",
+        "text": "I feel a strong urge to serve my country and community. Running for office was my chance to make an impact. But anyway, tell me more about your charity event. Did something special happen that made it meaningful for you?"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_4fe2fa7cc327ee91c32f",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_19dfaba009dc81262339980b0b2a61174196c6488e636d506d5a9027faa3691e",
+    "memory_b_id": "m_4445bf2f5bbde996b6b44d1046bd7296446ef5176517d287bd2d9c684c5b0e32",
+    "memory_a": {
+      "content": "John got back from a family road trip yesterday.",
+      "entity": "John",
+      "attribute": "recent_activity",
+      "value": "returned from a family road trip",
+      "time_expression": "yesterday",
+      "event_time": "2022-12-16",
+      "event_time_precision": "day",
+      "sources": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:2"
+        }
+      ],
+      "memory_id": "m_19dfaba009dc81262339980b0b2a61174196c6488e636d506d5a9027faa3691e",
+      "conversation_id": "conv-41",
+      "session_time": "2022-12-17T11:01:00"
+    },
+    "memory_b": {
+      "content": "John made pizza with family and had fun picking out toppings.",
+      "entity": "John",
+      "attribute": "recent_activity",
+      "value": "made pizza with family",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:24"
+        }
+      ],
+      "memory_id": "m_4445bf2f5bbde996b6b44d1046bd7296446ef5176517d287bd2d9c684c5b0e32",
+      "conversation_id": "conv-41",
+      "session_time": "2022-12-22T18:10:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 1,
+        "turn_id": "D1:2",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2022-12-17T11:01:00",
+        "text": "Hey Maria! Good to see you. Just got back from a family road trip yesterday, it was fun! Anything exciting happening for you?"
+      },
+      {
+        "session_id": 2,
+        "turn_id": "D2:24",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2022-12-22T18:10:00",
+        "text": "We made pizza! We had so much fun making them together. It was great picking out toppings and sharing a tasty meal with family. Have you made anything lately?"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_807a94e8d87927dcfda7",
+    "conversation_id": "conv-41",
+    "build_id": "c26a5ed4b3e48f3cb4de29758b3080e8e39805c282916e393a1a799880b404bf",
+    "memory_a_id": "m_e10a76d7be84cf21dfe622091540f2ed68726caf3231eab7d038a0463f37ac73",
+    "memory_b_id": "m_d71882626592b41018b040070f41ca8f07ff1ed9ac1602e9a0183724acd167ab",
+    "memory_a": {
+      "content": "John shared a picture of his family.",
+      "entity": "John",
+      "attribute": "shared_photo",
+      "value": "picture of his family",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 22,
+          "turn_id": "D22:5"
+        }
+      ],
+      "memory_id": "m_e10a76d7be84cf21dfe622091540f2ed68726caf3231eab7d038a0463f37ac73",
+      "conversation_id": "conv-41",
+      "session_time": "2023-07-05T18:59:00"
+    },
+    "memory_b": {
+      "content": "John shared a picture from his walk last week.",
+      "entity": "John",
+      "attribute": "shared_photo",
+      "value": "picture from his walk last week",
+      "time_expression": "last week",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 22,
+          "turn_id": "D22:15"
+        }
+      ],
+      "memory_id": "m_d71882626592b41018b040070f41ca8f07ff1ed9ac1602e9a0183724acd167ab",
+      "conversation_id": "conv-41",
+      "session_time": "2023-07-05T18:59:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 22,
+        "turn_id": "D22:5",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-07-05T18:59:00",
+        "text": "I appreciate it. It's really uplifting hearing from you. I sometimes doubt if I'm making a difference, but knowing there's people who understand my work means a lot and helps keep me going. Here's a picture of my family. They motivate me and remind me why I'm doing this."
+      },
+      {
+        "session_id": 22,
+        "turn_id": "D22:15",
+        "conversation_id": "conv-41",
+        "speaker": "John",
+        "session_time": "2023-07-05T18:59:00",
+        "text": "Yeah, Maria. Little things like this can make a big impact in how we think. Oh, and here's a pic I got from my walk last week. It always reminds me to take a break, breathe, and appreciate nature."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_70f54ca677150d9646d0",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_edb46221c570e1544bd4b0f5b6a9ec812ff017f3673a541abbbe966e873a4cff",
+    "memory_b_id": "m_d27497812caf39508afbc4d8d556a792f179bd4f08d574c4be834eda1844422b",
+    "memory_a": {
+      "content": "Joanna has been testing dairy-free dessert recipes for friends and family.",
+      "entity": "Joanna",
+      "attribute": "activity",
+      "value": "testing dairy-free dessert recipes",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 10,
+          "turn_id": "D10:9"
+        }
+      ],
+      "memory_id": "m_edb46221c570e1544bd4b0f5b6a9ec812ff017f3673a541abbbe966e873a4cff",
+      "conversation_id": "conv-42",
+      "session_time": "2022-05-02T11:54:00"
+    },
+    "memory_b": {
+      "content": "Joanna has been revising and perfecting a recipe she made for her family.",
+      "entity": "Joanna",
+      "attribute": "activity",
+      "value": "revising and perfecting a recipe",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 24,
+          "turn_id": "D24:2"
+        }
+      ],
+      "memory_id": "m_d27497812caf39508afbc4d8d556a792f179bd4f08d574c4be834eda1844422b",
+      "conversation_id": "conv-42",
+      "session_time": "2022-10-21T14:01:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 10,
+        "turn_id": "D10:9",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-05-02T11:54:00",
+        "text": "Not much is new other than the screenplay. Been working on some projects and testing out dairy-free dessert recipes for friends and fam. Here's a pic of a cake I made recently!"
+      },
+      {
+        "session_id": 24,
+        "turn_id": "D24:2",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-10-21T14:01:00",
+        "text": "Hey Nate! I have been revising and perfecting the recipe I made for my family and it turned out really tasty. What's been happening with you?"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_655f94873b7d5dd0f447",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_3da89d75f0374cbda046c3bebfd381f18d0aa82302015aa8b9b45955106b4538",
+    "memory_b_id": "m_639840ae890cd01906786170afa05e5615d43938e15b1710fb76c4b3ac7ec6bf",
+    "memory_a": {
+      "content": "Joanna is allergic to turtles.",
+      "entity": "Joanna",
+      "attribute": "allergy",
+      "value": "allergic to turtles",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 5,
+          "turn_id": "D5:11"
+        }
+      ],
+      "memory_id": "m_3da89d75f0374cbda046c3bebfd381f18d0aa82302015aa8b9b45955106b4538",
+      "conversation_id": "conv-42",
+      "session_time": "2022-03-18T18:59:00"
+    },
+    "memory_b": {
+      "content": "Joanna recently found out she is allergic to cockroaches.",
+      "entity": "Joanna",
+      "attribute": "allergy",
+      "value": "allergic to cockroaches",
+      "time_expression": "recently",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 5,
+          "turn_id": "D5:11"
+        }
+      ],
+      "memory_id": "m_639840ae890cd01906786170afa05e5615d43938e15b1710fb76c4b3ac7ec6bf",
+      "conversation_id": "conv-42",
+      "session_time": "2022-03-18T18:59:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 5,
+        "turn_id": "D5:11",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-03-18T18:59:00",
+        "text": "I wish I wasn't allergic! I would get two turtles today if I could! I found out recently I'm allergic to cockroaches as well, so who knows if I'll ever get a pet."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_bec76ac8241c80c3d3e2",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_6d78f67549e3ecf2899f55e56178bb4b9921f30b33ff0f799b2ec74e1be8ce08",
+    "memory_b_id": "m_2fbd3001e2eda21b86c3d335cde278cf33c1f4a76e2417592172b89257e3061b",
+    "memory_a": {
+      "content": "Joanna made a dairy-free vanilla cake with strawberry filling and coconut cream frosting.",
+      "entity": "Joanna",
+      "attribute": "baked_item",
+      "value": "dairy-free vanilla cake with strawberry filling and coconut cream frosting",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 10,
+          "turn_id": "D10:11"
+        }
+      ],
+      "memory_id": "m_6d78f67549e3ecf2899f55e56178bb4b9921f30b33ff0f799b2ec74e1be8ce08",
+      "conversation_id": "conv-42",
+      "session_time": "2022-05-02T11:54:00"
+    },
+    "memory_b": {
+      "content": "Joanna made dairy-free chocolate coconut cupcakes with raspberry frosting.",
+      "entity": "Joanna",
+      "attribute": "baked_item",
+      "value": "dairy-free chocolate coconut cupcakes with raspberry frosting",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 20,
+          "turn_id": "D20:10"
+        }
+      ],
+      "memory_id": "m_2fbd3001e2eda21b86c3d335cde278cf33c1f4a76e2417592172b89257e3061b",
+      "conversation_id": "conv-42",
+      "session_time": "2022-09-05T18:03:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 10,
+        "turn_id": "D10:11",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-05-02T11:54:00",
+        "text": "Thanks! It's dairy-free vanilla with strawberry filling and coconut cream frosting. I gotta say, I really like your coconut reccomendation you gave a while back!"
+      },
+      {
+        "session_id": 20,
+        "turn_id": "D20:10",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-09-05T18:03:00",
+        "text": "Yeah, since I'm lactose intolerant I'm trying out dairy-free options like coconut or almond milk instead. It's been a fun challenge seeing how to make yummy treats that suit everyone's diets. I even made these dairy-free chocolate coconut cupcakes with raspberry frosting."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_7022c21a5b942fa211da",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_03212fb5982be5cd0f6df4ff214dbb14eef6a2dc63f550f290aeaa9b3aae91b4",
+    "memory_b_id": "m_76bda35ddb318c791ff18c0296eeccbbf2562292b12e8183119350edd7697252",
+    "memory_a": {
+      "content": "Joanna has been working on a project lately.",
+      "entity": "Joanna",
+      "attribute": "current_project",
+      "value": "working on a project",
+      "time_expression": "lately",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 1,
+          "turn_id": "D1:2"
+        }
+      ],
+      "memory_id": "m_03212fb5982be5cd0f6df4ff214dbb14eef6a2dc63f550f290aeaa9b3aae91b4",
+      "conversation_id": "conv-42",
+      "session_time": "2022-01-21T19:31:00"
+    },
+    "memory_b": {
+      "content": "Joanna is working on a script called \"Finding Home\" with her writers group.",
+      "entity": "Joanna",
+      "attribute": "current_project",
+      "value": "script called \"Finding Home\"",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 9,
+          "turn_id": "D9:3"
+        }
+      ],
+      "memory_id": "m_76bda35ddb318c791ff18c0296eeccbbf2562292b12e8183119350edd7697252",
+      "conversation_id": "conv-42",
+      "session_time": "2022-04-21T19:44:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 1,
+        "turn_id": "D1:2",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-01-21T19:31:00",
+        "text": "Hey Nate! Long time no see! I've been working on a project lately - it's been pretty cool. What about you - any fun projects or hobbies?"
+      },
+      {
+        "session_id": 9,
+        "turn_id": "D9:3",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-04-21T19:44:00",
+        "text": "Thanks, Nate! We've made some great progress. I'm working on one with my group called \"Finding Home.\" It's a script about a girl on a journey to find her true home. I find it really rewarding and emotional. What about you? Any upcoming gaming tournaments?"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_5eca61b510010e2845c4",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_0f0cc5b4321b6fa5139a748beb0bda5d0aaea565d78c98797f4ec223f4d0dd9f",
+    "memory_b_id": "m_762754649e619d019b26340bf0ddc35638aa4655aa976a8471d9f9fa27be88d6",
+    "memory_a": {
+      "content": "Joanna loves making a dairy-free chocolate cake with raspberries, made with almond flour, coconut oil, chocolate and raspberries.",
+      "entity": "Joanna",
+      "attribute": "dessert_recipe",
+      "value": "dairy-free chocolate cake with raspberries",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 21,
+          "turn_id": "D21:13"
+        },
+        {
+          "session_id": 21,
+          "turn_id": "D21:15"
+        }
+      ],
+      "memory_id": "m_0f0cc5b4321b6fa5139a748beb0bda5d0aaea565d78c98797f4ec223f4d0dd9f",
+      "conversation_id": "conv-42",
+      "session_time": "2022-09-14T13:43:00"
+    },
+    "memory_b": {
+      "content": "Joanna likes a dessert made with blueberries, coconut milk, and a gluten-free crust.",
+      "entity": "Joanna",
+      "attribute": "dessert_recipe",
+      "value": "blueberry dessert with coconut milk and gluten-free crust",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 21,
+          "turn_id": "D21:17"
+        }
+      ],
+      "memory_id": "m_762754649e619d019b26340bf0ddc35638aa4655aa976a8471d9f9fa27be88d6",
+      "conversation_id": "conv-42",
+      "session_time": "2022-09-14T13:43:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 21,
+        "turn_id": "D21:13",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-09-14T13:43:00",
+        "text": "Hey Nate, I love making this dairy-free chocolate cake with raspberries. It's so moist and delicious - perfect sweetness level."
+      },
+      {
+        "session_id": 21,
+        "turn_id": "D21:15",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-09-14T13:43:00",
+        "text": "I make it with almond flour, coconut oil, chocolate and raspberries. It's my favorite for birthdays and special days."
+      },
+      {
+        "session_id": 21,
+        "turn_id": "D21:17",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-09-14T13:43:00",
+        "text": "Hey Nate! Here's another recipe I like. It's a delicious dessert made with blueberries, coconut milk, and a gluten-free crust. So creamy and delicious!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_5a5b06d6ab995fc17cda",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_3d42c37b0022b5813a13acee73d4688b43721d0a50b2a8468d4d3002e65a9eb3",
+    "memory_b_id": "m_5288e27f316ef7051b04ffe4b106fbf32976313bc8c77a67d1d3d59021282685",
+    "memory_a": {
+      "content": "Joanna cannot have dairy.",
+      "entity": "Joanna",
+      "attribute": "dietary_restriction",
+      "value": "cannot have dairy",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 4,
+          "turn_id": "D4:4"
+        }
+      ],
+      "memory_id": "m_3d42c37b0022b5813a13acee73d4688b43721d0a50b2a8468d4d3002e65a9eb3",
+      "conversation_id": "conv-42",
+      "session_time": "2022-02-25T13:07:00"
+    },
+    "memory_b": {
+      "content": "Joanna is lactose intolerant.",
+      "entity": "Joanna",
+      "attribute": "dietary_restriction",
+      "value": "lactose intolerant",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:18"
+        }
+      ],
+      "memory_id": "m_5288e27f316ef7051b04ffe4b106fbf32976313bc8c77a67d1d3d59021282685",
+      "conversation_id": "conv-42",
+      "session_time": "2022-04-17T18:44:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 4,
+        "turn_id": "D4:4",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-02-25T13:07:00",
+        "text": "That looks delicious! Unfortunately, I can't have dairy, so no ice cream for me. Do you happen to have a dairy-free recipe that I could try?"
+      },
+      {
+        "session_id": 8,
+        "turn_id": "D8:18",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-04-17T18:44:00",
+        "text": "Sure! I'm lactose intolerant, so I'll just need the dairy-free recipe!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_275a36c3a2e12fbf2d82",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_cf3f58b97033d9ae9482a4118522501b6d77e7afb12ee8f1ac903a273b90fae7",
+    "memory_b_id": "m_7a8d34e9820c9c9dd083167bd7631b5c2b69c42aeb6872181757a5b5729b1ffc",
+    "memory_a": {
+      "content": "Joanna feels relief, excitement, and worry about her screenplay submission.",
+      "entity": "Joanna",
+      "attribute": "emotional_state",
+      "value": "relief, excitement, and worry about screenplay submission",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 3,
+          "turn_id": "D3:1"
+        }
+      ],
+      "memory_id": "m_cf3f58b97033d9ae9482a4118522501b6d77e7afb12ee8f1ac903a273b90fae7",
+      "conversation_id": "conv-42",
+      "session_time": "2022-02-07T09:27:00"
+    },
+    "memory_b": {
+      "content": "Joanna feels a mix of relief, anxiety, excitement, and terror about her work getting noticed and hitting the big screen.",
+      "entity": "Joanna",
+      "attribute": "emotional_state",
+      "value": "mix of excitement and terror about work getting noticed",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 5,
+          "turn_id": "D5:1"
+        }
+      ],
+      "memory_id": "m_7a8d34e9820c9c9dd083167bd7631b5c2b69c42aeb6872181757a5b5729b1ffc",
+      "conversation_id": "conv-42",
+      "session_time": "2022-03-18T18:59:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 3,
+        "turn_id": "D3:1",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-02-07T09:27:00",
+        "text": "Hey Nate, long time no see! The screenplay I sent in to the film festival has been on my mind all day everyday. I keep bouncing between crazy emotions like relief, excitement and worry! Fingers crossed a producer or director falls in love with it and it ends up on the big screen - that would be awesome!"
+      },
+      {
+        "session_id": 5,
+        "turn_id": "D5:1",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-03-18T18:59:00",
+        "text": "Hey Nate, it's been a minute! I wrapped up my second script, and the feels have been wild. Sometimes I'm so relieved, but other times I just feel anxious about what comes next. It's a mix of excitement and terror, thinking about my work getting noticed and hitting the big screen."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_cfda94461095fe7ed881",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_abef1900d9c7419713b7c5123ce51a7dd263eaf3ecfdf48bfb5e93cfb1838b2c",
+    "memory_b_id": "m_a2edce2348f150f2af296d92176df10294006f2167c9fd059f4741e6b5019bb7",
+    "memory_a": {
+      "content": "Joanna wants to show her screenplay to Nate and values his opinion.",
+      "entity": "Joanna",
+      "attribute": "intention",
+      "value": "show screenplay to Nate and values his opinion",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 13,
+          "turn_id": "D13:20"
+        }
+      ],
+      "memory_id": "m_abef1900d9c7419713b7c5123ce51a7dd263eaf3ecfdf48bfb5e93cfb1838b2c",
+      "conversation_id": "conv-42",
+      "session_time": "2022-05-25T15:00:00"
+    },
+    "memory_b": {
+      "content": "Joanna wants to surprise her family with something delicious.",
+      "entity": "Joanna",
+      "attribute": "intention",
+      "value": "surprise her family with something delicious",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 18,
+          "turn_id": "D18:13"
+        }
+      ],
+      "memory_id": "m_a2edce2348f150f2af296d92176df10294006f2167c9fd059f4741e6b5019bb7",
+      "conversation_id": "conv-42",
+      "session_time": "2022-08-14T18:12:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 13,
+        "turn_id": "D13:20",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-05-25T15:00:00",
+        "text": "Appreciating the journey and being aware of those happy moments can be a game-changer! It keeps us focused on our dreams. Can't wait to show it to you. I value your opinion!"
+      },
+      {
+        "session_id": 18,
+        "turn_id": "D18:13",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-08-14T18:12:00",
+        "text": "Thanks, Nate! Can't wait to surprise my family with something delicious!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_9fcd19755c15d0b7d60a",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_02649f8f92b3eaa4b726f371ae546d6b997791443e84702f7365e5e0e7674340",
+    "memory_b_id": "m_780f16d2b5f4783373b15b9cd3efcc35f2b5c97bba8bf266e8ed789e67585460",
+    "memory_a": {
+      "content": "Joanna is allergic to pets.",
+      "entity": "Joanna",
+      "attribute": "pet_allergy_status",
+      "value": "allergic to pets",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:15"
+        }
+      ],
+      "memory_id": "m_02649f8f92b3eaa4b726f371ae546d6b997791443e84702f7365e5e0e7674340",
+      "conversation_id": "conv-42",
+      "session_time": "2022-01-23T14:01:00"
+    },
+    "memory_b": {
+      "content": "Joanna has allergies that make her not want to get a pet.",
+      "entity": "Joanna",
+      "attribute": "pet_allergy_status",
+      "value": "has allergies preventing pet ownership",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 12,
+          "turn_id": "D12:8"
+        }
+      ],
+      "memory_id": "m_780f16d2b5f4783373b15b9cd3efcc35f2b5c97bba8bf266e8ed789e67585460",
+      "conversation_id": "conv-42",
+      "session_time": "2022-05-20T19:49:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 2,
+        "turn_id": "D2:15",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-01-23T14:01:00",
+        "text": "Good idea, Nate! I'll think about it and maybe get pets of my own soon if I can find any I'm not allergic to. Have you been up to anything recently?"
+      },
+      {
+        "session_id": 12,
+        "turn_id": "D12:8",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-05-20T19:49:00",
+        "text": "Unfortunately, allergies make it so I don't really want to get any, and I'm too lazy to research alternative pets for my allergies."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_641f2c99d461f538edce",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_fe175a6046bd3307d5c66596efbf9c5f39e435cdddc704e935f92645073f3bb5",
+    "memory_b_id": "m_75635cdd473da6c6872f10b7c1bff699da1c367f29995e94c01a421b9cccc922",
+    "memory_a": {
+      "content": "Joanna took a photo at Whispering Falls.",
+      "entity": "Joanna",
+      "attribute": "photo_location",
+      "value": "Whispering Falls",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 11,
+          "turn_id": "D11:7"
+        }
+      ],
+      "memory_id": "m_fe175a6046bd3307d5c66596efbf9c5f39e435cdddc704e935f92645073f3bb5",
+      "conversation_id": "conv-42",
+      "session_time": "2022-05-12T15:35:00"
+    },
+    "memory_b": {
+      "content": "Joanna took a sunset photo on a hike last summer near Fort Wayne.",
+      "entity": "Joanna",
+      "attribute": "photo_location",
+      "value": "near Fort Wayne",
+      "time_expression": "last summer",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 28,
+          "turn_id": "D28:22"
+        }
+      ],
+      "memory_id": "m_75635cdd473da6c6872f10b7c1bff699da1c367f29995e94c01a421b9cccc922",
+      "conversation_id": "conv-42",
+      "session_time": "2022-11-09T17:54:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 11,
+        "turn_id": "D11:7",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-05-12T15:35:00",
+        "text": "Thanks! I took this photo at a beautiful location called Whispering Falls. It was really peaceful and serene."
+      },
+      {
+        "session_id": 28,
+        "turn_id": "D28:22",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-11-09T17:54:00",
+        "text": "Thanks, Nate! I took that pic on a hike last summer near Fort Wayne. The sunset and the surrounding beauty were just incredible. It was an awesome reminder of nature's beauty."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_24e34b02abfeaaadb7ba",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_472ecc3d3b97213a480ec30e7c82c404700d552693beec6f84572c962bb1a9fb",
+    "memory_b_id": "m_8cdd63a158a360be852f3ff548fbf07dab36938f1a5a2acc8a216dcbec24915b",
+    "memory_a": {
+      "content": "Joanna plans to let Nate know how the recipe turns out.",
+      "entity": "Joanna",
+      "attribute": "plan",
+      "value": "let Nate know how the recipe turns out",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 8,
+          "turn_id": "D8:22"
+        }
+      ],
+      "memory_id": "m_472ecc3d3b97213a480ec30e7c82c404700d552693beec6f84572c962bb1a9fb",
+      "conversation_id": "conv-42",
+      "session_time": "2022-04-17T18:44:00"
+    },
+    "memory_b": {
+      "content": "Joanna plans to make the vegan ice cream for her family this weekend.",
+      "entity": "Joanna",
+      "attribute": "plan",
+      "value": "make vegan ice cream for her family this weekend",
+      "time_expression": "this weekend",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 16,
+          "turn_id": "D16:11"
+        }
+      ],
+      "memory_id": "m_8cdd63a158a360be852f3ff548fbf07dab36938f1a5a2acc8a216dcbec24915b",
+      "conversation_id": "conv-42",
+      "session_time": "2022-06-24T10:55:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 8,
+        "turn_id": "D8:22",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-04-17T18:44:00",
+        "text": "Got it, Nate. I'll definitely let you know how it turns out. Thanks for sharing the recipe!"
+      },
+      {
+        "session_id": 16,
+        "turn_id": "D16:11",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-06-24T10:55:00",
+        "text": "Awesome! I'm going to make it for my family this weekend - can't wait!"
+      }
+    ]
+  },
+  {
+    "pair_id": "p_5244207388cb951ae7aa",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_e264869765d173fd16ab2b5ff02a1b8a97f65acd27eb6381746b1abb1178276b",
+    "memory_b_id": "m_a9358f4ee6cdf70799b34fe4c0d77c39d45318292d237fcf06da4e7161334cfb",
+    "memory_a": {
+      "content": "Joanna watched \"Little Women\" and found it amazing.",
+      "entity": "Joanna",
+      "attribute": "recent_activity",
+      "value": "watched \"Little Women\"",
+      "time_expression": "just",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 3,
+          "turn_id": "D3:17"
+        }
+      ],
+      "memory_id": "m_e264869765d173fd16ab2b5ff02a1b8a97f65acd27eb6381746b1abb1178276b",
+      "conversation_id": "conv-42",
+      "session_time": "2022-02-07T09:27:00"
+    },
+    "memory_b": {
+      "content": "Joanna saw a gorgeous sunset while hiking the other day.",
+      "entity": "Joanna",
+      "attribute": "recent_activity",
+      "value": "saw a sunset while hiking",
+      "time_expression": "the other day",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 7,
+          "turn_id": "D7:6"
+        }
+      ],
+      "memory_id": "m_a9358f4ee6cdf70799b34fe4c0d77c39d45318292d237fcf06da4e7161334cfb",
+      "conversation_id": "conv-42",
+      "session_time": "2022-04-15T19:37:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 3,
+        "turn_id": "D3:17",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-02-07T09:27:00",
+        "text": "I just watched \"Little Women\" and it was amazing! It's a great story about sisterhood, love, and reaching for your dreams. Definitely a must-see!"
+      },
+      {
+        "session_id": 7,
+        "turn_id": "D7:6",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-04-15T19:37:00",
+        "text": "That's amazing, Nate! Your boldness really inspired me. It reminded me of this gorgeous sunset I saw while hiking the other day. It made me realize the importance of showing the world who we are."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_09241fbd8dd8df3dd789",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_5a4fe570d9bb124adbd859bea2e0319f8c6c40b51bc868527aa101fe3fca43fb",
+    "memory_b_id": "m_5c8858bf465d62875cc672fd48ffe91b49f0703b93bee253dfa3d9d82e88ecc1",
+    "memory_a": {
+      "content": "Joanna revised one of her old recipes.",
+      "entity": "Joanna",
+      "attribute": "recipe_activity",
+      "value": "revised an old recipe",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 20,
+          "turn_id": "D20:2"
+        }
+      ],
+      "memory_id": "m_5a4fe570d9bb124adbd859bea2e0319f8c6c40b51bc868527aa101fe3fca43fb",
+      "conversation_id": "conv-42",
+      "session_time": "2022-09-05T18:03:00"
+    },
+    "memory_b": {
+      "content": "Joanna has been tweaking a dessert recipe to make it yummier and more accessible.",
+      "entity": "Joanna",
+      "attribute": "recipe_activity",
+      "value": "tweaking a dessert recipe",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 20,
+          "turn_id": "D20:6"
+        }
+      ],
+      "memory_id": "m_5c8858bf465d62875cc672fd48ffe91b49f0703b93bee253dfa3d9d82e88ecc1",
+      "conversation_id": "conv-42",
+      "session_time": "2022-09-05T18:03:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 20,
+        "turn_id": "D20:2",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-09-05T18:03:00",
+        "text": "Hey Nate! Cute turtles! Bummer about the setback. Any positive vibes comin' your way? I just revised on of my old recipes and made this!"
+      },
+      {
+        "session_id": 20,
+        "turn_id": "D20:6",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-09-05T18:03:00",
+        "text": "Been tweaking a dessert recipe to make it yummier and more accessible."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_94c12c25150fa28e6f5e",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_2da31bb3053d0213b6f27de42b165e589bdffd38f58c5bc23583aa0bc37d66f0",
+    "memory_b_id": "m_5f520ede6921cccc8a63343c6d35d3cf2372645123a9ea6d6a4c0ee8a41f10a3",
+    "memory_a": {
+      "content": "Joanna finished her first full screenplay and printed it last Friday.",
+      "entity": "Joanna",
+      "attribute": "screenplay_status",
+      "value": "finished first full screenplay and printed it",
+      "time_expression": "last Friday",
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 2,
+          "turn_id": "D2:3"
+        }
+      ],
+      "memory_id": "m_2da31bb3053d0213b6f27de42b165e589bdffd38f58c5bc23583aa0bc37d66f0",
+      "conversation_id": "conv-42",
+      "session_time": "2022-01-23T14:01:00"
+    },
+    "memory_b": {
+      "content": "Joanna started writing another screenplay while waiting to hear back about how the first one did.",
+      "entity": "Joanna",
+      "attribute": "screenplay_status",
+      "value": "started writing another screenplay while awaiting feedback on the first",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 4,
+          "turn_id": "D4:10"
+        }
+      ],
+      "memory_id": "m_5f520ede6921cccc8a63343c6d35d3cf2372645123a9ea6d6a4c0ee8a41f10a3",
+      "conversation_id": "conv-42",
+      "session_time": "2022-02-25T13:07:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 2,
+        "turn_id": "D2:3",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-01-23T14:01:00",
+        "text": "Woo! I finally finished my first full screenplay and printed it last Friday. I've been working on for a while, such a relief to have it all done!"
+      },
+      {
+        "session_id": 4,
+        "turn_id": "D4:10",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-02-25T13:07:00",
+        "text": "Yeah Nate, your cooking is amazing! I can't stop thinking about the screenplay, so I just started writing another one while I wait to hear back about how the first one did."
+      }
+    ]
+  },
+  {
+    "pair_id": "p_4d06f8ba45cc19e480c7",
+    "conversation_id": "conv-42",
+    "build_id": "8c8753438af8784a88ba01f8f88b5ad442a2d3c1851baf2cd58c3c9ac29bf639",
+    "memory_a_id": "m_9c45b29cab5937871761f468361489c7b299d3b9d5d349d25e03b03a2b4e1e3b",
+    "memory_b_id": "m_83349aec69bb38126a1e7c00707ba4543f6618aec4e725ceb280ff5ada6e1104",
+    "memory_a": {
+      "content": "Joanna sent a screenplay to a film festival.",
+      "entity": "Joanna",
+      "attribute": "screenplay_submission_status",
+      "value": "submitted to a film festival",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 3,
+          "turn_id": "D3:1"
+        }
+      ],
+      "memory_id": "m_9c45b29cab5937871761f468361489c7b299d3b9d5d349d25e03b03a2b4e1e3b",
+      "conversation_id": "conv-42",
+      "session_time": "2022-02-07T09:27:00"
+    },
+    "memory_b": {
+      "content": "Joanna received a rejection letter from a major company after finishing her screenplay.",
+      "entity": "Joanna",
+      "attribute": "screenplay_submission_status",
+      "value": "rejected by a major company",
+      "time_expression": null,
+      "event_time": null,
+      "event_time_precision": "unknown",
+      "sources": [
+        {
+          "session_id": 14,
+          "turn_id": "D14:1"
+        }
+      ],
+      "memory_id": "m_83349aec69bb38126a1e7c00707ba4543f6618aec4e725ceb280ff5ada6e1104",
+      "conversation_id": "conv-42",
+      "session_time": "2022-06-03T17:44:00"
+    },
+    "original_turns": [
+      {
+        "session_id": 3,
+        "turn_id": "D3:1",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-02-07T09:27:00",
+        "text": "Hey Nate, long time no see! The screenplay I sent in to the film festival has been on my mind all day everyday. I keep bouncing between crazy emotions like relief, excitement and worry! Fingers crossed a producer or director falls in love with it and it ends up on the big screen - that would be awesome!"
+      },
+      {
+        "session_id": 14,
+        "turn_id": "D14:1",
+        "conversation_id": "conv-42",
+        "speaker": "Joanna",
+        "session_time": "2022-06-03T17:44:00",
+        "text": "Nate, after finishing my screenplay I got a rejection letter from a major company. It really bummed me out."
+      }
+    ]
+  }
+]

@@ -4,7 +4,7 @@
 
 ## 当前可运行范围
 
-B 的 `common/`、`memory/`、`index/` 已实现 `0.1` 数据接口、BM25、MiniLM 向量检索与 RRF 混合检索；`reasoning/` 已提供 Query 分析、状态关系判定、有效记忆选择和答案生成。`web/` 提供本地演示界面；`eval/` 尚未实现。Memory 有两种构建模式：
+B 的 `common/`、`memory/`、`index/` 已实现 `0.1` 数据接口、BM25、MiniLM 向量检索与 RRF 混合检索；`reasoning/` 已提供 Query 分析、状态关系判定、有效记忆选择和答案生成。`web/` 提供本地演示界面；`eval/` 已实现在线/离线CLI、指标、冻结、三方法跑批与报告写回，见 `../docs/final-run-guide.md`。Memory 有两种构建模式：
 
 - `deepseek`：通过官方 API 抽取事实，关闭 thinking，使用 JSON 输出、来源校验及块级缓存。需要用户本地配置密钥，真实抽取效果尚未验证。
 - `turns`：每个文本轮次保存为一条 Memory，entity/attribute/value 和事件时间留空，标记为 `turn_baseline`。用于离线验证管线，不宣称完成语义抽取。
@@ -41,7 +41,7 @@ python -m src.web.server
 
 ### 真实数据构建
 
-将课程文件放在根目录 `locomo.json`，复制 `.env.example` 为 `.env` 并填写个人密钥；开发调试使用课程已确认的 `conv-26`、`conv-30`、`conv-41`、`conv-42`。课程会从其余 6 段中任意选取 2 段作为独立测试集，最终编号在课程通知前不得自行推定。
+将课程文件放在根目录 `locomo.json`，复制 `.env.example` 为 `.env` 并填写个人密钥；开发调试使用课程已确认的 `conv-26`、`conv-30`、`conv-41`、`conv-42`。张崇洋确认可任选两段非开发对话后，已固定conv-43/44；在开发方案冻结后运行独立测试。
 
 ```bash
 python -m src.memory.build --conversation <sample_id> --mode deepseek

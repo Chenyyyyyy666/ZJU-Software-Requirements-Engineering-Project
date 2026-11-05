@@ -22,7 +22,7 @@ import argparse
 import csv
 import json
 from collections.abc import Iterable, Mapping
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -109,7 +109,7 @@ def aggregate_inputs(bindings: Iterable[str], *, dataset: str) -> dict[str, Any]
         }
     return {
         "dataset": dataset,
-        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "generated_at": datetime.now(UTC).isoformat(timespec="seconds"),
         "methods": result_methods,
     }
 
@@ -213,8 +213,8 @@ def render_svg(summary: Mapping[str, Any]) -> str:
             f'height="{height}" viewBox="0 0 {width} {height}">'
         ),
         (
-            '<style>text{font-family:Arial,sans-serif;fill:#243447} '
-            '.axis{stroke:#9aa7b2} rect{fill:#2f6f9f}</style>'
+            "<style>text{font-family:Arial,sans-serif;fill:#243447} "
+            ".axis{stroke:#9aa7b2} rect{fill:#2f6f9f}</style>"
         ),
         '<rect width="100%" height="100%" fill="white"/>',
     ]
@@ -249,7 +249,7 @@ def render_svg(summary: Mapping[str, Any]) -> str:
                 )
     parts.append(
         '<text x="20" y="345" font-size="11">Generated from recorded evaluation '
-        'rows; missing metrics are left blank.</text>'
+        "rows; missing metrics are left blank.</text>"
     )
     parts.append("</svg>")
     return "\n".join(parts)

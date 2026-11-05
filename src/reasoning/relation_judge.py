@@ -8,6 +8,7 @@ from openai import OpenAI
 from pydantic import ValidationError
 
 from src.common.models import Memory, MemoryRelation, SourceRef
+from src.reasoning.telemetry import tracked_completion
 
 PROMPT_VERSION = "relation_v2"
 
@@ -25,6 +26,8 @@ Output JSON only: {"relation_type": "...", "reason": "..."}"""
 
 def _client() -> OpenAI:
     return OpenAI(
+        max_retries=0,
+        timeout=60,
         api_key=os.environ["DEEPSEEK_API_KEY"],
         base_url=os.environ.get("DEEPSEEK_BASE_URL", "https://api.deepseek.com"),
     )
@@ -77,7 +80,8 @@ def judge_pair(a: Memory, b: Memory, *, max_attempts: int = 2) -> MemoryRelation
         )
     last_error: Exception | None = None
     for _ in range(max_attempts):
-        resp = _client().chat.completions.create(
+        resp = tracked_completion(
+            _client(),
             model=os.environ.get("DEEPSEEK_MODEL", "deepseek-flash"),
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
