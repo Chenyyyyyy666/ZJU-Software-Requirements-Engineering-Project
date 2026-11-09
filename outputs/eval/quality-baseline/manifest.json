@@ -1,0 +1,115 @@
+{
+  "runner_version": "final-eval-v1",
+  "base_url": "https://api.deepseek.com",
+  "python_version": "3.11.18",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "dependencies": {
+    "openai": "3.35.1",
+    "pydantic": "2.13.4",
+    "sentence-transformers": "5.1.2",
+    "transformers": "4.57.1",
+    "torch": "2.8.0",
+    "numpy": "2.3.3"
+  },
+  "dataset": "dev",
+  "conversations": [
+    "conv-26",
+    "conv-30",
+    "conv-41",
+    "conv-42"
+  ],
+  "methods": [
+    "ours"
+  ],
+  "baseline_implementation": "local project baselines; not official LoCoMo runner",
+  "question_policy": "nonempty reference only",
+  "question_selection_counts": {
+    "conv-26": {
+      "source_questions": 199,
+      "excluded_without_reference": 45,
+      "eligible_questions": 154,
+      "selected_questions": 154
+    },
+    "conv-30": {
+      "source_questions": 105,
+      "excluded_without_reference": 24,
+      "eligible_questions": 81,
+      "selected_questions": 81
+    },
+    "conv-41": {
+      "source_questions": 193,
+      "excluded_without_reference": 41,
+      "eligible_questions": 152,
+      "selected_questions": 152
+    },
+    "conv-42": {
+      "source_questions": 260,
+      "excluded_without_reference": 61,
+      "eligible_questions": 199,
+      "selected_questions": 199
+    }
+  },
+  "limit_per_conversation": null,
+  "ours_mode": "hybrid",
+  "top_k": 5,
+  "candidate_k": 30,
+  "fallback_window": 0,
+  "fallback_slots": 0,
+  "state_resolution": false,
+  "device": "cpu",
+  "model": "deepseek-flash",
+  "generation_temperature": 0,
+  "thinking": "disabled",
+  "prompts": {
+    "src.reasoning.answer_generator": {
+      "version": "answer_v1",
+      "sha256": "16c567a5cdb7bb0486e120dea18f01557cf71637e7b53614783d92f0dd031822"
+    },
+    "src.reasoning.query_analyzer": {
+      "version": "query_v1",
+      "sha256": "8ebbfe77ac296df436aabd0478e08ce63812b6291d7ec481bd86de8dbc0f81ea"
+    },
+    "src.reasoning.relation_judge": {
+      "version": "relation_v2",
+      "sha256": "cbbec4c7b04c2e160b30da541797c9025118666fb7280e4e6e299f0557690013"
+    }
+  },
+  "data_sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+  "splits_sha256": "4232a6f2d0e5fa39ffcbad1d1d4db47946f2b6ec2e582057b46df6fab83ebe73",
+  "memory_versions": {
+    "conv-26": {
+      "sha256": "6ff022cd697d03a41f48d7ac7d8f6e8a0faa276adfe5d0c0c7c16ea99775edb2",
+      "build_id": "dc8bb69cee733b7d9e472df748e2467c47421f295fb1565d1b80b4681468e6eb",
+      "memories": 204,
+      "source_turns": 419
+    },
+    "conv-30": {
+      "sha256": "e1cd5a52ed755a23281b0a34a1fb377b617dabc56bfed2ee75b896755eb672cf",
+      "build_id": "5b7d91ba3e9c84ccc4e500116540a3fa969e8b4aea32f6d2f05d644b75f49133",
+      "memories": 161,
+      "source_turns": 369
+    },
+    "conv-41": {
+      "sha256": "ca585c3d1a766bc7d245f6b018e63b53fe522058f5720565baba9170729aaef8",
+      "build_id": "c92b818bc1dc8bf0b58f024d53b2b0573260dc8bb05b498e8db232537f7c0552",
+      "memories": 282,
+      "source_turns": 663
+    },
+    "conv-42": {
+      "sha256": "fbdcba257413f0c27a0ef7f7b71b8dd54fd0eed3c3e22122929be8b36fef8eda",
+      "build_id": "75b55b0f11bd1ed05b9e53b9aab797e1ecdc5987d0834b6fdeaec669bc6d6c98",
+      "memories": 304,
+      "source_turns": 629
+    }
+  },
+  "code_sha256": "c2830bb1867acf9060ada669854e820e5d264e9e151ebeed7b84eee9235abb20",
+  "metric_implementation": "src.eval.metrics project token F1, not official scorer",
+  "timing_policy": "per-question inference; excludes index/model initialization",
+  "config_id": "a081ce3288f82c64fc4cab4c95c187358ebf52b073f97d2cce32b2dd2aabf82e",
+  "started_at_utc": "2026-11-09T02:21:08.796797+00:00",
+  "resumed_at_utc": null,
+  "git_commit": "4d242c0f9e71977c4d1009207d241f848192671a",
+  "status": "complete",
+  "completed_rows": 586,
+  "finished_at_utc": "2026-11-09T02:32:53.768740+00:00"
+}

@@ -42,7 +42,6 @@ models/
 cache/
 
 # ---------- 运行输出与临时文件 ----------
-outputs/
 predictions/
 logs/
 *.log

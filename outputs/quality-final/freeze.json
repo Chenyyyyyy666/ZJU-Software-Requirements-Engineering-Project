@@ -1,0 +1,118 @@
+{
+  "created_at_utc": "2026-11-09T02:53:47.851623+00:00",
+  "snapshot": {
+    "python_version": "3.11.18",
+    "dependencies": {
+      "openai": "3.35.1",
+      "pydantic": "2.13.4",
+      "sentence-transformers": "5.1.2",
+      "transformers": "4.57.1",
+      "torch": "2.8.0",
+      "numpy": "2.3.3"
+    },
+    "data_sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+    "splits_sha256": "4232a6f2d0e5fa39ffcbad1d1d4db47946f2b6ec2e582057b46df6fab83ebe73",
+    "dev": [
+      "conv-26",
+      "conv-30",
+      "conv-41",
+      "conv-42"
+    ],
+    "test": [
+      "conv-43",
+      "conv-44"
+    ],
+    "memory_versions": {
+      "conv-26": {
+        "sha256": "6ff022cd697d03a41f48d7ac7d8f6e8a0faa276adfe5d0c0c7c16ea99775edb2",
+        "build_id": "dc8bb69cee733b7d9e472df748e2467c47421f295fb1565d1b80b4681468e6eb"
+      },
+      "conv-30": {
+        "sha256": "e1cd5a52ed755a23281b0a34a1fb377b617dabc56bfed2ee75b896755eb672cf",
+        "build_id": "5b7d91ba3e9c84ccc4e500116540a3fa969e8b4aea32f6d2f05d644b75f49133"
+      },
+      "conv-41": {
+        "sha256": "ca585c3d1a766bc7d245f6b018e63b53fe522058f5720565baba9170729aaef8",
+        "build_id": "c92b818bc1dc8bf0b58f024d53b2b0573260dc8bb05b498e8db232537f7c0552"
+      },
+      "conv-42": {
+        "sha256": "fbdcba257413f0c27a0ef7f7b71b8dd54fd0eed3c3e22122929be8b36fef8eda",
+        "build_id": "75b55b0f11bd1ed05b9e53b9aab797e1ecdc5987d0834b6fdeaec669bc6d6c98"
+      },
+      "conv-43": {
+        "sha256": "0fef56be7adea8665f11f62e0e681b1c2f6c35f15336526f0c8c4a034d33c6ed",
+        "build_id": "876c1ed4d1356bd5a606295796d3068fc8369faee217e5cf1c80cc21479f5fc5"
+      },
+      "conv-44": {
+        "sha256": "165a8751031e6bc846ceafeecc48e3fdd74b779467fd8cd8a737edf23bb4a768",
+        "build_id": "a451783dc343f0fcc70bd974c07d8a567806da24d1bfcaa4df24cbe10057c557"
+      }
+    },
+    "code_files": {
+      "experiments/dev_probe.py": "1b4da459678c9894ce5ff54f6acbe5bc35b3dc0703702f778f8c297a561f9002",
+      "experiments/draw_state_example.py": "a7391cdd9bcab5f6fe775696bac544b7469183786945ab8a8806c7ab4a6b292d",
+      "experiments/evaluate_relations.py": "e0517fe5f9c871aefd0f5002a997c9ffdd0571d0001fcc0e958897d35fb5c329",
+      "experiments/final_workflow.py": "8ac15d36a026ca8970d04c03b8ff44f7b687b30b9c624a7e4990fc28f4b3b8f0",
+      "experiments/measure_retrieval_improvement.py": "30fa199234f16102402d15900b4d556392555e7dce5356a57425ed982431e52b",
+      "experiments/plot_fig2.py": "6de81c76adc6eb57e1ec09f599bd3cc59b1594900974452a272cf21a324d85e5",
+      "experiments/run_dev_eval.py": "c33a3e41cb23e9efd4e7d1c76f52b0e906c223858dd805912ac86e489dbd615d",
+      "experiments/run_final_eval.py": "eb92d785753f48325bb174f8935d41de3f5c0c56df8a98ecb2b1b7245bfabf84",
+      "pyproject.toml": "a95e0f42db95838f25dce909a168361303d4a7fdf42d7a256251b894b7b1dc28",
+      "requirements-report.txt": "cdc58f5782ab1f662f2fa7305bfeaf039a9e9e37b38b7115b391a40b13df02a5",
+      "requirements-vector.txt": "fc9f4dc1d5dc441fab37f740ef80989b1f971c34293d23cb987b0110820837d8",
+      "requirements.txt": "f796c716bdfb1d21587f225d0d21e1cfc4759a8b1fc11c9216fca3b7cf65902a",
+      "src/__init__.py": "4bf51f6b3cb06db67ff6918b9de5f4e18add998fddd87c6dbfc1a30f5cdb7d1e",
+      "src/common/__init__.py": "ea8b611de9b49606b8e1d774da74a29640c7f0fa7295b2ec0fb8f6b4dfbcd4ff",
+      "src/common/json_io.py": "b07dd87b816ddca62fcf882e43a43f07abe48093b8c5d7d4f8a771ed7812eff3",
+      "src/common/models.py": "829584077dbe0ed74cb6c71bbc73595271ad6b732dbc2563042c470cfb9590e5",
+      "src/eval/__init__.py": "f94873532af9cd09b9244ff79f35caa920b1c9eda9773677cb3aee873aad6ed3",
+      "src/eval/__main__.py": "470a432469e608742ee56b70fc277032c5f5dab306c3d80bd97ddd0ceaffe531",
+      "src/eval/aggregate.py": "4816e894ef3849dfd61012e5b1abdd958d4df4e69e16a2ddf132fbc21cf88a3a",
+      "src/eval/cli.py": "88eb16c5a4178d286e110160e4aad17f45506f7bfe32a5390c15887db78e2e80",
+      "src/eval/export_answers.py": "8be44204ec23f5a8d01a650c2a789ee84bf0e59dd50718d400da7dc594f3724a",
+      "src/eval/finalize.py": "6af32559be3113c8dc7be5147fc4813f1069a54de5ee778c87b8ed4557f68f42",
+      "src/eval/freeze.py": "0b0df255eda5c08f249f2281e3c9c465a839cb941cf9d6f35c7100876db49d8f",
+      "src/eval/metrics.py": "0c2ea4bf60704d46bfb60ec81eb3d8c753063993a0c93457c299ff8050004142",
+      "src/index/__init__.py": "5726d2143287519b21dff95749d1c27abf6831819f99fc148c18dbff44b2d794",
+      "src/index/bm25.py": "01060eeab4be1ea242a3cbf455da63469bdf21d671c4850e8bee3dc942317380",
+      "src/index/context.py": "b751725ac034717d683b56cfda0ddde057c1c994ffbe7601fd92b662b4d9bbba",
+      "src/index/embeddings.py": "d0649d002c838c9f30fe7fe14b1573ac4ee8479cb215fe401b4c4a44e45ded53",
+      "src/index/search.py": "a03fc41dd9be88a7baf5be02e511793c444a3a0ca221e2c13cb3ce1b9dc6dead",
+      "src/memory/__init__.py": "a2a4cebff347df7fd6229c3eb48ce7549fdd035ad4022437012b3d2804e00690",
+      "src/memory/build.py": "b97f48fe0b25ff72c831693f65de5d1d95034e31889b888da181e40f041b67bf",
+      "src/memory/devbuild.py": "3108625eeeb9390b96d265be9a5f280d64d347df51d476152932626f315194ae",
+      "src/memory/extract.py": "72d3c93d0892303e4b90283e0dbfdcbcaa613fd14daec4ddc3e2fd12adcfeb50",
+      "src/memory/locomo.py": "b22991e24eb5917698bb5328d04faa80fea3ab68cf2ccca57f4efc4d8be9dfab",
+      "src/memory/store.py": "1b25a8d82c3ab8638cc6123352a8fc029addd084039b2cddd07c8fcc4eb01b97",
+      "src/reasoning/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "src/reasoning/answer_generator.py": "e03ef12ca6d6a6a7ce3fdb717456d92b62ffa749c60838d02b9b71f1154e2626",
+      "src/reasoning/memory_selector.py": "46cea8054b9b4cadbbe892969855ab32d223ec91e9720cca84077a36e55c8174",
+      "src/reasoning/pipeline.py": "224be0b5268fccc5cf2cea224b705b9a3173bd23e2af8ff6251cb49e194389a5",
+      "src/reasoning/query_analyzer.py": "6b6df99e2a16435c613e1020013e0598278ffe679c42059638bf82d40d03ed92",
+      "src/reasoning/relation_judge.py": "1c0bbaef1dfba7f3cd20d69e28faa1f1d3ea34a773a7bddec9bf8d6c53a730f2",
+      "src/reasoning/telemetry.py": "5aff942a23b2a228d5cc1e784fdb898440b8d5ec90c65aebd6b612ec43ac5d38",
+      "src/web/__init__.py": "9cbfcbf83240866e868e95eb47370b7871cd33169d7f22cae5bc3f59816af258",
+      "src/web/server.py": "83c94ccb78e3cc34d48a045479e3b4a6fbde6fa1e947d70fa179f71a66f940de"
+    },
+    "model": "deepseek-flash",
+    "base_url": "https://api.deepseek.com"
+  },
+  "snapshot_sha256": "aeef703f6714b53e3ae4837d5dec80d3be415cb71d87aad8f75cf01bb8faeb9c",
+  "experiment_policy": {
+    "ours_mode": "hybrid",
+    "top_k": 5,
+    "candidate_k": 30,
+    "question_policy": "nonempty reference only",
+    "methods": [
+      "ours"
+    ],
+    "generation_temperature": 0,
+    "fallback_window": 5,
+    "fallback_slots": 2,
+    "state_resolution": false
+  },
+  "development_config_id": "ef7a52a48c558f205a18ed1b2e394a15654073eeaf257171ba139d24798c2890",
+  "development_manifest_sha256": "0425b382fc4f979045d08fab8796131856ca29441baeeac84d78629745f90e9e",
+  "python": "3.11.18",
+  "selection": "Development-tuned configuration frozen before any run on conv-43/conv-44"
+}

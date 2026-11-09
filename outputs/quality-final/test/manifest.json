@@ -1,0 +1,89 @@
+{
+  "runner_version": "final-eval-v1",
+  "base_url": "https://api.deepseek.com",
+  "python_version": "3.11.18",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "dependencies": {
+    "openai": "3.35.1",
+    "pydantic": "2.13.4",
+    "sentence-transformers": "5.1.2",
+    "transformers": "4.57.1",
+    "torch": "2.8.0",
+    "numpy": "2.3.3"
+  },
+  "dataset": "test",
+  "conversations": [
+    "conv-43",
+    "conv-44"
+  ],
+  "methods": [
+    "ours"
+  ],
+  "baseline_implementation": "local project baselines; not official LoCoMo runner",
+  "question_policy": "nonempty reference only",
+  "question_selection_counts": {
+    "conv-43": {
+      "source_questions": 242,
+      "excluded_without_reference": 64,
+      "eligible_questions": 178,
+      "selected_questions": 178
+    },
+    "conv-44": {
+      "source_questions": 158,
+      "excluded_without_reference": 35,
+      "eligible_questions": 123,
+      "selected_questions": 123
+    }
+  },
+  "limit_per_conversation": null,
+  "ours_mode": "hybrid",
+  "top_k": 5,
+  "candidate_k": 30,
+  "fallback_window": 5,
+  "fallback_slots": 2,
+  "state_resolution": false,
+  "device": "cpu",
+  "model": "deepseek-flash",
+  "generation_temperature": 0,
+  "thinking": "disabled",
+  "prompts": {
+    "src.reasoning.answer_generator": {
+      "version": "answer_v2",
+      "sha256": "664759b0e1f57ff3526b2080de40490880e459736fada492a691fff6c60e87fc"
+    },
+    "src.reasoning.query_analyzer": {
+      "version": "query_v1",
+      "sha256": "8ebbfe77ac296df436aabd0478e08ce63812b6291d7ec481bd86de8dbc0f81ea"
+    },
+    "src.reasoning.relation_judge": {
+      "version": "relation_v2",
+      "sha256": "cbbec4c7b04c2e160b30da541797c9025118666fb7280e4e6e299f0557690013"
+    }
+  },
+  "data_sha256": "79fa87e90f04081343b8c8debecb80a9a6842b76a7aa537dc9fdf651ea698ff4",
+  "splits_sha256": "4232a6f2d0e5fa39ffcbad1d1d4db47946f2b6ec2e582057b46df6fab83ebe73",
+  "memory_versions": {
+    "conv-43": {
+      "sha256": "0fef56be7adea8665f11f62e0e681b1c2f6c35f15336526f0c8c4a034d33c6ed",
+      "build_id": "876c1ed4d1356bd5a606295796d3068fc8369faee217e5cf1c80cc21479f5fc5",
+      "memories": 317,
+      "source_turns": 680
+    },
+    "conv-44": {
+      "sha256": "165a8751031e6bc846ceafeecc48e3fdd74b779467fd8cd8a737edf23bb4a768",
+      "build_id": "a451783dc343f0fcc70bd974c07d8a567806da24d1bfcaa4df24cbe10057c557",
+      "memories": 318,
+      "source_turns": 675
+    }
+  },
+  "code_sha256": "fb016855841e005b6d5a1645e11b37e91962aa2afb72a86fff0a3b2464e71630",
+  "metric_implementation": "src.eval.metrics project token F1, not official scorer",
+  "timing_policy": "per-question inference; excludes index/model initialization",
+  "config_id": "bfb9f9add656ae49d7d1b948ff625a4e63f6b7d32915a03e173cdd6d2ca67ffe",
+  "started_at_utc": "2026-11-09T02:54:00.194960+00:00",
+  "resumed_at_utc": null,
+  "git_commit": "4d242c0f9e71977c4d1009207d241f848192671a",
+  "status": "complete",
+  "completed_rows": 301,
+  "finished_at_utc": "2026-11-09T02:59:47.536714+00:00"
+}

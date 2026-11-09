@@ -163,6 +163,9 @@ def build_plan(args: argparse.Namespace) -> tuple[dict[str, Any], dict[str, Any]
         "ours_mode": args.ours_mode,
         "top_k": args.top_k,
         "candidate_k": args.candidate_k,
+        "fallback_window": args.fallback_window,
+        "fallback_slots": args.fallback_slots,
+        "state_resolution": not args.disable_state_resolution,
         "device": args.device,
         "model": os.environ.get("DEEPSEEK_MODEL", "deepseek-flash"),
         "generation_temperature": 0,
@@ -228,7 +231,7 @@ def run_question(
                     ),
                 )
                 memories = [hit.memory for hit in retrieval.hits]
-                if method == "ours":
+                if method == "ours" and not args.disable_state_resolution:
                     analysis = analyze_query(
                         question, bundle.conversation_id, bundle.build_info.build_id
                     )
@@ -386,6 +389,8 @@ def run(args: argparse.Namespace) -> dict[str, Any]:
                         bundle,
                         config=IndexConfig(
                             mode=mode,
+                            fallback_window=args.fallback_window,
+                            fallback_slots=args.fallback_slots,
                             embedding_device=args.device,
                             model_cache_dir=args.model_cache_dir,
                             vector_cache_dir=args.output_dir / "vector-cache",
@@ -483,6 +488,13 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--ours-mode", choices=["bm25", "vector", "hybrid"], default="hybrid")
     parser.add_argument("--top-k", type=int, default=5)
     parser.add_argument("--candidate-k", type=int, default=30)
+    parser.add_argument("--fallback-window", type=int, default=5)
+    parser.add_argument("--fallback-slots", type=int, default=2)
+    parser.add_argument(
+        "--disable-state-resolution",
+        action="store_true",
+        help="retrieval+answer ablation; skip query analysis and relation judging",
+    )
     parser.add_argument("--limit", type=int, help="smoke-test questions per conversation")
     parser.add_argument("--include-unscored", action="store_true")
     parser.add_argument("--device", choices=["cpu", "cuda", "mps"], default="cpu")

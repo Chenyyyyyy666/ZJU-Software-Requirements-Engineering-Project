@@ -75,13 +75,13 @@ eval：课程 CLI 运行在线问答或读取离线结果，计算三项指标�
 
 Memory 保存 `content`、`entity/attribute/value`、`session_time`、`event_time`、`time_expression` 和 `sources`。会话时间与事件时间分别保存，未知字段为空；新旧状态均保留，由 C 在查询时判断有效性。仅字段及来源完全相同的事实去重，不进行实体别名归并或相似事实合并。`MemoryBundle` 汇总 Memory、原始轮次、schema 版本及 `build_info`；构建身份记录输入哈希、配置、模型与 prompt 版本，外部引用使用对话 ID、`build_id` 和 Memory ID。保存前校验唯一 ID、来源及时间一致性，通过后原子写入 UTF-8 JSON，读取时重新校验。
 
-**检索与交接。** `build_index` 为单个 bundle 建立独立快照；`search_memories` 返回带构建身份的 `RetrievalResult`。BM25 使用内容、实体、属性和值建立词项统计；向量通道使用固定 revision 的本地 MiniLM 编码内容和问题，以余弦相似度排序。混合模式两路各取 `candidate_k`，按 Memory ID 去重，以 `sum(1 / (60 + rank))` 做等权 RRF，最终返回 `top_k`，并保留各通道分数和排名。实体/属性精确过滤先于候选截取；相同分数按 Memory ID 排序，保证结果稳定。
+**检索与交接。** `build_index` 为单个 bundle 建立独立快照；`search_memories` 返回带构建身份的 `RetrievalResult`。BM25 使用内容、实体、属性和值建立词项统计；向量通道使用固定 revision 的本地 MiniLM 编码内容和问题，以余弦相似度排序。混合模式两路各取 `candidate_k`，按 Memory ID 去重，以 `sum(1 / (60 + rank))` 做等权 RRF。为进一步处理抽取覆盖缺口和 Top-K 漏召回，hybrid 再构造不跨 session 的五轮原文窗口：保留 RRF 前三名，用窗口 BM25 选择最多两条补足 Top-5。窗口来源保留原始轮次，`channel_scores` 标记 `raw_window`，trace 记录兜底参数和实际槽位。实体/属性精确过滤先于候选截取；指定显式过滤时禁用窗口兜底；相同分数按 Memory ID 排序，保证结果稳定。
 
 `get_source_turns` 按来源引用回溯原文；`retrieve_context` 将初始检索、证据与可选关联历史序列化给消费方。关联历史必须由调用方明确指定实体和属性，单列返回并标记 `truncated`，不混入初始 Top-K，便于 E 独立计算检索指标。B 提供候选与证据，状态关系和答案由 C 生成。字段及接入示例见 [interfaces.md](interfaces.md) 与 [b-handoff.md](b-handoff.md)。
 
 **缓存与失败处理。** 抽取缓存绑定输入、配置、模型和 prompt；向量缓存绑定 bundle 与编码器身份。非法模型输出、越界来源、截断响应和瞬时网络错误有界重试，默认最多 3 次；认证失败立即报错。构建失败保留已验证块缓存，不导出完整成功结果；损坏缓存不触发隐式付费重试。非法查询、跨对话请求、版本不匹配、模型缺失、向量维度或数值非法均明确失败；混合检索任一路失败时不静默降级。MiniLM 输入超过模型 token 上限时拒绝编码，避免截断事实。合法空对话和无匹配结果返回空集合。
 
-上述设计已实现并通过离线/Mock 测试；真实 DeepSeek 语义抽取质量、正式开发集召回效果与消费方完整联调仍待验收，不能用结构校验或逐轮基线代替。
+上述设计已实现并通过离线/Mock 测试。四段开发集上，五轮窗口兜底将 Recall@1 保持不变、Recall@5 从 `0.6815` 提升到 `0.7825`；冻结后的 conv-43/44 测试集 Recall@5 为 `0.7940`。结果只覆盖检索与答案消融，不等同于状态解析整体效果。
 
 ### 2.2 状态解析与答案生成
 
@@ -96,7 +96,7 @@ Memory 保存 `content`、`entity/attribute/value`、`session_time`、`event_tim
 | `query_analyzer.py`   | 调用 DeepSeek 抽取实体、时间视角、时间原文、属性与置信度  |
 | `relation_judge.py`   | 对候选记忆按 `(entity, attribute)` 分组，两两判定四类关系 |
 | `memory_selector.py`  | 按关系与 `time_scope` 选择当前有效记忆                    |
-| `answer_generator.py` | 组装 prompt，调用 DeepSeek 生成一句话答案                 |
+| `answer_generator.py` | 组装 prompt，调用 DeepSeek 生成最短答案短语               |
 
 ### 2.2.2 Query 分析
 
@@ -140,11 +140,11 @@ Memory 保存 `content`、`entity/attribute/value`、`session_time`、`event_tim
 
 ### 2.2.5 答案生成与异常处理
 
-`answer_generator.generate_answer` 将有效记忆的内容逐条列出，冲突时附加 `[Note: conflicting information exists.]`，调用 DeepSeek 生成一句话答案。输出 `AnswerRecord`：
+`answer_generator.generate_answer` 将有效记忆的内容逐条列出，冲突时附加 `[Note: conflicting information exists.]`。`answer_v2` 要求模型只返回最短答案短语：日期、姓名和值不包装成完整句子，Yes/No 题仅回答 Yes 或 No，冲突与解释不混入评分答案。输出 `AnswerRecord`：
 
 | 字段               | 含义                                          |
 | :----------------- | :-------------------------------------------- |
-| `answer`           | 一句话答案；空 content 时降级为 `(no answer)` |
+| `answer`           | 最短答案短语；空 content 时降级为 `(no answer)` |
 | `valid_memory_ids` | 参与生成的有效记忆 ID                         |
 | `conflict`         | 有效记忆集合是否存在冲突                      |
 | `build_id`         | 与检索结果一致的构建版本                      |
@@ -222,11 +222,11 @@ python -m src.eval --conversation <conv_id> --questions <questions.json> \
 
 `src/memory/` 实现 FR-01 至 FR-03：LoCoMo 读取与清洗、按会话分块、DeepSeek 抽取、来源校验和 JSON 持久化。`deepseek` 模式生成真实语义 Memory，`turns` 模式用于无密钥的管线联调并显式标为逐轮基线。
 
-`src/index/` 实现 FR-04 至 FR-07：BM25、MiniLM 向量检索、RRF 混合排序、构建版本校验、来源回溯和可选关联历史。`retrieve_context` 将检索、原文和关联历史组成供推理、Web 与评测消费的上下文对象。构建、索引和交接命令见 [b-handoff.md](b-handoff.md)。
+`src/index/` 实现 FR-04 至 FR-07：BM25、MiniLM 向量检索、RRF 混合排序、五轮原文窗口兜底、构建版本校验、来源回溯和可选关联历史。`retrieve_context` 将检索、原文和关联历史组成供推理、Web 与评测消费的上下文对象。构建、索引和交接命令见 [b-handoff.md](b-handoff.md)。
 
 ### 3.3 动态状态解析与答案生成
 
-`src/reasoning/query_analyzer.py` 从问题中提取实体、属性、时间范围和置信度；`relation_judge.py` 对同实体属性的候选 Memory 两两判定四类关系；`memory_selector.py` 根据关系和时间范围选择有效记忆；`answer_generator.py` 调用 DeepSeek 生成一句话答案；`pipeline.py` 串联完整在线流程。
+`src/reasoning/query_analyzer.py` 从问题中提取实体、属性、时间范围和置信度；`relation_judge.py` 对同实体属性的候选 Memory 两两判定四类关系；`memory_selector.py` 根据关系和时间范围选择有效记忆；`answer_generator.py` 使用 `answer_v2` 调用 DeepSeek 生成最短答案短语；`pipeline.py` 串联完整在线流程。
 
 RETAIN、UPDATE 和 CONFLICT 记忆保留；SUPERSEDE 在查询当前状态时过滤旧值，在查询过去状态时保留旧值。所有答案携带 `build_id`、有效 Memory ID 和冲突标记，供 Web 与评测回溯。
 
@@ -238,7 +238,7 @@ RETAIN、UPDATE 和 CONFLICT 记忆保留；SUPERSEDE 在查询当前状态时�
 
 ### 3.5 评测与课程接口
 
-`src/eval/cli.py` 提供 live 与离线两种模式，`metrics.py` 实现 token F1、Recall@K、关系准确率和混淆矩阵。`tests/test_eval_metrics.py` 使用合成记录验证指标和离线 CLI；正式课程数据实验、Full Text 与 Vector RAG 对照尚未运行。
+`src/eval/cli.py` 提供 live 与离线两种模式，`metrics.py` 实现 token F1、Recall@K、关系准确率和混淆矩阵。`tests/test_eval_metrics.py` 使用合成记录验证指标和离线 CLI。已运行三方法开发集对照、60 对关系评测以及冻结后的 conv-43/44 测试；优化消融的开发集和测试集 QA F1 分别为 `0.4325` 和 `0.4738`，详见 [retrieval-improvement.md](../experiments/retrieval-improvement.md)。
 
 ### 3.6 集成运行顺序
 
@@ -246,7 +246,7 @@ RETAIN、UPDATE 和 CONFLICT 记忆保留；SUPERSEDE 在查询当前状态时�
 2. 使用 `python -m src.eval --conversation ... --questions ... --memory ... --output ... --metrics-output ...` 运行课程问答和指标计算。
 3. 使用 `python -m src.web.server` 启动本地展示页面，检查 Memory、来源、答案和状态关系。
 
-当前可确认的集成层级是离线契约和合成数据 CLI 链路；真实 DeepSeek 抽取、课程开发集 live 问答、Web 手工验收和双平台复测仍未完成。
+当前已完成真实 DeepSeek 抽取、开发集 live 问答、冻结测试集运行和优化消融；Web 手工验收和双平台复测仍未完成。优化消融关闭状态关系解析，正式结论不得将其直接替代完整流水线指标。
 
 ## 4 现阶段测试结果
 
@@ -278,7 +278,7 @@ RETAIN、UPDATE 和 CONFLICT 记忆保留；SUPERSEDE 在查询当前状态时�
 | 检索与证据回溯 | 向量与 RRF 排序去重、过滤、缓存身份和损坏处理、非法向量、初始 Top-K 保持、关联历史、来源回溯与消费 CLI | `test_vector_retrieval.py` 12 项、`test_reasoning_context.py` 7 项通过；不代替 C 实际模块联调 | 对应两个测试文件；本节 2026-10-24 复核命令 | 鲁瑞特 |
 | 状态解析与答案生成 | Query 分析、分组判定、无时间冲突、来源去重、关系选择、冲突处理和答案异常；执行 `python -m pytest -o addopts= tests/test_reasoning.py -q` | 15 项通过、1 项失败；失败为关系判定测试未 Mock API | `tests/test_reasoning.py`；第 4 节全仓复核命令 | 于国庆 |
 | Web 与课程接口 | FR-12 至 FR-15 的 Web 代码已加入；Web 手工验收和自动化测试尚未记录 | FR-12 至 FR-15 已实现，未验收 | `src/web/` | 许子萌、张崇洋 |
-| 评测 CLI 与指标 | 离线 F1、Recall@K、关系准确率/混淆矩阵、token 汇总及 CLI 输出；执行 `python -m pytest -o addopts= tests/test_eval_metrics.py -q` | 5 项通过；真实课程数据与基线未运行 | `tests/test_eval_metrics.py`、`src/eval/` | 张崇洋 |
+| 评测 CLI 与指标 | 离线 F1、Recall@K、关系准确率/混淆矩阵、token 汇总及 CLI 输出；已运行四段开发集、两段冻结测试与三方法基线 | 单元测试通过；开发集/测试集及优化消融均已完成，详见 `experiments/retrieval-improvement.md` | `tests/test_eval_metrics.py`、`src/eval/` | 张崇洋 |
 | 集成链路 | `test_reasoning_context.py` 覆盖 Memory→检索→上下文→消费方；`test_eval_metrics.py` 覆盖离线答案→评分→指标文件；全仓测试同时执行 | 契约/离线链路通过；真实 DeepSeek、完整 Web 操作和课程端到端未验收 | `tests/test_reasoning_context.py`、`tests/test_eval_metrics.py`；第 4 节复核结果 | 陈易 |
 >>>>>>> b82985e2c6f1e3077369268346557be2891fd4b8
 
@@ -295,10 +295,10 @@ RETAIN、UPDATE 和 CONFLICT 记忆保留；SUPERSEDE 在查询当前状态时�
 | 评测与基线 | 【待补】 | 【待补】 | 张崇洋 |
 | 集成与交付 | 【待补】 | 【待补】 | 陈易 |
 =======
-| 记忆与检索 | 已实现 LoCoMo 清洗、带版本及来源的 Memory JSON、DeepSeek 抽取入口、BM25/MiniLM/RRF 检索和证据/历史交接；SRS FR-01 至 FR-07 与接口文档已供稿；本次 54 项离线/Mock 测试及 B 模块 Ruff 检查通过，已有真实 MiniLM 逐轮基线运行记录 | 实现与离线验证完成；真实语义抽取、正式检索质量、Python 3.11/macOS 验证及消费方完整联调待验收 | 鲁瑞特 |
+| 记忆与检索 | 已实现 LoCoMo 清洗、带版本及来源的 Memory JSON、DeepSeek 抽取入口、BM25/MiniLM/RRF、五轮原文窗口兜底和证据/历史交接；完成真实 Memory 构建、开发集与冻结测试 | 真实抽取与检索质量已有记录；仍需双平台复测及全量语义人工审核 | 鲁瑞特 |
 | 状态解析与答案生成 | 五个模块文件与三个共享类型完成；16 项单元测试中 15 项通过、1 项因未 Mock API 失败；turns 基线端到端跑通 | 核心链路完成；测试隔离和真实数据验证待补 | 于国庆 |
 | Web 展示 | FR-12 至 FR-15 已有本地页面和 HTTP 接口，覆盖记忆列表、来源轮次、BM25 问答接线和关系结果展示。现有 Web 功能尚无自动化测试，端到端效果待联调确认 | FR-12 至 FR-15 已实现，未验收 | 许子萌 |
-| 评测与基线 | 已加入离线 F1、Recall@K、关系准确率/混淆矩阵和课程 CLI 骨架；`src/eval` 尚无正式课程数据结果，Full Text/Vector RAG 对照未运行 | 骨架已实现；正式评测未测试 | 张崇洋 |
+| 评测与基线 | 离线 F1、Recall@K、关系准确率/混淆矩阵、三方法对照、冻结记录和报告写回已完成；优化消融在开发集与 conv-43/44 上运行 | 正式评测已运行；仍需区分完整状态流水线与关闭状态解析的优化消融 | 张崇洋 |
 | 集成与交付 | 完成公共契约、模块接口、Web 与评测 CLI 接线；离线契约测试覆盖 Memory/检索/上下文/评测链路；开发集、测试集和提交材料已配置 | 离线集成框架已完成；真实课程数据 live 联调、跨平台验收、Web 手工测试与最终打包仍待完成 | 陈易 |
 
 **阶段判断。** 核心记忆、检索、状态解析、答案生成、Web 展示和评测骨架均已形成可运行实现；当前主要缺口不是模块结构，而是真实课程数据上的完整运行、基线实验、跨平台验证和失败测试修复。因此本报告可以证明阶段性设计与实现完成度，但不能据此宣称最终准确率或验收已经通过。

@@ -132,7 +132,7 @@ locomo.json
 #### 3.2.2 刺激—响应序列
 
 - 关键词查询：系统执行 BM25 排名并返回不超过 K 条带分数的 Memory 命中。
-- 语义或混合查询：系统执行向量检索或 BM25 + 向量 RRF 融合，去重后返回 Top-K 和 trace。
+- 语义或混合查询：系统执行向量检索或 BM25 + 向量 RRF 融合；hybrid 再以连续五轮原文窗口 BM25 补足 Top-5 的剩余槽位，去重后返回 Top-K 和 trace。
 - 证据或历史请求：系统按来源读取原始轮次或关联历史，返回与初始 Top-K 分离的结果。
 
 #### 3.2.3 功能需求
@@ -141,7 +141,7 @@ locomo.json
 | --- | --- | --- | --- | --- |
 | FR-04 | 关键词候选检索 | 输入：索引、对话 ID、问题、K 和可选过滤；处理：BM25 排名；输出：不超过 K 条有序命中，带分数、Memory 和构建身份；异常：空问题、非法 K、跨对话请求报错；无词项交集返回空命中 | 来源已知的合成查询命中目标轮次；重复查询排序一致；过滤先于截取；`top_k` 为正整数且不大于 `candidate_k` | `src/index/bm25.py` |
 | FR-05 | 语义候选检索 | 输入同 FR-04；处理：固定版本 MiniLM 编码、余弦相似度排名、复用带构建与模型身份的缓存；输出：有序 Top-K 及模型和通道信息；异常：模型缺失、超 token 上限、缓存损坏或维度非法时明确报错 | 真实模型本地运行且来源可回溯；缓存重载与首次结果一致；身份变化不复用旧缓存；模型测试与真实运行分别记录 | `src/index/embeddings.py`、`bm25.py` |
-| FR-06 | 混合召回与去重 | 输入同 FR-04，模式为 `hybrid`；处理：两路各取 `candidate_k`，按 Memory ID 去重并用等权 RRF 合并；输出：最终 Top-K、各路分数与排名、trace；异常：任一路失败即报错，不伪装成成功融合 | 同一 Memory 最多出现一次；按融合分降序、同分按 ID 排序；分数均为有限值；结果可追溯到各路候选 | `src/index/bm25.py` |
+| FR-06 | 混合召回、窗口兜底与去重 | 输入同 FR-04，模式为 `hybrid`；处理：两路各取 `candidate_k`，按 Memory ID 去重并用等权 RRF 合并；保留前三名后，以不跨 session 的连续五轮原文窗口 BM25 补足最多两条 Top-5；显式实体/属性过滤时禁用窗口兜底；输出：最终 Top-K、各路或 `raw_window` 分数与排名、trace；异常：任一路失败即报错，不伪装成成功融合 | 同一 Memory 最多出现一次；普通命中按 RRF 排序、同分按 ID 稳定排序；窗口命中 score 明确标为 BM25；窗口来源覆盖连续原文轮次；Recall@1 不下降且开发集 Recall@5 有实测提升 | `src/index/bm25.py` |
 | FR-07 | 证据回溯与关联历史读取 | 输入：当前 bundle 与 Memory ID 或来源引用，或实体、属性及排除 ID；处理：读取原轮次或按原文顺序取关联历史；输出：去重来源、历史列表及 `truncated` 标记；异常：来源或记忆不存在、`limit` 非法时报错 | 每条候选均可回溯原文；旧状态保留；历史结果与初始 hits 分开；返回对象被修改不污染存储 | `src/memory/store.py`、`src/index/context.py` |
 
 ### 3.3 动态状态解析与答案生成
@@ -154,7 +154,7 @@ locomo.json
 
 - 接收问题：系统抽取实体、时间范围、时间表达、属性和置信度。
 - 接收候选 Memory：系统按实体和属性分组，判定 RETAIN、UPDATE、SUPERSEDE 或 CONFLICT。
-- 接收有效关系和候选记忆：系统组装版本化 prompt，调用 DeepSeek 生成一句话答案和 AnswerRecord。
+- 接收有效关系和候选记忆：系统组装版本化 prompt，调用 DeepSeek 生成最短答案短语和 AnswerRecord；解释和冲突信息留在结构化字段，不混入评分答案。
 - 构建版本不匹配：系统抛出 `RuntimeError` 并要求重建索引，不返回跨 bundle 结果。
 
 #### 3.3.3 功能需求
@@ -163,7 +163,7 @@ locomo.json
 | --- | --- | --- | --- | --- |
 | FR-08 | 从问题中抽取状态判定关键要素 | 输入：问题文本、`conversation_id`；处理：调用 DeepSeek 官方接口并关闭 thinking，抽取 `entity`、`time_scope`、`time_expression`、`attribute`、`confidence`；输出：符合 `interfaces.md` 契约的 JSON；异常：非法 JSON 重试 2 次，仍失败则记录日志并中断该题，不输出假成功 | 开发集问题 `attribute` 非空率和 JSON 可解析率均为 100%；`time_scope` 抽样人工核对准确率不低于 80%；字段与 `interfaces.md` 一致 | `src/reasoning/query_analyzer.py` |
 | FR-09 | 判定候选记忆的时效关系 | 输入：候选 Memory，含内容、实体、属性、时间和来源；处理：仅比较相同 `(entity, attribute)` 组，综合时间和上下文判定；双方时间均缺失时判为 CONFLICT，跨组直接视为 RETAIN；输出：MemoryRelation 列表及 reason、sources；异常：非法 JSON 重试 2 次，仍失败降级为 CONFLICT 并记录日志 | 输出 100% 符合 schema；开发集总体判定准确率不低于 70%，并报告四类混淆矩阵；时间缺失样本 100% 判为 CONFLICT；跨组记忆不触发模型调用；相同输入与 prompt 版本结果一致 | `src/reasoning/relation_judge.py` |
-| FR-10 | 选择有效记忆并生成答案 | 输入：MemoryRelation、Query 分析结果和候选 Memory；处理：RETAIN 全保留，UPDATE 合并，SUPERSEDE 只保留新值，CONFLICT 双留并标记；调用版本化 prompt 生成答案；输出：含 `question_id`、`answer`、`valid_memory_ids`、`conflict`、`build_id` 的 AnswerRecord；异常：生成失败重试 2 次，仍失败输出空答案并记录日志，不中断批量评测 | SUPERSEDE 场景旧值 100% 不进入答案生成；冲突样本抽检 100% 包含冲突说明；引用记忆均可回溯原始轮次；答案符合课程接口；记录每题 token 消耗 | `src/reasoning/memory_selector.py`、`answer_generator.py` |
+| FR-10 | 选择有效记忆并生成简洁答案 | 输入：MemoryRelation、Query 分析结果和候选 Memory；处理：RETAIN、UPDATE、CONFLICT 保留，SUPERSEDE 在 current/specific 查询中只保留新值；调用 `answer_v2` 版本化 prompt，只输出最短答案短语；冲突标记留在 `conflict` 字段；输出：含 `question_id`、`answer`、`valid_memory_ids`、`conflict`、`build_id` 的 AnswerRecord；异常：生成失败重试 2 次，仍失败输出空答案并记录日志，不中断批量评测 | SUPERSEDE 场景旧值 100% 不进入答案生成；冲突字段可驱动界面解释而不稀释评分答案；引用记忆均可回溯原始轮次；答案符合课程接口；记录每题 token 消耗 | `src/reasoning/memory_selector.py`、`answer_generator.py` |
 | FR-11 | 保证状态解析与答案可追溯 | 输入：AnswerRecord 与 MemoryRelation；处理：携带 `build_id` 和被引用 Memory ID，证据键统一为 `(conversation_id, session_id, turn_id)`；输出：可供评测和前端消费的结构化结果；异常：引用 `build_id` 与当前 bundle 不一致时抛出 `RuntimeError` | 每条答案和关系均含 `build_id`；有效记忆与来源均可定位，定位失败率为 0；Recall@K 证据对齐使用同一口径 | `src/reasoning/` |
 
 ### 3.4 网页记忆与状态可视化
@@ -204,7 +204,7 @@ Web 界面用于浏览和解释系统结果，调用现有 Memory、来源读取
 
 | 编号 | 需求 | 验收依据 | 实现位置 |
 | --- | --- | --- | --- |
-| FR-16 | 提供参数化的课程评测入口，接收对话编号与问题参数，并把答案写入结果文件 | 按 6.2 节命令运行能生成 `answers.json`，每题一句话答案并标明题号 | `src/eval/`（未实现） |
+| FR-16 | 提供参数化的课程评测入口，接收对话编号与问题参数，并把答案写入结果文件 | 按 6.2 节命令运行能生成 `answers.json`，每题一个最短有效答案并标明题号；解释和冲突信息保留在结构化字段 | `src/eval/` |
 | FR-17 | 计算问题回答 F1、证据记忆检索 Recall@K、状态更新判断准确率 | 三项指标均能在开发集计算，并可按问题类别细分 | `src/eval/`（未实现） |
 | FR-18 | 支持与 Full Text、Vector RAG 基线在同表对照，并记录平均 token | 结果表包含三种方法及四项数值，实验配置可复现 | `experiments/` |
 
@@ -289,7 +289,7 @@ Web 界面用于浏览和解释系统结果，调用现有 Memory、来源读取
 python [评测入口] --conversation [conv_id] --questions [questions.json] --output answers.json
 ```
 
-输出要求：每题提供一句话答案并标明题号，保存为 UTF-8 JSON；内部 Memory 格式不要求与课程统一。
+输出要求：每题提供最短有效答案并标明题号，保存为 UTF-8 JSON；答案可以是单词、短语或必要的一句话。内部 Memory、检索 trace、冲突标志和证据引用格式不要求与课程统一。
 
 ### 6.3 结果与可复现性
 

@@ -1,0 +1,83 @@
+{
+  "dataset": "dev",
+  "conversations": [
+    "conv-26",
+    "conv-30",
+    "conv-41",
+    "conv-42"
+  ],
+  "top_k": 5,
+  "candidate_k": 30,
+  "fallback_window": 5,
+  "fallback_slots": 2,
+  "before": {
+    "questions": 584,
+    "recall@1": 0.4657534246575342,
+    "recall@5": 0.6815068493150684
+  },
+  "after": {
+    "questions": 584,
+    "recall@1": 0.4657534246575342,
+    "recall@5": 0.7825342465753424
+  },
+  "delta_recall@1": 0.0,
+  "delta_recall@5": 0.10102739726027399,
+  "per_conversation": {
+    "conv-26": {
+      "before": {
+        "questions": 152,
+        "recall@1": 0.4144736842105263,
+        "recall@5": 0.625
+      },
+      "after": {
+        "questions": 152,
+        "recall@1": 0.4144736842105263,
+        "recall@5": 0.7960526315789473
+      },
+      "delta_recall@1": 0.0,
+      "delta_recall@5": 0.17105263157894735
+    },
+    "conv-30": {
+      "before": {
+        "questions": 81,
+        "recall@1": 0.49382716049382713,
+        "recall@5": 0.6419753086419753
+      },
+      "after": {
+        "questions": 81,
+        "recall@1": 0.49382716049382713,
+        "recall@5": 0.7530864197530864
+      },
+      "delta_recall@1": 0.0,
+      "delta_recall@5": 0.11111111111111116
+    },
+    "conv-41": {
+      "before": {
+        "questions": 152,
+        "recall@1": 0.5,
+        "recall@5": 0.756578947368421
+      },
+      "after": {
+        "questions": 152,
+        "recall@1": 0.5,
+        "recall@5": 0.7960526315789473
+      },
+      "delta_recall@1": 0.0,
+      "delta_recall@5": 0.03947368421052633
+    },
+    "conv-42": {
+      "before": {
+        "questions": 199,
+        "recall@1": 0.46733668341708545,
+        "recall@5": 0.6834170854271356
+      },
+      "after": {
+        "questions": 199,
+        "recall@1": 0.46733668341708545,
+        "recall@5": 0.7738693467336684
+      },
+      "delta_recall@1": 0.0,
+      "delta_recall@5": 0.09045226130653272
+    }
+  }
+}

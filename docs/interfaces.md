@@ -189,7 +189,7 @@ def list_related_memories(
 | `entity` | string 或 null，默认 null | 可选精确匹配过滤；由 C 提供，不自动调用模型分析 |
 | `attribute` | string 或 null，默认 null | 可选精确匹配过滤；无可靠值时不限制 |
 
-三种模式均已实现。过滤先于各通道截取 candidate_k 执行，不能先从全库取 K 条再丢弃其他对话。不对时间做硬过滤，由 C 处理历史问题。BM25 分词为英文小写词/数字及单个 CJK 字符，无词项交集时返回空 hits；vector 按 content 的余弦相似度取候选，不设正分阈值。没有符合过滤条件的记忆时，两路都返回空结果。
+三种模式均已实现。过滤先于各通道截取 candidate_k 执行，不能先从全库取 K 条再丢弃其他对话。不对时间做硬过滤，由 C 处理历史问题。BM25 分词为英文小写词/数字及单个 CJK 字符，无词项交集时返回空 hits；vector 按 content 的余弦相似度取候选，不设正分阈值。hybrid 在 RRF 后保留前三名，再以不跨 session 的连续五轮原文窗口 BM25 补足最多两条 Top-5；显式 entity/attribute 过滤时关闭窗口兜底。没有符合过滤条件的记忆时，两路都返回空结果。
 
 ### RetrievalResult
 
@@ -199,9 +199,9 @@ def list_related_memories(
 | `query` | string | 实际检索问题 |
 | `mode` | string | 实际执行模式，不能将单路降级伪装成 hybrid |
 | `hits` | RetrievalHit[] | 有序、唯一 Memory 列表，长度不超过 top_k |
-| `trace` | object | 请求参数和各通道候选数；向量模式另含 embedding 元数据、vector_cache 路径与 fusion（hybrid 为 rrf-k60，否则 null） |
+| `trace` | object | 请求参数和各通道候选数；向量/混合模式另含 embedding 元数据、vector_cache 路径与 fusion（hybrid 为 rrf-k60，否则 null）；混合模式含 `raw_window_fallback`，记录 window、requested_slots、candidate_count、selected_slots 与 preserved_semantic |
 
-RetrievalHit 包含 `rank`（从 1 开始的连续整数）、`memory`（完整 Memory）、`score`（有限数值）和 `channel_scores`。后者为通道名到 `{rank: int, score: number}` 的映射；未命中的通道不出现。原始通道分数只用于诊断，混合结果的 score 使用 [设计说明](memory-design.md) 中的 RRF 公式。
+RetrievalHit 包含 `rank`（从 1 开始的连续整数）、`memory`（完整 Memory）、`score`（有限数值）和 `channel_scores`。后者为通道名到 `{rank: int, score: number}` 的映射；普通 hybrid 命中含 `bm25`、`vector`，score 为两者的等权 RRF。原文窗口兜底命中的通道名为 `raw_window`，其 score 是该五轮窗口的 BM25 分数，不是 RRF 分。窗口 Memory 的 ID 以 `raw-window-` 开头，sources 保留窗口内每一轮的 `(session_id, turn_id)`，正文按轮次顺序拼接。
 
 按 score 降序排序；相同分数按 memory_id 的字典序升序稳定排序，单路候选也遵循该规则。source 由 hit.memory.sources 提供，不另造与它不一致的证据字段。JSON 中不得出现 NaN 或 Infinity。
 
@@ -225,6 +225,12 @@ trace:
   entity: null
   attribute: null
   channel_candidates: {bm25: 1, vector: 1}
+  raw_window_fallback:
+    window: 5
+    requested_slots: 2
+    candidate_count: 12
+    selected_slots: 2
+    preserved_semantic: 3
 ```
 
 关联历史由 C 在初始检索后显式请求，单列保存，不偷偷插入初始 hits。E 先计算初始 Top-K 指标，如评估扩展后结果则另行标注；任何摘要视图不得直接混入按 Memory 计数的排名。
