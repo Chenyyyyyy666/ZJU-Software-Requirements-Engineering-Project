@@ -14,6 +14,8 @@ experiments/
 ├── memory_pairs_gold.csv         # 人工标注真值文件（gold 标准）
 ├── relation_eval_results.csv     # 脚本输出：全部样本预测详情
 ├── relation-errors.csv           # 脚本输出：错误样本单独汇总
+├── measure_retrieval_improvement.py # 旧/新检索 Recall@K 离线对照
+├── retrieval-improvement.md      # 窗口兜底、简洁答案与冻结测试记录
 ├── splits.json                   # 数据集划分配置（开发集 / 测试集划分）
 ├── 错误案例分析报告.md             # 人工撰写：本轮错误分析文档
 ├──summary.md                      #总结实验结果
@@ -82,6 +84,8 @@ python experiments/dev_probe.py
 | 日期 | 实验主题 | 检索方式 | top-K | QA F1 | Recall@K | 状态更新准确率 | 平均 token | 备注 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 2026-10-15 | 检索方式对比 | 关键词 | 10 | 待填 | 待填 | 待填 | 待填 | 初版流水线 |
+| 2026-11-09 | 五轮窗口兜底 | RRF 前三 + 原文 BM25 两槽 | 5 | — | Dev R@5 0.6815→0.7825；Test 0.7940 | 未启用 | 576.6 | `answer_v1` 消融 |
+| 2026-11-09 | 简洁答案 `answer_v2` | 同上 | 5 | Dev 0.4325；Test 0.4738 | Dev R@5 0.7825；Test 0.7940 | 未启用 | 659.9 / 672.3 | 冻结后测试零失败 |
 
 ## 约定
 

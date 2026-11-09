@@ -4,7 +4,7 @@
 
 ## 当前可运行范围
 
-B 的 `common/`、`memory/`、`index/` 已实现 `0.1` 数据接口、BM25、MiniLM 向量检索与 RRF 混合检索；`reasoning/` 已提供 Query 分析、状态关系判定、有效记忆选择和答案生成。`web/` 提供本地演示界面；`eval/` 已实现在线/离线CLI、指标、冻结、三方法跑批与报告写回，见 `../docs/final-run-guide.md`。Memory 有两种构建模式：
+B 的 `common/`、`memory/`、`index/` 已实现 `0.1` 数据接口、BM25、MiniLM 向量检索、RRF 混合检索和五轮原文窗口兜底；`reasoning/` 已提供 Query 分析、状态关系判定、有效记忆选择和 `answer_v2` 简洁答案生成。`web/` 提供本地演示界面；`eval/` 已实现在线/离线CLI、指标、冻结、三方法跑批与报告写回，见 `../docs/final-run-guide.md`。Memory 有两种构建模式：
 
 - `deepseek`：通过官方 API 抽取事实，关闭 thinking，使用 JSON 输出、来源校验及块级缓存。需要用户本地配置密钥，真实抽取效果尚未验证。
 - `turns`：每个文本轮次保存为一条 Memory，entity/attribute/value 和事件时间留空，标记为 `turn_baseline`。用于离线验证管线，不宣称完成语义抽取。
@@ -64,13 +64,15 @@ python -m src.index.search --memory outputs/memory/demo-01.json --query "adoptio
 
 默认在 CPU 本地运行 `sentence-transformers/all-MiniLM-L6-v2`，无需 API key。首次运行从 Hugging Face 下载固定版本的模型到 `cache/embedding_models/`；下载完成后可加 `--local-files-only` 禁止联网下载。可用 `--device cuda` 或 `--device mps` 显式选择已配置的 GPU 环境。Windows、WSL 和 macOS 使用各自的虚拟环境。
 
-Memory 的 content 与问题由同一模型编码为 384 维向量，归一化后计算余弦相似度；人物/属性筛选在排名截断前执行。每路先取 candidate_k，hybrid 按 Memory ID 去重并以等权 RRF（k=60）合并，输出保留每路排名和原始分数。向量模式不设最低相关性阈值，因此有候选不等于一定有答案。
+Memory 的 content 与问题由同一模型编码为 384 维向量，归一化后计算余弦相似度；人物/属性筛选在排名截断前执行。每路先取 candidate_k，hybrid 按 Memory ID 去重并以等权 RRF（k=60）合并。随后保留 RRF 前三名，用不跨 session 的连续五轮原文窗口 BM25 补足最多两条 Top-5；窗口命中以 `raw_window` 通道返回，并保留完整来源。`IndexConfig(fallback_window=0)` 可关闭兜底，显式 entity/attribute 过滤时也会自动禁用。向量模式不设最低相关性阈值，因此有候选不等于一定有答案。
 
 向量缓存以 `indexes/<hash>.json` 保存，包含记忆 ID、构建版本、完整 bundle 哈希、模型 revision、运行库版本、设备和向量校验和。记忆或模型身份变化后自动使用新缓存；缓存损坏直接报错，不静默降级为 BM25。模型失败时 hybrid 也明确失败。
 
 固定模型 revision 为 `1110a243fdf4706b3f48f1d95db1a4f5529b4d41`。为避免静默丢失证据，单条记忆或问题超过模型 256 token 上限时明确报错；需将长记忆拆成更短的事实。此限制按模型 tokenizer 计数，包含特殊 token。[官方模型说明](https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
 
 2026-10-14 本地验证：54 项自动化测试通过（模型相关单元测试使用测试编码器）；另外使用真实 MiniLM 在 Windows / Python 3.13.5 / CPU 离线模式下检索公开 conv-26 的 419 条逐轮基线记忆。查询 `adoption interviews` 时 D19:1 在 BM25 中排名 1、vector 中排名 3、hybrid 中排名 1；各模式重复 30 次结果一致，全部命中可回溯原始轮次。该单例验证不等于开发集评测结果、真实 DeepSeek 抽取质量或双平台验收。详细证据见 [交付记录](../process/2026-10-14-b-delivery.md)。
+
+2026-11-09 开发集与冻结测试：五轮窗口兜底使开发集 Recall@1 保持 `0.4658`，Recall@5 从 `0.6815` 提升到 `0.7825`；使用 `answer_v2` 后开发集 QA F1 为 `0.4325`。冻结后的 conv-43/44 测试集 QA F1 为 `0.4738`、Recall@5 为 `0.7940`，301 题零失败。该结果关闭状态解析，不能替代完整流水线指标。详见 [实验记录](../experiments/retrieval-improvement.md)。
 
 ### 交给推理模块的候选与证据
 

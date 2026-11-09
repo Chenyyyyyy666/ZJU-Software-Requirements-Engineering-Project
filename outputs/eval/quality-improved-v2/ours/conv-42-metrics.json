@@ -1,0 +1,45 @@
+{
+  "scorer_version": "project-token-f1-v1",
+  "rows": 199,
+  "qa_f1": 0.4079838477368231,
+  "relation_accuracy": null,
+  "relation_confusion_matrix": {
+    "RETAIN": {
+      "RETAIN": 0,
+      "UPDATE": 0,
+      "SUPERSEDE": 0,
+      "CONFLICT": 0
+    },
+    "UPDATE": {
+      "RETAIN": 0,
+      "UPDATE": 0,
+      "SUPERSEDE": 0,
+      "CONFLICT": 0
+    },
+    "SUPERSEDE": {
+      "RETAIN": 0,
+      "UPDATE": 0,
+      "SUPERSEDE": 0,
+      "CONFLICT": 0
+    },
+    "CONFLICT": {
+      "RETAIN": 0,
+      "UPDATE": 0,
+      "SUPERSEDE": 0,
+      "CONFLICT": 0
+    }
+  },
+  "recall@1": 0.46733668341708545,
+  "recall@5": 0.7738693467336684,
+  "average_tokens": 648.4371859296482,
+  "token_rows": 199,
+  "average_elapsed_seconds": 1.2196112370215608,
+  "median_elapsed_seconds": 1.1876846250379458,
+  "elapsed_rows": 199,
+  "qa_rows": 199,
+  "answer_rows": 199,
+  "evidence_rows": 199,
+  "failed_rows": 0,
+  "relation_rows": 0,
+  "relation_failed_rows": 0
+}

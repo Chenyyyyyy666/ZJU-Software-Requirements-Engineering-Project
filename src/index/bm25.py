@@ -12,10 +12,12 @@ from pydantic import Field
 from src.common.models import (
     ChannelScore,
     Contract,
+    Memory,
     MemoryBundle,
     RetrievalHit,
     RetrievalRequest,
     RetrievalResult,
+    SourceRef,
 )
 from src.index.embeddings import Encoder, MiniLMEncoder, VectorStore, build_vectors
 
@@ -29,10 +31,20 @@ class IndexConfig(Contract):
     mode: Literal["bm25", "vector", "hybrid"] = "bm25"
     k1: float = Field(default=1.5, gt=0, allow_inf_nan=False)
     b: float = Field(default=0.75, ge=0, le=1, allow_inf_nan=False)
+    fallback_window: int = Field(default=5, ge=0, le=20)
+    fallback_slots: int = Field(default=2, ge=0, le=10)
     vector_cache_dir: Path = Path("indexes")
     model_cache_dir: Path = Path("cache/embedding_models")
     embedding_device: Literal["cpu", "cuda", "mps"] = "cpu"
     local_files_only: bool = False
+
+
+@dataclass
+class TurnWindowIndex:
+    memories: list[Memory]
+    counts: list[Counter]
+    document_frequency: Counter
+    average_length: float
 
 
 @dataclass
@@ -42,6 +54,7 @@ class MemoryIndex:
     counts: list[Counter]
     document_frequency: Counter
     average_length: float
+    turn_windows: TurnWindowIndex | None
     vectors: VectorStore | None = None
 
     def validate_bundle(self, bundle: MemoryBundle) -> None:
@@ -51,6 +64,68 @@ class MemoryIndex:
             or bundle.model_dump() != self.bundle.model_dump()
         ):
             raise RuntimeError("Index belongs to a different bundle; rebuild the index")
+
+
+def _build_turn_windows(bundle: MemoryBundle, size: int) -> TurnWindowIndex | None:
+    """Index contiguous raw-turn windows as an evidence-recovery safety net."""
+    if size == 0:
+        return None
+    memories = []
+    for start, first in enumerate(bundle.source_turns):
+        window = [first]
+        for turn in bundle.source_turns[start + 1 :]:
+            if len(window) == size or turn.session_id != first.session_id:
+                break
+            window.append(turn)
+        speakers = {turn.speaker for turn in window}
+        memories.append(
+            Memory(
+                memory_id=f"raw-window-{first.turn_id}",
+                conversation_id=bundle.conversation_id,
+                content="\n".join(f"{turn.speaker}: {turn.text}" for turn in window),
+                entity=next(iter(speakers)) if len(speakers) == 1 else None,
+                attribute=None,
+                value=None,
+                time_expression=None,
+                event_time=None,
+                event_time_precision="unknown",
+                sources=[
+                    SourceRef(session_id=turn.session_id, turn_id=turn.turn_id) for turn in window
+                ],
+                session_time=window[-1].session_time,
+            )
+        )
+    counts = [Counter(tokenize(memory.content)) for memory in memories]
+    return TurnWindowIndex(
+        memories=memories,
+        counts=counts,
+        document_frequency=Counter(term for document in counts for term in document),
+        average_length=sum(sum(document.values()) for document in counts) / len(counts)
+        if counts
+        else 0,
+    )
+
+
+def _bm25_score(
+    terms: set[str],
+    counts: Counter,
+    document_frequency: Counter,
+    document_count: int,
+    average_length: float,
+    *,
+    k1: float,
+    b: float,
+) -> float:
+    score = 0.0
+    for term in terms:
+        frequency = counts[term]
+        if not frequency:
+            continue
+        df = document_frequency[term]
+        idf = math.log(1 + (document_count - df + 0.5) / (df + 0.5))
+        denominator = frequency + k1 * (1 - b + b * sum(counts.values()) / average_length)
+        score += idf * frequency * (k1 + 1) / denominator
+    return score
 
 
 def build_index(
@@ -76,8 +151,34 @@ def build_index(
         counts=counts,
         document_frequency=Counter(term for doc in counts for term in doc),
         average_length=sum(sum(doc.values()) for doc in counts) / len(counts) if counts else 0,
+        turn_windows=_build_turn_windows(snapshot, config.fallback_window),
         vectors=vectors,
     )
+
+
+def _turn_window_candidates(
+    turn_windows: TurnWindowIndex, terms: set[str], config: IndexConfig
+) -> list[tuple[float, Memory]]:
+    document_count = len(turn_windows.memories)
+    ranked = []
+    for memory, counts in zip(turn_windows.memories, turn_windows.counts, strict=True):
+        score = _bm25_score(
+            terms,
+            counts,
+            turn_windows.document_frequency,
+            document_count,
+            turn_windows.average_length,
+            k1=config.k1,
+            b=config.b,
+        )
+        if score > 0:
+            ranked.append((score, memory))
+    ranked.sort(key=lambda pair: (-pair[0], pair[1].memory_id))
+    return ranked
+
+
+def _source_signature(memory: Memory) -> tuple[tuple[int, str], ...]:
+    return tuple(source.key for source in memory.sources)
 
 
 def search_memories(index: MemoryIndex, request: RetrievalRequest) -> RetrievalResult:
@@ -98,16 +199,15 @@ def search_memories(index: MemoryIndex, request: RetrievalRequest) -> RetrievalR
         positions.append(i)
         if request.mode == "vector":
             continue
-        score = 0.0
-        for term in terms:
-            frequency = counts[term]
-            if not frequency:
-                continue
-            df = index.document_frequency[term]
-            idf = math.log(1 + (n - df + 0.5) / (df + 0.5))
-            k1, b = index.config.k1, index.config.b
-            denominator = frequency + k1 * (1 - b + b * sum(counts.values()) / index.average_length)
-            score += idf * frequency * (k1 + 1) / denominator
+        score = _bm25_score(
+            terms,
+            counts,
+            index.document_frequency,
+            n,
+            index.average_length,
+            k1=index.config.k1,
+            b=index.config.b,
+        )
         if score > 0:
             ranked.append((score, memory))
     ranked.sort(key=lambda pair: (-pair[0], pair[1].memory_id))
@@ -137,14 +237,62 @@ def search_memories(index: MemoryIndex, request: RetrievalRequest) -> RetrievalR
         for memory_id, channel_scores in scores.items()
     ]
     fused.sort(key=lambda pair: (-pair[0], pair[1]))
+
+    selected: list[tuple[float, Memory, dict[str, ChannelScore]]] = []
+    selected_memory_ids = set()
+    selected_signatures = set()
+
+    def select(memory: Memory, score: float, channel_scores: dict[str, ChannelScore]) -> bool:
+        signature = _source_signature(memory)
+        if memory.memory_id in selected_memory_ids or signature in selected_signatures:
+            return False
+        selected.append((score, memory, channel_scores))
+        selected_memory_ids.add(memory.memory_id)
+        selected_signatures.add(signature)
+        return True
+
+    raw_slots = 0
+    if (
+        request.mode == "hybrid"
+        and request.entity is None
+        and request.attribute is None
+        and index.turn_windows is not None
+        and index.config.fallback_window > 0
+    ):
+        raw_slots = min(index.config.fallback_slots, max(0, request.top_k - 1))
+    preserved_semantic = min(len(fused), request.top_k - raw_slots)
+    for score, memory_id in fused[:preserved_semantic]:
+        select(memories[memory_id], score, scores[memory_id])
+
+    raw_selected = 0
+    raw_candidates = 0
+    if raw_slots and index.turn_windows is not None:
+        for rank, (score, memory) in enumerate(
+            _turn_window_candidates(index.turn_windows, terms, index.config), 1
+        ):
+            raw_candidates += 1
+            if raw_selected == raw_slots:
+                break
+            if select(
+                memory,
+                score,
+                {"raw_window": ChannelScore(rank=rank, score=score)},
+            ):
+                raw_selected += 1
+
+    for score, memory_id in fused[preserved_semantic:]:
+        if len(selected) == request.top_k:
+            break
+        select(memories[memory_id], score, scores[memory_id])
+
     hits = [
         RetrievalHit(
             rank=rank,
-            memory=memories[memory_id].model_copy(deep=True),
+            memory=memory.model_copy(deep=True),
             score=score,
-            channel_scores=scores[memory_id],
+            channel_scores=channel_scores,
         )
-        for rank, (score, memory_id) in enumerate(fused[: request.top_k], 1)
+        for rank, (score, memory, channel_scores) in enumerate(selected[: request.top_k], 1)
     ]
     return RetrievalResult(
         conversation_id=request.conversation_id,
@@ -163,6 +311,17 @@ def search_memories(index: MemoryIndex, request: RetrievalRequest) -> RetrievalR
                     "embedding": index.vectors.metadata["encoder"],
                     "vector_cache": str(index.vectors.cache_path),
                     "fusion": "rrf-k60" if request.mode == "hybrid" else None,
+                    "raw_window_fallback": (
+                        {
+                            "window": index.config.fallback_window,
+                            "requested_slots": raw_slots,
+                            "candidate_count": raw_candidates,
+                            "selected_slots": raw_selected,
+                            "preserved_semantic": preserved_semantic,
+                        }
+                        if request.mode == "hybrid"
+                        else None
+                    ),
                 }
                 if request.mode != "bm25"
                 else {}

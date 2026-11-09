@@ -66,11 +66,34 @@ def test_rrf_union_deduplicates_and_preserves_channel_ranks(bundle, tmp_path):
     assert len({hit.memory.memory_id for hit in result.hits}) == len(result.hits)
     assert result.hits[0].memory.sources[0].turn_id == "D2:1"
     for hit in result.hits:
-        assert hit.score == pytest.approx(
-            sum(1 / (60 + score.rank) for score in hit.channel_scores.values())
-        )
+        if "raw_window" not in hit.channel_scores:
+            assert hit.score == pytest.approx(
+                sum(1 / (60 + score.rank) for score in hit.channel_scores.values())
+            )
     assert set(result.hits[0].channel_scores) == {"bm25", "vector"}
     assert result.trace["fusion"] == "rrf-k60"
+
+
+def test_turn_window_fallback_preserves_semantic_top_rank(bundle, tmp_path):
+    baseline, encoder = setup_index(bundle, tmp_path)
+    improved = build_index(
+        bundle,
+        config=IndexConfig(
+            mode="hybrid",
+            vector_cache_dir=tmp_path,
+            fallback_window=5,
+            fallback_slots=2,
+        ),
+        encoder=encoder,
+    )
+    query = request(query="interviews", mode="hybrid", top_k=5)
+    before = search_memories(baseline, query)
+    after = search_memories(improved, query)
+
+    assert after.hits[0].memory.memory_id == before.hits[0].memory.memory_id
+    assert after.trace["raw_window_fallback"]["window"] == 5
+    assert after.trace["raw_window_fallback"]["selected_slots"] > 0
+    assert any("raw_window" in hit.channel_scores for hit in after.hits[1:])
 
 
 def test_filter_before_vector_topk_and_no_query_when_empty(bundle, tmp_path):

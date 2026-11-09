@@ -7,12 +7,20 @@ from openai import OpenAI
 from src.common.models import AnswerRecord, Memory
 from src.reasoning.telemetry import tracked_completion
 
-PROMPT_VERSION = "answer_v1"
+PROMPT_VERSION = "answer_v2"
 
-SYSTEM_PROMPT = """Answer the question using only the memories below.
-If a conflict is marked, mention both possibilities.
-Output one sentence.Each memory shows the date it was said on. Resolve relative expressions such as
-"yesterday" or "last weekend" against that date, and answer with a full date when asked "when"."""
+SYSTEM_PROMPT = """Answer using only the memories below.
+Return only the shortest exact answer phrase. Do not explain, cite memories, restate the
+question, add background, or write a full sentence unless the answer is Yes or No.
+- "When" questions: return the date or time phrase only.
+- "Who", "what", "which" and "where" questions: return the name or value only.
+- "How many" and "how often" questions: return the quantity only.
+- Yes/no questions: return only "Yes" or "No".
+Each memory shows when it was said. Resolve relative expressions against that date.
+When facts conflict, use the latest event time, then the latest session time; do not
+describe the conflict in the answer. If the memories cannot answer, return exactly
+"Not enough information."
+"""
 
 
 def _client() -> OpenAI:
